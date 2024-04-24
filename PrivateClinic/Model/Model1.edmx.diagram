@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5ae9bbb10bd54d46af5c5a04d8213163" Name="Diagram1">
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.BACSI" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.BAOCAODOANHTHU" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.BENHNHAN" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.CACHDUNG" Width="1.5" PointX="2.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.CHUCVU" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.DVT" Width="1.5" PointX="2.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.HOADON" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.LOAIBENH" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.LOAITHUOC" Width="1.5" PointX="2.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.PHIEUKHAMBENH" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.PHIEUNHAPTHUOC" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.TAIKHOAN" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.THAMSO" Width="1.5" PointX="9.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.THUOC1" Width="1.5" PointX="5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYPHONGMACHTUModel.CT_BCDT" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_PHIEUKHAMBENH_MaBS" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_TAIKHOAN_MaBS" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_CT_BCDT_MaBCDT" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_HOADON_MaBN" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_PHIEUKHAMBENH_MaBN" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_THUOC1_MaCachDung" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_TAIKHOAN_ChucVu" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_THUOC1_MaDVT" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_CT_BCDT_SoHD" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_HOADON_MaPKB" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_PHIEUKHAMBENH_MaLoaiBenh" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYPHONGMACHTUModel.FK_THUOC1_MaLoaiThuoc" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
