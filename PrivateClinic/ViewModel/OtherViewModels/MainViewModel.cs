@@ -1,4 +1,5 @@
 ﻿
+using PrivateClinic.View.HoSoBacSi;
 using PrivateClinic.View.OtherViews;
 using PrivateClinic.View.QuanLiTiepDon;
 using System;
@@ -55,6 +56,10 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                 MainFrame.Content = new QuanLiTiepDonView();
             });
 
+            BacSiCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                MainFrame.Content = new HoSoBacSiView();
+            });
 
 
             LogOutCM = new RelayCommand<FrameworkElement>((p) => { return p == null ? false : true; }, (p) =>
