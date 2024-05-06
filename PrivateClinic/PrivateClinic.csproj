@@ -171,6 +171,9 @@
     <Compile Include="View\HoSoBacSi\ThemBacSiView.xaml.cs">
       <DependentUpon>ThemBacSiView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HoSoBacSi\ThongTinCaNhanView.xaml.cs">
+      <DependentUpon>ThongTinCaNhanView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HoSoBacSi\ThemBacSiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HoSoBacSi\ThongTinCaNhanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
