@@ -156,6 +156,9 @@
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\RelayCommand.cs" />
+    <Compile Include="View\HoSoBacSi\HoSoBacSiView.xaml.cs">
+      <DependentUpon>HoSoBacSiView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\TextStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HoSoBacSi\HoSoBacSiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,7 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\BangDieuKhien\" />
-    <Folder Include="View\HoSoBacSi\" />
     <Folder Include="View\QuanLiKhamBenh\" />
     <Folder Include="View\QuanLiKhoThuoc\" />
     <Folder Include="View\ThanhToan\" />
