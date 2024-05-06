@@ -156,6 +156,9 @@
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\RelayCommand.cs" />
+    <Compile Include="View\HoSoBacSi\DanhSachBacSiView.xaml.cs">
+      <DependentUpon>DanhSachBacSiView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HoSoBacSi\HoSoBacSiView.xaml.cs">
       <DependentUpon>HoSoBacSiView.xaml</DependentUpon>
     </Compile>
@@ -200,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\TextStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HoSoBacSi\DanhSachBacSiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
