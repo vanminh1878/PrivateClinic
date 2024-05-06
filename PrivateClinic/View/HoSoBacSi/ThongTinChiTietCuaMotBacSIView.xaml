@@ -1,0 +1,240 @@
+﻿<Window x:Class="PrivateClinic.View.HoSoBacSi.ThongTinChiTietCuaMotBacSIView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrivateClinic.View.HoSoBacSi"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Width="700"
+        Height="300"
+        AllowsTransparency="True"
+        Background="Transparent"
+        FontFamily="Sugoe UI"
+        ResizeMode="NoResize"
+        FontSize="22"
+        FontWeight="Regular"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        mc:Ignorable="d">
+    <Border
+        Background="White"
+        CornerRadius="12">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!--  Vùng nút thoát-->
+            <Border
+                Grid.Row="0"
+                Background="#348F6C"
+                CornerRadius="12,12,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="670" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="24"
+                        FontWeight="Bold"
+                        Foreground="#FFFFFF"
+                        Text="Thông tin bác sĩ" />
+
+                    <!--  Nút exit  -->
+                    <Button
+                        Grid.Column="2"
+                        BorderThickness="0"
+                        Content="X"
+                        Cursor="Hand"
+                        FontSize="17"
+                        Foreground="#fffaf5">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#D51F2A" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#0010A1" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="25"
+                                    Height="25"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="15">
+                                    <ContentPresenter
+                                        Margin="0,1,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!--Mã bác sĩ-->
+                <TextBox
+                    Width="80"
+                    Height="50"
+                    Margin="15,2,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    FontWeight="Bold"
+                    IsReadOnly="True"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="BS001" />
+
+                <!--  Ảnh đại diện  -->
+                <Border
+                    Width="120"
+                    Height="120"
+                    Margin="0,0,0,0"
+                    VerticalAlignment="Center"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="70">
+                    <Border.Background>
+                        <ImageBrush />
+                    </Border.Background>
+                </Border>
+
+
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <!--  Chỗ binding họ và tên  -->
+                    <TextBox
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Họ và tên"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="Trần Thanh Nhã" />
+
+                    <!--  Chỗ SĐT  -->
+                    <TextBox
+                        Grid.Row="1"
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Số điện thoại"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="02583974123" />
+
+                    <!--  Chỗ binding ngày sinh  -->
+                    <TextBox
+                        Grid.Row="2"
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Ngày sinh"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="02/03/1995" />
+                    <!--  Chỗ binding địa chỉ  -->
+                    <TextBox
+                        Grid.Row="3"
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Địa chỉ"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="Q1, Hồ Chí Minh" />
+                </Grid>
+
+                <Grid Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!--  Chỗ binding giới tính  -->
+                    <TextBox
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Giới tính"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="Nữ" />
+
+                    <!--  Chỗ binding email  -->
+                    <TextBox
+                        Grid.Row="1"
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Email"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="nhathanh@gmail.com" />
+
+                    <!--  Chỗ binding ngày vào làm  -->
+                    <TextBox
+                        Grid.Row="2"
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Ngày vào làm"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="12/8/2019" />
+
+                    <!--  Chỗ binding bằng cấp  -->
+                    <TextBox
+                        Grid.Row="3"
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Bằng cấp"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="Tiến sĩ" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
