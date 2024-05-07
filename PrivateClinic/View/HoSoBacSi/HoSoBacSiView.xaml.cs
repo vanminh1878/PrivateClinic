@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrivateClinic.ViewModel.HoSoBacSiVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace PrivateClinic.View.HoSoBacSi
         public HoSoBacSiView()
         {
             InitializeComponent();
+            Main.Content = new ThongTinCaNhanView();
+            HoSoBacSiViewModel viewModel = new HoSoBacSiViewModel();
+            this.DataContext = viewModel;
         }
     }
 }

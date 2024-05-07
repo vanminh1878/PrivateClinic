@@ -80,6 +80,8 @@
                         FontSize="22"
                         Background="#F5F5F5"
                         BorderThickness="0"
+                        Command="{Binding SwitchViewCommand}"
+                        CommandParameter="Personal"
                         VerticalAlignment="Bottom">
                         <Button.Content>
                             <TextBlock Margin="5,0,0,0"
@@ -99,6 +101,8 @@
                         HorizontalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="22"
+                        Command="{Binding SwitchViewCommand}"
+                        CommandParameter="DoctorList"
                         Background="#F5F5F5"
                         BorderThickness="0"
                         VerticalAlignment="Bottom">
@@ -120,6 +124,8 @@
                         HorizontalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="22"
+                        Command="{Binding SwitchViewCommand}"
+                        CommandParameter="Password"
                         Background="#F5F5F5"
                         BorderThickness="0"
                         VerticalAlignment="Bottom">
@@ -138,6 +144,13 @@
                         VerticalAlignment="Bottom" />
 
             </StackPanel>
+
+            <Frame Grid.Row="2"
+                   x:Name="Main"/>
+
+            <ContentControl
+                Grid.Row="2"
+                Content="{Binding CurrentView}"/>
 
         </Grid>
     </Border>
