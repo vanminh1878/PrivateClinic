@@ -178,148 +178,147 @@
 
         <!--Chi tiết danh sách-->
         <Grid Grid.Row="7" >
-            <ScrollViewer
-                Margin="5,0,5,0"
-                HorizontalScrollBarVisibility="Disabled"
-                VerticalScrollBarVisibility="Auto">
-                <ListView FontSize="22"
-                          FontWeight="SemiBold"
-                          ItemsSource="{Binding DSBS}"
-                          >
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <!-- Thiết lập đường viền dưới cho mỗi hàng -->
-                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                            <Setter Property="BorderBrush" Value="Black"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <!--MABS-->
-                            <GridViewColumn Width="80">
 
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding MaBS}"
-                                                   FontWeight="Regular"
-                                                   Margin="8,30,0,0"
-                                                   />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+            <ListView FontSize="22"
+                      Focusable="True"
+                      FontWeight="SemiBold"
+                      ItemsSource="{Binding DSBS}"
+                      >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem"
+                           BasedOn="{StaticResource MaterialDesignGridViewItem}">
+                        <!-- Thiết lập đường viền dưới cho mỗi hàng -->
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <!--MABS-->
+                        <GridViewColumn Width="80">
 
-                            <!--Tên BS-->
-                            <GridViewColumn Width="200">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding HoTen}"
-                                                   FontWeight="Regular"
-                                                   Margin="10,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MaBS}"
+                                               FontWeight="Regular"
+                                               Margin="8,30,0,0"
+                                               />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <!--Giới tính-->
-                            <GridViewColumn Width="100">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding GioiTinh}"
-                                                   FontWeight="Regular"
-                                                   Margin="10,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <!--Tên BS-->
+                        <GridViewColumn Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding HoTen}"
+                                               FontWeight="Regular"
+                                               Margin="10,30,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <!--SĐT-->
-                            <GridViewColumn Width="160">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding SDT}"
-                                                   FontWeight="Regular"
-                                                   Margin="20,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <!--Giới tính-->
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding GioiTinh}"
+                                               FontWeight="Regular"
+                                               Margin="10,30,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <!--Ngày sinh-->
-                            <GridViewColumn Width="140">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding NgaySinh}"
-                                                   FontWeight="Regular"
-                                                   Margin="5,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <!--SĐT-->
+                        <GridViewColumn Width="160">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SDT}"
+                                               FontWeight="Regular"
+                                               Margin="20,30,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <!--Bằng cấp-->
-                            <GridViewColumn Width="150">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding BangCap}"
-                                                   FontWeight="Regular"
-                                                   Margin="25,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <!--Ngày sinh-->
+                        <GridViewColumn Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NgaySinh, StringFormat=dd/MM/yyyy}"
+                                               FontWeight="Regular"
+                                               Margin="5,30,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <!--Thao tác-->
-                            <GridViewColumn Width="Auto">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <!--  Nút sửa  -->
-                                        <StackPanel Orientation="Horizontal">
-                                            <Border
-                                                BorderBrush="Black"
-                                                BorderThickness="0.5"
-                                                CornerRadius="50"
-                                                Margin="20,20,0,0"
-                                                Width="45"
-                                                Height="45"
-                                                Cursor="Hand">
-                                                <Border.Style>
-                                                    <Style TargetType="Border">
-                                                        <Style.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="#00e5ff" />
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Border.Style>
-                                                <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                        <!--Bằng cấp-->
+                        <GridViewColumn Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding BangCap}"
+                                               FontWeight="Regular"
+                                               Margin="25,30,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!--Thao tác-->
+                        <GridViewColumn Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!--  Nút sửa  -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border
+                                            BorderBrush="Black"
+                                            BorderThickness="0.5"
+                                            CornerRadius="50"
+                                            Margin="20,20,0,0"
+                                            Width="45"
+                                            Height="45"
+                                            Cursor="Hand">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#00e5ff" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
 
 
-                                            </Border>
+                                        </Border>
 
-                                            <!--  Nút xóa -->
-                                            <Border
-                                                BorderBrush="Black"
-                                                BorderThickness="0.5"
-                                                CornerRadius="50"
-                                                Margin="5,20,0,0"
-                                                Width="45"
-                                                Height="45"
-                                                Cursor="Hand">
-                                                <Border.Style>
-                                                    <Style TargetType="Border">
-                                                        <Style.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="#DFD7BF" />
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Border.Style>
-                                                <Image Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
-                                            </Border>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                                        <!--  Nút xóa -->
+                                        <Border
+                                            BorderBrush="Black"
+                                            BorderThickness="0.5"
+                                            CornerRadius="50"
+                                            Margin="5,20,0,0"
+                                            Width="45"
+                                            Height="45"
+                                            Cursor="Hand">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#DFD7BF" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Image Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
+                                        </Border>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
-            </ScrollViewer>
+
         </Grid>
     </Grid>
 </UserControl>
