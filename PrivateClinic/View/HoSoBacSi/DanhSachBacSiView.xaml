@@ -183,7 +183,9 @@
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto">
                 <ListView FontSize="22"
-                          FontWeight="SemiBold" d:ItemsSource="{d:SampleData ItemCount=5}">
+                          FontWeight="SemiBold"
+                          ItemsSource="{Binding DSBS}"
+                          >
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <!-- Thiết lập đường viền dưới cho mỗi hàng -->
@@ -198,7 +200,7 @@
 
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="BS001"
+                                        <TextBlock Text="{Binding MaBS}"
                                                    FontWeight="Regular"
                                                    Margin="8,30,0,0"
                                                    />
@@ -210,7 +212,7 @@
                             <GridViewColumn Width="200">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="Vũ Minh Bảo"
+                                        <TextBlock Text="{Binding HoTen}"
                                                    FontWeight="Regular"
                                                    Margin="10,30,0,0"/>
                                     </DataTemplate>
@@ -221,7 +223,7 @@
                             <GridViewColumn Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="Nam"
+                                        <TextBlock Text="{Binding GioiTinh}"
                                                    FontWeight="Regular"
                                                    Margin="10,30,0,0"/>
                                     </DataTemplate>
@@ -232,7 +234,7 @@
                             <GridViewColumn Width="160">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="0393568749"
+                                        <TextBlock Text="{Binding SDT}"
                                                    FontWeight="Regular"
                                                    Margin="20,30,0,0"/>
                                     </DataTemplate>
@@ -243,7 +245,7 @@
                             <GridViewColumn Width="140">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="17/02/2005"
+                                        <TextBlock Text="{Binding NgaySinh}"
                                                    FontWeight="Regular"
                                                    Margin="5,30,0,0"/>
                                     </DataTemplate>
@@ -254,7 +256,7 @@
                             <GridViewColumn Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="Tiến sĩ"
+                                        <TextBlock Text="{Binding BangCap}"
                                                    FontWeight="Regular"
                                                    Margin="25,30,0,0"/>
                                     </DataTemplate>
