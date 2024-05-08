@@ -201,6 +201,9 @@
     <Compile Include="View\OtherViews\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLiKhamBenh\QuanLiKhamBenhView.xaml.cs">
+      <DependentUpon>QuanLiKhamBenhView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
     </Compile>
@@ -275,6 +278,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\QuanLiKhamBenh\QuanLiKhamBenhView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -320,7 +327,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\BangDieuKhien\" />
-    <Folder Include="View\QuanLiKhamBenh\" />
     <Folder Include="View\QuanLiKhoThuoc\" />
     <Folder Include="View\ThanhToan\" />
   </ItemGroup>
