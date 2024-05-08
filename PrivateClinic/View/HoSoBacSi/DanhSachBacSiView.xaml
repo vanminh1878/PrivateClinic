@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -177,12 +178,13 @@
         </Border>
 
         <!--Chi tiết danh sách-->
-        <Grid Grid.Row="7" >
+        <Grid Grid.Row="3" >
 
             <ListView FontSize="22"
                       Focusable="True"
+                      Margin="0,-45,0,0"
                       FontWeight="SemiBold"
-                      ItemsSource="{Binding DSBS}"
+                      ItemsSource="{Binding DSBS}" d:ItemsSource="{d:SampleData ItemCount=5}"
                       >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem"
