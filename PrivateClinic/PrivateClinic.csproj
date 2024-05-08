@@ -207,6 +207,9 @@
     <Compile Include="View\QuanLiKhamBenh\QuanLiKhamBenhView.xaml.cs">
       <DependentUpon>QuanLiKhamBenhView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLiKhamBenh\SuaThongTinThuocChoBenhNhanView.xaml.cs">
+      <DependentUpon>SuaThongTinThuocChoBenhNhanView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
     </Compile>
@@ -286,6 +289,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuanLiKhamBenh\QuanLiKhamBenhView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLiKhamBenh\SuaThongTinThuocChoBenhNhanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
