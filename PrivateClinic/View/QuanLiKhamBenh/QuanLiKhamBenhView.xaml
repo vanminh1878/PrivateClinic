@@ -98,6 +98,8 @@
                         HorizontalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="22"
+                        Command="{Binding SwitchViewCommand}"
+                        CommandParameter="PatientList"
                         Background="#F5F5F5"
                         BorderThickness="0"
                         VerticalAlignment="Bottom">
@@ -118,6 +120,12 @@
                         VerticalAlignment="Bottom" />
 
             </StackPanel>
+
+            
+            <ContentControl
+                Grid.Row="2"
+                x:Name="Main"
+                Content="{Binding CurrentView}"/>
 
         </Grid>
     </Border>

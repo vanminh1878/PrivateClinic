@@ -153,7 +153,8 @@
                 <ListView FontSize="22"
                           FontWeight="SemiBold" d:ItemsSource="{d:SampleData ItemCount=5}" >
                     <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
+                        <Style TargetType="ListViewItem"
+                               BasedOn="{StaticResource MaterialDesignGridViewItem}">
                             <!-- Thiết lập đường viền dưới cho mỗi hàng -->
                             <Setter Property="BorderThickness" Value="0,0,0,1"/>
                             <Setter Property="BorderBrush" Value="Black"/>
