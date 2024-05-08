@@ -1,0 +1,252 @@
+﻿<UserControl x:Class="PrivateClinic.View.QuanLiKhamBenh.BenhNhanDaKhamView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhamBenh"
+             mc:Ignorable="d"
+             FontFamily="Sugoe UI"
+             FontSize="22"
+             FontWeight="Regular"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="550" d:DesignWidth="990">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Tiêu đề-->
+        <StackPanel
+            Orientation="Horizontal"
+            Margin="18,0,0,0">
+            <Image Source="{StaticResource icPerson}"
+                   Width="40"
+                   Height="40"/>
+
+            <TextBlock  Text="Số lượng bệnh nhân đã khám:"
+                       Margin="5,10,0,0"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       FontSize="30"
+                       Foreground="#348F6C"/>
+
+            <!--Tổng số lượng bác sĩ-->
+            <TextBlock
+                Text="3"
+                Margin="5,10,0,0"
+                FontSize="30"
+                VerticalAlignment="Center"
+                FontWeight="Bold"
+                Foreground="#348F6C"/>
+        </StackPanel>
+
+        <!--Nút thêm + tìm kiếm bác sĩ-->
+
+        <!--Chỗ tìm kiếm-->
+        <Border
+            Margin="18,0,0,0"
+            Grid.Row="1"
+            Width="465"
+            Height="50"
+            HorizontalAlignment="Left"
+            BorderThickness="0.7"
+            CornerRadius="4"
+            BorderBrush="Black"
+            >
+            <!--Tìm kiếm thuốc-->
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                    Width="430"
+                    Height="35"
+                    BorderThickness="0"
+                    Padding="5,0,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    materialDesign:HintAssist.Hint="Nhập bệnh nhân cần tìm"/>
+                <Image Source="{StaticResource icSearch}"
+                       Width="30"
+                       Height="30"/>
+            </StackPanel>
+
+        </Border>
+        <!--Danh sách bệnh nhân-->
+        <!--header-->
+        <Border
+            Grid.Row="6"
+            Margin="5,5,0,0"
+            Width="970"
+            Height="50"
+            CornerRadius="10"
+            VerticalAlignment="Top"
+            Background="#D9D9D9">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="240"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontWeight="DemiBold"
+                               Text="STT"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontWeight="DemiBold"
+                               Text="Mã BN"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontWeight="DemiBold"
+                               Text="Tên bệnh nhân"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid Grid.Column="3">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontWeight="DemiBold"
+                               Text="Giới tính"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid Grid.Column="4">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontWeight="DemiBold"
+                               Text="SĐT"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid Grid.Column="5">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontWeight="DemiBold"
+                               Text="Ngày sinh"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid Grid.Column="6">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontWeight="DemiBold"
+                               Text="Địa chỉ"
+                               VerticalAlignment="Center" />
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!--Chi tiết danh sách-->
+        <Grid Grid.Row="7" >
+            <ScrollViewer
+                Margin="5,0,5,0"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto">
+                <ListView FontSize="22"
+                          FontWeight="SemiBold" d:ItemsSource="{d:SampleData ItemCount=5}" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <!-- Thiết lập đường viền dưới cho mỗi hàng -->
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <!--STT-->
+                            <GridViewColumn Width="70">
+
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="1"
+                                                   FontWeight="Regular"
+                                                   Margin="20,30,0,0"
+                                                   />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--Mã BN-->
+                            <GridViewColumn Width="120">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="BN002"
+                                                   FontWeight="Regular"
+                                                   Margin="25,30,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--Tên BN-->
+                            <GridViewColumn Width="240">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Vũ Việt Quốc"
+                                                   FontWeight="Regular"
+                                                   Margin="50,30,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--Giới tính-->
+                            <GridViewColumn Width="120">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Nam"
+                                                   FontWeight="Regular"
+                                                   Margin="30,30,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--SĐT-->
+                            <GridViewColumn Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="0393546782"
+                                                   FontWeight="Regular"
+                                                   Margin="20,30,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--Cách dùng-->
+                            <GridViewColumn Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="12/05/2023"
+                                                   FontWeight="Regular"
+                                                   Margin="10,30,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--Địa chỉ-->
+                            <GridViewColumn Width="Auto">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Đồng Nai"
+                                                   FontWeight="Regular"
+                                                   Margin="10,30,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
+</UserControl>
