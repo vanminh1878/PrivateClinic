@@ -18,7 +18,6 @@ namespace PrivateClinic.Model
         public BACSI()
         {
             this.PHIEUKHAMBENHs = new HashSet<PHIEUKHAMBENH>();
-            this.TAIKHOANs = new HashSet<TAIKHOAN>();
         }
     
         public int MaBS { get; set; }
@@ -33,7 +32,5 @@ namespace PrivateClinic.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUKHAMBENH> PHIEUKHAMBENHs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAIKHOAN> TAIKHOANs { get; set; }
     }
 }

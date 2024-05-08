@@ -1,6 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:PrivateClinic.ViewModel.OtherViewModels">
-    <viewmodel:MainViewModel x:Key="MainVM"/>
-  
-</ResourceDictionary>   
+                    xmlns:QuanLiTiepDonVM="clr-namespace:PrivateClinic.ViewModel.QuanLiTiepDon"
+                    xmlns:MainViewVM="clr-namespace:PrivateClinic.ViewModel.OtherViewModels">
+
+    <MainViewVM:MainViewModel x:Key="MainVM"/>
+    <QuanLiTiepDonVM:QuanLiTiepDonViewModel x:Key="QuanLiTiepDonVM"/>
+
+</ResourceDictionary>
