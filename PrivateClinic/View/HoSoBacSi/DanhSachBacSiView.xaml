@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:PrivateClinic.View.HoSoBacSi"
              mc:Ignorable="d"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -68,7 +69,10 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
-                        materialDesign:HintAssist.Hint="Nhập tên bác sĩ cần tìm"/>
+                        materialDesign:HintAssist.Hint="Nhập tên bác sĩ cần tìm"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+
+
                     <Image Source="{StaticResource icSearch}"
                            Width="30"
                            Height="30"/>
@@ -184,7 +188,7 @@
                       Focusable="True"
                       Margin="0,-45,0,0"
                       FontWeight="SemiBold"
-                      ItemsSource="{Binding DSBS}" d:ItemsSource="{d:SampleData ItemCount=5}"
+                      ItemsSource="{Binding FilterDSBS}" d:ItemsSource="{d:SampleData ItemCount=5}"
                       >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem"
