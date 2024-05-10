@@ -381,6 +381,7 @@
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="20"
                         Background="#D51F2A"
+                        Command="{Binding quitCommand}"
                         >
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
