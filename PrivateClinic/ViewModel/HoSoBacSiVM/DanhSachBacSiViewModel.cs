@@ -1,4 +1,5 @@
 ﻿using PrivateClinic.Model;
+using PrivateClinic.View.HoSoBacSi;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
@@ -70,18 +72,33 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             }
         }
 
-        //
+        //Hàm khởi tạo
         public DanhSachBacSiViewModel()
         {
            LoadData();
+           AddDoctor();
            
         }
 
-        //Load danh sách bác sĩ
+        //Chức năng hiển thị danh sách bác sĩ
         void LoadData()
         {
             DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             SearchBS();
+        }
+
+        // Chức năng thêm mới 1 bác sĩ
+        public ICommand ShowWDAddDoctor {  get; set; }
+
+        private void ShowWDDoctor(object obj)
+        {
+            ThemBacSiView view = new ThemBacSiView();
+            view.ShowDialog();
+        }
+
+        void AddDoctor()
+        {
+            ShowWDAddDoctor = new ViewModelCommand(ShowWDDoctor);
         }
     }
 }

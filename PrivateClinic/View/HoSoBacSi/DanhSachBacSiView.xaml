@@ -89,6 +89,7 @@
                 materialDesign:ButtonAssist.CornerRadius="5"
                 FontSize="20"
                 Background="#348F6C"
+                Command="{Binding ShowWDAddDoctor}"
                 >
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
