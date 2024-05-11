@@ -12,15 +12,12 @@ namespace PrivateClinic.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TAIKHOAN
+    public partial class sysdiagram
     {
-        public int TaiKhoanID { get; set; }
-        public string TenDangNhap { get; set; }
-        public string MatKhau { get; set; }
-        public Nullable<int> MaBS { get; set; }
-        public string ChucVu { get; set; }
-    
-        public virtual BACSI BACSI { get; set; }
-        public virtual CHUCVU CHUCVU1 { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -12,19 +12,18 @@ namespace PrivateClinic.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CHUCVU
+    public partial class NHOMNGUOIDUNG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CHUCVU()
+        public NHOMNGUOIDUNG()
         {
-            this.TAIKHOANs = new HashSet<TAIKHOAN>();
+            this.NGUOIDUNGs = new HashSet<NGUOIDUNG>();
         }
     
-        public string MaChucVu { get; set; }
-        public string TenChucVu { get; set; }
-        public string NoiDung { get; set; }
+        public string MaNhom { get; set; }
+        public string TenNhom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAIKHOAN> TAIKHOANs { get; set; }
+        public virtual ICollection<NGUOIDUNG> NGUOIDUNGs { get; set; }
     }
 }
