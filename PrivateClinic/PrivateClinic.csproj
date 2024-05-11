@@ -96,6 +96,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\IndexConverter.cs" />
     <Compile Include="Model\BACSI.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -180,6 +181,7 @@
     <Compile Include="ViewModel\QuanLiTiepDon\QuanLiTiepDonViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\SuaBenhNhanViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\ThemBenhNhanViewModel.cs" />
+    <Compile Include="ViewModel\ThanhToan\ThanhToanViewModel.cs" />
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -194,6 +196,12 @@
     </Compile>
     <Compile Include="View\QuanLiTiepDon\ThemBenhNhanView.xaml.cs">
       <DependentUpon>ThemBenhNhanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ThanhToan\HoaDonView.xaml.cs">
+      <DependentUpon>HoaDonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ThanhToan\ThanhToanView.xaml.cs">
+      <DependentUpon>ThanhToanView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +255,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ThanhToan\HoaDonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ThanhToan\ThanhToanView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -287,7 +303,6 @@
     <Folder Include="View\HoSoBacSi\" />
     <Folder Include="View\QuanLiKhamBenh\" />
     <Folder Include="View\QuanLiKhoThuoc\" />
-    <Folder Include="View\ThanhToan\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ResourceXAML\image\ic_add.png" />

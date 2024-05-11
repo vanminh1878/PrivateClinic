@@ -1,6 +1,7 @@
 ﻿
 using PrivateClinic.View.OtherViews;
 using PrivateClinic.View.QuanLiTiepDon;
+using PrivateClinic.View.ThanhToan;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
     {
         //field
         public static Frame MainFrame { get; set; }
-        //Command 
+        //Command ThanhToanCM
         public ICommand CloseLogin { get; set; }
         public ICommand MinimizeLogin { get; set; }
         public ICommand MoveWindow { get; set; }
@@ -53,6 +54,11 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             TiepDonCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 MainFrame.Content = new QuanLiTiepDonView();
+            });
+                      
+            ThanhToanCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                MainFrame.Content = new ThanhToanView();
             });
 
 
