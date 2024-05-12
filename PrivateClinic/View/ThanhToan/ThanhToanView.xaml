@@ -257,7 +257,8 @@
                                         </Grid>
                                         <Grid Grid.Column="6">
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <Button Margin="0 0 15 4" Width="50" Height="50" HorizontalAlignment="Right" >
+                                                <Button ToolTip="Thanh toán " Command="{Binding PayHDCommand}" CommandParameter="{Binding}" Click="PaymentHDButton_Click"
+                                                    Margin="0 0 15 4" Width="50" Height="50" HorizontalAlignment="Right" >
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Grid>
@@ -266,7 +267,8 @@
                                                         </ControlTemplate>
                                                     </Button.Template>
                                                 </Button>
-                                                <Button Margin="0 0 0 4"  Width="50" Height="50" Padding="0 0 0 10" HorizontalAlignment="Right" >
+                                                <Button ToolTip="Xóa hóa đơn " Command="{Binding DeleteCommand}" CommandParameter="{Binding}"
+                                                         Margin="0 0 0 4" Width="50" Height="50" Padding="0 0 0 10" HorizontalAlignment="Right" Click="DeleteButton_Click">
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Grid>

@@ -22,16 +22,16 @@ namespace PrivateClinic.ViewModel.ThanhToan
         private ObservableCollection<HOADON> _listHD;
         public ObservableCollection<HOADON> listHD { get => _listHD; set { _listHD = value; OnPropertyChanged(); } }
 
-        public SuaBenhNhanView EditHDView { get; set; }
+        public HoaDonView hoaDonView { get; set; }
         public ICommand SearchCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
+
 
         public ICommand LoadCommand { get; set; }
         public ICommand LoadSLHDCommand { get; set; }
 
-        //LIST COMMAND
+        //LISTVIEW COMMAND
         public ICommand PayHDCommand { get; set; }
-        public ICommand EditHDCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         #endregion
 
         public ThanhToanViewModel()
@@ -39,10 +39,11 @@ namespace PrivateClinic.ViewModel.ThanhToan
             listHD = new ObservableCollection<HOADON>(DataProvider.Ins.DB.HOADONs);
             SearchCommand = new RelayCommand<ThanhToanView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             LoadSLHDCommand = new RelayCommand<ThanhToanView>((p) => { return p == null ? false : true; }, (p) => _LoadSLHDCommand(p));
-            PayHDCommand = new RelayCommand<ThanhToanView>((p) => { return p == null ? false : true; }, (p) => _PayHDCommand(p));
+            PayHDCommand = new RelayCommand<HOADON>((p) => { return p == null ? false : true; }, (p) => _PayHDCommand(p));
             DeleteCommand = new RelayCommand<HOADON>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
         }
 
+        #region Functions
         void _LoadSLHDCommand(ThanhToanView parameter)
         {
             parameter.txbSLHD.Text = listHD.Count.ToString();
@@ -98,15 +99,15 @@ namespace PrivateClinic.ViewModel.ThanhToan
                 }
             }
         }
-        public void SetEditBNView(SuaBenhNhanView view)
+        public void SetThanhToanHDView(HoaDonView view)
         {
-            //EditBNView = view;
+            hoaDonView = view;
         }
         void _EditBNCommand(BENHNHAN selectedItem)
         {
             if (selectedItem != null)
             {
-                SuaBenhNhanViewModel.Instance.EditBNView = new SuaBenhNhanView();
+
                 SuaBenhNhanViewModel.Instance.EditBNView.HoTen.Text = selectedItem.HoTen.ToString();
                 SuaBenhNhanViewModel.Instance.EditBNView.NgSinh.Text = selectedItem.NamSinh.ToString();
                 SuaBenhNhanViewModel.Instance.EditBNView.MaBN.Text = selectedItem.MaBN.ToString();
@@ -121,13 +122,20 @@ namespace PrivateClinic.ViewModel.ThanhToan
 
             }
         }
-        void _PayHDCommand(ThanhToanView parameter)
+        void _PayHDCommand(HOADON selectedItem)
         {
-            //HoaDonView hoaDonView = new HoaDonView();
-            //double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-            //hoaDonView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //hoaDonView.ShowDialog();
+            if (selectedItem != null)
+            {
+                HoaDonViewModel hoaDonVM = new HoaDonViewModel();
+                hoaDonVM.CurrentHoaDon = selectedItem;
 
+                HoaDonView hoaDonView = new HoaDonView();
+                hoaDonView.DataContext = hoaDonVM;
+                double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
+                hoaDonView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                hoaDonView.ShowDialog();
+            }
         }
+        #endregion
     }
 }

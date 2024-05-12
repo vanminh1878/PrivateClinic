@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PrivateClinic.ViewModel.QuanLiTiepDon;
+using PrivateClinic.ViewModel.ThanhToan;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +14,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
+
 namespace PrivateClinic.View.ThanhToan
 {
     /// <summary>
     /// Interaction logic for HoaDonView.xaml
     /// </summary>
-    public partial class HoaDonView : Page
+    public partial class HoaDonView : Window
     {
         public HoaDonView()
         {
             InitializeComponent();
+            HoaDonViewModel viewmodel = new HoaDonViewModel();
+            this.DataContext = viewmodel;
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -181,6 +181,7 @@
     <Compile Include="ViewModel\QuanLiTiepDon\QuanLiTiepDonViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\SuaBenhNhanViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\ThemBenhNhanViewModel.cs" />
+    <Compile Include="ViewModel\ThanhToan\HoaDonViewModel.cs" />
     <Compile Include="ViewModel\ThanhToan\ThanhToanViewModel.cs" />
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
