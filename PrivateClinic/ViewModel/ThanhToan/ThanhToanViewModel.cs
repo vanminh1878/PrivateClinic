@@ -13,6 +13,7 @@ using System.Windows;
 using MaterialDesignThemes.Wpf;
 using PrivateClinic.View.QuanLiTiepDon;
 using PrivateClinic.ViewModel.QuanLiTiepDon;
+using System.Windows.Documents;
 
 namespace PrivateClinic.ViewModel.ThanhToan
 {
@@ -21,6 +22,29 @@ namespace PrivateClinic.ViewModel.ThanhToan
         #region Properties
         private ObservableCollection<HOADON> _listHD;
         public ObservableCollection<HOADON> listHD { get => _listHD; set { _listHD = value; OnPropertyChanged(); } }
+
+        private PaymentStatus _selectedPaymentStatus = PaymentStatus.All;
+        public PaymentStatus SelectedPaymentStatus
+        {
+            get => _selectedPaymentStatus;
+            set
+            {
+                _selectedPaymentStatus = value;
+                OnPropertyChanged(nameof(SelectedPaymentStatus));
+                FilterListHD();
+            }
+        }
+
+        private HOADON _hoaDon;
+        public HOADON HoaDon
+        {
+            get => _hoaDon;
+            set
+            {
+                _hoaDon = value;
+                OnPropertyChanged(nameof(HoaDon));
+            }
+        }
 
         public HoaDonView hoaDonView { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -32,6 +56,14 @@ namespace PrivateClinic.ViewModel.ThanhToan
         //LISTVIEW COMMAND
         public ICommand PayHDCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+
+        public enum PaymentStatus
+        {
+            All = -1,
+            Unpaid = 0,
+            Paid = 1
+        }
+
         #endregion
 
         public ThanhToanViewModel()
@@ -72,26 +104,20 @@ namespace PrivateClinic.ViewModel.ThanhToan
             {
                 if (selectedItem != null)
                 {
-                    // Remove related HOADON records
                     var relatedHoadons = DataProvider.Ins.DB.HOADONs.Where(h => h.MaBN == selectedItem.MaBN).ToList();
                     DataProvider.Ins.DB.HOADONs.RemoveRange(relatedHoadons);
-                    // Remove related CT_BCDT records
                     var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.HOADON.MaBN == selectedItem.MaBN).ToList();
                     DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
-                    // Remove related PHIEUKHAMBENH records
                     var relatedPHIEUKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).ToList();
                     DataProvider.Ins.DB.PHIEUKHAMBENHs.RemoveRange(relatedPHIEUKBs);
                     var relatedMaPKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).Select(pkb => pkb.MaPKB).ToList();
                     var relatedCT_PKBs = DataProvider.Ins.DB.CT_PKB.Where(ctpkb => relatedMaPKBs.Contains(ctpkb.MaPKB)).ToList();
                     DataProvider.Ins.DB.CT_PKB.RemoveRange(relatedCT_PKBs);
 
-                    // Remove the selected BENHNHAN
                     DataProvider.Ins.DB.HOADONs.Remove(selectedItem);
 
-                    // Save changes to the database
                     DataProvider.Ins.DB.SaveChanges();
 
-                    // Remove the item from the list
                     listHD.Remove(selectedItem);
                     ThanhToanView thanhToanView = new ThanhToanView();
                     thanhToanView.txbSLHD.Text = listHD.Count.ToString();
@@ -103,25 +129,22 @@ namespace PrivateClinic.ViewModel.ThanhToan
         {
             hoaDonView = view;
         }
-        void _EditBNCommand(BENHNHAN selectedItem)
+
+        private void FilterListHD()
         {
-            if (selectedItem != null)
+            var allHoaDons = DataProvider.Ins.DB.HOADONs.ToList();
+            if (SelectedPaymentStatus == PaymentStatus.All)
             {
-
-                SuaBenhNhanViewModel.Instance.EditBNView.HoTen.Text = selectedItem.HoTen.ToString();
-                SuaBenhNhanViewModel.Instance.EditBNView.NgSinh.Text = selectedItem.NamSinh.ToString();
-                SuaBenhNhanViewModel.Instance.EditBNView.MaBN.Text = selectedItem.MaBN.ToString();
-                SuaBenhNhanViewModel.Instance.EditBNView.GioiTinh.Text = selectedItem.GioiTinh.ToString();
-                SuaBenhNhanViewModel.Instance.EditBNView.DiaChi.Text = selectedItem.DiaChi.ToString();
-
-                double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-                SuaBenhNhanViewModel.Instance.EditBNView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                SuaBenhNhanViewModel.Instance.EditBNView.ShowDialog();
-
-
-
+                listHD = new ObservableCollection<HOADON>(allHoaDons);
+            }
+            else
+            {
+                var statusString = ((int)SelectedPaymentStatus).ToString();
+                listHD = new ObservableCollection<HOADON>(
+                    allHoaDons.Where(x => x.TrangThai == statusString));
             }
         }
+
         void _PayHDCommand(HOADON selectedItem)
         {
             if (selectedItem != null)
@@ -133,9 +156,12 @@ namespace PrivateClinic.ViewModel.ThanhToan
                 hoaDonView.DataContext = hoaDonVM;
                 double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
                 hoaDonView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                hoaDonView.Height = 550;
                 hoaDonView.ShowDialog();
             }
         }
         #endregion
     }
 }
+
+

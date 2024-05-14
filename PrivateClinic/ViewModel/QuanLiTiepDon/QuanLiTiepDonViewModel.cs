@@ -52,7 +52,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             for (int i = 0; i < listBN.Count; i++)
             {
-                listBN[i].STT = i + 1;
+                //listBN[i].STT = i + 1;
             }
         }
         void _LoadCommand(QuanLiTiepDonView parameter)

@@ -12,6 +12,7 @@
       Title="ThanhToanView">
     <Page.Resources>
         <convert:IndexConverter x:Key="indexConverter"/>
+        <convert:EnumToIntConverter  x:Key="enumToIntConverter"/>
     </Page.Resources>
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
@@ -108,24 +109,25 @@
                                     Width="235" 
                                     Margin="0 0 -30 0"
                                     VerticalAlignment="Center">
-                                <ComboBox DockPanel.Dock="Right"
-                                              x:Name="cboSelectCustomerSort1"
-                                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                              Height="50"
-                                              Width="230"
-                                              SelectedIndex="0" 
-                                              FontSize="18"
-                                              BorderThickness="0"
-                                              Padding="10,0,10,0"
-                                              VerticalContentAlignment="Center"
-                                              HorizontalContentAlignment="Left"
-                                              FontWeight="Light"
-                                              FontStyle="Italic"
-                                              Background="Transparent"
-                                              >
-                                    <ComboBoxItem Content="Đã thanh toán" />
-                                    <ComboBoxItem Content="Chưa thanh toán" />
+                                <ComboBox x:Name="cboSelectCustomerSort1"
+                                          SelectedValue="{Binding SelectedPaymentStatus, Converter={StaticResource enumToIntConverter}}"
+                                          SelectedValuePath="Tag"
+                                          Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                          Height="50"
+                                          Width="230"
+                                          FontSize="18"
+                                          BorderThickness="0"
+                                          Padding="10,0,10,0"
+                                          VerticalContentAlignment="Center"
+                                          HorizontalContentAlignment="Left"
+                                          FontWeight="Light"
+                                          FontStyle="Italic"
+                                          Background="Transparent">
+                                    <ComboBoxItem Content="Tất cả" Tag="-1"/>
+                                    <ComboBoxItem Content="Đã thanh toán" Tag="1"/>
+                                    <ComboBoxItem Content="Chưa thanh toán" Tag="0"/>
                                 </ComboBox>
+
                             </Border>
                         </DockPanel>
                     </StackPanel>
@@ -257,7 +259,10 @@
                                         </Grid>
                                         <Grid Grid.Column="6">
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <Button ToolTip="Thanh toán " Command="{Binding PayHDCommand}" CommandParameter="{Binding}" Click="PaymentHDButton_Click"
+                                                <Button ToolTip="Thanh toán "
+                                                        Command="{Binding PayHDCommand}" 
+                                                        CommandParameter="{Binding}" Click="PaymentHDButton_Click"
+                                                      
                                                     Margin="0 0 15 4" Width="50" Height="50" HorizontalAlignment="Right" >
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">

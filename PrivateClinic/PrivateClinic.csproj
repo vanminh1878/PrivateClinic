@@ -96,6 +96,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EnumToIntConverter.cs" />
     <Compile Include="Converters\IndexConverter.cs" />
     <Compile Include="Model\BACSI.cs">
       <DependentUpon>Model1.tt</DependentUpon>
