@@ -380,6 +380,7 @@
                         VerticalAlignment="Top"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="20"
+                        Command="{Binding CancelCommand}"
                         Background="#D51F2A"
                         >
                         <Button.Content>
@@ -403,6 +404,7 @@
                         VerticalAlignment="Top"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="20"
+                        Command="{Binding CancelCommand}"
                         Background="#364C9A"
                         >
                         <Button.Content>

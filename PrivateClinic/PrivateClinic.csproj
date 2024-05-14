@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="ViewModel\HoSoBacSiVM\DanhSachBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\HoSoBacSiViewModel.cs" />
+    <Compile Include="ViewModel\HoSoBacSiVM\SuaThongTinBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThemBacSiViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
