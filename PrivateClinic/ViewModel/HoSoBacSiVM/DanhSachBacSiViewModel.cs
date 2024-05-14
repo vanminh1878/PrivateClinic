@@ -77,6 +77,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         {
            LoadData();
            AddDoctor();
+           EditDoctor();
            
         }
 
@@ -101,5 +102,18 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         {
             ShowWDAddDoctor = new ViewModelCommand(ShowWDDoctor);
         }
-    }
+
+        // Chức năng sửa thông tin cho 1 bác sĩ
+        public ICommand EditDoctorCommand {  get; set; }
+        void EditDoctor()
+        {
+            EditDoctorCommand = new ViewModelCommand(ShowWDEditDoctor);
+        }
+        private void ShowWDEditDoctor(object obj)
+        {
+            SuaThongTinBacSiView view = new SuaThongTinBacSiView();
+            view.ShowDialog();
+            LoadData();
+        }
+    } 
 }
