@@ -187,6 +187,7 @@
 
             <ListView FontSize="22"
                       Focusable="True"
+                      x:Name="ListViewBS"
                       Margin="0,-45,0,0"
                       FontWeight="SemiBold"
                       ItemsSource="{Binding FilterDSBS}" d:ItemsSource="{d:SampleData ItemCount=5}"

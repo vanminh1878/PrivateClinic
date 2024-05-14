@@ -55,26 +55,35 @@
                         VerticalAlignment="Center"
                         Text="Họ và tên:" />
 
-                    <Border Grid.Column="1"
+                    <StackPanel Grid.Column="1">
+                        <Border
                             Width="310"
                             Height="35"
                             HorizontalAlignment="Left"
-                            Margin="0,0,0,10"
+                            Margin="0,20,0,10"
                             BorderThickness="0.7"
                             CornerRadius="10"
                             BorderBrush="Black"
                             >
-                        <!--Họ và tên-->
-                        <TextBox
-                            Width="300"
-                            Height="35"
-                            Padding="5,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            materialDesign:HintAssist.Hint="Nhập họ và tên"/>
+                            <!--Họ và tên-->
+                            <TextBox
+                                x:Name="HoTen"
+                                Width="300"
+                                Height="35"
+                                Padding="5,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Hint="Nhập họ và tên"
+                                Text="{Binding HoTen, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
+                        <TextBlock
+                            Margin="10,-8,0,0"
+                            FontSize="12"
+                            Foreground="red"
+                            Text="{Binding HoTenError}" />
+                    </StackPanel>
 
-                    </Border>
 
 
                 </Grid>
@@ -92,25 +101,34 @@
                         VerticalAlignment="Center"
                         Text="Email:" />
 
-                    <Border Grid.Column="1"
-                            Width="310"
-                            Height="35"
-                            Margin="0,0,0,10"
-                            BorderThickness="0.7"
-                            CornerRadius="10"
-                            BorderBrush="Black"
-                            >
-                        <!--Email-->
-                        <TextBox
-                            Width="300"
-                            Height="35"
-                            Padding="5,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            materialDesign:HintAssist.Hint="Nhập email"/>
+                    <StackPanel Grid.Column="1">
+                        <Border Grid.Column="1"
+                                Width="310"
+                                Height="35"
+                                Margin="0,20,0,10"
+                                BorderThickness="0.7"
+                                CornerRadius="10"
+                                BorderBrush="Black"
+                                >
+                            <!--Email-->
+                            <TextBox
+                                x:Name="Email"
+                                Width="300"
+                                Height="35"
+                                Padding="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Hint="Nhập email"
+                                Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
+                        <TextBlock
+                            Margin="10,-8,0,0"
+                            FontSize="12"
+                            Foreground="red"
+                            Text="{Binding EmailError}" />
+                    </StackPanel>
 
-                    </Border>
 
 
                 </Grid>
@@ -147,11 +165,14 @@
                             >
                         <!--Giới tính-->
                         <ComboBox
+                            x:Name="GioiTinh"
                             Width="300"
                             Height="35"
                             Padding="5,0,0,0"
                             HorizontalAlignment="Left"
                             Margin="-1,0,0,0"
+                            SelectedValue="{Binding GioiTinh}"
+                            SelectedValuePath="Content"
                             VerticalContentAlignment="Center"
                             materialDesign:HintAssist.Hint="Chọn giới tính">
                             <ComboBoxItem Content="Nam"/>
@@ -176,25 +197,35 @@
                         VerticalAlignment="Center"
                         Text="Số điện thoại:" />
 
-                    <Border Grid.Column="1"
+                    <StackPanel Grid.Column="1">
+                        <Border
                             Width="310"
                             Height="35"
-                            Margin="0,0,0,10"
+                            Margin="0,20,0,10"
                             BorderThickness="0.7"
                             CornerRadius="10"
                             BorderBrush="Black"
                             >
-                        <!--SDT-->
-                        <TextBox
-                            Width="300"
-                            Height="35"
-                            Padding="5,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            materialDesign:HintAssist.Hint="Nhập số điện thoại"/>
+                            <!--SDT-->
+                            <TextBox
+                                x:Name="SĐT"
+                                Width="300"
+                                Height="35"
+                                Padding="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Hint="Nhập số điện thoại"
+                                Text="{Binding SDT,UpdateSourceTrigger=PropertyChanged}"/>
 
-                    </Border>
+                        </Border>
+                        <TextBlock
+                            Margin="10,-8,0,0"
+                            FontSize="12"
+                            Foreground="red"
+                            Text="{Binding SDTError}" />
+                    </StackPanel>
+
 
 
                 </Grid>
@@ -219,27 +250,36 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Text="Ngày sinh:" />
+                    <StackPanel Grid.Column="1">
+                        <Border Grid.Column="1"
+                                Width="310"
+                                Height="35"
+                                HorizontalAlignment="Left"
+                                Margin="0,20,0,10"                            BorderThickness="0.7"
+                                CornerRadius="10"
+                                BorderBrush="Black"
+                                >
+                            <!--Ngày sinh-->
+                            <DatePicker
+                                x:Name="NgaySinh"
+                                Width="300"
+                                Height="35"
+                                Padding="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Hint="Chọn ngày sinh"
+                                SelectedDate="{Binding NgaySinh, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <Border Grid.Column="1"
-                            Width="310"
-                            Height="35"
-                            HorizontalAlignment="Left"
-                            Margin="0,0,0,10"                            BorderThickness="0.7"
-                            CornerRadius="10"
-                            BorderBrush="Black"
-                            >
-                        <!--Ngày sinh-->
-                        <DatePicker
-                            Width="300"
-                            Height="35"
-                            Padding="5,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            materialDesign:HintAssist.Hint="Chọn ngày sinh"/>
 
+                        </Border>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="12"
+                            Foreground="red"
+                            Text="{Binding NgaySinhError}" />
+                    </StackPanel>
 
-                    </Border>
 
 
                 </Grid>
@@ -257,25 +297,35 @@
                         VerticalAlignment="Center"
                         Text="Ngày vào làm:" />
 
-                    <Border Grid.Column="1"
-                            Width="310"
-                            Height="35"
-                            Margin="0,0,0,10"
-                            BorderThickness="0.7"
-                            CornerRadius="10"
-                            BorderBrush="Black"
-                            >
-                        <!--Ngày vào làm-->
-                        <DatePicker
-                            Width="300"
-                            Height="35"
-                            Padding="5,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            materialDesign:HintAssist.Hint="Chọn ngày vào làm"/>
+                    <StackPanel Grid.Column="1">
+                        <Border Grid.Column="1"
+                                Width="310"
+                                Height="35"
+                                Margin="0,20,0,10"
+                                BorderThickness="0.7"
+                                CornerRadius="10"
+                                BorderBrush="Black"
+                                >
+                            <!--Ngày vào làm-->
+                            <DatePicker
+                                x:Name="NgayVL"
+                                Width="300"
+                                Height="35"
+                                Padding="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                SelectedDate="{Binding NgayVL, UpdateSourceTrigger=PropertyChanged}"
+                                materialDesign:HintAssist.Hint="Chọn ngày vào làm"/>
 
-                    </Border>
+                        </Border>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="12"
+                            Foreground="red"
+                            Text="{Binding NgayVLError}" />
+                    </StackPanel>
+
 
 
                 </Grid>
@@ -302,25 +352,35 @@
                         VerticalAlignment="Center"
                         Text="Địa chỉ:" />
 
-                    <Border Grid.Column="1"
-                            Width="310"
-                            Height="35"
-                            HorizontalAlignment="Left"
-                            Margin="0,0,0,10"                            BorderThickness="0.7"
-                            CornerRadius="10"
-                            BorderBrush="Black"
-                            >
-                        <!--Địa chỉ-->
-                        <TextBox
-                            Width="300"
-                            Height="35"
-                            Padding="5,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            materialDesign:HintAssist.Hint="Nhập địa chỉ"/>
+                    <StackPanel Grid.Column="1">
+                        <Border Grid.Column="1"
+                                Width="310"
+                                Height="35"
+                                HorizontalAlignment="Left"
+                                Margin="0,20,0,10"
+                                BorderThickness="0.7"
+                                CornerRadius="10"
+                                BorderBrush="Black"
+                                >
+                            <!--Địa chỉ-->
+                            <TextBox
+                                x:Name="DiaChi"
+                                Width="300"
+                                Height="35"
+                                Padding="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Hint="Nhập địa chỉ"
+                                Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
+                        <TextBlock
+                            Margin="10,-8,0,0"
+                            FontSize="12"
+                            Foreground="red"
+                            Text="{Binding DiaChiError}" />
+                    </StackPanel>
 
-                    </Border>
 
 
                 </Grid>
@@ -338,25 +398,35 @@
                         VerticalAlignment="Center"
                         Text="Bằng cấp:" />
 
-                    <Border Grid.Column="1"
-                            Width="310"
-                            Height="35"
-                            Margin="0,0,0,10"
-                            BorderThickness="0.7"
-                            CornerRadius="10"
-                            BorderBrush="Black"
-                            >
-                        <!--Bằng cấp-->
-                        <TextBox
-                            Width="300"
-                            Height="35"
-                            Padding="5,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            materialDesign:HintAssist.Hint="Nhập bằng cấp"/>
+                    <StackPanel Grid.Column="1">
+                        <Border Grid.Column="1"
+                                Width="310"
+                                Height="35"
+                                Margin="0,20,0,10"
+                                BorderThickness="0.7"
+                                CornerRadius="10"
+                                BorderBrush="Black"
+                                >
+                            <!--Bằng cấp-->
+                            <TextBox
+                                x:Name="BangCap"
+                                Width="300"
+                                Height="35"
+                                Padding="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Hint="Nhập bằng cấp"
+                                Text="{Binding BangCap,UpdateSourceTrigger=PropertyChanged}"/>
 
-                    </Border>
+                        </Border>
+                        <TextBlock
+                            Margin="10,-8,0,0"
+                            FontSize="12"
+                            Foreground="red"
+                            Text="{Binding BangCapError}" />
+                    </StackPanel>
+
 
 
                 </Grid>
@@ -408,6 +478,7 @@
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="20"
                         Background="#348F6C"
+                        Command="{Binding AddDoctorCommand}"
                         >
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
