@@ -14,6 +14,7 @@ using MaterialDesignThemes.Wpf;
 using PrivateClinic.View.QuanLiTiepDon;
 using PrivateClinic.ViewModel.QuanLiTiepDon;
 using System.Windows.Documents;
+using System.Runtime.InteropServices;
 
 namespace PrivateClinic.ViewModel.ThanhToan
 {
@@ -143,6 +144,13 @@ namespace PrivateClinic.ViewModel.ThanhToan
                 listHD = new ObservableCollection<HOADON>(
                     allHoaDons.Where(x => x.TrangThai == statusString));
             }
+        }
+        
+        public void RefreshData()
+        {
+            listHD = new ObservableCollection<HOADON>(DataProvider.Ins.DB.HOADONs); // Refresh the list
+            OnPropertyChanged(nameof(listHD));
+            SelectedPaymentStatus = PaymentStatus.All; // Reset the combo box or similar UI element
         }
 
         void _PayHDCommand(HOADON selectedItem)

@@ -98,6 +98,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\EnumToIntConverter.cs" />
     <Compile Include="Converters\IndexConverter.cs" />
+    <Compile Include="Converters\StatusToBooleanConverter.cs" />
     <Compile Include="Model\BACSI.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -374,6 +375,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="ResourceXAML\image\ic_x_payment.png" />
+    <Resource Include="ResourceXAML\image\ic_wallet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets')" />

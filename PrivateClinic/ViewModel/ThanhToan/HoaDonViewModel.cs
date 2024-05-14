@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows;
 using PrivateClinic.View.ThanhToan;
 using System.Windows.Documents;
+using static PrivateClinic.ViewModel.ThanhToan.ThanhToanViewModel;
 
 namespace PrivateClinic.ViewModel.ThanhToan
 {
@@ -89,18 +90,24 @@ namespace PrivateClinic.ViewModel.ThanhToan
                 HOADON invoiceToUpdate = DataProvider.Ins.DB.HOADONs.FirstOrDefault(hd => hd.SoHD == CurrentHoaDon.SoHD);
                 if (invoiceToUpdate != null)
                 {
-                    //TODO update daThanhToan
-                    //invoiceToUpdate.daThanhToan = true; 
+                    invoiceToUpdate.TrangThai = ((int)PaymentStatus.Paid).ToString();
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thanh toán thành công!", "THÔNG BÁO");
                     ThanhToanView thanhToanView = new ThanhToanView();
                     thanhToanView.ListViewHD.ItemsSource = new ObservableCollection<HOADON>(DataProvider.Ins.DB.HOADONs);
                     thanhToanView.ListViewHD.Items.Refresh();
+                    thanhToanView.cboSelectCustomerSort1.SelectedIndex = 0;
+
+                    //if (paramater.Owner is ThanhToanView ownerView)
+                    //{
+                    //    ownerView.RefreshData();
+                    //}
                 }
                 else
                 {
                     MessageBox.Show("Hóa đơn không tồn tại.", "Error");
                 }
+                paramater.Close();
 
             }
         }

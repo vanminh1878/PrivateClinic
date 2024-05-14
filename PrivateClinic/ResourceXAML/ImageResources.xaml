@@ -62,5 +62,7 @@
     <BitmapImage x:Key="icTreatmentBlack" UriSource="pack://application:,,,/ResourceXAML/image/ic_treatment_black.png"/>
     <BitmapImage x:Key="icX" UriSource="pack://application:,,,/ResourceXAML/image/ic_x.png"/>
     <BitmapImage x:Key="icPerson" UriSource="pack://application:,,,/ResourceXAML/image/ic_person.png"/>
+    <BitmapImage x:Key="icWallet" UriSource="pack://application:,,,/ResourceXAML/image/ic_wallet.png"/>
+    <BitmapImage x:Key="icXPayment" UriSource="pack://application:,,,/ResourceXAML/image/ic_x_payment.png"/>
 
 </ResourceDictionary>

@@ -230,6 +230,12 @@
                             </Grid>
                         </ControlTemplate>
                     </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveCommand}"
+                                                CommandParameter="{Binding ElementName=HoaDonViewPage}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
         </Grid>

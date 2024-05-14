@@ -13,6 +13,7 @@
     <Page.Resources>
         <convert:IndexConverter x:Key="indexConverter"/>
         <convert:EnumToIntConverter  x:Key="enumToIntConverter"/>
+        <convert:PaymentStatusToBooleanConverter x:Key="paymentStatusToBooleanConverter"/>
     </Page.Resources>
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
@@ -246,12 +247,20 @@
                                         </Grid>
                                         <Grid Grid.Column="5">
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <Button Margin="0 0 0 0" Width="50" Height="50" HorizontalAlignment="Right" >
+                                                <Button IsHitTestVisible="False" Focusable="False" Margin="0 0 0 0" Width="40" Height="40" HorizontalAlignment="Right" >
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Grid>
-                                                                <Image Source="{StaticResource icCheckMark}" Stretch="UniformToFill"/>
+                                                                <Image Name="iconImage" Source="{StaticResource icCheckMark}" Stretch="UniformToFill"/>
                                                             </Grid>
+                                                            <ControlTemplate.Triggers>
+                                                                <DataTrigger Binding="{Binding TrangThai}" Value="0">
+                                                                    <Setter TargetName="iconImage" Property="Source" Value="{StaticResource icXPayment}"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding TrangThai}" Value="1">
+                                                                    <Setter TargetName="iconImage" Property="Source" Value="{StaticResource icCheckMark}"/>
+                                                                </DataTrigger>
+                                                            </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Button.Template>
                                                 </Button>
@@ -260,6 +269,7 @@
                                         <Grid Grid.Column="6">
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                                 <Button ToolTip="Thanh toán "
+                                                        IsEnabled="{Binding TrangThai, Converter={StaticResource paymentStatusToBooleanConverter}}"
                                                         Command="{Binding PayHDCommand}" 
                                                         CommandParameter="{Binding}" Click="PaymentHDButton_Click"
                                                       
@@ -267,20 +277,33 @@
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Grid>
-                                                                <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                                                                <Image Name="pay_img" Source="{StaticResource icWallet}" Stretch="UniformToFill"/>
                                                             </Grid>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="False">
+                                                                    <Setter TargetName="pay_img" Property="Opacity" Value="0.5"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Button.Template>
                                                 </Button>
-                                                <Button ToolTip="Xóa hóa đơn " Command="{Binding DeleteCommand}" CommandParameter="{Binding}"
+                                                <Button ToolTip="Xóa hóa đơn "
+                                                        IsEnabled="{Binding TrangThai, Converter={StaticResource paymentStatusToBooleanConverter}}"
+                                                        Command="{Binding DeleteCommand}" CommandParameter="{Binding}"
                                                          Margin="0 0 0 4" Width="50" Height="50" Padding="0 0 0 10" HorizontalAlignment="Right" Click="DeleteButton_Click">
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Grid>
-                                                                <Image Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
+                                                                <Image Name="delete_img" Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
                                                             </Grid>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="False">
+                                                                    <Setter TargetName="delete_img" Property="Opacity" Value="0.5"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Button.Template>
+
                                                 </Button>
                                             </StackPanel>
                                         </Grid>
