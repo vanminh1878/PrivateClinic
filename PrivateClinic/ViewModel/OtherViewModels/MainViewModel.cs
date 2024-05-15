@@ -1,4 +1,5 @@
 ﻿
+using PrivateClinic.View.BangDieuKhien;
 using PrivateClinic.View.OtherViews;
 using PrivateClinic.View.QuanLiTiepDon;
 using PrivateClinic.View.ThanhToan;
@@ -21,7 +22,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
         public ICommand CloseLogin { get; set; }
         public ICommand MinimizeLogin { get; set; }
         public ICommand MoveWindow { get; set; }
-        public ICommand BangdieukhienCM { get; set; }
+        public ICommand BangDieuKhienCM { get; set; }
         public ICommand TiepDonCM { get; set; }
         public ICommand KhamBenhCM { get; set; }
         public ICommand ThanhToanCM { get; set; }
@@ -44,11 +45,16 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             LoadPageCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 MainFrame = p;
-                p.Content = new QuanLiTiepDonView();
+                p.Content = new BangDieuKhienView();
             });
             HomeCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                MainFrame.Content = new QuanLiTiepDonView();
+                MainFrame.Content = new BangDieuKhienView();
+            });
+
+            BangDieuKhienCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                MainFrame.Content = new BangDieuKhienView();
             });
 
             TiepDonCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
