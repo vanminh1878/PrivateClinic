@@ -1,4 +1,5 @@
-﻿using PrivateClinic.ViewModel.HoSoBacSiVM;
+﻿using PrivateClinic.Model;
+using PrivateClinic.ViewModel.HoSoBacSiVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,12 @@ namespace PrivateClinic.View.HoSoBacSi
     /// </summary>
     public partial class SuaThongTinBacSiView : Window
     {
-        public SuaThongTinBacSiView()
+        public SuaThongTinBacSiView(BACSI bacsi)
         {
             InitializeComponent();
             SuaThongTinBacSiViewModel viewModel = new SuaThongTinBacSiViewModel(this);
+            viewModel.bacsi = bacsi;
+            viewModel.loadEditCurrent();
             this.DataContext = viewModel;
         }
     }

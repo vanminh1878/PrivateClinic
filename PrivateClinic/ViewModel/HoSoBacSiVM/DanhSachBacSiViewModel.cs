@@ -111,7 +111,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
         private void ShowWDEditDoctor(object obj)
         {
-            SuaThongTinBacSiView view = new SuaThongTinBacSiView();
+            BACSI bACSI = obj as BACSI;
+            SuaThongTinBacSiView view = new SuaThongTinBacSiView((BACSI) obj);
             view.ShowDialog();
             LoadData();
         }
