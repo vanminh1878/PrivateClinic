@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrivateClinic.View.HoSoBacSi"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Width="700"
-        Height="300"
+        Width="750"
+        Height="320"
         AllowsTransparency="True"
         Background="Transparent"
         FontFamily="Sugoe UI"
@@ -32,7 +32,7 @@
                 CornerRadius="12,12,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="670" />
+                        <ColumnDefinition Width="710" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock
@@ -93,7 +93,7 @@
                 <TextBox
                     Width="120"
                     Height="50"
-                    Margin="0,2,0,0"
+                    Margin="20,2,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     BorderThickness="0"
@@ -127,8 +127,8 @@
                     </Grid.RowDefinitions>
                     <!--  Chỗ binding họ và tên  -->
                     <TextBox
-                        Width="250"
-                        Height="50"
+                        Width="260"
+                        Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Họ và tên"
@@ -140,8 +140,8 @@
                     <!--  Chỗ SĐT  -->
                     <TextBox
                         Grid.Row="1"
-                        Width="250"
-                        Height="50"
+                        Width="260"
+                        Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Số điện thoại"
@@ -153,8 +153,8 @@
                     <!--  Chỗ binding ngày sinh  -->
                     <TextBox
                         Grid.Row="2"
-                        Width="250"
-                        Height="50"
+                        Width="260"
+                        Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Ngày sinh"
@@ -165,8 +165,8 @@
                     <!--  Chỗ binding địa chỉ  -->
                     <TextBox
                         Grid.Row="3"
-                        Width="250"
-                        Height="50"
+                        Width="260"
+                        Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Địa chỉ"
@@ -186,8 +186,8 @@
 
                     <!--  Chỗ binding giới tính  -->
                     <TextBox
-                        Width="250"
-                        Height="50"
+                        Width="260"
+                        Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Giới tính"
@@ -199,21 +199,23 @@
                     <!--  Chỗ binding email  -->
                     <TextBox
                         Grid.Row="1"
-                        Width="250"
-                        Height="50"
+                        Width="260"
+                        Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Email"
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding Email}"  />
+                        Text="{Binding Email}"
+                        TextWrapping="Wrap"
+                        />
 
                     <!--  Chỗ binding ngày vào làm  -->
                     <TextBox
                         Grid.Row="2"
-                        Width="250"
-                        Height="50"
+                        Width="260"
+                        Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Ngày vào làm"
@@ -225,8 +227,8 @@
                     <!--  Chỗ binding bằng cấp  -->
                     <TextBox
                         Grid.Row="3"
-                        Width="250"
-                        Height="50"
+                        Width="260"
+                        Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Bằng cấp"
