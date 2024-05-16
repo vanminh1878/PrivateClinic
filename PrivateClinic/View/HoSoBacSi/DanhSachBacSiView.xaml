@@ -36,7 +36,7 @@
 
             <!--Tổng số lượng bác sĩ-->
             <TextBlock
-                Text="3"
+                Text="{Binding SoLuong}"
                 Margin="5,0,0,0"
                 FontSize="30"
                 VerticalAlignment="Center"
@@ -113,83 +113,87 @@
             Margin="5,5,0,0"
             Width="970"
             Height="50"
-            CornerRadius="10"
+            CornerRadius="10,10,0,0"
             VerticalAlignment="Top"
             Background="#D9D9D9">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="160"/>
-                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="270"/>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="180"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
+                <!--MaBS-->
                 <Grid Grid.Column="0">
                     <TextBlock HorizontalAlignment="Center"
                                FontWeight="DemiBold"
                                Text="MABS"
+                               Margin="5,0,0,0"
                                VerticalAlignment="Center" />
                 </Grid>
 
+                <!--HoTen-->
                 <Grid Grid.Column="1">
                     <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
                                Text="Tên bác sĩ"
-                               Margin="20,0,0,0"
+                               Margin="21,0,0,0"
                                VerticalAlignment="Center" />
                 </Grid>
 
+                <!--Giới tính-->
                 <Grid Grid.Column="2">
                     <TextBlock HorizontalAlignment="Left"
+                               Margin="20,0,0,0"
                                FontWeight="DemiBold"
                                Text="Giới tính"
-                               Margin="5,0,0,0"
                                VerticalAlignment="Center" />
                 </Grid>
 
+                <!--SDT-->
                 <Grid Grid.Column="3">
-                    <TextBlock HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
-                               Text="SĐT"
+                               Text="Số điện thoại"
+                               Margin="42,0,20,0"
                                VerticalAlignment="Center" />
                 </Grid>
 
+                <!--Bang Cap-->
                 <Grid Grid.Column="4">
                     <TextBlock HorizontalAlignment="Left"
-                               FontWeight="DemiBold"
-                               Text="Ngày sinh"
-                               Margin="20,0,0,0"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <Grid Grid.Column="5">
-                    <TextBlock HorizontalAlignment="Left"
-                               Margin="5,0,0,0"
+                               Margin="17,0,0,0"
                                FontWeight="DemiBold"
                                Text="Bằng cấp"
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <Grid Grid.Column="6">
-                    <TextBlock HorizontalAlignment="Center"
+                <!--Thao tac-->
+                <Grid Grid.Column="5">
+                    <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
                                Text="Thao tác"
+                               Margin="5,0,0,0"
                                VerticalAlignment="Center" />
                 </Grid>
             </Grid>
         </Border>
 
         <!--Chi tiết danh sách-->
-        <Grid Grid.Row="3" >
+        <Grid Grid.Row="3"
+              Margin="12,0,0,0"
+              >
 
             <ListView FontSize="22"
                       Focusable="True"
                       x:Name="ListViewBS"
                       Margin="0,-45,0,0"
                       FontWeight="SemiBold"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+
                       ItemsSource="{Binding FilterDSBS}" d:ItemsSource="{d:SampleData ItemCount=5}"
                       >
                 <ListView.ItemContainerStyle>
@@ -209,14 +213,14 @@
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaBS}"
                                                FontWeight="Regular"
-                                               Margin="8,30,0,0"
+                                               Margin="0,30,0,0"
                                                />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
                         <!--Tên BS-->
-                        <GridViewColumn Width="200">
+                        <GridViewColumn Width="280">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding HoTen}"
@@ -227,18 +231,18 @@
                         </GridViewColumn>
 
                         <!--Giới tính-->
-                        <GridViewColumn Width="100">
+                        <GridViewColumn Width="110">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding GioiTinh}"
                                                FontWeight="Regular"
-                                               Margin="10,30,0,0"/>
+                                               Margin="0,30,0,0"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
                         <!--SĐT-->
-                        <GridViewColumn Width="160">
+                        <GridViewColumn Width="180">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding SDT}"
@@ -248,34 +252,24 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <!--Ngày sinh-->
-                        <GridViewColumn Width="Auto">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding NgaySinh, StringFormat=dd/MM/yyyy}"
-                                               FontWeight="Regular"
-                                               Margin="5,30,0,0"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
                         <!--Bằng cấp-->
-                        <GridViewColumn Width="150">
+                        <GridViewColumn Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding BangCap}"
                                                FontWeight="Regular"
-                                               Margin="25,30,0,0"/>
+                                               Margin="35,30,0,0"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
                         <!--Thao tác-->
-                        <GridViewColumn Width="Auto">
+                        <GridViewColumn Width="230">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <!--  Nút sửa  -->
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0,0,0,0">
                                         <Button ToolTip="Sửa thông tin bệnh nhân "
                                                 Click="EditButton_Click"
                                                 Command="{Binding EditDoctorCommand}"
@@ -299,7 +293,7 @@
                                             BorderBrush="Black"
                                             BorderThickness="0.5"
                                             CornerRadius="50"
-                                            Margin="15,20,0,0"
+                                            Margin="10,20,0,0"
                                             Width="45"
                                             Height="45"
                                             Cursor="Hand">

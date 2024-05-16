@@ -43,5 +43,7 @@ namespace PrivateClinic.View.HoSoBacSi
                 }
             }
         }
+
+        
     }
 }
