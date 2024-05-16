@@ -1,4 +1,5 @@
-﻿using PrivateClinic.ViewModel.HoSoBacSiVM;
+﻿using PrivateClinic.Model;
+using PrivateClinic.ViewModel.HoSoBacSiVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
 
 namespace PrivateClinic.View.HoSoBacSi
 {
@@ -26,6 +28,20 @@ namespace PrivateClinic.View.HoSoBacSi
             InitializeComponent();
             DanhSachBacSiViewModel viewModel = new DanhSachBacSiViewModel();
             this.DataContext = viewModel;
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is DanhSachBacSiViewModel viewModel)
+            {
+                var selectedBacSi = (sender as System.Windows.Controls.Button)?.CommandParameter as BACSI;
+
+                if (selectedBacSi != null)
+                {
+                    viewModel.EditDoctorCommand.Execute(selectedBacSi);
+                    
+                }
+            }
         }
     }
 }

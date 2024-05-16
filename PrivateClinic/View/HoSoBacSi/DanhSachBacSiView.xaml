@@ -276,39 +276,30 @@
                                 <DataTemplate>
                                     <!--  Nút sửa  -->
                                     <StackPanel Orientation="Horizontal">
-                                        <Border
-                                            BorderBrush="Black"
-                                            BorderThickness="0.5"
-                                            CornerRadius="50"
-                                            Margin="20,20,0,0"
-                                            Width="45"
-                                            Height="45"
-                                            Cursor="Hand">
-                                            <Border.Style>
-                                                <Style TargetType="Border">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#00e5ff" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>
-                                            <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="MouseLeftButtonDown">
-                                                    <i:InvokeCommandAction Command="{Binding DataContext.EditDoctorCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-
-
-                                        </Border>
+                                        <Button ToolTip="Sửa thông tin bệnh nhân "
+                                                Click="EditButton_Click"
+                                                Command="{Binding EditDoctorCommand}"
+                                                CommandParameter="{Binding}"
+                                                Margin="0"
+                                                VerticalAlignment="Bottom"
+                                                Width="45"
+                                                Height="45"
+                                                HorizontalAlignment="Right" >
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Grid>
+                                                        <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
 
                                         <!--  Nút xóa -->
                                         <Border
                                             BorderBrush="Black"
                                             BorderThickness="0.5"
                                             CornerRadius="50"
-                                            Margin="5,20,0,0"
+                                            Margin="15,20,0,0"
                                             Width="45"
                                             Height="45"
                                             Cursor="Hand">
@@ -323,6 +314,11 @@
                                             </Border.Style>
                                             <Image Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
                                         </Border>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown" >
+                                                <i:InvokeCommandAction Command="{Binding DataContext.DeleteDoctorCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
