@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PrivateClinic.Model;
+using PrivateClinic.ViewModel.HoSoBacSiVM;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,11 @@ namespace PrivateClinic.View.HoSoBacSi
     /// </summary>
     public partial class ThongTinChiTietCuaMotBacSIView : Window
     {
-        public ThongTinChiTietCuaMotBacSIView()
+        public ThongTinChiTietCuaMotBacSIView(BACSI bs)
         {
             InitializeComponent();
+            ThongTinChiTietCuaMotBacSiViewModel doctorDetailViewModel = new ThongTinChiTietCuaMotBacSiViewModel(bs, this);
+            this.DataContext = doctorDetailViewModel;
         }
     }
 }

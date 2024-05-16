@@ -51,6 +51,7 @@
                         Content="X"
                         Cursor="Hand"
                         FontSize="17"
+                        Command="{Binding ExitCommand}"
                         Foreground="#fffaf5">
                         <Button.Style>
                             <Style TargetType="Button">
@@ -90,16 +91,16 @@
 
                 <!--Mã bác sĩ-->
                 <TextBox
-                    Width="80"
+                    Width="120"
                     Height="50"
-                    Margin="15,2,0,0"
+                    Margin="0,2,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     FontWeight="Bold"
                     IsReadOnly="True"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="BS001" />
+                    Text="{Binding MaBS}" />
 
                 <!--  Ảnh đại diện  -->
                 <Border
@@ -134,7 +135,7 @@
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="Trần Thanh Nhã" />
+                        Text="{Binding HoTen}" />
 
                     <!--  Chỗ SĐT  -->
                     <TextBox
@@ -147,7 +148,7 @@
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="02583974123" />
+                        Text="{Binding SDT}"  />
 
                     <!--  Chỗ binding ngày sinh  -->
                     <TextBox
@@ -160,7 +161,7 @@
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="02/03/1995" />
+                        Text="{Binding NgaySinh,StringFormat='{}{0:dd/MM/yyyy}'}"  />
                     <!--  Chỗ binding địa chỉ  -->
                     <TextBox
                         Grid.Row="3"
@@ -172,7 +173,7 @@
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="Q1, Hồ Chí Minh" />
+                        Text="{Binding DiaChi}"  />
                 </Grid>
 
                 <Grid Grid.Column="3">
@@ -193,7 +194,7 @@
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="Nữ" />
+                        Text="{Binding GioiTinh}"  />
 
                     <!--  Chỗ binding email  -->
                     <TextBox
@@ -206,7 +207,7 @@
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="nhathanh@gmail.com" />
+                        Text="{Binding Email}"  />
 
                     <!--  Chỗ binding ngày vào làm  -->
                     <TextBox
@@ -219,7 +220,7 @@
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="12/8/2019" />
+                        Text="{Binding NgayVL,StringFormat='{}{0:dd/MM/yyyy}'}"  />
 
                     <!--  Chỗ binding bằng cấp  -->
                     <TextBox
@@ -232,7 +233,7 @@
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="Tiến sĩ" />
+                        Text="{Binding BangCap}"  />
                 </Grid>
             </Grid>
         </Grid>

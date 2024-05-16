@@ -29,6 +29,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         public ICommand ShowWDAddDoctor { get; set; }
         public ICommand EditDoctorCommand { get; set; }
         public ICommand DeleteDoctorCommand { get; set; }
+        public ICommand DoctorDetailCommand { get; set; }
 
         private int soLuong;
         public int SoLuong
@@ -50,6 +51,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             LoadData();
             AddDoctor();
             EditDoctor();
+            DoctorDetailF();
             DeleteDoctorCommand = new RelayCommand<BACSI>((p) => p != null, DeleteBacSi);
 
         }
@@ -160,6 +162,20 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     MessageBox.Show("Xóa thành công", "Thông báo");
                 }
             }
+        }
+
+        //Hàm thể hiện thông tin bằng double click
+        void DoctorDetailF()
+        {
+            DoctorDetailCommand = new ViewModelCommand(DoctorDetail);
+        }
+
+        private void DoctorDetail(object obj)
+        {
+            BACSI bs = (BACSI)obj;
+            ThongTinChiTietCuaMotBacSIView doctordetailView = new ThongTinChiTietCuaMotBacSIView(bs);
+            doctordetailView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            doctordetailView.ShowDialog();
         }
     } 
 }
