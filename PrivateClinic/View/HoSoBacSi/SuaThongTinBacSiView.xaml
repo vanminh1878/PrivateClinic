@@ -460,7 +460,7 @@
                         </Button.Content>
                     </Button>
 
-                    <!--Nút thêm-->
+                    <!--Nút lưu-->
                     <Button
                         Width="150"
                         Height="45"
@@ -470,7 +470,7 @@
                         VerticalAlignment="Top"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="20"
-                        Command="{Binding CancelCommand}"
+                        Command="{Binding SaveCommand}"
                         Background="#364C9A"
                         >
                         <Button.Content>

@@ -17,7 +17,18 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
     {
         private SuaThongTinBacSiView _view;
         public ICommand CancelCommand { get; set; }
+
+        public ICommand SaveCommand { get; set; }
         public BACSI bacsi { get; set; }
+
+        //Hàm khởi tạo
+        public SuaThongTinBacSiViewModel(SuaThongTinBacSiView view)
+        {
+            this._view = view;
+            CancelCommand = new ViewModelCommand(quit);
+            SaveCommand = new ViewModelCommand(accept, canAccept);
+
+        }
         //Họ Tên
         private string hoten;
         public string HoTen
@@ -186,7 +197,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
 
         private bool[] _canAccept = new bool[7];
-        private bool canAcceptAdd(object obj)
+        private bool canAccept(object obj)
         {
             bool check = _canAccept[0] && _canAccept[1] && _canAccept[2] && _canAccept[3]
                             && _canAccept[4] && _canAccept[5] && _canAccept[6];
@@ -197,8 +208,27 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             return false;
 
         }
+        private void accept(object obj)
+        {
+            MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin bác sĩ ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (h == MessageBoxResult.Yes)
+            {
+                BACSI a = DataProvider.Ins.DB.BACSIs.FirstOrDefault(bs => bs.MaBS == bacsi.MaBS);
+                a.HoTen = HoTen;
+                a.SDT = SDT;
+                a.GioiTinh = GioiTinh;
+                a.Email = Email;
+                a.NgaySinh = NgaySinh;
+                a.NgayVaoLam =(DateTime)NgayVL;
+                a.DiaChi = DiaChi;
+                a.BangCap = BangCap;
+                DataProvider.Ins.DB.SaveChanges();
+                MessageBox.Show("Thành công", "Thông báo");
+                _view.Close();
+            }
+        }
 
-        
+
         //Hàm load thông tin hiện tại của item đang được chọn
         public void loadEditCurrent()
         {
@@ -213,13 +243,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
 
 
-        public SuaThongTinBacSiViewModel(SuaThongTinBacSiView view) 
-        {
-            this._view = view;
-            CancelCommand = new ViewModelCommand(quit);
-
-        }
         
+        
+        //Hàm hỗ trợ CancelCommand
         private void quit(object obj)
         {
             _view.Close();
