@@ -22,11 +22,27 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             {
                 dsbs = value;
                 OnPropertyChanged(nameof(DSBS));
+                SoLuong = DSBS.Count;
+
             }
         }
         public ICommand ShowWDAddDoctor { get; set; }
         public ICommand EditDoctorCommand { get; set; }
         public ICommand DeleteDoctorCommand { get; set; }
+
+        private int soLuong;
+        public int SoLuong
+        {
+            get => soLuong;
+            set
+            {
+                if (soLuong != value)
+                {
+                    soLuong = value;
+                    OnPropertyChanged(nameof(SoLuong));
+                }
+            }
+        }
 
         //Hàm khởi tạo
         public DanhSachBacSiViewModel()
@@ -49,6 +65,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 {
                     filterDSBS = value;
                     OnPropertyChanged(nameof(FilterDSBS));
+
                 }
             }
         }
@@ -139,6 +156,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
                     //Cập nhật listview
                     FilterDSBS.Remove(selectedItem);
+                    SoLuong = FilterDSBS.Count;
                     MessageBox.Show("Xóa thành công", "Thông báo");
                 }
             }
