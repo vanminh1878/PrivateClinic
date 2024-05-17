@@ -52,11 +52,11 @@
                            HorizontalAlignment="Left"
                            Margin="40,0,0,0"
                            />
-                <TextBox
+                <PasswordBox
+                    x:Name="txtMKcu"
                     Grid.Column="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
-                    TextWrapping="Wrap"
                     Width="660"
                     materialDesign:HintAssist.Hint="Mật khẩu hiện tại"
                     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignTextFieldBoxTextBoxEnabledComboBox}" />
@@ -73,11 +73,11 @@
                            VerticalAlignment="Center"
                            Margin="40,0,0,0"
                            HorizontalAlignment="Left"/>
-                <TextBox
+                <PasswordBox
+                    x:Name="txtMKmoi"
                     Grid.Column="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
-                    TextWrapping="Wrap"
                     Width="660"
                     materialDesign:HintAssist.Hint="Mật khẩu mới"
                     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignTextFieldBoxTextBoxEnabledComboBox}" />
@@ -94,11 +94,11 @@
                            VerticalAlignment="Center"
                            Margin="40,0,0,0"
                            HorizontalAlignment="Left"/>
-                <TextBox
+                <PasswordBox
+                    x:Name="txtNhapLai"
                     Grid.Column="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
-                    TextWrapping="Wrap"
                     Width="660"
                     materialDesign:HintAssist.Hint="Nhập lại mật khẩu mới"
                     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignTextFieldBoxTextBoxEnabledComboBox}" />
@@ -110,6 +110,7 @@
                         Height="50"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         Background="#EE3C46"
+                        Command="{Binding ChangePasswordCommand}"
                         FontSize="25"/>
             </Grid>
         </Grid>

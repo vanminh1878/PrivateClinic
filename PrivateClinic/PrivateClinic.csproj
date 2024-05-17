@@ -174,6 +174,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\HoSoBacSiVM\DanhSachBacSiViewModel.cs" />
+    <Compile Include="ViewModel\HoSoBacSiVM\DoiMatKhauViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\HoSoBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\SuaThongTinBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThemBacSiViewModel.cs" />

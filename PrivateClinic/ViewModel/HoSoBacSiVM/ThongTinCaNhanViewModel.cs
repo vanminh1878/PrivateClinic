@@ -75,7 +75,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     DiaChi = bac.DiaChi;
                     BangCap = bac.BangCap;
                     break;
-
                 }
             }
            
