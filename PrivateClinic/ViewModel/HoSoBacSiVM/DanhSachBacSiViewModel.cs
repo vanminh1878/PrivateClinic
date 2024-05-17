@@ -43,7 +43,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             SearchCommand = new RelayCommand<DanhSachBacSiView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             AddCommand = new RelayCommand<DanhSachBacSiView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
-            DoctorDetailCommand = new RelayCommand<DanhSachBacSiView>((p) => { return p == null ? false : true; }, (p) => _DoctorDetailCommand(p));
+            DoctorDetailCommand = new RelayCommand<DanhSachBacSiView>((p) => { return p.ListViewBS.SelectedItem == null ? false : true; }, (p) => _DoctorDetailCommand(p));
 
         }
         void _SearchCommand(DanhSachBacSiView parameter)
@@ -64,15 +64,34 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         {
 
             ThemBacSiView addBSView = new ThemBacSiView();
-            double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
+            double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width+ 100;
             addBSView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             addBSView.ShowDialog();
 
         }
         void _DoctorDetailCommand(DanhSachBacSiView parameter)
         {
-            
+            ThongTinChiTietCuaMotBacSIView doctordetail = new ThongTinChiTietCuaMotBacSIView();
+            BACSI temp = (BACSI)parameter.ListViewBS.SelectedItem;
+            doctordetail.HoTentxb.Text = temp.HoTen;
+            if(temp.GioiTinh== "Nam       ")
+            {
+                doctordetail.GioiTinhtxb.SelectedIndex = 0;
+            }
+            else
+            {
+                doctordetail.GioiTinhtxb.SelectedIndex = 1;
+            }
+            doctordetail.SDTtxb.Text = temp.SDT;
+            doctordetail.Emailtxb.Text = temp.Email;
+            doctordetail.DiaChitxb.Text = temp.DiaChi;
+            doctordetail.BangCaptxb.Text = temp.BangCap;
+            doctordetail.Ngaysinhtxb.SelectedDate = temp.NgaySinh;
+            doctordetail.NgayVaoLamtxb.SelectedDate = temp.NgayVaoLam;
+            doctordetail.MaBstxb.Text = "BS" + temp.MaBS.ToString();
+            doctordetail.ShowDialog();
         }
+
     }
     //    //Chức năng tìm kiếm
 
@@ -121,7 +140,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
     //                DSBS.Where(s => s.HoTen.ToLower().Contains(SearchText.ToLower())));
     //        }
     //    }
-             
+
     //    //Chức năng hiển thị danh sách bác sĩ
     //    void LoadData()
     //    {

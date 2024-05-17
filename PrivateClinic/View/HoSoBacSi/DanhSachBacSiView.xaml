@@ -124,9 +124,11 @@
                 <ListView x:Name="ListViewBS"
           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
           ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          SelectionMode="Single"
+                          
           d:ItemsSource="{d:SampleData ItemCount=5}"
           ItemsSource="{Binding DSBS}"
-          SelectionMode="Single">
+          >
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" />
@@ -172,7 +174,13 @@
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding DoctorDetailCommand}"
+                                     CommandParameter="{Binding ElementName=DanhSachBacSiViewPage}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
 
         </Grid>
 

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrivateClinic.View.HoSoBacSi"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         Width="750"
-        Height="320"
+        Height="380"
         AllowsTransparency="True"
         Background="Transparent"
         FontFamily="Sugoe UI"
@@ -15,6 +16,7 @@
         FontWeight="Regular"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        x:Name="DetailBSViewPage"
         mc:Ignorable="d">
     <Border
         Background="White"
@@ -22,7 +24,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
-                <RowDefinition />
+                <RowDefinition Height="70"/>
+                <RowDefinition  />
             </Grid.RowDefinitions>
 
             <!--  Vùng nút thoát-->
@@ -32,7 +35,7 @@
                 CornerRadius="12,12,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="710" />
+                        <ColumnDefinition Width="700" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock
@@ -45,44 +48,65 @@
                         Text="Thông tin bác sĩ" />
 
                     <!--  Nút exit  -->
-                    <Button
-                        Grid.Column="2"
-                        BorderThickness="0"
-                        Content="X"
-                        Cursor="Hand"
-                        FontSize="17"
-                        Command="{Binding ExitCommand}"
-                        Foreground="#fffaf5">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#D51F2A" />
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#0010A1" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border
-                                    Width="25"
-                                    Height="25"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="15">
-                                    <ContentPresenter
-                                        Margin="0,1,0,0"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                    <materialDesign:PackIcon Kind="CloseThick" Foreground="#7E542E" Height="24" Width="24" Margin="10,5,0,0" Grid.Column="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding ExitCommand}"
+                 CommandParameter="{Binding ElementName=DetailBSViewPage}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </materialDesign:PackIcon>
                 </Grid>
             </Border>
-
             <Grid Grid.Row="1">
+                <Button ToolTip="Sửa thông tin bác sĩ (Sửa xong phải lưu)" Margin="20 0 150 0"  Width="50" Height="50" HorizontalAlignment="Right" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding EditCommand}"
+CommandParameter="{Binding ElementName=DetailBSViewPage}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button IsEnabled="False" x:Name="btnSave" Margin="20 0 79 0"  Width="50" Height="50" HorizontalAlignment="Right" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Image Source="{StaticResource icSave}" Stretch="UniformToFill"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveCommand}"
+CommandParameter="{Binding ElementName=DetailBSViewPage}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button ToolTip="Xóa bác sĩ " 
+Margin="0 0 10 4" Width="50" Height="50" Padding="0 0 0 10" HorizontalAlignment="Right" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Image Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding DeleteCommand}"
+CommandParameter="{Binding ElementName=DetailBSViewPage}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition />
@@ -90,23 +114,23 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Mã bác sĩ-->
-                <TextBox
+                <TextBlock
                     Width="120"
                     Height="50"
-                    Margin="20,2,0,0"
+                    Margin="0,2,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    BorderThickness="0"
+                    Padding="40 0 0 0"
                     FontWeight="Bold"
-                    IsReadOnly="True"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding MaBS}" />
+                    IsEnabled="True"
+                  
+                    x:Name="MaBstxb" />
 
                 <!--  Ảnh đại diện  -->
                 <Border
                     Width="120"
-                    Height="120"
-                    Margin="0,0,0,0"
+                    Height="146"
+                    Margin="15,0,15,0"
                     VerticalAlignment="Center"
                     BorderBrush="Black"
                     BorderThickness="2"
@@ -124,18 +148,19 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
+
                     </Grid.RowDefinitions>
                     <!--  Chỗ binding họ và tên  -->
-                    <TextBox
+                    <TextBox Grid.Row="0"
                         Width="260"
                         Height="53"
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Họ và tên"
                         FontWeight="SemiBold"
-                        IsReadOnly="True"
+                        IsEnabled="False"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding HoTen}" />
+                        x:Name="HoTentxb" />
 
                     <!--  Chỗ SĐT  -->
                     <TextBox
@@ -146,22 +171,22 @@
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Số điện thoại"
                         FontWeight="SemiBold"
-                        IsReadOnly="True"
+                        IsEnabled="False"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding SDT}"  />
+                        x:Name="SDTtxb"  />
 
                     <!--  Chỗ binding ngày sinh  -->
-                    <TextBox
+
+                    <DatePicker
                         Grid.Row="2"
-                        Width="260"
-                        Height="53"
-                        Margin="20,0,0,0"
-                        HorizontalAlignment="Left"
-                        materialDesign:HintAssist.Hint="Ngày sinh"
-                        FontWeight="SemiBold"
-                        IsReadOnly="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding NgaySinh,StringFormat='{}{0:dd/MM/yyyy}'}"  />
+                            x:Name="Ngaysinhtxb"
+                            Width="240"
+                            Height="53"
+                            Padding="5,0,0,0"
+                            HorizontalAlignment="Left"
+                        IsEnabled="False"
+                            VerticalContentAlignment="Center" Margin="20,0,0,0"
+                            />
                     <!--  Chỗ binding địa chỉ  -->
                     <TextBox
                         Grid.Row="3"
@@ -171,30 +196,36 @@
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Địa chỉ"
                         FontWeight="SemiBold"
-                        IsReadOnly="True"
+                        IsEnabled="False"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding DiaChi}"  />
+                        x:Name="DiaChitxb"  />
                 </Grid>
 
-                <Grid Grid.Column="3">
+                <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
+
                     </Grid.RowDefinitions>
 
                     <!--  Chỗ binding giới tính  -->
-                    <TextBox
-                        Width="260"
+                    <ComboBox
+                        x:Name="GioiTinhtxb"
+                        Width="239"
                         Height="53"
-                        Margin="20,0,0,0"
+                        Padding="5,0,0,0"
                         HorizontalAlignment="Left"
-                        materialDesign:HintAssist.Hint="Giới tính"
-                        FontWeight="SemiBold"
-                        IsReadOnly="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding GioiTinh}"  />
+                        Margin="20,0,0,0"
+                        IsEnabled="False"
+                        SelectedValuePath="Content"
+                        VerticalContentAlignment="Center"
+                        materialDesign:HintAssist.Hint="Chọn giới tính">
+                        <ComboBoxItem Content="Nam"/>
+                        <ComboBoxItem Content="Nữ"/>
+                    </ComboBox>
+
 
                     <!--  Chỗ binding email  -->
                     <TextBox
@@ -205,24 +236,24 @@
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Email"
                         FontWeight="SemiBold"
-                        IsReadOnly="True"
+                        IsEnabled="False"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding Email}"
+                        x:Name="Emailtxb"
                         TextWrapping="Wrap"
                         />
 
                     <!--  Chỗ binding ngày vào làm  -->
-                    <TextBox
+
+                    <DatePicker
                         Grid.Row="2"
-                        Width="260"
-                        Height="53"
-                        Margin="20,0,0,0"
-                        HorizontalAlignment="Left"
-                        materialDesign:HintAssist.Hint="Ngày vào làm"
-                        FontWeight="SemiBold"
-                        IsReadOnly="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding NgayVL,StringFormat='{}{0:dd/MM/yyyy}'}"  />
+                            x:Name="NgayVaoLamtxb"
+                            Width="240"
+                            Height="53"
+                            Padding="5,0,0,0"
+                            HorizontalAlignment="Left"
+                        IsEnabled="False"
+                            VerticalContentAlignment="Center" Margin="20,0,0,0"
+                            />
 
                     <!--  Chỗ binding bằng cấp  -->
                     <TextBox
@@ -233,11 +264,13 @@
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Bằng cấp"
                         FontWeight="SemiBold"
-                        IsReadOnly="True"
+                        IsEnabled="False"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding BangCap}"  />
+                        x:Name="BangCaptxb"  />
+
                 </Grid>
             </Grid>
+
         </Grid>
     </Border>
 </Window>

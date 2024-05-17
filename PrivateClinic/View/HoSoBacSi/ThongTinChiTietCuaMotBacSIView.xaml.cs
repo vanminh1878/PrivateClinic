@@ -22,10 +22,10 @@ namespace PrivateClinic.View.HoSoBacSi
     /// </summary>
     public partial class ThongTinChiTietCuaMotBacSIView : Window
     {
-        public ThongTinChiTietCuaMotBacSIView(BACSI bs)
+        public ThongTinChiTietCuaMotBacSIView()
         {
             InitializeComponent();
-            ThongTinChiTietCuaMotBacSiViewModel doctorDetailViewModel = new ThongTinChiTietCuaMotBacSiViewModel(bs, this);
+            ThongTinChiTietCuaMotBacSiViewModel doctorDetailViewModel = new ThongTinChiTietCuaMotBacSiViewModel();
             this.DataContext = doctorDetailViewModel;
         }
     }
