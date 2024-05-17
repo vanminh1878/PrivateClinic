@@ -229,10 +229,53 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 bacsi.BangCap = BangCap;
                 DataProvider.Ins.DB.BACSI.Add(bacsi);
                 DataProvider.Ins.DB.SaveChanges();
+                //Thêm tài khoản
+                NGUOIDUNG nguoi = new NGUOIDUNG();
+                nguoi.MaBS = bacsi.MaBS;
+                nguoi.MaNhom = "NHOM2";
+                nguoi.TenDangNhap = TaoTenDangNhap(bacsi);
+                nguoi.MatKhau = TaoMK();
+                DataProvider.Ins.DB.NGUOIDUNG.Add(nguoi);
+                DataProvider.Ins.DB.SaveChanges();
                 MessageBox.Show("Thêm bác sĩ mới thành công", "Thông báo");
                 view.Close();
             }
         }
+
+        //Hàm hỗ trợ tạo tên đăng nhập
+        private string TaoTenDangNhap(BACSI bs)
+        {
+            if (bs.MaBS < 10)
+            {
+                return "user00" + bs.MaBS.ToString();
+            }
+            else if (bs.MaBS < 100)
+            {
+                return "user0" + bs.MaBS.ToString();
+            }
+            else
+            {
+                return "user" + bs.MaBS.ToString();
+            }
+        }
+
+        //Hàm hỗ trợ tạo tên đăng nhập
+        private string TaoMK()
+        {
+            const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            char[] passwordChars = new char[6];
+
+            for (int i = 0; i < 6; i++)
+            {
+                passwordChars[i] = validChars[random.Next(validChars.Length)];
+            }
+
+            return new string(passwordChars);
+        }
+
+
+        //Hàm tự động gửi mật khẩu qua email
 
         //Các hàm báo lỗi
         private void ValidateFullName()
