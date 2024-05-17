@@ -49,7 +49,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                     //var accCount = DataProvider.Ins.DB.NGUOIDUNGs
                     //    .Where(x => x.TenDangNhap == Username && x.MatKhau == PassEncode && x.TenDangNhap.Equals(Username, StringComparison.Ordinal))
                     //    .Count();
-                    var accCount = DataProvider.Ins.DB.NGUOIDUNG
+                    var accCount = DataProvider.Ins.DB.NGUOIDUNGs
                                                 .Where(x => x.TenDangNhap.Trim() == Username.Trim() && x.MatKhau.Trim().Equals(PassEncode))
                                                 .Count();
                     if (accCount > 0)

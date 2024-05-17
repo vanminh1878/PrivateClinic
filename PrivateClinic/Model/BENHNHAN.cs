@@ -17,8 +17,8 @@ namespace PrivateClinic.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BENHNHAN()
         {
-            this.HOADON = new HashSet<HOADON>();
-            this.PHIEUKHAMBENH = new HashSet<PHIEUKHAMBENH>();
+            this.HOADONs = new HashSet<HOADON>();
+            this.PHIEUKHAMBENHs = new HashSet<PHIEUKHAMBENH>();
         }
     
         public string MaBN { get; set; }
@@ -28,8 +28,8 @@ namespace PrivateClinic.Model
         public string DiaChi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HOADON> HOADON { get; set; }
+        public virtual ICollection<HOADON> HOADONs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUKHAMBENH> PHIEUKHAMBENH { get; set; }
+        public virtual ICollection<PHIEUKHAMBENH> PHIEUKHAMBENHs { get; set; }
     }
 }

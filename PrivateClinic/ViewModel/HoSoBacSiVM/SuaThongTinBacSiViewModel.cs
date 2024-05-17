@@ -213,7 +213,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin bác sĩ ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (h == MessageBoxResult.Yes)
             {
-                BACSI a = DataProvider.Ins.DB.BACSI.FirstOrDefault(bs => bs.MaBS == bacsi.MaBS);
+                BACSI a = DataProvider.Ins.DB.BACSIs.FirstOrDefault(bs => bs.MaBS == bacsi.MaBS);
                 a.HoTen = HoTen;
                 a.SDT = SDT;
                 a.GioiTinh = GioiTinh;
