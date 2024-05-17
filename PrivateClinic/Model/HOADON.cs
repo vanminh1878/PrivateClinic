@@ -24,12 +24,12 @@ namespace PrivateClinic.Model
         public double TienKham { get; set; }
         public Nullable<double> TienThuoc { get; set; }
         public double TongTien { get; set; }
-        public Nullable<int> MaBN { get; set; }
+        public string MaBN { get; set; }
         public Nullable<int> MaPKB { get; set; }
+        public string TrangThai { get; set; }
     
         public virtual BENHNHAN BENHNHAN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_BCDT> CT_BCDT { get; set; }
-        public virtual PHIEUKHAMBENH PHIEUKHAMBENH { get; set; }
     }
 }

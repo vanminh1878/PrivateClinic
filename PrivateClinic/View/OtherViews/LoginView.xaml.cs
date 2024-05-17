@@ -23,10 +23,31 @@ namespace PrivateClinic.View.OtherViews
         public LoginView()
         {
             InitializeComponent();
+            LoginViewModel viewModel = new LoginViewModel();
+            this.DataContext = viewModel;
         }
 
+        private void FloatingPasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // Trigger the login command
+                if (DataContext is LoginViewModel viewModel)
+                {
+                    viewModel.LoginCommand.Execute(null);
+                }
+            }
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
+            // Trigger the login command
+            if (DataContext is LoginViewModel viewModel)
+            {
+                viewModel.LoginCommand.Execute(null);
+            }
 
+        }
     }
 }

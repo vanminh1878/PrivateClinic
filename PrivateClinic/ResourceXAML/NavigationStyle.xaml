@@ -292,13 +292,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
-       TargetType="RadioButton"
+    <Style
+       TargetType="{x:Type Button}"
        x:Key="LogOut">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="RadioButton">
+                    <ControlTemplate >
                         <Border Height="100"
                             x:Name="MainBorder"
                             CornerRadius="10"
@@ -322,14 +322,7 @@
                                        Margin="20 0 0 0"/>
                             </StackPanel>
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="IconImage" Property="Source" Value="{StaticResource ResourceKey=icLogoutGreen}" />
-                                <Setter TargetName="TextBlock" Property="Foreground" Value="Black" />
-                                <Setter TargetName="TextBlock" Property="FontWeight" Value="Medium" />
-                                <Setter TargetName="MainBorder" Property="Background" Value="White" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -337,7 +330,7 @@
             <Setter Property="BorderThickness" Value="0" />
         </Style.Setters>
         <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True">
+            <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="White" />
             </Trigger>
         </Style.Triggers>

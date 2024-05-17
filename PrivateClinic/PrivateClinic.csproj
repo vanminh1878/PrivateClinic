@@ -68,8 +68,13 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -159,6 +164,15 @@
     <Compile Include="Model\PHIEUKHAMBENH.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\NHOMNGUOIDUNG.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PHANQUYEN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PHIEUKHAMBENH.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\PHIEUNHAPTHUOC.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -174,6 +188,7 @@
     <Compile Include="ViewModel\HoSoBacSiVM\ThemBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThongTinChiTietCuaMotBacSiViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModel\OtherViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\RelayCommand.cs" />
     <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
@@ -199,6 +214,9 @@
     <Compile Include="View\HoSoBacSi\ThongTinChiTietCuaMotBacSIView.xaml.cs">
       <DependentUpon>ThongTinChiTietCuaMotBacSIView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\QuanLiTiepDon\QuanLiTiepDonViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\SuaBenhNhanViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\ThemBenhNhanViewModel.cs" />
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -219,6 +237,9 @@
     </Compile>
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiTiepDon\SuaBenhNhanView.xaml.cs">
+      <DependentUpon>SuaBenhNhanView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLiTiepDon\ThemBenhNhanView.xaml.cs">
       <DependentUpon>ThemBenhNhanView.xaml</DependentUpon>
@@ -308,6 +329,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLiTiepDon\SuaBenhNhanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
