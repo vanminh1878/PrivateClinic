@@ -24,11 +24,11 @@ namespace PrivateClinic.Model
             }
         }
 
-        public QUANLYPHONGMACHTUEntities1 DB { get; set; }
+        public QUANLYPHONGMACHTUEntities DB { get; set; }
 
         private DataProvider()
         {
-            DB = new QUANLYPHONGMACHTUEntities1();
+            DB = new QUANLYPHONGMACHTUEntities();
         }
     }
 }

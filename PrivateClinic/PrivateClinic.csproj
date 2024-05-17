@@ -164,15 +164,6 @@
     <Compile Include="Model\PHIEUKHAMBENH.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\NHOMNGUOIDUNG.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PHANQUYEN.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PHIEUKHAMBENH.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\PHIEUNHAPTHUOC.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

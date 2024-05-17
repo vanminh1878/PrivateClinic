@@ -103,7 +103,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             if (LoginViewModel.IsLogin)
             {
                 string a = Const.TenDangNhap;
-                User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == a).FirstOrDefault();             
+                User = DataProvider.Ins.DB.NGUOIDUNG.Where(x => x.TenDangNhap == a).FirstOrDefault();             
                 Const.PQ = new PHANQUYEN();
               
                 if (User.MaNhom== "NHOM1     ")

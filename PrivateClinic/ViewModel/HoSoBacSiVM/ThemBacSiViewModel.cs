@@ -230,7 +230,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 bacsi.NgayVaoLam = (DateTime)NgayVL;
                 bacsi.DiaChi = DiaChi;
                 bacsi.BangCap = BangCap;
-                DataProvider.Ins.DB.BACSIs.Add(bacsi);
+                DataProvider.Ins.DB.BACSI.Add(bacsi);
                 DataProvider.Ins.DB.SaveChanges();
                 MessageBox.Show("Thêm bác sĩ mới thành công", "Thông báo");
                 view.Close();
