@@ -12,9 +12,9 @@
           <Property Name="MaBS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NgaySinh" Type="date" />
-          <Property Name="GioiTinh" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="20" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="SDT" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NgayVaoLam" Type="date" Nullable="false" />
           <Property Name="BangCap" Type="nvarchar" MaxLength="50" />
@@ -32,7 +32,7 @@
           <Key>
             <PropertyRef Name="MaBaoCaoSuDungThuoc" />
           </Key>
-          <Property Name="MaBaoCaoSuDungThuoc" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaBaoCaoSuDungThuoc" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Thang" Type="int" />
           <Property Name="SoLanDung" Type="int" />
           <Property Name="TongSoLuongDaDung" Type="int" />
@@ -89,7 +89,7 @@
           <Key>
             <PropertyRef Name="MaChucNang" />
           </Key>
-          <Property Name="MaChucNang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaChucNang" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TenChucNang" Type="nvarchar" MaxLength="50" />
           <Property Name="TenManHinhDuocLoad" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -130,16 +130,16 @@
           <Key>
             <PropertyRef Name="TenDangNhap" />
           </Key>
-          <Property Name="TenDangNhap" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="MatKhau" Type="nchar" MaxLength="50" />
-          <Property Name="MaNhom" Type="nchar" MaxLength="10" />
+          <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" />
           <Property Name="MaBS" Type="int" />
         </EntityType>
         <EntityType Name="NHOMNGUOIDUNG">
           <Key>
             <PropertyRef Name="MaNhom" />
           </Key>
-          <Property Name="MaNhom" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TenNhom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -149,8 +149,8 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
             <PropertyRef Name="MaNhom" />
             <PropertyRef Name="MaChucNang" />
           </Key>
-          <Property Name="MaNhom" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="MaChucNang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaChucNang" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="PHIEUKHAMBENH">
           <Key>
@@ -191,18 +191,6 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="DonGiaBan" Type="float" />
         </EntityType>
-        <Association Name="FK_BAOCAOSUDUNGTHUOC_THUOC">
-          <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
-          <End Role="BAOCAOSUDUNGTHUOC" Type="Self.BAOCAOSUDUNGTHUOC" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="THUOC">
-              <PropertyRef Name="MaThuoc" />
-            </Principal>
-            <Dependent Role="BAOCAOSUDUNGTHUOC">
-              <PropertyRef Name="MaThuoc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CT_BCDT_MaBCDT">
           <End Role="BAOCAODOANHTHU" Type="Self.BAOCAODOANHTHU" Multiplicity="1" />
           <End Role="CT_BCDT" Type="Self.CT_BCDT" Multiplicity="*" />
@@ -397,10 +385,6 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
     [PHANQUYEN].[MaChucNang] AS [MaChucNang]
     FROM [dbo].[PHANQUYEN] AS [PHANQUYEN]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_BAOCAOSUDUNGTHUOC_THUOC" Association="Self.FK_BAOCAOSUDUNGTHUOC_THUOC">
-            <End Role="THUOC" EntitySet="THUOC" />
-            <End Role="BAOCAOSUDUNGTHUOC" EntitySet="BAOCAOSUDUNGTHUOC" />
-          </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_MaBCDT" Association="Self.FK_CT_BCDT_MaBCDT">
             <End Role="BAOCAODOANHTHU" EntitySet="BAOCAODOANHTHU" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
@@ -470,9 +454,9 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="MaBS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgaySinh" Type="DateTime" Precision="0" />
-          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgayVaoLam" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="BangCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -493,12 +477,11 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Key>
             <PropertyRef Name="MaBaoCaoSuDungThuoc" />
           </Key>
-          <Property Name="MaBaoCaoSuDungThuoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaBaoCaoSuDungThuoc" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Thang" Type="Int32" />
           <Property Name="SoLanDung" Type="Int32" />
           <Property Name="TongSoLuongDaDung" Type="Int32" />
           <Property Name="MaThuoc" Type="Int32" />
-          <NavigationProperty Name="THUOC" Relationship="Self.FK_BAOCAOSUDUNGTHUOC_THUOC" FromRole="BAOCAOSUDUNGTHUOC" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="BENHNHAN">
           <Key>
@@ -559,7 +542,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Key>
             <PropertyRef Name="MaChucNang" />
           </Key>
-          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenChucNang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TenManHinhDuocLoad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -605,9 +588,9 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Key>
             <PropertyRef Name="TenDangNhap" />
           </Key>
-          <Property Name="TenDangNhap" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="MaBS" Type="Int32" />
           <NavigationProperty Name="BACSI" Relationship="Self.FK_NGUOIDUNG_BACSI" FromRole="NGUOIDUNG" ToRole="BACSI" />
           <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NGUOIDUNG" ToRole="NHOMNGUOIDUNG" />
@@ -616,7 +599,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Key>
             <PropertyRef Name="MaNhom" />
           </Key>
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NGUOIDUNG" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NHOMNGUOIDUNG" ToRole="NGUOIDUNG" />
         </EntityType>
@@ -662,7 +645,6 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="MaCachDung" Type="Int32" Nullable="false" />
           <Property Name="DonGiaNhap" Type="Double" />
           <Property Name="DonGiaBan" Type="Double" />
-          <NavigationProperty Name="BAOCAOSUDUNGTHUOC" Relationship="Self.FK_BAOCAOSUDUNGTHUOC_THUOC" FromRole="THUOC" ToRole="BAOCAOSUDUNGTHUOC" />
           <NavigationProperty Name="CACHDUNG" Relationship="Self.FK_THUOC_MaCachDung" FromRole="THUOC" ToRole="CACHDUNG" />
           <NavigationProperty Name="CT_PKB" Relationship="Self.FK_CT_PKB_THUOC" FromRole="THUOC" ToRole="CT_PKB" />
           <NavigationProperty Name="CT_PNT" Relationship="Self.FK_CT_PNT_MaThuoc" FromRole="THUOC" ToRole="CT_PNT" />
@@ -674,8 +656,8 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
             <PropertyRef Name="MaNhom" />
             <PropertyRef Name="MaChucNang" />
           </Key>
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_NGUOIDUNG_BACSI">
           <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
@@ -710,18 +692,6 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
             </Principal>
             <Dependent Role="CT_BCDT">
               <PropertyRef Name="MaBCDT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BAOCAOSUDUNGTHUOC_THUOC">
-          <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
-          <End Role="BAOCAOSUDUNGTHUOC" Type="Self.BAOCAOSUDUNGTHUOC" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="THUOC">
-              <PropertyRef Name="MaThuoc" />
-            </Principal>
-            <Dependent Role="BAOCAOSUDUNGTHUOC">
-              <PropertyRef Name="MaThuoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -889,10 +859,6 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <AssociationSet Name="FK_CT_BCDT_MaBCDT" Association="Self.FK_CT_BCDT_MaBCDT">
             <End Role="BAOCAODOANHTHU" EntitySet="BAOCAODOANHTHU" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BAOCAOSUDUNGTHUOC_THUOC" Association="Self.FK_BAOCAOSUDUNGTHUOC_THUOC">
-            <End Role="THUOC" EntitySet="THUOC" />
-            <End Role="BAOCAOSUDUNGTHUOC" EntitySet="BAOCAOSUDUNGTHUOC" />
           </AssociationSet>
           <AssociationSet Name="FK_HOADON_MaBN" Association="Self.FK_HOADON_MaBN">
             <End Role="BENHNHAN" EntitySet="BENHNHAN" />
