@@ -26,6 +26,23 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
             }
         }
+
+        void FormatMaBS()
+        {
+            foreach (var item in DSBS) 
+            {
+                if (item.MaBS < 10)
+                {
+                    item.formatMaBS = "BS00" + item.MaBS;
+                }
+                else if (item.MaBS < 100)
+                {
+                    item.formatMaBS = "BS0" + item.MaBS;
+                }
+                else
+                    item.formatMaBS = "BS" + item.MaBS;
+            }
+        }
         public ICommand ShowWDAddDoctor { get; set; }
         public ICommand EditDoctorCommand { get; set; }
         public ICommand DeleteDoctorCommand { get; set; }
@@ -107,6 +124,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         void LoadData()
         {
             DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
+            FormatMaBS();
             SearchBS();
         }
 

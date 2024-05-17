@@ -222,7 +222,7 @@
 
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding MaBS}"
+                                    <TextBlock Text="{Binding formatMaBS}"
                                                FontWeight="Regular"
                                                Margin="0,30,0,0"
                                                />
