@@ -177,6 +177,7 @@
     <Compile Include="ViewModel\HoSoBacSiVM\HoSoBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\SuaThongTinBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThemBacSiViewModel.cs" />
+    <Compile Include="ViewModel\HoSoBacSiVM\ThongTinCaNhanViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThongTinChiTietCuaMotBacSiViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\LoginViewModel.cs" />

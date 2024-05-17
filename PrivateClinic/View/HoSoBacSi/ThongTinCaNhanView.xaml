@@ -44,7 +44,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         FontWeight="Bold"
-                        Text="BS001" />
+                        Text="{Binding formatMaBS}" />
 
                     <!--  Nút đổi ảnh đại diện  -->
                     <Button
@@ -80,7 +80,7 @@
                                 materialDesign:HintAssist.Hint="Họ tên"
                                 IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="Trần Thu Hằng" />
+                                Text="{Binding HoTen}" />
                             <TextBox
                                 Grid.Column="1"
                                 Width="300"
@@ -89,7 +89,7 @@
                                 materialDesign:HintAssist.Hint="Giới tính"
                                 IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="Nữ" />
+                                Text="{Binding GioiTinh}"/>
                         </Grid>
 
                         <!--  SĐT và Email  -->
@@ -105,7 +105,7 @@
                                 materialDesign:HintAssist.Hint="Số điện thoại"
                                 IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="0393785624" />
+                                Text="{Binding SDT}" />
                             <TextBox
                                 Grid.Column="1"
                                 Width="300"
@@ -114,7 +114,7 @@
                                 materialDesign:HintAssist.Hint="Email"
                                 IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="thuhang@gmail.com" />
+                                Text="{Binding Email}" />
                         </Grid>
                         <!--  Ngày sinh và ngày vào làm   -->
                         <Grid Grid.Row="2">
@@ -129,7 +129,7 @@
                                 materialDesign:HintAssist.Hint="Ngày sinh"
                                 IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="20/01/1995" />
+                                Text="{Binding NgaySinh,StringFormat='{}{0:dd/MM/yyyy}'}" />
                             <TextBox
                                 Grid.Column="1"
                                 Width="300"
@@ -138,7 +138,7 @@
                                 materialDesign:HintAssist.Hint="Ngày vào làm"
                                 IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="17/02/2022" />
+                                Text="{Binding NgayVL,StringFormat='{}{0:dd/MM/yyyy}'}" />
                         </Grid>
                         <!--  Địa chỉ và bằng cấp  -->
                         <Grid Grid.Row="3">
@@ -153,7 +153,7 @@
                                 materialDesign:HintAssist.Hint="Địa chỉ"
                                 IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="Q1, Hồ Chí Minh" />
+                                Text="{Binding DiaChi}" />
                             <TextBox
                                 Grid.Column="1"
                                 Width="300"
@@ -162,7 +162,7 @@
                                 materialDesign:HintAssist.Hint="Bằng cấp"
                                 IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="Tiến sĩ" />
+                                Text="{Binding BangCap}" />
                         </Grid>
                     </Grid>
                 </Grid>
