@@ -15,32 +15,12 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
     public class ThemBacSiViewModel :BaseViewModel
     {
-
-
-        //Hàm khởi tạo
-        public ThemBacSiViewModel(ThemBacSiView wd) 
-        {
-            this.view = wd;
-            quitCommand = new ViewModelCommand(quit);
-            AddDoctorCommand = new ViewModelCommand(acceptAdd,canAcceptAdd);
-            GioiTinh = "Nam";
-            NgayVL = DateTime.UtcNow;
-            NgaySinh = DateTime.UtcNow;
-        }
-
+        #region Các Command và Property
         // Command thoát khỏi màn hình thêm bác sĩ
         public ICommand quitCommand { get; set; }
 
         //Command thêm bác sĩ
         public ICommand AddDoctorCommand { get; set; }
-
-        private ThemBacSiView view;
-
-        private void quit(object obj)
-        {
-            view.Close();
-        }
-
         //Họ Tên
         private string hoten;
         public string HoTen
@@ -201,10 +181,27 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             }
         }
 
-
-
-
         private bool[] _canAccept = new bool[7];
+
+        private ThemBacSiView view;
+        #endregion
+
+        //Hàm khởi tạo
+        public ThemBacSiViewModel(ThemBacSiView wd) 
+        {
+            this.view = wd;
+            quitCommand = new ViewModelCommand(quit);
+            AddDoctorCommand = new ViewModelCommand(acceptAdd,canAcceptAdd);
+            GioiTinh = "Nam";
+            NgayVL = DateTime.UtcNow;
+            NgaySinh = DateTime.UtcNow;
+        }
+
+        #region Các hàm
+        private void quit(object obj)
+        {
+            view.Close();
+        }
         private bool canAcceptAdd(object obj)
         {
             bool check = _canAccept[0] && _canAccept[1] && _canAccept[2] && _canAccept[3] 
@@ -236,6 +233,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 view.Close();
             }
         }
+
+        //Các hàm báo lỗi
         private void ValidateFullName()
         {
             if (string.IsNullOrWhiteSpace(HoTen))
@@ -337,6 +336,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 _canAccept[6] = true;
             }
         }
+        #endregion
 
     }
 }
