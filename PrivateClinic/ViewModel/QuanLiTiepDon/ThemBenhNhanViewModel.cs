@@ -41,27 +41,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     a.GioiTinh = paramater.GioiTinh.Text;
                     a.DiaChi = paramater.DiaChi.Text;
                     a.NamSinh = (DateTime)paramater.NgSinh.SelectedDate;
-
-                    try
-                    {
-
-                        if (int.TryParse(paramater.MaBN.Text, out int intMaBN))
-                        {
-                            a.MaBN = intMaBN;
-                        }
-                        else
-                        {
-
-                            MessageBox.Show("Mã bệnh nhân không hợp lệ!", "THÔNG BÁO", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        // Xử lý ngoại lệ chung nếu có lỗi khác
-                        MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "THÔNG BÁO", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
+                    a.MaBN=paramater.MaBN.Text;
 
 
                     MessageBox.Show("Thêm bệnh nhân mới thành công !", "THÔNG BÁO");

@@ -40,10 +40,10 @@ namespace PrivateClinic.Model
         public virtual DbSet<LOAITHUOC> LOAITHUOCs { get; set; }
         public virtual DbSet<NGUOIDUNG> NGUOIDUNGs { get; set; }
         public virtual DbSet<NHOMNGUOIDUNG> NHOMNGUOIDUNGs { get; set; }
-        public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
         public virtual DbSet<PHIEUKHAMBENH> PHIEUKHAMBENHs { get; set; }
         public virtual DbSet<PHIEUNHAPTHUOC> PHIEUNHAPTHUOCs { get; set; }
         public virtual DbSet<THAMSO> THAMSOes { get; set; }
         public virtual DbSet<THUOC> THUOCs { get; set; }
+        public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
     }
 }

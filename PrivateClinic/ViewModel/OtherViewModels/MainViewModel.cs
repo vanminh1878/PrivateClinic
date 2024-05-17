@@ -1,4 +1,5 @@
 ﻿
+using PrivateClinic.Model;
 using PrivateClinic.View.OtherViews;
 using PrivateClinic.View.QuanLiTiepDon;
 using System;
@@ -15,6 +16,9 @@ namespace PrivateClinic.ViewModel.OtherViewModels
     public class MainViewModel : BaseViewModel
     {
         //field
+        //field
+        private NGUOIDUNG _NhanVien;
+        private NGUOIDUNG _User;
         public static Frame MainFrame { get; set; }
         //Command 
         public ICommand CloseLogin { get; set; }
@@ -33,13 +37,16 @@ namespace PrivateClinic.ViewModel.OtherViewModels
         public ICommand HomeCM { get; set; }
 
         //property
+        public NGUOIDUNG User { get => _User; set { _User = value; OnPropertyChanged(); } }
+        public NGUOIDUNG NhanVien { get => _NhanVien; set { _NhanVien = value; OnPropertyChanged(); } }
+
 
         public MainViewModel()
         {
             CloseLogin = new RelayCommand<MainView>((p) => true, (p) => Close(p));
             MinimizeLogin = new RelayCommand<MainView>((p) => true, (p) => Minimize(p));
             MoveWindow = new RelayCommand<MainView>((p) => true, (p) => moveWindow(p));
-            //Loadwd = new RelayCommand<MainView>((p) => true, (p) => _Loadwd(p));
+            Loadwd = new RelayCommand<MainView>((p) => true, (p) => _Loadwd(p));
             LoadPageCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 MainFrame = p;
@@ -80,6 +87,36 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             }
             return parent;
         }
+        private void _Loadwd(MainView p)
+        {
+            if (LoginViewModel.IsLogin)
+            {
+                string a = Const.TenDangNhap;
+                User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == a).FirstOrDefault();             
+                Const.PQ = new PHANQUYEN();
+              
+                if (User.MaNhom== "NHOM1     ")
+                {
+                    Const.PQ.MaNhom = User.MaNhom;
+                }
+                else
+                {
+                    Const.PQ.MaNhom = User.MaNhom;;
+                }
+                //if (User.QTV == true)
+                //{
+                //    SetQuanLy = Visibility.Visible;
+                //    SetNhanVien = Visibility.Collapsed;
+                //}
+                //else
+                //{
+                //    SetQuanLy = Visibility.Collapsed;
+                //    SetNhanVien = Visibility.Visible;
+                //}
+                //Ava = User.AVA;
+                _LoadUsername(p);
+            }
+        }
 
         public void moveWindow(MainView p)
         {
@@ -92,6 +129,16 @@ namespace PrivateClinic.ViewModel.OtherViewModels
         public void Minimize(MainView p)
         {
             p.WindowState = WindowState.Minimized;
+        }
+        private void _LoadUsername(MainView p)
+        {
+            //p.TenDangNhap.Text = string.Join(" ", NGUOIDUNG.HoTen.Split().Reverse().Take(2).Reverse());
+        }
+
+        private void _LoadQuyen(MainView p)
+        {
+            //p.Quyen.Text = User.QTV ? "Quản lý" : "Nhân viên";
+
         }
 
     }

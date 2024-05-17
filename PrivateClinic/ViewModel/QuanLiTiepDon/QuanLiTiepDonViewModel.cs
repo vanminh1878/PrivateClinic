@@ -40,25 +40,30 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             AddCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
             LoadCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadCommand(p));
             LoadSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadSLBNCommand(p));
-            EditSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditSLBNCommand(p));
-            EditUpSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditUpSLBNCommand(p));
-            EditDownSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditDownSLBNCommand(p));
-            SaveSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _SaveSLBNCommand(p));
             EditBNCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _EditBNCommand(p));
             UpdateSTT();
+            if (Const.PQ.MaNhom == "NHOM1     ")
+            {
+                EditSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditSLBNCommand(p));
+                EditUpSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditUpSLBNCommand(p));
+                EditDownSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditDownSLBNCommand(p));
+                SaveSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _SaveSLBNCommand(p));
+            }
+            
         }
 
         void UpdateSTT()
         {
             for (int i = 0; i < listBN.Count; i++)
             {
-                listBN[i].STT = i + 1;
+                //listBN[i].STT = i + 1;
             }
         }
         void _LoadCommand(QuanLiTiepDonView parameter)
         {
             parameter.txbSLBNDK.Text = listBN.Count.ToString();
             parameter.txbSLBNDK.FontSize = 25;
+            
         }
         void _EditSLBNCommand(QuanLiTiepDonView parameter)
         {
@@ -71,16 +76,19 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         }
         void _EditUpSLBNCommand(QuanLiTiepDonView parameter)
         {
+
             parameter.txbMaxBN.IsEnabled = true;
             if (int.TryParse(parameter.txbMaxBN.Text, out int currentValue))
             {
-                int newValue = currentValue + 1; // Tăng giá trị lên 1
+                int newValue = currentValue + 1; 
                 parameter.txbMaxBN.Text = newValue.ToString();
             }
+
 
         }
         void _EditDownSLBNCommand(QuanLiTiepDonView parameter)
         {
+            
             parameter.txbMaxBN.IsEnabled = true;
             if (int.TryParse(parameter.txbMaxBN.Text, out int currentValue))
             {

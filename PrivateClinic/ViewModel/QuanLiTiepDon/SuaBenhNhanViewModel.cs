@@ -58,7 +58,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin bệnh nhân ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (h == MessageBoxResult.Yes)
                 {
-                    int maBN = int.Parse(p.MaBN.Text);
+                    string maBN = p.MaBN.Text;
                     BENHNHAN a = DataProvider.Ins.DB.BENHNHANs.FirstOrDefault(bn => bn.MaBN == maBN);
                     a.HoTen = p.HoTen.Text;
                     a.GioiTinh = p.GioiTinh.Text;

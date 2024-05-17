@@ -49,14 +49,16 @@
                                    HorizontalAlignment="Right"
                                    Margin="0 0 7 0"/>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                                <TextBlock Text="Trần Thu Hằng"
+                                <TextBlock Text="{Binding Name}"
                                            FontSize="22"
                                            FontWeight="SemiBold"
-                                           FontFamily="Segoe UI"/>
-                                <TextBlock Text="Nhân viên"
+                                           FontFamily="Segoe UI"
+                                           x:Name="Name"/>
+                                <TextBlock Text="{Binding Role}"
                                             FontSize="22"
                                             FontWeight="SemiBold"
-                                            FontFamily="Segoe UI"/>
+                                            FontFamily="Segoe UI"
+                                           x:Name="Role"/>
                             </StackPanel>
 
                         </StackPanel>

@@ -11,10 +11,8 @@ namespace PrivateClinic.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
-
-    public partial class BENHNHAN : INotifyPropertyChanged
+    
+    public partial class BENHNHAN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BENHNHAN()
@@ -22,28 +20,13 @@ namespace PrivateClinic.Model
             this.HOADONs = new HashSet<HOADON>();
             this.PHIEUKHAMBENHs = new HashSet<PHIEUKHAMBENH>();
         }
-        private int _STT;
-        public int STT
-        {
-            get { return _STT; }
-            set
-            {
-                _STT = value;
-                OnPropertyChanged();
-            }
-        }
-        public int MaBN { get; set; }
+    
+        public string MaBN { get; set; }
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public System.DateTime NamSinh { get; set; }
         public string DiaChi { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
