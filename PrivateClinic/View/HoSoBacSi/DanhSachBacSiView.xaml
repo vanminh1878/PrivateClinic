@@ -186,6 +186,10 @@
         <Grid Grid.Row="3"
               Margin="12,0,0,0"
               >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="28*"/>
+                <ColumnDefinition Width="135*"/>
+            </Grid.ColumnDefinitions>
 
             <ListView FontSize="22"
                       Focusable="True"
@@ -193,7 +197,7 @@
                       Margin="0,-45,0,0"
                       FontWeight="SemiBold"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ItemsSource="{Binding FilterDSBS}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                      ItemsSource="{Binding FilterDSBS}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2">
                 <!--  Event trigger phục vụ show StaffDetail  -->
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">

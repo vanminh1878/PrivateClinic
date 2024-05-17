@@ -84,63 +84,58 @@
             Background="#D9D9D9">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="240"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="270"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
+                <!--STT-->
                 <Grid Grid.Column="0">
-                    <TextBlock HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="5,0,0,0"
                                FontWeight="DemiBold"
                                Text="STT"
                                VerticalAlignment="Center" />
                 </Grid>
 
+                <!--Họ tên-->
                 <Grid Grid.Column="1">
-                    <TextBlock HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
-                               Text="Mã BN"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <Grid Grid.Column="2">
-                    <TextBlock HorizontalAlignment="Center"
-                               FontWeight="DemiBold"
+                               Margin="12,0,0,0"
                                Text="Tên bệnh nhân"
                                VerticalAlignment="Center" />
                 </Grid>
 
+                <!--Ngày khám-->
+                <Grid Grid.Column="2">
+                    <TextBlock HorizontalAlignment="Left"
+                               FontWeight="DemiBold"
+                               Margin="20,0,0,0"
+                               Text="Ngày khám"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+                <!--Loại bệnh-->
                 <Grid Grid.Column="3">
-                    <TextBlock HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
-                               Text="Giới tính"
+                               Margin="5,0,0,0"
+                               Text="Loại bệnh"
                                VerticalAlignment="Center" />
                 </Grid>
 
+                <!--Triệu chứng-->
                 <Grid Grid.Column="4">
-                    <TextBlock HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
-                               Text="SĐT"
+                               Margin="5,0,0,0"
+                               Text="Triệu chứng"
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <Grid Grid.Column="5">
-                    <TextBlock HorizontalAlignment="Center"
-                               FontWeight="DemiBold"
-                               Text="Ngày sinh"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <Grid Grid.Column="6">
-                    <TextBlock HorizontalAlignment="Center"
-                               FontWeight="DemiBold"
-                               Text="Địa chỉ"
-                               VerticalAlignment="Center" />
-                </Grid>
             </Grid>
         </Border>
 
@@ -148,7 +143,7 @@
         <Grid Grid.Row="7" >
             <ScrollViewer
                 Margin="5,0,5,0"
-                HorizontalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Hidden"
                 VerticalScrollBarVisibility="Auto">
                 <ListView FontSize="22"
                           FontWeight="SemiBold" d:ItemsSource="{d:SampleData ItemCount=5}" >
@@ -163,84 +158,61 @@
                     <ListView.View>
                         <GridView>
                             <!--STT-->
-                            <GridViewColumn Width="70">
+                            <GridViewColumn Width="80">
 
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="1"
+                                        <TextBlock Text="{Binding STT}"
                                                    FontWeight="Regular"
-                                                   Margin="20,30,0,0"
+                                                   Margin="0,30,0,0"
                                                    />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <!--Mã BN-->
-                            <GridViewColumn Width="120">
+                            <!--Tên bệnh nhân-->
+                            <GridViewColumn Width="280">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="BN002"
-                                                   FontWeight="Regular"
-                                                   Margin="25,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <!--Tên BN-->
-                            <GridViewColumn Width="240">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="Vũ Việt Quốc"
-                                                   FontWeight="Regular"
-                                                   Margin="50,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <!--Giới tính-->
-                            <GridViewColumn Width="120">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="Nam"
-                                                   FontWeight="Regular"
-                                                   Margin="30,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <!--SĐT-->
-                            <GridViewColumn Width="150">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="0393546782"
-                                                   FontWeight="Regular"
-                                                   Margin="20,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <!--Cách dùng-->
-                            <GridViewColumn Width="150">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="12/05/2023"
+                                        <TextBlock Text="{Binding HoTen}"
                                                    FontWeight="Regular"
                                                    Margin="10,30,0,0"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <!--Địa chỉ-->
-                            <GridViewColumn Width="Auto">
+                            <!--Ngày khám-->
+                            <GridViewColumn Width="190">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="Đồng Nai"
+                                        <TextBlock Text="{Binding NgayKham, StringFormat=dd/MM/yyyy}"
                                                    FontWeight="Regular"
-                                                   Margin="10,30,0,0"/>
+                                                   Margin="5,30,0,0"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
+                            <!--Loại bệnh-->
+                            <GridViewColumn Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TenLoaiBenh}"
+                                                   FontWeight="Regular"
+                                                   Margin="-24,30,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--Triệu chứng-->
+                            <GridViewColumn Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TrieuChung}"
+                                                   FontWeight="Regular"
+                                                   Margin="-18,30,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
                         </GridView>
                     </ListView.View>
