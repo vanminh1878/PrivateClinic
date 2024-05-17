@@ -15,6 +15,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
     {
         #region các property
         public string MaBS {  get; set; }
+        public string formatMaBS { get; set; }
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public string SDT { get; set; }
@@ -30,7 +31,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         #endregion
         public ThongTinChiTietCuaMotBacSiViewModel(BACSI bs,ThongTinChiTietCuaMotBacSIView view) 
         {
-            MaBS ="MABS: " + bs.MaBS.ToString();
+            formatMaBS = bs.formatMaBS;
             HoTen = bs.HoTen;
             GioiTinh = bs.GioiTinh;
             SDT = bs.SDT;
@@ -48,5 +49,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         {
             _view.Close();
         }
+        
     }
 }

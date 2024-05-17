@@ -91,16 +91,16 @@
 
                 <!--Mã bác sĩ-->
                 <TextBox
-                    Width="120"
+                    Width="100"
                     Height="50"
-                    Margin="20,2,0,0"
-                    HorizontalAlignment="Center"
+                    Margin="0,2,9,0"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     FontWeight="Bold"
                     IsReadOnly="True"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding MaBS}" />
+                    Text="{Binding formatMaBS}" />
 
                 <!--  Ảnh đại diện  -->
                 <Border
