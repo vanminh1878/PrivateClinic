@@ -72,7 +72,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             DeleteDoctorCommand = new RelayCommand<BACSI>((p) => p != null, DeleteBacSi);
 
         }
-        //Chức năng tìm kiếm
+        #region Chức năng tìm kiếm
 
         private ObservableCollection<BACSI> filterDSBS;
         public ObservableCollection<BACSI> FilterDSBS 
@@ -119,7 +119,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     DSBS.Where(s => s.HoTen.ToLower().Contains(SearchText.ToLower())));
             }
         }
-             
+        #endregion 
+
         //Chức năng hiển thị danh sách bác sĩ
         void LoadData()
         {
@@ -128,7 +129,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             SearchBS();
         }
 
-        // Hàm chức năng thêm mới 1 bác sĩ
+        #region Chức năng thêm 1 bác sĩ
         private void ShowWDDoctor(object obj)
         {
             ThemBacSiView view = new ThemBacSiView();
@@ -140,8 +141,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         {
             ShowWDAddDoctor = new ViewModelCommand(ShowWDDoctor);
         }
+        #endregion
 
-        // Hàm chức năng sửa thông tin cho 1 bác sĩ
+        #region Chức năng sửa 1 bác sĩ
         void EditDoctor()
         {
             EditDoctorCommand = new ViewModelCommand(ShowWDEditDoctor);
@@ -153,13 +155,15 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             LoadData();
         }
 
+        #endregion
+
         //hàm chức năng xóa thông tin 1 bác sĩ
         void DeleteBacSi(BACSI selectedItem)
         {
             MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (r == MessageBoxResult.Yes) 
             {
-                if (selectedItem != null) 
+                if (selectedItem != null && selectedItem.MaBS != 1) 
                 {
                     //Xóa tài khoàn trước
                     var taikhoan = DataProvider.Ins.DB.NGUOIDUNG.Where(h => h.MaBS == selectedItem.MaBS).ToList();
@@ -179,10 +183,14 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     SoLuong = FilterDSBS.Count;
                     MessageBox.Show("Xóa thành công", "Thông báo");
                 }
+                else
+                {
+                    MessageBox.Show("Không thể xóa Admin","Báo lỗi",MessageBoxButton.OK,MessageBoxImage.Error);
+                }
             }
         }
 
-        //Hàm thể hiện thông tin bằng double click
+        #region Chức năng double click hiển thị thông tin
         void DoctorDetailF()
         {
             DoctorDetailCommand = new ViewModelCommand(DoctorDetail);
@@ -195,5 +203,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             doctordetailView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             doctordetailView.ShowDialog();
         }
-    } 
+        #endregion
+    }
 }
