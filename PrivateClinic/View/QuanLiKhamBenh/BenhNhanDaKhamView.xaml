@@ -168,7 +168,7 @@
                       FontWeight="SemiBold"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      ItemsSource="{Binding ListBN}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                      ItemsSource="{Binding FilterListBN}" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border Width="924" Height="55" Margin="10 0 0 0" CornerRadius="10" Background="White">

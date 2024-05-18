@@ -22,6 +22,18 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                 OnPropertyChanged(nameof(ListBN));
             }
         }
+
+        private ObservableCollection<BenhNhanDTO> filterlistBN;
+        public ObservableCollection<BenhNhanDTO> FilterListBN
+        {
+            get => filterlistBN;
+            set
+            {
+                filterlistBN = value;
+                OnPropertyChanged(nameof(FilterListBN));
+            }
+        }
+
         private ObservableCollection<BENHNHAN> benhnhan;
         public ObservableCollection<BENHNHAN> BenhNhan
         {
@@ -52,6 +64,21 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             {
                 listLoaiBenh = value;
                 OnPropertyChanged(nameof(ListLoaiBenh));
+            }
+        }
+
+        private string searchText;
+        public string SearchText
+        {
+            get => searchText;
+            set
+            {
+                if (searchText != value)
+                {
+                    searchText = value;
+                    OnPropertyChanged(nameof(SearchText));
+                    FilterDSBN();
+                }
             }
         }
         #endregion
@@ -99,6 +126,24 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                         stt++;
                     }
                 }
+            }
+            SearchBN();
+        }
+        void SearchBN()
+        {
+            FilterListBN = new ObservableCollection<BenhNhanDTO>(ListBN);//ban đầu thì không cần lọc
+        }
+        private void FilterDSBN()
+        {
+            // Cập nhật FilteredDSBS dựa trên SearchText
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                FilterListBN = new ObservableCollection<BenhNhanDTO>(ListBN);
+            }
+            else
+            {
+                FilterListBN = new ObservableCollection<BenhNhanDTO>(
+                    ListBN.Where(s => s.HoTen.ToLower().Contains(SearchText.ToLower())));
             }
         }
 
