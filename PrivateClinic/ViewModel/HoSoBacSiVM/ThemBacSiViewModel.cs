@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,6 +24,18 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
         //Command thêm bác sĩ
         public ICommand AddDoctorCommand { get; set; }
+        //Notify
+        private string notify;
+        public string Notify
+        {
+            get { return notify; }
+            set
+            {
+                notify = value;
+                OnPropertyChanged(nameof(Notify));
+            }
+        }
+
         //Họ Tên
         private string hoten;
         public string HoTen
@@ -237,7 +252,27 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 nguoi.MatKhau = TaoMK();
                 DataProvider.Ins.DB.NGUOIDUNG.Add(nguoi);
                 DataProvider.Ins.DB.SaveChanges();
-                MessageBox.Show("Thêm bác sĩ mới thành công", "Thông báo");
+                //Gửi mail tài khoản cho bác sĩ
+                Task.Run(async () =>
+                {
+                    string email = "privateclinicse104@gmail.com";
+                    string pass = "uwui fldf dxif drqj";
+                    MailMessage mailMessage = new MailMessage();
+                    try
+                    {
+                        mailMessage.From = new MailAddress(email);
+                        mailMessage.Subject = "Tài khoản đăng nhập App";
+                        mailMessage.To.Add(new MailAddress(bacsi.Email));
+                    }
+                    catch
+                    {
+
+                    }
+                    GuiTaiKhoan(nguoi.TenDangNhap,nguoi.MatKhau,mailMessage,email,pass);
+                    await Task.Delay(2000);
+                }
+                );
+                MessageBox.Show("Thêm bác sĩ mới thành công\n"+"Tài khoản đã được gửi qua mail.", "Thông báo");
                 view.Close();
             }
         }
@@ -273,10 +308,43 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
             return new string(passwordChars);
         }
-
-
         //Hàm tự động gửi mật khẩu qua email
+        void GuiTaiKhoan(string tendangnhap, string matkhau, 
+                        MailMessage mailMessage, string fromMail, string fromPassword)
+        {
+            string noidung =
+                            "Tài khoản của bạn là: " + "<br>"
+                            + "Tên đăng nhập: " + "<b>" + tendangnhap + "</b>" + "<br>"
+                            + "Mật khẩu: " + "<b>" + matkhau + "</b>" + "<br>"
+                            + "Thân mến!";
 
+            mailMessage.Body = "<html><body>" + noidung + "</body></html>";
+            mailMessage.IsBodyHtml = true;
+            //Gửi mail
+            try
+            {
+                var smtpClient = new SmtpClient("smtp.gmail.com")
+                {
+                    Port = 587,
+                    Credentials = new NetworkCredential(fromMail, fromPassword),
+                    EnableSsl = true
+                };
+                try
+                {
+                    smtpClient.Send(mailMessage);
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý lỗi khi gửi email
+                    MessageBox.Show("Lỗi khi gửi email: " + ex.Message, "Thông báo");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi khi khởi tạo SmtpClient
+                MessageBox.Show("Lỗi khi khởi tạo SmtpClient: " + ex.Message, "Thông báo");
+            }
+        }
         //Các hàm báo lỗi
         private void ValidateFullName()
         {
