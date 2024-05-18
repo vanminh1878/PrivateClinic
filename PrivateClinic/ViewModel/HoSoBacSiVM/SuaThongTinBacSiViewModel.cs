@@ -15,20 +15,10 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
     public class SuaThongTinBacSiViewModel : BaseViewModel
     {
-        private SuaThongTinBacSiView _view;
+        #region Các command và Property
         public ICommand CancelCommand { get; set; }
-
         public ICommand SaveCommand { get; set; }
         public BACSI bacsi { get; set; }
-
-        //Hàm khởi tạo
-        public SuaThongTinBacSiViewModel(SuaThongTinBacSiView view)
-        {
-            this._view = view;
-            CancelCommand = new ViewModelCommand(quit);
-            SaveCommand = new ViewModelCommand(accept, canAccept);
-
-        }
         //Họ Tên
         private string hoten;
         public string HoTen
@@ -146,13 +136,15 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
         //GioiTinh
         private string gioitinh;
-        public string GioiTinh { 
-            get => gioitinh; 
+        public string GioiTinh
+        {
+            get => gioitinh;
             set
             {
                 gioitinh = value;
                 OnPropertyChanged(nameof(GioiTinh));
-            } }
+            }
+        }
         //NgaySinh
         private DateTime? ngaysinh;
         public DateTime? NgaySinh
@@ -195,8 +187,20 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 OnPropertyChanged(nameof(NgayVLError));
             }
         }
-
+#endregion
+        private SuaThongTinBacSiView _view;
         private bool[] _canAccept = new bool[7];
+
+        //Hàm khởi tạo
+        public SuaThongTinBacSiViewModel(SuaThongTinBacSiView view)
+        {
+            this._view = view;
+            CancelCommand = new ViewModelCommand(quit);
+            SaveCommand = new ViewModelCommand(accept, canAccept);
+
+        }
+               
+        //Hàm cho phép nút sửa có hiển thị không
         private bool canAccept(object obj)
         {
             bool check = _canAccept[0] && _canAccept[1] && _canAccept[2] && _canAccept[3]
@@ -208,6 +212,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             return false;
 
         }
+
+        //Hàm sửa thông tin bác sĩ
         private void accept(object obj)
         {
             MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin bác sĩ ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -241,16 +247,14 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             NgaySinh = bacsi.NgaySinh;
             NgayVL = bacsi.NgayVaoLam;
         }
-
-
-        
         
         //Hàm hỗ trợ CancelCommand
         private void quit(object obj)
         {
             _view.Close();
         }
-        //Các hàm báo lỗi validate
+
+        #region Các hàm báo lỗi
         private void ValidateFullName()
         {
             if (string.IsNullOrWhiteSpace(HoTen))
@@ -352,5 +356,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 _canAccept[6] = true;
             }
         }
+        #endregion
     }
 }

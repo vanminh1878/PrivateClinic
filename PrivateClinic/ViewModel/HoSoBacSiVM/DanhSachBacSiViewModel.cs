@@ -14,6 +14,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
     public class DanhSachBacSiViewModel: BaseViewModel
     {
+        #region Các Command và Property
         private ObservableCollection<BACSI> dsbs;
         public ObservableCollection<BACSI> DSBS
         {
@@ -27,20 +28,33 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             }
         }
 
-        void FormatMaBS()
+        private ObservableCollection<BACSI> filterDSBS;
+        public ObservableCollection<BACSI> FilterDSBS
         {
-            foreach (var item in DSBS) 
+            get => filterDSBS;
+            set
             {
-                if (item.MaBS < 10)
+                if (filterDSBS != value)
                 {
-                    item.formatMaBS = "BS00" + item.MaBS;
+                    filterDSBS = value;
+                    OnPropertyChanged(nameof(FilterDSBS));
+
                 }
-                else if (item.MaBS < 100)
+            }
+        }
+
+        private string searchText;
+        public string SearchText
+        {
+            get => searchText;
+            set
+            {
+                if (searchText != value)
                 {
-                    item.formatMaBS = "BS0" + item.MaBS;
+                    searchText = value;
+                    OnPropertyChanged(nameof(SearchText));
+                    FilterDSBacSi();
                 }
-                else
-                    item.formatMaBS = "BS" + item.MaBS;
             }
         }
         public ICommand ShowWDAddDoctor { get; set; }
@@ -61,6 +75,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 }
             }
         }
+        #endregion
 
         //Hàm khởi tạo
         public DanhSachBacSiViewModel()
@@ -74,34 +89,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
         #region Chức năng tìm kiếm
 
-        private ObservableCollection<BACSI> filterDSBS;
-        public ObservableCollection<BACSI> FilterDSBS 
-        { 
-            get => filterDSBS; 
-            set
-            {
-                if(filterDSBS != value)
-                {
-                    filterDSBS = value;
-                    OnPropertyChanged(nameof(FilterDSBS));
-
-                }
-            }
-        }
-
-        private string searchText;
-        public string SearchText
-        { get => searchText;
-            set
-        {
-                if(searchText != value)
-                {
-                    searchText = value;
-                    OnPropertyChanged(nameof(SearchText));
-                    FilterDSBacSi();
-                }
-            }
-        }
+    
         void SearchBS()
         {
             FilterDSBS = new ObservableCollection<BACSI>(DSBS);//ban đầu thì không cần lọc
@@ -119,15 +107,16 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     DSBS.Where(s => s.HoTen.ToLower().Contains(SearchText.ToLower())));
             }
         }
-        #endregion 
+        #endregion
 
-        //Chức năng hiển thị danh sách bác sĩ
+        #region Chức năng hiển thị danh sách bác sĩ
         void LoadData()
         {
             DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
             FormatMaBS();
             SearchBS();
         }
+        #endregion
 
         #region Chức năng thêm 1 bác sĩ
         private void ShowWDDoctor(object obj)
@@ -157,7 +146,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
         #endregion
 
-        //hàm chức năng xóa thông tin 1 bác sĩ
+        #region Chức năng xóa thông tin 1 bác sĩ
         void DeleteBacSi(BACSI selectedItem)
         {
             MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -189,6 +178,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 }
             }
         }
+        #endregion
 
         #region Chức năng double click hiển thị thông tin
         void DoctorDetailF()
@@ -202,6 +192,25 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             ThongTinChiTietCuaMotBacSIView doctordetailView = new ThongTinChiTietCuaMotBacSIView(bs);
             doctordetailView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             doctordetailView.ShowDialog();
+        }
+        #endregion
+
+        #region Chức năng điều chỉnh mã bác sĩ lên view
+        void FormatMaBS()
+        {
+            foreach (var item in DSBS)
+            {
+                if (item.MaBS < 10)
+                {
+                    item.formatMaBS = "BS00" + item.MaBS;
+                }
+                else if (item.MaBS < 100)
+                {
+                    item.formatMaBS = "BS0" + item.MaBS;
+                }
+                else
+                    item.formatMaBS = "BS" + item.MaBS;
+            }
         }
         #endregion
     }

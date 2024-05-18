@@ -11,6 +11,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
 {
     public class QuanLiKhamBenhViewModel : BaseViewModel
     {
+        #region Các Property và Command
         private object currentView;
         public object CurrentView
         {
@@ -21,14 +22,15 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                 OnPropertyChanged(nameof(CurrentView));
             }
         }
-
         public ICommand SwitchViewCommand { get; set; }
-
+        #endregion
+        //Hàm khởi tạo
         public QuanLiKhamBenhViewModel()
         {
             SwitchViewCommand = new ViewModelCommand(SwitchView);
         }
 
+        //Hàm chuyển màn hình
         private void SwitchView(object userControlName)
         {
             string UserControlName = userControlName as string;

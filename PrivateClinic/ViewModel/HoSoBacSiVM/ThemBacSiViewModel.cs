@@ -195,12 +195,10 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 OnPropertyChanged(nameof(NgayVLError));
             }
         }
-
-        private bool[] _canAccept = new bool[7];
-
-        private ThemBacSiView view;
         #endregion
 
+        private bool[] _canAccept = new bool[7];
+        private ThemBacSiView view;
         //Hàm khởi tạo
         public ThemBacSiViewModel(ThemBacSiView wd) 
         {
@@ -345,7 +343,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 MessageBox.Show("Lỗi khi khởi tạo SmtpClient: " + ex.Message, "Thông báo");
             }
         }
-        //Các hàm báo lỗi
+        #region Các hàm báo lỗi
         private void ValidateFullName()
         {
             if (string.IsNullOrWhiteSpace(HoTen))
@@ -447,6 +445,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 _canAccept[6] = true;
             }
         }
+        #endregion
+
         #endregion
 
     }

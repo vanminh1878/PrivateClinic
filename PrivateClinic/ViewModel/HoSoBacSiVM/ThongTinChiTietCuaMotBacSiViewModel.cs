@@ -29,6 +29,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
         public ThongTinChiTietCuaMotBacSIView _view;
         #endregion
+
+        //Hàm khởi tạo
         public ThongTinChiTietCuaMotBacSiViewModel(BACSI bs,ThongTinChiTietCuaMotBacSIView view) 
         {
             formatMaBS = bs.formatMaBS;
@@ -45,6 +47,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
         }
 
+        //Hàm hỗ trợ nút thoát
         private void Exit(object obj)
         {
             _view.Close();

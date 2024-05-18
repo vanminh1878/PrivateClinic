@@ -46,14 +46,14 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 OnPropertyChanged(nameof(DSBS));
             }
         }
-        //Hàm khởi tạo
         public ThongTinCaNhanView _view;
+        //Hàm khởi tạo
         public ThongTinCaNhanViewModel(ThongTinCaNhanView view) 
         {
             LoadData();
             this._view = view;
         }
-
+        //Hàm load data lên listview
         void LoadData()
         {
             string tendangnhap = Const.TenDangNhap;
@@ -82,6 +82,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 
         }
 
+        // Hàm định dạng lại mã bác sĩ đưa lên view
         void FormatMaBS()
         {
             foreach (var item in DSBS)
