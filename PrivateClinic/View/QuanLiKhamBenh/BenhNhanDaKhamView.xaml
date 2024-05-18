@@ -14,16 +14,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
+            <RowDefinition Height="40.5"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <!--Tiêu đề-->
         <StackPanel
             Orientation="Horizontal"
-            Margin="18,0,0,0">
+            Margin="37,0,0,0">
             <Image Source="{StaticResource icPerson}"
-                   Width="40"
-                   Height="40"/>
+                   Width="35"
+                   Height="35"/>
 
             <TextBlock  Text="Số lượng bệnh nhân đã khám:"
                        Margin="5,10,0,0"
@@ -42,42 +43,62 @@
                 Foreground="#348F6C"/>
         </StackPanel>
 
+
         <!--Nút thêm + tìm kiếm bác sĩ-->
+        <StackPanel Orientation="Horizontal"
+                    Margin="18,0,0,0"
+                    Grid.Row="1">
 
-        <!--Chỗ tìm kiếm-->
-        <Border
-            Margin="18,0,0,0"
-            Grid.Row="1"
-            Width="465"
-            Height="50"
-            HorizontalAlignment="Left"
-            BorderThickness="0.7"
-            CornerRadius="4"
-            BorderBrush="Black"
-            >
-            <!--Tìm kiếm thuốc-->
-            <StackPanel Orientation="Horizontal">
-                <TextBox
-                    Width="430"
-                    Height="35"
-                    BorderThickness="0"
-                    Padding="5,0,0,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    materialDesign:HintAssist.Hint="Nhập bệnh nhân cần tìm"/>
-                <Image Source="{StaticResource icSearch}"
-                       Width="30"
-                       Height="30"/>
-            </StackPanel>
+            <!--Chỗ tìm kiếm-->
+            <Border
+                Width="490"
+                Height="60"
+                BorderThickness="1"
+                BorderBrush="Black"
+                HorizontalAlignment="Left"
+                Margin="23 13 0 0"
+                CornerRadius="10"
+                >
+                <!--Tìm kiếm thuốc-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBox
+                        Margin="20 0 0 0"
+                        Width="420"
+                        Height="40"
+                        BorderThickness="0"
+                        Padding="5,0,0,0"
+                        FontSize="20"
+                        FontStyle="Italic"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        materialDesign:HintAssist.Hint="Nhập tên bệnh nhân cần tìm"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                        />
+                    <Image Source="{StaticResource icSearch}"
+                           Width="40"
+                           Height="40"
+                           Margin="0 0 5 0"/>
+                </StackPanel>
 
-        </Border>
+            </Border>
+            <DatePicker
+                Margin="227,0,5,4"
+                Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                materialDesign:ValidationAssist.Background="#f0f2f5"
+                VerticalAlignment="Bottom"
+                Height="60"
+                Width="200"
+                BorderBrush="Black"
+                materialDesign:HintAssist.Hint="Chọn ngày"
+                />
+        </StackPanel>
         <!--Danh sách bệnh nhân-->
         <!--header-->
         <Border
-            Grid.Row="6"
-            Margin="5,5,0,0"
-            Width="970"
+            Grid.Row="2"
+            Margin="11,5,0,0"
+            Width="920"
             Height="50"
             CornerRadius="10"
             VerticalAlignment="Top"
@@ -85,35 +106,35 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="270"/>
-                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="260"/>
+                    <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="200"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <!--STT-->
                 <Grid Grid.Column="0">
-                    <TextBlock HorizontalAlignment="Left"
-                               Margin="5,0,0,0"
+                    <TextBlock HorizontalAlignment="Center"
                                FontWeight="DemiBold"
                                Text="STT"
+                               Margin="0,0,12,0"
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <!--Họ tên-->
+                <!--HoTen-->
                 <Grid Grid.Column="1">
                     <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
+                               Text="Họ tên"
                                Margin="12,0,0,0"
-                               Text="Tên bệnh nhân"
                                VerticalAlignment="Center" />
                 </Grid>
 
                 <!--Ngày khám-->
                 <Grid Grid.Column="2">
                     <TextBlock HorizontalAlignment="Left"
+                               Margin="2,0,0,0"
                                FontWeight="DemiBold"
-                               Margin="20,0,0,0"
                                Text="Ngày khám"
                                VerticalAlignment="Center" />
                 </Grid>
@@ -122,103 +143,116 @@
                 <Grid Grid.Column="3">
                     <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
-                               Margin="5,0,0,0"
                                Text="Loại bệnh"
+                               Margin="22,0,0,0"
                                VerticalAlignment="Center" />
                 </Grid>
 
                 <!--Triệu chứng-->
                 <Grid Grid.Column="4">
                     <TextBlock HorizontalAlignment="Left"
+                               Margin="27,0,0,0"
                                FontWeight="DemiBold"
-                               Margin="5,0,0,0"
                                Text="Triệu chứng"
                                VerticalAlignment="Center" />
                 </Grid>
-
             </Grid>
         </Border>
 
         <!--Chi tiết danh sách-->
-        <Grid Grid.Row="7" >
-            <ScrollViewer
-                Margin="5,0,5,0"
-                HorizontalScrollBarVisibility="Hidden"
-                VerticalScrollBarVisibility="Auto">
-                <ListView FontSize="22"
-                          FontWeight="SemiBold" d:ItemsSource="{d:SampleData ItemCount=5}" >
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem"
-                               BasedOn="{StaticResource MaterialDesignGridViewItem}">
-                            <!-- Thiết lập đường viền dưới cho mỗi hàng -->
-                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                            <Setter Property="BorderBrush" Value="Black"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <!--STT-->
-                            <GridViewColumn Width="80">
+        <Grid Grid.Row="3">
+            <ListView FontSize="22"
+                      Focusable="True"
+                      x:Name="ListViewBN"
+                      Margin="20,0,0,0"
+                      FontWeight="SemiBold"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      ItemsSource="{Binding FilterDSBN}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="924" Height="55" Margin="10 0 0 0" CornerRadius="10" Background="White">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="260"/>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <!--STT-->
+                                <Grid Grid.Column="0">
+                                    <TextBlock Text="{Binding STT}"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,0,10,0"
+                                               VerticalAlignment="Center"
+                                               FontFamily="Segoe UI"
+                                               FontSize="20" />
 
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding STT}"
-                                                   FontWeight="Regular"
-                                                   Margin="0,30,0,0"
-                                                   />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                                </Grid>
 
-                            <!--Tên bệnh nhân-->
-                            <GridViewColumn Width="280">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding HoTen}"
-                                                   FontWeight="Regular"
-                                                   Margin="10,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                                <!--Tên BN-->
+                                <Grid Grid.Column="1">
+                                    <TextBlock
+                                        HorizontalAlignment="Left"
+                                        Margin="15,0,0,0"
+                                        Text="{Binding HoTen}"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Segoe UI"
+                                        FontSize="20" />
 
-                            <!--Ngày khám-->
-                            <GridViewColumn Width="190">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding NgayKham, StringFormat=dd/MM/yyyy}"
-                                                   FontWeight="Regular"
-                                                   Margin="5,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                                </Grid>
 
-                            <!--Loại bệnh-->
-                            <GridViewColumn Width="200">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding TenLoaiBenh}"
-                                                   FontWeight="Regular"
-                                                   Margin="-24,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                                <!--NgayKham-->
+                                <Grid Grid.Column="2">
+                                    <TextBlock Text="{Binding NgayKham, StringFormat=dd/MM/yyyy}"
+                                               HorizontalAlignment="Left"
+                                               Margin="5,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontFamily="Segoe UI"
+                                               FontSize="20" />
 
-                            <!--Triệu chứng-->
-                            <GridViewColumn Width="200">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding TrieuChung}"
-                                                   FontWeight="Regular"
-                                                   Margin="-18,30,0,0"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                                </Grid>
+                                <!--Loại bệnh-->
+                                <Grid Grid.Column="3">
+                                    <TextBlock Text="{Binding LoaiBenh}"
+                                               HorizontalAlignment="Left"
+                                               Margin="25,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontFamily="Segoe UI"
+                                               FontSize="20"/>
 
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                                </Grid>
 
-            </ScrollViewer>
+                                <!--Bằng cấp-->
+                                <Grid Grid.Column="4">
+                                    <TextBlock Text="{Binding  TrieuChung}"
+                                               HorizontalAlignment="Left"
+                                               Margin="30,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontFamily="Segoe UI"
+                                               FontSize="20"/>
+                                </Grid>
+
+
+                                <Border BorderBrush="Black"
+                                        BorderThickness="0 0 0 1"
+                                        Margin="1,0,2,0"
+                                        Grid.ColumnSpan="7" />
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+
+            </ListView>
         </Grid>
 
     </Grid>
