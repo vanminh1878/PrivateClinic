@@ -54,7 +54,26 @@
                         Content="Thay đổi ảnh"
                         FontSize="22"
                         Background="#348F6C"
-                        Command="{Binding editImageCommand}"/>
+                        Command="{Binding editImageCommand}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Border BorderBrush="Transparent"
+                                            Background="#348F6C"
+                                            CornerRadius="10">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="5"
+                                                              Color="Black"
+                                                              Opacity="0.5"
+                                                              BlurRadius="5"/>
+                                        </Border.Effect>
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </Grid>
 
                 <Grid Grid.Column="1">

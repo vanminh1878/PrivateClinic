@@ -22,10 +22,10 @@
         <!--Tiêu đề-->
         <StackPanel
             Orientation="Horizontal"
-            Margin="18,0,0,0">
+            Margin="32,0,0,0">
             <Image Source="{StaticResource icDoctor}"
-                   Width="44"
-                   Height="44"/>
+                   Width="45"
+                   Height="45"/>
 
             <TextBlock  Text="Tổng số lượng bác sĩ:"
                        Margin="5,0,0,0"
@@ -51,58 +51,68 @@
 
             <!--Chỗ tìm kiếm-->
             <Border
-                Width="465"
-                Height="50"
-                HorizontalAlignment="Right"
-                Margin="10,0,0,0"
-                BorderThickness="0.7"
-                CornerRadius="4"
+                Width="590"
+                Height="60"
+                BorderThickness="1"
                 BorderBrush="Black"
+                HorizontalAlignment="Left"
+                Margin="23 13 0 0"
+                CornerRadius="10"
                 >
                 <!--Tìm kiếm thuốc-->
                 <StackPanel Orientation="Horizontal">
                     <TextBox
-                        Width="430"
-                        Height="35"
+                        Margin="20 0 0 0"
+                        Width="520"
+                        Height="40"
                         BorderThickness="0"
                         Padding="5,0,0,0"
+                        FontSize="20"
+                        FontStyle="Italic"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
                         materialDesign:HintAssist.Hint="Nhập tên bác sĩ cần tìm"
-                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-
-
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                        />
                     <Image Source="{StaticResource icSearch}"
-                           Width="30"
-                           Height="30"/>
+                           Width="40"
+                           Height="40"
+                           Margin="0 0 5 0"/>
                 </StackPanel>
 
             </Border>
             <!--Nút thêm mới bác sĩ-->
             <Button
-                Width="150"
-                Height="45"
-                Padding="0"
-                Margin="320,0,0,0"
-                VerticalAlignment="Center"
-                materialDesign:ButtonAssist.CornerRadius="5"
-                FontSize="20"
-                Background="#348F6C"
-                Command="{Binding ShowWDAddDoctor}"
-                >
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{StaticResource icAdd}"
-                               Width="40"
-                               Height="40"
-                               Stretch="Uniform"/>
-                        <TextBlock Margin="5,0,0,0"
-                                   VerticalAlignment="Center"
-                                   Text="Thêm (F1)"
-                                   FontWeight="Bold"/>
-                    </StackPanel>
-                </Button.Content>
+                Content="       Thêm (F1)"
+                FontSize="22"
+                FontWeight="Bold"
+                Margin="158 0 5 0"
+                Width="170" Height="50"
+                HorizontalAlignment="Right"
+                Command="{Binding ShowWDAddDoctor}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border BorderBrush="Transparent" 
+                                    Background="#348F6C" 
+                                    CornerRadius="10">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="5" 
+                                                      Color="Black" 
+                                                      Opacity="0.5" 
+                                                      BlurRadius="5"/>
+                                </Border.Effect>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                            <Image 
+                                HorizontalAlignment="Left" 
+                                Source="{StaticResource icAdd}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+
             </Button>
         </StackPanel>
 
@@ -110,19 +120,19 @@
         <!--header-->
         <Border
             Grid.Row="2"
-            Margin="5,5,0,0"
-            Width="970"
+            Margin="11,5,0,0"
+            Width="920"
             Height="50"
-            CornerRadius="10,10,0,0"
+            CornerRadius="10"
             VerticalAlignment="Top"
             Background="#D9D9D9">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="270"/>
-                    <ColumnDefinition Width="110"/>
-                    <ColumnDefinition Width="220"/>
-                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="260"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="160"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
@@ -147,7 +157,7 @@
                 <!--Giới tính-->
                 <Grid Grid.Column="2">
                     <TextBlock HorizontalAlignment="Left"
-                               Margin="20,0,0,0"
+                               Margin="10,0,0,0"
                                FontWeight="DemiBold"
                                Text="Giới tính"
                                VerticalAlignment="Center" />
@@ -176,28 +186,23 @@
                     <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
                                Text="Thao tác"
-                               Margin="5,0,0,0"
+                               Margin="10,0,0,0"
                                VerticalAlignment="Center" />
                 </Grid>
             </Grid>
         </Border>
 
         <!--Chi tiết danh sách-->
-        <Grid Grid.Row="3"
-              Margin="12,0,0,0"
-              >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="28*"/>
-                <ColumnDefinition Width="135*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="3">
 
             <ListView FontSize="22"
                       Focusable="True"
                       x:Name="ListViewBS"
-                      Margin="0,-45,0,0"
+                      Margin="20,0,0,0"
                       FontWeight="SemiBold"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ItemsSource="{Binding FilterDSBS}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2">
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      ItemsSource="{Binding FilterDSBS}" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <!--  Event trigger phục vụ show StaffDetail  -->
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
@@ -207,80 +212,76 @@
                                                Path=SelectedItem}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem"
-                           BasedOn="{StaticResource MaterialDesignGridViewItem}">
-                        <!-- Thiết lập đường viền dưới cho mỗi hàng -->
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.View>
-                    <GridView>
-                        <!--MABS-->
-                        <GridViewColumn Width="80">
-
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="924" Height="55" Margin="10 0 0 0" CornerRadius="10" Background="White">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="260"/>
+                                    <ColumnDefinition Width="110"/>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <!--Mã bác sĩ-->
+                                <Grid Grid.Column="0">
                                     <TextBlock Text="{Binding formatMaBS}"
-                                               FontWeight="Regular"
-                                               Margin="0,30,0,0"
-                                               />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                                               HorizontalAlignment="Center"
+                                               Margin="0,0,10,0"
+                                               VerticalAlignment="Center"
+                                               FontFamily="Segoe UI"
+                                               FontSize="20" />
 
-                        <!--Tên BS-->
-                        <GridViewColumn Width="280">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding HoTen}"
-                                               FontWeight="Regular"
-                                               Margin="10,30,0,0"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                                </Grid>
 
-                        <!--Giới tính-->
-                        <GridViewColumn Width="110">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
+                                <!--Tên bác sĩ-->
+                                <Grid Grid.Column="1">
+                                    <TextBlock
+                                        HorizontalAlignment="Left"
+                                        Margin="15,0,0,0"
+                                        Text="{Binding HoTen}"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Segoe UI"
+                                        FontSize="20" />
+
+                                </Grid>
+
+                                <!--Giới tính-->
+                                <Grid Grid.Column="2">
                                     <TextBlock Text="{Binding GioiTinh}"
-                                               FontWeight="Regular"
-                                               Margin="0,30,0,0"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                                               HorizontalAlignment="Left"
+                                               Margin="5,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontFamily="Segoe UI"
+                                               FontSize="20" />
 
-                        <!--SĐT-->
-                        <GridViewColumn Width="180">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
+                                </Grid>
+                                <!--Số điện thoại-->
+                                <Grid Grid.Column="3">
                                     <TextBlock Text="{Binding SDT}"
-                                               FontWeight="Regular"
-                                               Margin="20,30,0,0"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                                               HorizontalAlignment="Left"
+                                               Margin="25,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontFamily="Segoe UI"
+                                               FontSize="20"/>
 
-                        <!--Bằng cấp-->
-                        <GridViewColumn Width="200">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding BangCap}"
-                                               FontWeight="Regular"
-                                               Margin="35,30,0,0"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                                </Grid>
 
-                        <!--Thao tác-->
-                        <GridViewColumn Width="230">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <!--  Nút sửa  -->
+                                <!--Bằng cấp-->
+                                <Grid Grid.Column="4">
+                                    <TextBlock Text="{Binding  BangCap}"
+                                               HorizontalAlignment="Left"
+                                               Margin="30,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontFamily="Segoe UI"
+                                               FontSize="20"/>
+                                </Grid>
+
+                                <Grid Grid.Column="6">
                                     <StackPanel Orientation="Horizontal"
-                                                Margin="0,0,0,0">
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center">
                                         <Button ToolTip="Sửa thông tin bệnh nhân "
                                                 Click="EditButton_Click"
                                                 Command="{Binding EditDoctorCommand}"
@@ -298,13 +299,12 @@
                                                 </ControlTemplate>
                                             </Button.Template>
                                         </Button>
-
                                         <!--  Nút xóa -->
                                         <Border
                                             BorderBrush="Black"
                                             BorderThickness="0.5"
                                             CornerRadius="50"
-                                            Margin="10,20,0,0"
+                                            Margin="10,0,0,0"
                                             Width="45"
                                             Height="45"
                                             Cursor="Hand">
@@ -324,15 +324,27 @@
                                                 <i:InvokeCommandAction Command="{Binding DataContext.DeleteDoctorCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
+
                                     </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
+                                </Grid>
+                                <Border BorderBrush="Black"
+                                        BorderThickness="0 0 0 1"
+                                        Margin="1,0,2,0"
+                                        Grid.ColumnSpan="7" />
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+
             </ListView>
-
-
         </Grid>
     </Grid>
 </UserControl>

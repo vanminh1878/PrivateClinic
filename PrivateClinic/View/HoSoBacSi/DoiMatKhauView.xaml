@@ -106,12 +106,30 @@
 
             <Grid Grid.Row="4">
                 <Button Width="360"
-                        Content="Đổi mật khẩu"
                         Height="50"
                         materialDesign:ButtonAssist.CornerRadius="10"
-                        Background="#EE3C46"
                         Command="{Binding ChangePasswordCommand}"
-                        FontSize="25"/>
+                        FontSize="25">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border BorderBrush="Transparent"
+                                        Background="#EE3C46"
+                                        CornerRadius="10">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="5"
+                                                          Color="Black"
+                                                          Opacity="0.5"
+                                                          BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Content="Đổi mật khẩu"/>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Grid>
         </Grid>
     </Grid>
