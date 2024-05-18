@@ -168,7 +168,7 @@
                       FontWeight="SemiBold"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      ItemsSource="{Binding FilterDSBN}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                      ItemsSource="{Binding ListBN}" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border Width="924" Height="55" Margin="10 0 0 0" CornerRadius="10" Background="White">
@@ -215,7 +215,7 @@
                                 </Grid>
                                 <!--Loại bệnh-->
                                 <Grid Grid.Column="3">
-                                    <TextBlock Text="{Binding LoaiBenh}"
+                                    <TextBlock Text="{Binding TenLoaiBenh}"
                                                HorizontalAlignment="Left"
                                                Margin="25,0,0,0"
                                                VerticalAlignment="Center"

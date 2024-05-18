@@ -108,6 +108,7 @@
     <Compile Include="Model\BENHNHAN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\BenhNhanDTO.cs" />
     <Compile Include="Model\CACHDUNG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -185,6 +186,7 @@
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\RelayCommand.cs" />
     <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
+    <Compile Include="ViewModel\QuanLiKhamBenhVM\BenhNhanDaKhamViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhamBenhVM\QuanLiKhamBenhViewModel.cs" />
     <Compile Include="View\HoSoBacSi\DanhSachBacSiView.xaml.cs">
       <DependentUpon>DanhSachBacSiView.xaml</DependentUpon>

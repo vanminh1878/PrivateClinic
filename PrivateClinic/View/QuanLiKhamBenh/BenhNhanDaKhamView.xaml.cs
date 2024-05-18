@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrivateClinic.ViewModel.QuanLiKhamBenhVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace PrivateClinic.View.QuanLiKhamBenh
         public BenhNhanDaKhamView()
         {
             InitializeComponent();
+            BenhNhanDaKhamViewModel viewModel = new BenhNhanDaKhamViewModel();
+            this.DataContext = viewModel;
         }
     }
 }
