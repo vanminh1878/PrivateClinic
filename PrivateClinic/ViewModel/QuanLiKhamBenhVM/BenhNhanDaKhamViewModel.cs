@@ -53,6 +53,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             {
                 listpkb = value;
                 OnPropertyChanged(nameof(ListPKB));
+                SoLuong = ListPKB.Count;
             }
         }
 
@@ -79,6 +80,17 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                     OnPropertyChanged(nameof(SearchText));
                     FilterDSBN();
                 }
+            }
+        }
+
+        private int soluong;
+        public int SoLuong
+        {
+            get => soluong;
+            set
+            {
+                soluong = value;
+                OnPropertyChanged(nameof(SoLuong));
             }
         }
         #endregion
@@ -128,7 +140,10 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                 }
             }
             SearchBN();
+            
         }
+
+        #region Chức năng search theo tên
         void SearchBN()
         {
             FilterListBN = new ObservableCollection<BenhNhanDTO>(ListBN);//ban đầu thì không cần lọc
@@ -146,6 +161,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                     ListBN.Where(s => s.HoTen.ToLower().Contains(SearchText.ToLower())));
             }
         }
+        #endregion
 
     }
 }

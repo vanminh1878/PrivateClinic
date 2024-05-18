@@ -35,7 +35,7 @@
 
             <!--Tổng số lượng bác sĩ-->
             <TextBlock
-                Text="3"
+                Text="{Binding SoLuong}"
                 Margin="5,10,0,0"
                 FontSize="30"
                 VerticalAlignment="Center"
