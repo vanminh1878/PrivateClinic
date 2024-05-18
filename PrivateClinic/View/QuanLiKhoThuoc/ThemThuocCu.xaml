@@ -1,0 +1,197 @@
+﻿<Page
+    x:Class="PrivateClinic.View.QuanLiKhoThuoc.ThemThuocCu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ThemThuocCu"
+    d:DesignHeight="345"
+    d:DesignWidth="877"
+    Background="Transparent"
+    FontFamily="Sugoe UI"
+    TextElement.FontSize="22"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    mc:Ignorable="d">
+
+
+    <Border
+        Padding="10"
+        Background="White"
+        BorderBrush="DarkGray"
+        BorderThickness="0.7"
+        CornerRadius="12">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                    <!--  Tiêu đề  -->
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="30"
+                        FontWeight="Bold"
+                        Text="Nhập thuốc" />
+
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Left"
+                            Content="Thuốc cũ"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White" />
+
+                        <Button
+                            Margin="50,0,0,0"
+                            HorizontalAlignment="Center"
+                            Background="White"
+                            Content="Thuốc mới"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="Black" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <!--  Row 1  -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+
+                <TextBlock
+                    Margin="10,0,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Chọn thuốc:" />
+
+                <Border
+                    Grid.Column="1"
+                    Width="510"
+                    Height="35"
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    BorderBrush="Black"
+                    BorderThickness="0.7"
+                    CornerRadius="10">
+
+                    <ComboBox
+                        Width="500"
+                        Height="35"
+                        Padding="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Text="Chọn thuốc" />
+
+                </Border>
+
+            </Grid>
+
+            <!--  Row 2  -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Margin="10,0,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Số lượng:" />
+
+                <Border
+                    Grid.Column="1"
+                    Width="310"
+                    Height="35"
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    BorderBrush="Black"
+                    BorderThickness="0.7"
+                    CornerRadius="10">
+
+                    <TextBox
+                        Width="310"
+                        Height="35"
+                        Margin="-1,0,0,0"
+                        Padding="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalContentAlignment="Center"
+                        Text="Nhập số lượng" />
+
+                </Border>
+
+
+
+            </Grid>
+
+
+
+            <!--  Row 3  -->
+            <Grid Grid.Row="3">
+                <StackPanel
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <!--  Nút hủy  -->
+                    <Button
+                        Width="150"
+                        Height="45"
+                        Padding="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Background="#D51F2A"
+                        FontSize="20">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{StaticResource icCancel}" Stretch="Uniform" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Text="Hủy (F2)" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <!--  Nút thêm  -->
+                    <Button
+                        Width="150"
+                        Height="45"
+                        Margin="25,0,25,0"
+                        Padding="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Background="#348F6C"
+                        FontSize="20">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{StaticResource icAdd}" Stretch="Uniform" />
+                                <TextBlock
+                                    Margin="0,0,5,0"
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Text="Nhập (F1)" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+    </Border>
+</Page>

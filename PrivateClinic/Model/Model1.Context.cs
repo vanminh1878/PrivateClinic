@@ -13,10 +13,10 @@ namespace PrivateClinic.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QUANLYPHONGMACHTUEntities1 : DbContext
+    public partial class QUANLYPHONGMACHTUEntities : DbContext
     {
-        public QUANLYPHONGMACHTUEntities1()
-            : base("name=QUANLYPHONGMACHTUEntities1")
+        public QUANLYPHONGMACHTUEntities()
+            : base("name=QUANLYPHONGMACHTUEntities")
         {
         }
     

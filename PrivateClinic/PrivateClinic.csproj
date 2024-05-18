@@ -68,6 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -174,12 +175,22 @@
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModel\QuanLiKhoThuocVM\QuanLyThuocViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiKhoThuocVM\ThemThuocViewModel.cs" />
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OtherViews\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\QuanLyThuocView.xaml.cs" />
+    <Compile Include="View\QuanLiKhoThuoc\ThayDoiQuyDinhThuoc.xaml.cs" />
+    <Compile Include="View\QuanLiKhoThuoc\ThayDoiThongTinThuoc.xaml.cs" />
+    <Compile Include="View\QuanLiKhoThuoc\ThemDonViTinh.xaml.cs" />
+    <Compile Include="View\QuanLiKhoThuoc\ThemThuocCu.xaml.cs" />
+    <Compile Include="View\QuanLiKhoThuoc\ThemThuocMoiView.xaml.cs" />
+    <Compile Include="View\QuanLiKhoThuoc\ThongTinThuoc.xaml.cs" />
+    <Compile Include="View\QuanLiKhoThuoc\XoaDonViTinh.xaml.cs" />
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
     </Compile>
@@ -225,6 +236,38 @@
     <Page Include="View\OtherViews\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLiKhoThuoc\QuanLyThuocView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuanLiKhoThuoc\ThayDoiQuyDinhThuoc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuanLiKhoThuoc\ThayDoiThongTinThuoc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuanLiKhoThuoc\ThemDonViTinh.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuanLiKhoThuoc\ThemThuocCu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuanLiKhoThuoc\ThemThuocMoiView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuanLiKhoThuoc\ThongTinThuoc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuanLiKhoThuoc\XoaDonViTinh.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml">
       <SubType>Designer</SubType>
@@ -273,7 +316,6 @@
     <Folder Include="View\BangDieuKhien\" />
     <Folder Include="View\HoSoBacSi\" />
     <Folder Include="View\QuanLiKhamBenh\" />
-    <Folder Include="View\QuanLiKhoThuoc\" />
     <Folder Include="View\ThanhToan\" />
   </ItemGroup>
   <ItemGroup>
