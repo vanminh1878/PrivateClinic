@@ -1,4 +1,5 @@
-﻿using PrivateClinic.Model;
+﻿using Microsoft.Win32;
+using PrivateClinic.Model;
 using PrivateClinic.View.HoSoBacSi;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
@@ -8,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 
@@ -15,7 +18,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
     public class ThongTinCaNhanViewModel : BaseViewModel
     {
-        #region các property
+        #region các property và Command
         public string HoTen {  get; set; }
         public string MaBS { get; set; }
         public string formatMaBS { get; set; }
@@ -36,6 +39,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 OnPropertyChanged(nameof(ImageSource));
             }
         }
+        public ICommand editImageCommand { get; set; }
         #endregion
         private NGUOIDUNG user;
         public NGUOIDUNG User
@@ -62,6 +66,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         public ThongTinCaNhanViewModel(ThongTinCaNhanView view) 
         {
             LoadData();
+            EditImage();
             this._view = view;
         }
         //Hàm load data lên listview
@@ -109,8 +114,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 }
             }
            
-            
-                
         }
 
         // Hàm định dạng lại mã bác sĩ đưa lên view
@@ -131,7 +134,52 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             }
         }
 
-    }
+        #region Chức năng thay đổi ảnh đại diện
+        private void EditImage()
+        {
+            editImageCommand = new ViewModelCommand(editImage);
+        }
+        // Hàm thực hiện cập nhật ảnh đại diện cho tài khoản
+        private void editImage(object obj)
+        {
+            ChooseImage();
+            //Lấy thông tin bác sĩ đang dùng app
+            string tendangnhap = Const.TenDangNhap;
+            User = DataProvider.Ins.DB.NGUOIDUNG.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+            MaBS = User.MaBS.ToString();
+            DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
+            foreach (var item in DSBS)
+            {
+                if (item.MaBS.ToString() == MaBS) 
+                {
+                    byte[] imageBytes = ImageViewModel.BitmapImageToByteArray(imageSource);
+                    item.Image = imageBytes;
+                    DataProvider.Ins.DB.SaveChanges();
+                    break;
+                }
+            }
+        }
+
+        //Hàm giúp chọn ảnh từ máy
+        private void ChooseImage()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*";
+
+            byte[] imageData;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                imageData = File.ReadAllBytes(openFileDialog.FileName);
+
+                ImageSource = ImageViewModel.ByteArrayToBitmapImage(imageData);
+                MessageBox.Show("Thay đổi ảnh đại diện thành công", "Thông báo");
+            }
+
+        }
+        #endregion
 
     }
+
+}
 
