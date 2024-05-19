@@ -11,6 +11,9 @@
              FontSize="22"
              FontWeight="Regular"
              d:DesignHeight="530" d:DesignWidth="990">
+    <UserControl.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding ShowWDAddDoctor}" />
+    </UserControl.InputBindings>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -94,20 +97,20 @@
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
-                            <Border BorderBrush="Transparent" 
-                                    Background="#348F6C" 
+                            <Border BorderBrush="Transparent"
+                                    Background="#348F6C"
                                     CornerRadius="10">
                                 <Border.Effect>
-                                    <DropShadowEffect ShadowDepth="5" 
-                                                      Color="Black" 
-                                                      Opacity="0.5" 
+                                    <DropShadowEffect ShadowDepth="5"
+                                                      Color="Black"
+                                                      Opacity="0.5"
                                                       BlurRadius="5"/>
                                 </Border.Effect>
-                                <ContentPresenter HorizontalAlignment="Center" 
+                                <ContentPresenter HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"/>
                             </Border>
-                            <Image 
-                                HorizontalAlignment="Left" 
+                            <Image
+                                HorizontalAlignment="Left"
                                 Source="{StaticResource icAdd}"/>
                         </Grid>
                     </ControlTemplate>

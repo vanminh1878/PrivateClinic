@@ -288,7 +288,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     await Task.Delay(2000);
                 }
                 );
-                MessageBox.Show("Thêm bác sĩ mới thành công\n"+"Tài khoản đã được gửi qua mail.", "Thông báo");
+                MessageBox.Show("Thêm bác sĩ mới thành công\n", "Thông báo");
                 view.Close();
             }
         }
