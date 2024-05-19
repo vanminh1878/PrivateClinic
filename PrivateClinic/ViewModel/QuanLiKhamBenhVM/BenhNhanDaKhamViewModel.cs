@@ -116,7 +116,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             var loaiBenhDictionary = ListLoaiBenh.ToDictionary(lb => lb.MaLoaiBenh, lb => lb.TenLoaiBenh);
 
             // Xử lý
-            ListBN = new ObservableCollection<BenhNhanDTO>();
+            List<BenhNhanDTO> tempListBN = new List<BenhNhanDTO>();
             int stt = 1;
 
             foreach (var benhnhan in BenhNhan)
@@ -127,18 +127,25 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                     {
                         BenhNhanDTO benhNhanDTO = new BenhNhanDTO
                         {
-                            STT = stt,
                             HoTen = benhnhan.HoTen,
                             TrieuChung = pkb.TrieuChung,
                             NgayKham = pkb.NgayKham,
                             TenLoaiBenh = loaiBenhDictionary.TryGetValue(pkb.MaLoaiBenh, out var tenLoaiBenh) ? tenLoaiBenh : string.Empty
                         };
-
-                        ListBN.Add(benhNhanDTO);
-                        stt++;
+                        tempListBN.Add(benhNhanDTO);
+                        
                     }
                 }
             }
+            // Sắp xếp theo NgayKham giảm dần
+            var sortedListBN = tempListBN.OrderByDescending(bn => bn.NgayKham).ToList();
+            //Đặt STT
+            foreach (var benhnhan in sortedListBN)
+            {
+                benhnhan.STT = stt;
+                stt++;
+            }
+            ListBN = new ObservableCollection<BenhNhanDTO>(sortedListBN);
             SearchBN();
             
         }
