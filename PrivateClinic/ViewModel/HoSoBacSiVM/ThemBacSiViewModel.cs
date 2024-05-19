@@ -5,6 +5,7 @@ using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -13,6 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 
 namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
@@ -195,6 +198,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 OnPropertyChanged(nameof(NgayVLError));
             }
         }
+        //Ảnh mặc định
+        public BitmapImage ImageSource { get; set; }
+       
         #endregion
 
         private bool[] _canAccept = new bool[7];
@@ -240,6 +246,18 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 bacsi.NgayVaoLam = (DateTime)NgayVL;
                 bacsi.DiaChi = DiaChi;
                 bacsi.BangCap = BangCap;
+                Uri resourceUri = new Uri("pack://application:,,,/ResourceXAML/image/img_default.png", UriKind.Absolute);
+                StreamResourceInfo streamInfo = System.Windows.Application.GetResourceStream(resourceUri);
+                byte[] imageBytes;
+                using (Stream imageStream = streamInfo.Stream)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        imageStream.CopyTo(ms);
+                        imageBytes = ms.ToArray();
+                    }
+                }
+                bacsi.Image = imageBytes;
                 DataProvider.Ins.DB.BACSI.Add(bacsi);
                 DataProvider.Ins.DB.SaveChanges();
                 //Thêm tài khoản
@@ -254,12 +272,12 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 Task.Run(async () =>
                 {
                     string email = "privateclinicse104@gmail.com";
-                    string pass = "uwui fldf dxif drqj";
+                    string pass = "ibap lpjv sqrf vrsq";
                     MailMessage mailMessage = new MailMessage();
                     try
                     {
                         mailMessage.From = new MailAddress(email);
-                        mailMessage.Subject = "Tài khoản đăng nhập App";
+                        mailMessage.Subject = "Tài khoản đăng nhập Private Clinic";
                         mailMessage.To.Add(new MailAddress(bacsi.Email));
                     }
                     catch
@@ -311,7 +329,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                         MailMessage mailMessage, string fromMail, string fromPassword)
         {
             string noidung =
-                            "Tài khoản của bạn là: " + "<br>"
+                            "Thông tin tài khoản đăng nhập Private Clinic của bạn là: " + "<br>"
                             + "Tên đăng nhập: " + "<b>" + tendangnhap + "</b>" + "<br>"
                             + "Mật khẩu: " + "<b>" + matkhau + "</b>" + "<br>"
                             + "Thân mến!";
@@ -331,10 +349,11 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 {
                     smtpClient.Send(mailMessage);
                 }
-                catch (Exception ex)
+                catch 
                 {
                     // Xử lý lỗi khi gửi email
-                    MessageBox.Show("Lỗi khi gửi email: " + ex.Message, "Thông báo");
+                    MessageBox.Show("Tên đăng nhập: " + tendangnhap +"\n"
+                                    +"Mật khẩu: " + matkhau);
                 }
             }
             catch (Exception ex)

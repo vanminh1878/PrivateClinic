@@ -4,9 +4,12 @@ using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 
 namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
@@ -16,7 +19,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         public string HoTen {  get; set; }
         public string MaBS { get; set; }
         public string formatMaBS { get; set; }
-
         public string GioiTinh { get; set; }
         public string SDT { get; set; }
         public string Email { get; set; }
@@ -24,7 +26,17 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         public DateTime NgayVL { get; set; }
         public string DiaChi { get; set; }
         public string BangCap { get; set; }
-
+        private BitmapImage imageSource;
+        public BitmapImage ImageSource
+        {
+            get => imageSource;
+            set
+            {
+                imageSource = value;
+                OnPropertyChanged(nameof(ImageSource));
+            }
+        }
+        #endregion
         private NGUOIDUNG user;
         public NGUOIDUNG User
         {
@@ -35,7 +47,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 OnPropertyChanged(nameof(User));
             }
         }
-        #endregion
         private ObservableCollection<BACSI> dsbs;
         public ObservableCollection<BACSI> DSBS
         {
@@ -74,6 +85,26 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     NgayVL = bac.NgayVaoLam;
                     DiaChi = bac.DiaChi;
                     BangCap = bac.BangCap;
+                    if (bac.Image == null) 
+                    {
+                        Uri resourceUri = new Uri("pack://application:,,,/ResourceXAML/image/img_default.png", UriKind.Absolute);
+                        StreamResourceInfo streamInfo = System.Windows.Application.GetResourceStream(resourceUri);
+                        byte[] imageBytes;
+                        using (Stream imageStream = streamInfo.Stream)
+                        {
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                imageStream.CopyTo(ms);
+                                imageBytes = ms.ToArray();
+                            }
+                        }
+                        ImageSource = ImageViewModel.ByteArrayToBitmapImage(imageBytes);
+                    }
+                    else
+                    {
+                        BitmapImage image = ImageViewModel.ByteArrayToBitmapImage(bac.Image);
+                        ImageSource = image;
+                    }
                     break;
                 }
             }
