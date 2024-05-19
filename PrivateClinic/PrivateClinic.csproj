@@ -222,17 +222,8 @@
     <Compile Include="View\QuanLiKhamBenh\BenhNhanDaKhamView.xaml.cs">
       <DependentUpon>BenhNhanDaKhamView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\QuanLiKhamBenh\BenhNhanDangKhamView.xaml.cs">
-      <DependentUpon>BenhNhanDangKhamView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\QuanLiKhamBenh\QuanLiKhamBenhView.xaml.cs">
       <DependentUpon>QuanLiKhamBenhView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\QuanLiKhamBenh\SuaThongTinThuocChoBenhNhanView.xaml.cs">
-      <DependentUpon>SuaThongTinThuocChoBenhNhanView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\QuanLiKhamBenh\ThemThuocChoBenhNhanView.xaml.cs">
-      <DependentUpon>ThemThuocChoBenhNhanView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
@@ -315,19 +306,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhamBenh\BenhNhanDangKhamView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\QuanLiKhamBenh\QuanLiKhamBenhView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuanLiKhamBenh\SuaThongTinThuocChoBenhNhanView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuanLiKhamBenh\ThemThuocChoBenhNhanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
