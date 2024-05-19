@@ -112,7 +112,7 @@
                     BorderThickness="2"
                     CornerRadius="70">
                     <Border.Background>
-                        <ImageBrush />
+                        <ImageBrush ImageSource="{Binding ImageSource}"/>
                     </Border.Background>
                 </Border>
 

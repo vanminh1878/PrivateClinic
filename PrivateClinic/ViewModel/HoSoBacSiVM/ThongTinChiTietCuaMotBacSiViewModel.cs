@@ -3,11 +3,14 @@ using PrivateClinic.View.HoSoBacSi;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 
 namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
@@ -24,7 +27,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         public DateTime NgayVL { get; set; }
         public string DiaChi { get; set; }
         public string BangCap { get; set; }
-
+        public BitmapImage ImageSource { get; set; }
         public ICommand ExitCommand { get; set; }
 
         public ThongTinChiTietCuaMotBacSIView _view;
@@ -42,6 +45,26 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             NgayVL = bs.NgayVaoLam;
             DiaChi = bs.DiaChi;
             BangCap = bs.BangCap;
+            if (bs.Image == null)
+            {
+                Uri resourceUri = new Uri("pack://application:,,,/ResourceXAML/image/img_default.png", UriKind.Absolute);
+                StreamResourceInfo streamInfo = System.Windows.Application.GetResourceStream(resourceUri);
+                byte[] imageBytes;
+                using (Stream imageStream = streamInfo.Stream)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        imageStream.CopyTo(ms);
+                        imageBytes = ms.ToArray();
+                    }
+                }
+                ImageSource = ImageViewModel.ByteArrayToBitmapImage(imageBytes);
+            }
+            else
+            {
+                BitmapImage image = ImageViewModel.ByteArrayToBitmapImage(bs.Image);
+                ImageSource = image;
+            }
             ExitCommand = new ViewModelCommand(Exit);
             this._view = view;
 
