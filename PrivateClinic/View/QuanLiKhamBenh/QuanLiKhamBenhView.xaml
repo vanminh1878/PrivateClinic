@@ -39,19 +39,23 @@
                                Foreground="#348F6C"
                                Margin="35 0 0 0"/>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0" Orientation="Horizontal">
-                        <Image Source="{StaticResource icMaleUserBlue}"
-                               Width="60"
-                               Height="60"
-                               HorizontalAlignment="Right"
-                               Margin="0 0 7 0"/>
+                        <Border
+                            Width="60"
+                            Height="60"
+                            Margin="0,0,7,0"
+                            CornerRadius="50">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding ImageSource}" />
+                            </Border.Background>
+                        </Border>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
                             <!--Tên user-->
-                            <TextBlock Text="Trần Thu Hằng"
+                            <TextBlock Text="{Binding TenNV}"
                                        FontSize="22"
                                        FontWeight="SemiBold"
                                        FontFamily="Segoe UI"/>
-                            <TextBlock Text="Nhân viên"
+                            <TextBlock Text="{Binding ChucVu}"
                                        FontSize="22"
                                        FontWeight="SemiBold"
                                        FontFamily="Segoe UI"/>
