@@ -32,6 +32,7 @@ namespace PrivateClinic.Model
         public string DiaChi { get; set; }
         public System.DateTime NgayVaoLam { get; set; }
         public string BangCap { get; set; }
+        public byte[] Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NGUOIDUNG> NGUOIDUNG { get; set; }

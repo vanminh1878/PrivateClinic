@@ -18,6 +18,7 @@
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NgayVaoLam" Type="date" Nullable="false" />
           <Property Name="BangCap" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="BAOCAODOANHTHU">
           <Key>
@@ -460,6 +461,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgayVaoLam" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="BangCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="NGUOIDUNG" Relationship="Self.FK_NGUOIDUNG_BACSI" FromRole="BACSI" ToRole="NGUOIDUNG" />
           <NavigationProperty Name="PHIEUKHAMBENH" Relationship="Self.FK_PHIEUKHAMBENH_MaBS" FromRole="BACSI" ToRole="PHIEUKHAMBENH" />
         </EntityType>
@@ -923,6 +925,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
                 <ScalarProperty Name="NgayVaoLam" ColumnName="NgayVaoLam" />
                 <ScalarProperty Name="BangCap" ColumnName="BangCap" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
