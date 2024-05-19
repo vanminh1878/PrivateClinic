@@ -1,15 +1,17 @@
-﻿<Page
-    x:Class="PrivateClinic.View.QuanLiKhoThuoc.ThayDoiThongTinThuoc"
+﻿<Window
+    x:Class="PrivateClinic.View.QuanLiKhoThuoc.ThayDoiThongTinThuocView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="ThayDoiThongTinThuoc"
+    x:Name="ThayDoiThongTinThuocViewPage"
+    Title="ThayDoiThongTinThuocView"
     d:DesignHeight="632"
     d:DesignWidth="877"
     Background="Transparent"
-    FontFamily="Sugoe UI"
+    FontFamily="Segoe UI"
     TextElement.FontSize="22"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -25,7 +27,6 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
-                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
@@ -74,13 +75,14 @@
                     CornerRadius="10">
 
                     <TextBox
+                        x:Name="MaThuoc"
                         Width="300"
                         Height="35"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
-                        Text="Nhập mã thuốc" />
+                        Text="{Binding MaThuoc}" />
 
                 </Border>
             </Grid>
@@ -111,13 +113,14 @@
                     CornerRadius="10">
 
                     <TextBox
+                        x:Name="TenThuoc"
                         Width="300"
                         Height="35"
                         Margin="-1,0,0,0"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalContentAlignment="Center"
-                        Text="Nhập tên thuốc" />
+                        Text="{Binding TenThuoc}" />
 
                 </Border>
 
@@ -148,58 +151,23 @@
                     CornerRadius="10">
 
                     <DatePicker
+                        x:Name="NgayNhap"
                         Width="300"
                         Height="35"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
-                        Text="Chọn ngày nhập" />
+                        Text="{Binding NgayNhap}" />
 
                 </Border>
 
 
             </Grid>
+
 
             <!--  Row 4  -->
             <Grid Grid.Row="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock
-                    Grid.Column="0"
-                    Margin="10,0,0,10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Text="Hạn sử dụng:" />
-
-                <Border
-                    Grid.Column="1"
-                    Width="310"
-                    Height="35"
-                    Margin="0,0,0,10"
-                    HorizontalAlignment="Left"
-                    BorderBrush="Black"
-                    BorderThickness="0.7"
-                    CornerRadius="10">
-
-                    <DatePicker
-                        Width="300"
-                        Height="35"
-                        Padding="5,0,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Text="Chọn ngày hết hạn" />
-
-                </Border>
-
-            </Grid>
-
-            <!--  Row 5  -->
-            <Grid Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -223,19 +191,20 @@
                     CornerRadius="10">
 
                     <TextBox
+                        x:Name="DonGiaNhap"
                         Width="300"
                         Height="35"
                         Margin="-1,0,0,0"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalContentAlignment="Center"
-                        Text="Nhập đơn giá" />
+                        Text="{Binding DonGiaNhap}" />
 
                 </Border>
 
             </Grid>
-            <!--  Row 6  -->
-            <Grid Grid.Row="6">
+            <!--  Row 5  -->
+            <Grid Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -259,22 +228,27 @@
                     CornerRadius="10">
 
                     <ComboBox
+                        x:Name="TenDVT"
                         Width="300"
                         Height="35"
                         Margin="-1,0,0,0"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalContentAlignment="Center"
-                        Text="Chọn ĐVT" />
+                        Text="{Binding TenDVT}">
 
+                        <ComboBoxItem Content="Viên" />
+                        <ComboBoxItem Content="Chai" />
+
+                    </ComboBox>
                 </Border>
 
 
 
             </Grid>
 
-            <!--  Row 7  -->
-            <Grid Grid.Row="7">
+            <!--  Row 6  -->
+            <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -298,13 +272,14 @@
                     CornerRadius="10">
 
                     <TextBox
+                        x:Name="SoLuong"
                         Width="300"
                         Height="35"
                         Margin="-1,0,0,0"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalContentAlignment="Center"
-                        Text="Nhập số lượng" />
+                        Text="{Binding SoLuong}" />
 
                 </Border>
 
@@ -312,59 +287,92 @@
 
             </Grid>
 
-            <!--  Row 8  -->
-            <Grid Grid.Row="8">
+            <!--  Row 7  -->
+            <Grid Grid.Row="7">
                 <StackPanel
                     Margin="0,0,10,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
 
-                    <!--  Nút hủy  -->
+                    <!--  Cancel Button  -->
                     <Button
-                        Width="150"
-                        Height="45"
-                        Padding="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Background="#D51F2A"
-                        FontSize="20">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{StaticResource icCancel}" Stretch="Uniform" />
-                                <TextBlock
-                                    Margin="5,0,0,0"
-                                    VerticalAlignment="Center"
-                                    FontWeight="Bold"
-                                    Text="Hủy (F2)" />
-                            </StackPanel>
-                        </Button.Content>
+                        Width="170"
+                        Height="50"
+                        Margin="5,0,22,0"
+                        HorizontalAlignment="Right"
+                        Content="       Hủy (F2)"
+                        FontFamily="Segoe UI"
+                        FontSize="22"
+                        FontWeight="Bold">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Border
+                                        Background="#D51F2A"
+                                        BorderBrush="Transparent"
+                                        CornerRadius="10">
+                                        <Border.Effect>
+                                            <DropShadowEffect
+                                                BlurRadius="5"
+                                                Opacity="0.5"
+                                                ShadowDepth="5"
+                                                Color="Black" />
+                                        </Border.Effect>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Source="{StaticResource icCancel}" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=ThayDoiThongTinThuocViewPage}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </Button>
+
 
                     <!--  Nút thêm  -->
                     <Button
-                        Width="150"
-                        Height="45"
-                        Margin="25,0,25,0"
-                        Padding="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Background="#364C9A"
-                        FontSize="20">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{StaticResource icSaveWhite}" Stretch="Uniform" />
-                                <TextBlock
-                                    Margin="5,0,0,0"
-                                    VerticalAlignment="Center"
-                                    FontWeight="Bold"
-                                    Text="Lưu (F3)" />
-                            </StackPanel>
-                        </Button.Content>
+                        Width="170"
+                        Height="50"
+                        Margin="5,0,30,0"
+                        HorizontalAlignment="Right"
+                        Content="       Lưu (F3)"
+                        FontFamily="Segoe UI"
+                        FontSize="22"
+                        FontWeight="Bold">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Border
+                                        Background="#364C9A"
+                                        BorderBrush="Transparent"
+                                        CornerRadius="10">
+                                        <Border.Effect>
+                                            <DropShadowEffect
+                                                BlurRadius="5"
+                                                Opacity="0.5"
+                                                ShadowDepth="5"
+                                                Color="Black" />
+                                        </Border.Effect>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Source="{StaticResource icSaveWhite}" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=ThayDoiThongTinThuocViewPage}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </Button>
+
                 </StackPanel>
             </Grid>
 
         </Grid>
     </Border>
-</Page>
+</Window>

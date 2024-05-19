@@ -2,6 +2,7 @@
 using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,7 +13,28 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
         public ICommand AddMedicineCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        public ICommand quitCommand { get; set; }
 
+        //private ThemThuocMoiView _themThuocMoiView;
+
+        //// Constructor
+        //public ThemThuocViewModel(ThemThuocMoiView wd)
+        //{
+        //    this._themThuocMoiView = wd;
+        //    AddMedicineCommand = new RelayCommand<object>(CanExecuteAdd, ExecuteAdd);
+        //    quitCommand = new ViewModelCommand(quit);
+        //}
+
+        public ThemThuocViewModel()
+        {
+            AddMedicineCommand = new RelayCommand<ThemThuocMoiView>((p) => true, (p) => ExecuteAdd(p));
+            CancelCommand = new RelayCommand<ThemThuocMoiView>((p) => true, (p) => _CancelCommand(p));
+        }
+
+        void _CancelCommand(ThemThuocMoiView paramater)
+        {
+            paramater.Close();
+        }
 
         private string maLoaiThuoc;
         public string MaLoaiThuoc
@@ -150,18 +172,6 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
 
 
-        // Constructor
-        public ThemThuocViewModel()
-        {
-            AddMedicineCommand = new RelayCommand<object>(CanExecuteAdd, ExecuteAdd);
-            CancelCommand = new RelayCommand<ThemThuocMoiView>((p) => true, (p) => _CancelCommand(p));
-        }
-
-        void _CancelCommand(ThemThuocMoiView paramater)
-        {
-            paramater.Close();
-        }
-
         // Validation methods
         private void ValidateMaLoaiThuoc()
         {
@@ -209,7 +219,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             return true;
         }
 
-        private void ExecuteAdd(object parameter)
+        void ExecuteAdd(ThemThuocMoiView parameter)
         {
             MessageBoxResult result = MessageBox.Show("Bạn muốn thêm thuốc mới?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
@@ -228,6 +238,10 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
                     DataProvider.Ins.DB.THUOCs.Add(thuoc);
                     DataProvider.Ins.DB.SaveChanges();
+
+                    QuanLiKhoThuocView quanlikhothuocview = new QuanLiKhoThuocView();
+                    quanlikhothuocview.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+                    quanlikhothuocview.MedicineListView.Items.Refresh();
 
                     MessageBox.Show("Thêm thuốc mới thành công", "Thông báo");
                     ClearFields();

@@ -2,11 +2,11 @@
     x:Class="PrivateClinic.View.QuanLiKhoThuoc.ThemThuocMoiView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="ThemThuocMoiViewPage"
     Title="ThemThuocMoiView"
     d:DesignHeight="632"
@@ -28,7 +28,6 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
-                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
@@ -224,8 +223,8 @@
 
             </Grid>-->
 
-            <!--  Row 5  -->
-            <Grid Grid.Row="5">
+            <!--  Row 4  -->
+            <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -261,8 +260,8 @@
                 </Border>
 
             </Grid>
-            <!--  Row 6  -->
-            <Grid Grid.Row="6">
+            <!--  Row 5  -->
+            <Grid Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -305,8 +304,8 @@
 
             </Grid>
 
-            <!--  Row 7  -->
-            <Grid Grid.Row="7">
+            <!--  Row 6  -->
+            <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -344,8 +343,8 @@
 
 
             </Grid>
-            <!--  Row 8  -->
-            <Grid Grid.Row="8">
+            <!--  Row 7  -->
+            <Grid Grid.Row="7">
                 <StackPanel
                     Margin="0,0,10,0"
                     HorizontalAlignment="Right"
@@ -384,8 +383,7 @@
                         </Button.Template>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding CancelCommand}" 
-                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Page}}" />
+                                <i:InvokeCommandAction Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Page}}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -422,8 +420,7 @@
                         </Button.Template>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding AddMedicineCommand}"
-                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Page}}" />
+                                <i:InvokeCommandAction Command="{Binding AddMedicineCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Page}}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>

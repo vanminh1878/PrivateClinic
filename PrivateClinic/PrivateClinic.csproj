@@ -154,16 +154,10 @@
     <Compile Include="Model\NHOMNGUOIDUNG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PHANQUYEN.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\PHIEUKHAMBENH.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PHIEUNHAPTHUOC.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\THAMSO.cs">
@@ -175,22 +169,41 @@
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\QuanLyThuocViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiKhoThuocVM\ThayDoiThongTinThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\ThemThuocViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiKhoThuocVM\ThongTinThuocViewModel.cs" />
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OtherViews\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\QuanLiKhoThuoc\QuanLyThuocView.xaml.cs" />
-    <Compile Include="View\QuanLiKhoThuoc\ThayDoiQuyDinhThuoc.xaml.cs" />
-    <Compile Include="View\QuanLiKhoThuoc\ThayDoiThongTinThuoc.xaml.cs" />
-    <Compile Include="View\QuanLiKhoThuoc\ThemDonViTinh.xaml.cs" />
-    <Compile Include="View\QuanLiKhoThuoc\ThemThuocCu.xaml.cs" />
-    <Compile Include="View\QuanLiKhoThuoc\ThemThuocMoiView.xaml.cs" />
-    <Compile Include="View\QuanLiKhoThuoc\ThongTinThuoc.xaml.cs" />
-    <Compile Include="View\QuanLiKhoThuoc\XoaDonViTinh.xaml.cs" />
+    <Compile Include="View\QuanLiKhoThuoc\QuanLiKhoThuocView.xaml.cs">
+      <DependentUpon>QuanLiKhoThuocView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\ThayDoiQuiDinhThuocView.xaml.cs">
+      <DependentUpon>ThayDoiQuiDinhThuocView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\ThayDoiThongTinThuocView.xaml.cs">
+      <DependentUpon>ThayDoiThongTinThuocView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\ThemDonViTinhView.xaml.cs">
+      <DependentUpon>ThemDonViTinhView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\ThemThuocCuView.xaml.cs">
+      <DependentUpon>ThemThuocCuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\ThemThuocMoiView.xaml.cs">
+      <DependentUpon>ThemThuocMoiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\ThongTinThuocView.xaml.cs">
+      <DependentUpon>ThongTinThuocView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\XoaDonViTinhView.xaml.cs">
+      <DependentUpon>XoaDonViTinhView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
     </Compile>
@@ -237,37 +250,37 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\QuanLyThuocView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\QuanLiKhoThuoc\QuanLiKhoThuocView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\ThayDoiQuyDinhThuoc.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\QuanLiKhoThuoc\ThayDoiQuiDinhThuocView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\ThayDoiThongTinThuoc.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\QuanLiKhoThuoc\ThayDoiThongTinThuocView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\ThemDonViTinh.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\QuanLiKhoThuoc\ThemDonViTinhView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\ThemThuocCu.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\QuanLiKhoThuoc\ThemThuocCuView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuanLiKhoThuoc\ThemThuocMoiView.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\ThongTinThuoc.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\QuanLiKhoThuoc\ThongTinThuocView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\XoaDonViTinh.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\QuanLiKhoThuoc\XoaDonViTinhView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml">
       <SubType>Designer</SubType>

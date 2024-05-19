@@ -1,7 +1,6 @@
 ﻿using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 using System.Windows;
 
-
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
     /// <summary>

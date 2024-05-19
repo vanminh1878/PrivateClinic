@@ -2,16 +2,15 @@
 using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 using System.Windows;
 using System.Windows.Controls;
-using Button = System.Windows.Controls.Button;
 
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
     /// <summary>
-    /// Interaction logic for QuanLyThuocView.xaml
+    /// Interaction logic for QuanLiKhoThuocView.xaml
     /// </summary>
-    public partial class QuanLyThuocView : UserControl
+    public partial class QuanLiKhoThuocView : Page
     {
-        public QuanLyThuocView()
+        public QuanLiKhoThuocView()
         {
             InitializeComponent();
             QuanLyThuocViewModel viewModel = new QuanLyThuocViewModel();
