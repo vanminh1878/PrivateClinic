@@ -26,7 +26,7 @@
                    Width="35"
                    Height="35"/>
 
-            <TextBlock  Text="Số lượng bệnh nhân đã khám:"
+            <TextBlock  Text="Số lượng bệnh nhân đã khám trong ngày:"
                        Margin="5,10,0,0"
                        VerticalAlignment="Center"
                        FontWeight="Bold"

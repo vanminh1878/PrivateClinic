@@ -31,6 +31,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             {
                 filterlistBN = value;
                 OnPropertyChanged(nameof(FilterListBN));
+
             }
         }
 
@@ -53,7 +54,6 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             {
                 listpkb = value;
                 OnPropertyChanged(nameof(ListPKB));
-                SoLuong = ListPKB.Count;
             }
         }
 
@@ -113,6 +113,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
         public BenhNhanDaKhamViewModel()
         {
             LoadData();
+            SoLuongBNDaKhamHomNay();
         }
 
         //Hàm load dữ liệu lên list view 
@@ -196,6 +197,21 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             }
 
             FilterListBN = new ObservableCollection<BenhNhanDTO>(filteredList);
+        }
+
+        //Hàm đếm số lượng bệnh nhân đã khám trong ngày
+        private void SoLuongBNDaKhamHomNay()
+        {
+            int soluong = 0;
+            ListPKB = new ObservableCollection<PHIEUKHAMBENH>(DataProvider.Ins.DB.PHIEUKHAMBENH);
+            foreach ( var pkb in originalListBN)
+            {
+                if (pkb.NgayKham.Value.Date == DateTime.UtcNow.Date)
+                {
+                    soluong++;
+                }
+            }
+            SoLuong = soluong;
         }
 
     }
