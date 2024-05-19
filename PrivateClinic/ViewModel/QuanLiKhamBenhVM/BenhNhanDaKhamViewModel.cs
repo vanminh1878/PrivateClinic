@@ -68,6 +68,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             }
         }
 
+        private ObservableCollection<BenhNhanDTO> originalListBN;
+
         private string searchText;
         public string SearchText
         {
@@ -78,7 +80,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                 {
                     searchText = value;
                     OnPropertyChanged(nameof(SearchText));
-                    FilterDSBN();
+                    ApplyFilter();
                 }
             }
         }
@@ -91,6 +93,18 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             {
                 soluong = value;
                 OnPropertyChanged(nameof(SoLuong));
+            }
+        }
+
+        private DateTime? filterDate;
+        public DateTime? FilterDate
+        {
+            get => filterDate;
+            set
+            {
+                filterDate = value;
+                OnPropertyChanged(nameof(FilterDate));
+                ApplyFilter();
             }
         }
         #endregion
@@ -139,6 +153,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
             }
             // Sắp xếp theo NgayKham giảm dần
             var sortedListBN = tempListBN.OrderByDescending(bn => bn.NgayKham).ToList();
+            originalListBN = new ObservableCollection<BenhNhanDTO>(sortedListBN);
             //Đặt STT
             foreach (var benhnhan in sortedListBN)
             {
@@ -153,22 +168,35 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
         #region Chức năng search theo tên
         void SearchBN()
         {
-            FilterListBN = new ObservableCollection<BenhNhanDTO>(ListBN);//ban đầu thì không cần lọc
+            ApplyFilter();
         }
+
         private void FilterDSBN()
         {
-            // Cập nhật FilteredDSBS dựa trên SearchText
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                FilterListBN = new ObservableCollection<BenhNhanDTO>(ListBN);
-            }
-            else
-            {
-                FilterListBN = new ObservableCollection<BenhNhanDTO>(
-                    ListBN.Where(s => s.HoTen.ToLower().Contains(SearchText.ToLower())));
-            }
+            ApplyFilter();
         }
+
         #endregion
+
+        //Chức năng filter theo ngày
+        private void ApplyFilter()
+        {
+            IEnumerable<BenhNhanDTO> filteredList = originalListBN;
+
+            // Lọc theo ngày nếu có giá trị
+            if (filterDate.HasValue)
+            {
+                filteredList = filteredList.Where(bn => bn.NgayKham == filterDate.Value.Date);
+            }
+
+            // Lọc theo tìm kiếm tên nếu có giá trị
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                filteredList = filteredList.Where(bn => bn.HoTen.ToLower().Contains(SearchText.ToLower()));
+            }
+
+            FilterListBN = new ObservableCollection<BenhNhanDTO>(filteredList);
+        }
 
     }
 }

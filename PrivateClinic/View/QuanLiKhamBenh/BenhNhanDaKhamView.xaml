@@ -85,13 +85,15 @@
             <DatePicker
                 Margin="227,0,5,4"
                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                materialDesign:TextFieldAssist.HasClearButton="True"
                 materialDesign:ValidationAssist.Background="#f0f2f5"
                 VerticalAlignment="Bottom"
                 Height="60"
                 Width="200"
                 BorderBrush="Black"
                 materialDesign:HintAssist.Hint="Chọn ngày"
-                />
+                SelectedDate="{Binding FilterDate,UpdateSourceTrigger=PropertyChanged}"/>
+
         </StackPanel>
         <!--Danh sách bệnh nhân-->
         <!--header-->
