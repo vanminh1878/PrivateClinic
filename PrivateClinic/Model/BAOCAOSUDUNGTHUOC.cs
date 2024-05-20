@@ -19,7 +19,5 @@ namespace PrivateClinic.Model
         public Nullable<int> SoLanDung { get; set; }
         public Nullable<int> TongSoLuongDaDung { get; set; }
         public Nullable<int> MaThuoc { get; set; }
-    
-        public virtual THUOC THUOC { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace PrivateClinic.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHOMNGUOIDUNG()
         {
-            this.NGUOIDUNGs = new HashSet<NGUOIDUNG>();
+            this.NGUOIDUNG = new HashSet<NGUOIDUNG>();
         }
     
         public string MaNhom { get; set; }
         public string TenNhom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NGUOIDUNG> NGUOIDUNGs { get; set; }
+        public virtual ICollection<NGUOIDUNG> NGUOIDUNG { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
        
         public QuanLiTiepDonViewModel()
         {
-            listBN = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
+            listBN = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHAN);
             SearchCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             DeleteCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
             AddCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
@@ -106,14 +106,14 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         void _LoadSLBNCommand(QuanLiTiepDonView parameter)
         {
-            THAMSO t = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 1);
+            THAMSO t = DataProvider.Ins.DB.THAMSO.SingleOrDefault(h => h.MaThamSo == 1);
             parameter.txbMaxBN.Text = t.GiaTri.ToString();
             parameter.txbMaxBN.FontSize = 25;
         }
         void _SaveSLBNCommand(QuanLiTiepDonView parameter)
         {
    
-            THAMSO t = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 1);
+            THAMSO t = DataProvider.Ins.DB.THAMSO.SingleOrDefault(h => h.MaThamSo == 1);
             if (int.TryParse(parameter.txbMaxBN.Text, out int newValue))
             {
                 MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu lại số bệnh nhân khám tối đa trong ngày không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -155,20 +155,20 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 if (selectedItem != null)
                 {
                     // Remove related HOADON records
-                    var relatedHoadons = DataProvider.Ins.DB.HOADONs.Where(h => h.MaBN == selectedItem.MaBN).ToList();
-                    DataProvider.Ins.DB.HOADONs.RemoveRange(relatedHoadons);
+                    var relatedHoadons = DataProvider.Ins.DB.HOADON.Where(h => h.MaBN == selectedItem.MaBN).ToList();
+                    DataProvider.Ins.DB.HOADON.RemoveRange(relatedHoadons);
                     // Remove related CT_BCDT records
                     var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.HOADON.MaBN == selectedItem.MaBN).ToList();
                     DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
                     // Remove related PHIEUKHAMBENH records
-                    var relatedPHIEUKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).ToList();
-                    DataProvider.Ins.DB.PHIEUKHAMBENHs.RemoveRange(relatedPHIEUKBs);
-                    var relatedMaPKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).Select(pkb => pkb.MaPKB).ToList();
+                    var relatedPHIEUKBs = DataProvider.Ins.DB.PHIEUKHAMBENH.Where(pkb => pkb.MaBN == selectedItem.MaBN).ToList();
+                    DataProvider.Ins.DB.PHIEUKHAMBENH.RemoveRange(relatedPHIEUKBs);
+                    var relatedMaPKBs = DataProvider.Ins.DB.PHIEUKHAMBENH.Where(pkb => pkb.MaBN == selectedItem.MaBN).Select(pkb => pkb.MaPKB).ToList();
                     var relatedCT_PKBs = DataProvider.Ins.DB.CT_PKB.Where(ctpkb => relatedMaPKBs.Contains(ctpkb.MaPKB)).ToList();
                     DataProvider.Ins.DB.CT_PKB.RemoveRange(relatedCT_PKBs);
 
                     // Remove the selected BENHNHAN
-                    DataProvider.Ins.DB.BENHNHANs.Remove(selectedItem);
+                    DataProvider.Ins.DB.BENHNHAN.Remove(selectedItem);
 
                     // Save changes to the database
                     DataProvider.Ins.DB.SaveChanges();

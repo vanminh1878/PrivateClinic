@@ -17,13 +17,13 @@ namespace PrivateClinic.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LOAIBENH()
         {
-            this.PHIEUKHAMBENHs = new HashSet<PHIEUKHAMBENH>();
+            this.PHIEUKHAMBENH = new HashSet<PHIEUKHAMBENH>();
         }
     
         public int MaLoaiBenh { get; set; }
         public string TenLoaiBenh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUKHAMBENH> PHIEUKHAMBENHs { get; set; }
+        public virtual ICollection<PHIEUKHAMBENH> PHIEUKHAMBENH { get; set; }
     }
 }

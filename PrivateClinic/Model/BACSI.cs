@@ -17,8 +17,8 @@ namespace PrivateClinic.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BACSI()
         {
-            this.NGUOIDUNGs = new HashSet<NGUOIDUNG>();
-            this.PHIEUKHAMBENHs = new HashSet<PHIEUKHAMBENH>();
+            this.NGUOIDUNG = new HashSet<NGUOIDUNG>();
+            this.PHIEUKHAMBENH = new HashSet<PHIEUKHAMBENH>();
         }
     
         public int MaBS { get; set; }
@@ -30,10 +30,11 @@ namespace PrivateClinic.Model
         public string DiaChi { get; set; }
         public System.DateTime NgayVaoLam { get; set; }
         public string BangCap { get; set; }
+        public byte[] Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NGUOIDUNG> NGUOIDUNGs { get; set; }
+        public virtual ICollection<NGUOIDUNG> NGUOIDUNG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUKHAMBENH> PHIEUKHAMBENHs { get; set; }
+        public virtual ICollection<PHIEUKHAMBENH> PHIEUKHAMBENH { get; set; }
     }
 }

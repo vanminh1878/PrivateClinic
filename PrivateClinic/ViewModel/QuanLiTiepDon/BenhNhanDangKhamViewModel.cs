@@ -16,6 +16,18 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
     {
         private ObservableCollection<THUOC> _listMed;
         public ObservableCollection<THUOC> listMed { get => _listMed; set { _listMed = value; OnPropertyChanged(); } }
+
+        //Lấy danh sách cách dùng thuốc DTO
+        private ObservableCollection<ThuocDTO> listThuoc;
+        public ObservableCollection<ThuocDTO> ListThuoc
+        {
+            get => listThuoc;
+            set
+            {
+                listThuoc = value;
+                OnPropertyChanged(nameof(ListThuoc));
+            }
+        }
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -23,7 +35,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         public BenhNhanDangKhamViewModel()
         {
-            listMed = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+            listMed = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
             SearchCommand = new RelayCommand<BenhNhanDangKhamView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             DeleteCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
             AddCommand = new RelayCommand<BenhNhanDangKhamView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
