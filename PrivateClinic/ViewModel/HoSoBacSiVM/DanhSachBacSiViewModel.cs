@@ -122,8 +122,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         private void ShowWDDoctor(object obj)
         {
             ThemBacSiView view = new ThemBacSiView();
-            LoadData();
             view.ShowDialog();
+            LoadData();
         }
 
         void AddDoctor()
