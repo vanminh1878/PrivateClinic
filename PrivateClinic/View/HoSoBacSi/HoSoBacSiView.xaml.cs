@@ -24,8 +24,8 @@ namespace PrivateClinic.View.HoSoBacSi
         public HoSoBacSiView()
         {
             InitializeComponent();
-            Main.Content = new ThongTinCaNhanView();
             HoSoBacSiViewModel viewModel = new HoSoBacSiViewModel();
+            Main.Content = new ThongTinCaNhanView(viewModel);
             this.DataContext = viewModel;
         }
     }

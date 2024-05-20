@@ -63,8 +63,10 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
         public ThongTinCaNhanView _view;
         //Hàm khởi tạo
-        public ThongTinCaNhanViewModel(ThongTinCaNhanView view) 
+        HoSoBacSiViewModel hoSoBacSiViewModel;
+        public ThongTinCaNhanViewModel(ThongTinCaNhanView view, HoSoBacSiViewModel hoSoBacSi) 
         {
+            this.hoSoBacSiViewModel = hoSoBacSi;
             LoadData();
             EditImage();
             this._view = view;
@@ -72,47 +74,51 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         //Hàm load data lên listview
         void LoadData()
         {
-            string tendangnhap = Const.TenDangNhap;
-            User = DataProvider.Ins.DB.NGUOIDUNG.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
-            MaBS = User.MaBS.ToString();
-            DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
-            foreach (BACSI bac in DSBS)
+            try
             {
-                if (bac.MaBS.ToString() == MaBS) 
+                string tendangnhap = Const.TenDangNhap;
+                User = DataProvider.Ins.DB.NGUOIDUNG.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+                MaBS = User.MaBS.ToString();
+                DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
+                foreach (BACSI bac in DSBS)
                 {
-                    FormatMaBS();
-                    formatMaBS = bac.formatMaBS;
-                    HoTen = bac.HoTen;
-                    GioiTinh = bac.GioiTinh;
-                    SDT = bac.SDT;
-                    Email = bac.Email;
-                    NgaySinh = bac.NgaySinh;
-                    NgayVL = bac.NgayVaoLam;
-                    DiaChi = bac.DiaChi;
-                    BangCap = bac.BangCap;
-                    if (bac.Image == null) 
+                    if (bac.MaBS.ToString() == MaBS)
                     {
-                        Uri resourceUri = new Uri("pack://application:,,,/ResourceXAML/image/img_default.png", UriKind.Absolute);
-                        StreamResourceInfo streamInfo = System.Windows.Application.GetResourceStream(resourceUri);
-                        byte[] imageBytes;
-                        using (Stream imageStream = streamInfo.Stream)
+                        FormatMaBS();
+                        formatMaBS = bac.formatMaBS;
+                        HoTen = bac.HoTen;
+                        GioiTinh = bac.GioiTinh;
+                        SDT = bac.SDT;
+                        Email = bac.Email;
+                        NgaySinh = bac.NgaySinh;
+                        NgayVL = bac.NgayVaoLam;
+                        DiaChi = bac.DiaChi;
+                        BangCap = bac.BangCap;
+                        if (bac.Image == null)
                         {
-                            using (MemoryStream ms = new MemoryStream())
+                            Uri resourceUri = new Uri("pack://application:,,,/ResourceXAML/image/img_default.png", UriKind.Absolute);
+                            StreamResourceInfo streamInfo = System.Windows.Application.GetResourceStream(resourceUri);
+                            byte[] imageBytes;
+                            using (Stream imageStream = streamInfo.Stream)
                             {
-                                imageStream.CopyTo(ms);
-                                imageBytes = ms.ToArray();
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    imageStream.CopyTo(ms);
+                                    imageBytes = ms.ToArray();
+                                }
                             }
+                            ImageSource = ImageViewModel.ByteArrayToBitmapImage(imageBytes);
                         }
-                        ImageSource = ImageViewModel.ByteArrayToBitmapImage(imageBytes);
+                        else
+                        {
+                            BitmapImage image = ImageViewModel.ByteArrayToBitmapImage(bac.Image);
+                            ImageSource = image;
+                        }
+                        break;
                     }
-                    else
-                    {
-                        BitmapImage image = ImageViewModel.ByteArrayToBitmapImage(bac.Image);
-                        ImageSource = image;
-                    }
-                    break;
                 }
             }
+            catch { }
            
         }
 
@@ -155,6 +161,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     byte[] imageBytes = ImageViewModel.BitmapImageToByteArray(imageSource);
                     item.Image = imageBytes;
                     DataProvider.Ins.DB.SaveChanges();
+                    hoSoBacSiViewModel.ImageSource =ImageViewModel.ByteArrayToBitmapImage(imageBytes);
                     break;
                 }
             }

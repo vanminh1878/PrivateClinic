@@ -21,10 +21,10 @@ namespace PrivateClinic.View.HoSoBacSi
     /// </summary>
     public partial class ThongTinCaNhanView : UserControl
     {
-        public ThongTinCaNhanView()
+        public ThongTinCaNhanView(HoSoBacSiViewModel hoSoBacSiViewModel)
         {
             InitializeComponent();
-            ThongTinCaNhanViewModel viewModel = new ThongTinCaNhanViewModel(this);
+            ThongTinCaNhanViewModel viewModel = new ThongTinCaNhanViewModel(this, hoSoBacSiViewModel);
             this.DataContext = viewModel;
         }
     }

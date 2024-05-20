@@ -85,7 +85,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             switch(UserControlName)
             {
                 case "Personal":
-                    CurrentView = new ThongTinCaNhanView();
+                    CurrentView = new ThongTinCaNhanView( this);
                     break;
                 case "DoctorList":
                     CurrentView = new DanhSachBacSiView();
