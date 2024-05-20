@@ -177,14 +177,25 @@
     <Compile Include="ViewModel\OtherViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\BenhNhanDangKhamViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\QuanLiKhamBenhViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\QuanLiTiepDonViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\SuaBenhNhanViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\SuaThongTinDonThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\ThemBenhNhanViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\ThemThuocChoBenhNhanViewModel.cs" />
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OtherViews\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiTiepDon\BenhNhanDangKhamView.xaml.cs">
+      <DependentUpon>BenhNhanDangKhamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiTiepDon\QuanLiKhamBenhView.xaml.cs">
+      <DependentUpon>QuanLiKhamBenhView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
@@ -192,8 +203,14 @@
     <Compile Include="View\QuanLiTiepDon\SuaBenhNhanView.xaml.cs">
       <DependentUpon>SuaBenhNhanView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLiTiepDon\SuaThongTinDonThuocView.xaml.cs">
+      <DependentUpon>SuaThongTinDonThuocView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLiTiepDon\ThemBenhNhanView.xaml.cs">
       <DependentUpon>ThemBenhNhanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiTiepDon\ThemThuocChoBenhNhanView.xaml.cs">
+      <DependentUpon>ThemThuocChoBenhNhanView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +252,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\QuanLiTiepDon\BenhNhanDangKhamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLiTiepDon\QuanLiKhamBenhView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -243,7 +268,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\QuanLiTiepDon\SuaThongTinDonThuocView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\QuanLiTiepDon\ThemBenhNhanView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLiTiepDon\ThemThuocChoBenhNhanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -357,6 +390,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="ResourceXAML\image\ic_khambenh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets')" />
