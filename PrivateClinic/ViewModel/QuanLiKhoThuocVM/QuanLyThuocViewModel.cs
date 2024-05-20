@@ -2,6 +2,7 @@
 using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -34,12 +35,12 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
         private void LoadMedicines()
         {
-
             var context = DataProvider.Ins.DB;
             var thuocList = from t in context.THUOCs
                             join d in context.DVTs on t.MaDVT equals d.MaDVT
                             select new
                             {
+                                t.STT,
                                 t.MaThuoc,
                                 t.TenThuoc,
                                 t.DonGiaNhap,
