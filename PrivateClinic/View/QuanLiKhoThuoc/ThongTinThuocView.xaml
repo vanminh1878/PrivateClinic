@@ -8,13 +8,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="ThongTinThuocViewPage"
     Title="ThongTinThuocView"
-    d:DesignHeight="300"
-    d:DesignWidth="700"
+    Height="320"
+    Width="750"
+     WindowStyle="None"
+    ResizeMode="NoResize"
     Background="Transparent"
+    AllowsTransparency="True"
     FontFamily="Segoe UI"
     TextElement.FontSize="19"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
     mc:Ignorable="d">
 
     <Border
@@ -53,42 +57,14 @@
                         Text="Thông tin thuốc" />
 
                     <!--  Nút exit  -->
-                    <Button
-                        Grid.Column="1"
-                        Margin="0,0,10,0"
-                        HorizontalAlignment="Right"
-                        BorderThickness="0"
-                        Command="{Binding ExitCommand}"
-                        Content="X"
-                        Cursor="Hand"
-                        FontSize="17"
-                        Foreground="#fffaf5">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#D51F2A" />
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#0010A1" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border
-                                    Width="25"
-                                    Height="25"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="15">
-                                    <ContentPresenter
-                                        Margin="0,1,0,0"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                    <materialDesign:PackIcon Kind="CloseThick" Foreground="#7E542E" Margin="0 5 5 0" Height="24" Width="24" Grid.Column="1" HorizontalAlignment="Right">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding ExitCommand}"
+                 CommandParameter="{Binding ElementName=ThongTinThuocViewPage}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </materialDesign:PackIcon>
                 </Grid>
             </Border>
 
@@ -118,8 +94,9 @@
                         materialDesign:HintAssist.Hint="Mã thuốc"
                         FontWeight="SemiBold"
                         IsReadOnly="True"
+                        x:Name="MaThuoc"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding formatMaThuoc}" />
+                         />
 
                     <!--  Chỗ Ten thuoc  -->
                     <TextBox
@@ -132,8 +109,9 @@
                         materialDesign:HintAssist.Hint="Tên thuốc"
                         FontWeight="SemiBold"
                         IsReadOnly="True"
+                        x:Name="TenThuoc"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding TenThuoc}" />
+                         />
 
                     <!--  Chỗ binding ngày nhập  -->
                     <TextBox
@@ -146,8 +124,9 @@
                         materialDesign:HintAssist.Hint="Ngày nhập"
                         FontWeight="SemiBold"
                         IsReadOnly="True"
+                        x:Name="NgNhap"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding NgayNhap}" />
+                        />
                     <!--  Chỗ binding DVT  -->
                     <TextBox
                         Grid.Row="3"
@@ -159,8 +138,9 @@
                         materialDesign:HintAssist.Hint="Đơn vị tính"
                         FontWeight="SemiBold"
                         IsReadOnly="True"
+                        x:Name="DVT"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding DVT}" />
+                         />
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -184,8 +164,9 @@
                         materialDesign:HintAssist.Hint="Đơn giá"
                         FontWeight="SemiBold"
                         IsReadOnly="True"
+                        x:Name="DonGia"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding DonGiaNhap}" />
+                         />
 
                     <!--  Chỗ binding HSD  -->
                     <!--
@@ -213,8 +194,9 @@
                         materialDesign:HintAssist.Hint="Số lượng"
                         FontWeight="SemiBold"
                         IsReadOnly="True"
+                        x:Name="SL"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding SoLuong}" />
+                         />
                 </Grid>
             </Grid>
         </Grid>

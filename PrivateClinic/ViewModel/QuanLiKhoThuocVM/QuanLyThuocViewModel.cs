@@ -24,6 +24,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         public ICommand AddMedicineCommand { get; set; }
         public ICommand EditMedicineCommand { get; set; }
         public ICommand DeleteMedicineCommand { get; set; }
+        public ICommand DetailMedicineCommand { get; set; }
 
         public QuanLyThuocViewModel()
         {
@@ -31,32 +32,33 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             AddMedicineCommand = new RelayCommand<QuanLiKhoThuocView>((p) => { return p == null ? false : true; }, (p) => _AddMedicineCommand(p));
             EditMedicineCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _EditMedicineCommand(p));
             DeleteMedicineCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _DeleteMedicineCommand(p));
+            DetailMedicineCommand = new RelayCommand<QuanLiKhoThuocView>((p) => { return p == null ? false : true; }, (p) => _DetailMedicineCommand(p));
         }
 
         private void LoadMedicines()
         {
             var context = DataProvider.Ins.DB;
-            var thuocList = from t in context.THUOCs
-                            join d in context.DVTs on t.MaDVT equals d.MaDVT
+            var thuocList = from t in context.THUOC
+                            join d in context.DVT on t.MaDVT equals d.MaDVT
                             select new
                             {
-                                t.STT,
+                                //t.STT,
                                 t.MaThuoc,
                                 t.TenThuoc,
                                 t.DonGiaNhap,
-                                t.SoLuong,
+                                //t.SoLuong,
                                 d.TenDVT
                             };
 
             ListMedicine = new ObservableCollection<THUOC>(
             thuocList.ToList().Select((t, index) => new THUOC
             {
-                STT = index + 1,
+                //STT = index + 1,
                 MaThuoc = t.MaThuoc,
                 TenThuoc = t.TenThuoc,
-                TenDVT = t.TenDVT,
+                //TenDVT = t.TenDVT,
                 DonGiaNhap = t.DonGiaNhap,
-                SoLuong = t.SoLuong
+                //SoLuong = t.SoLuong
             }));
         }
         void _EditMedicineCommand(THUOC selectedItem)
@@ -65,10 +67,10 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             {
                 ThayDoiThongTinThuocViewModel.Instance.EditThuocView = new ThayDoiThongTinThuocView();
                 ThayDoiThongTinThuocViewModel.Instance.EditThuocView.TenThuoc.Text = selectedItem.TenThuoc.ToString();
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.Text = selectedItem.NgayNhap.ToString();
+                //ThayDoiThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.Text = selectedItem.NgayNhap.ToString();
                 ThayDoiThongTinThuocViewModel.Instance.EditThuocView.DonGiaNhap.Text = selectedItem.DonGiaNhap.ToString();
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.TenDVT.Text = selectedItem.TenDVT.ToString();
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.SoLuong.Text = selectedItem.SoLuong.ToString();
+               // ThayDoiThongTinThuocViewModel.Instance.EditThuocView.TenDVT.Text = selectedItem.TenDVT.ToString();
+                //ThayDoiThongTinThuocViewModel.Instance.EditThuocView.SoLuong.Text = selectedItem.SoLuong.ToString();
 
                 double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
                 ThayDoiThongTinThuocViewModel.Instance.EditThuocView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -87,7 +89,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     // Thực hiện xóa thuốc
                     var context = DataProvider.Ins.DB;
                     // Xóa thuốc
-                    context.THUOCs.Remove(selectedItem);
+                    context.THUOC.Remove(selectedItem);
                     // Lưu thay đổi vào cơ sở dữ liệu
                     context.SaveChanges();
                     // Xóa khỏi danh sách thuốc
@@ -101,6 +103,18 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
             addMedicineView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             addMedicineView.ShowDialog();
+
+        }
+        public void _DetailMedicineCommand(QuanLiKhoThuocView parameter)
+        {   
+            ThongTinThuocView detail = new ThongTinThuocView();
+            THUOC temp = (THUOC)parameter.MedicineListView.SelectedItem;
+            detail.DonGia.Text = temp.DonGiaNhap.ToString();
+            detail.TenThuoc.Text = temp.TenThuoc;
+            detail.MaThuoc.Text=temp.MaThuoc.ToString();
+            //detail.DVT.Text = temp.DVT.ToString();
+            detail.WindowStartupLocation=WindowStartupLocation.CenterScreen;
+            detail.ShowDialog();
 
         }
 

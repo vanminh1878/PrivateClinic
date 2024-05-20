@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
@@ -10,6 +11,8 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
         public ThongTinThuocView()
         {
             InitializeComponent();
+            ThongTinThuocViewModel viewModel= new ThongTinThuocViewModel(); 
+            this.DataContext = viewModel;
         }
     }
 }

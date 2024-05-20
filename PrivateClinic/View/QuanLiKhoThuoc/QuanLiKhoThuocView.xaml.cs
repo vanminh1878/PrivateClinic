@@ -17,10 +17,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
             this.DataContext = viewModel;
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

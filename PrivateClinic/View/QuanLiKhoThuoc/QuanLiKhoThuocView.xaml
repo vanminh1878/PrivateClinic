@@ -111,6 +111,7 @@
                         VerticalAlignment="Bottom"
                         Background="#F5F5F5"
                         BorderThickness="2"
+                        BorderBrush="Transparent"
                         FontSize="22">
                         <Button.Content>
                             <TextBlock
@@ -132,6 +133,7 @@
                         VerticalAlignment="Bottom"
                         Background="#F5F5F5"
                         BorderThickness="2"
+                        BorderBrush="Transparent"
                         FontSize="22">
                         <Button.Content>
                             <TextBlock
@@ -156,22 +158,6 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Orientation="Vertical">
-
-                    <TextBlock FontWeight="SemiBold" Text="Thông báo" />
-
-                    <TextBox
-                        MaxWidth="300"
-                        Padding="5"
-                        AcceptsReturn="True"
-                        Background="LightGray"
-                        BorderBrush="DarkGray"
-                        BorderThickness="2"
-                        FontSize="20"
-                        FontWeight="Regular"
-                        Style="{StaticResource RoundedTextBoxStyle}"
-                        Text="Thuốc Alcohol (mã MDC254) sắp hết hạn 3 ngày nữa"
-                        TextWrapping="Wrap" />
-
                 </StackPanel>
             </Grid>
 
@@ -196,38 +182,25 @@
                     </Border>
                 </StackPanel>
                 <Button
-                    Width="170"
-                    Height="50"
-                    Margin="0,0,32,0"
-                    HorizontalAlignment="Right"
-                    Content="      Thêm (F1)"
-                    FontFamily="Segoe UI"
-                    FontSize="22"
-                    FontWeight="Bold"
-                    Foreground="White">
+    ToolTip="Thêm bệnh nhân"
+    Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 5 0"  Width="170" Height="50" HorizontalAlignment="Right" >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>
-                                <Border
-                                    Background="#348F6C"
-                                    BorderBrush="Transparent"
-                                    CornerRadius="10">
+                                <Border BorderBrush="Transparent" Background="#348F6C" CornerRadius="10">
                                     <Border.Effect>
-                                        <DropShadowEffect
-                                            BlurRadius="5"
-                                            Opacity="0.5"
-                                            ShadowDepth="5"
-                                            Color="Black" />
+                                        <DropShadowEffect ShadowDepth="5" Color="Black" Opacity="0.5" BlurRadius="5"/>
                                     </Border.Effect>
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
-                                <Image HorizontalAlignment="Left" Source="{StaticResource icAdd}" />
+                                <Image HorizontalAlignment="Left" Source="{StaticResource icAdd}"/>
                             </Grid>
                         </ControlTemplate>
                     </Button.Template>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding AddMedicineCommand}" CommandParameter="{Binding ElementName=QuanLyKhoThuocViewPage}" />
+                            <i:InvokeCommandAction Command="{Binding AddMedicineCommand}"
+   CommandParameter="{Binding ElementName=QuanLiKhoThuocViewPage}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
@@ -327,8 +300,7 @@
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
                     SelectedItem="selecteditem "
-                    SelectionChanged="ListView_SelectionChanged"
-                    SelectionMode="Single">
+                    >
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -457,6 +429,12 @@
                             <WrapPanel Orientation="Vertical" />
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding DetailMedicineCommand}"
+                      CommandParameter="{Binding ElementName=QuanLiKhoThuocViewPage}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ListView>
             </Grid>
         </Grid>

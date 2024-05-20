@@ -54,21 +54,21 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 if (result == MessageBoxResult.Yes)
                 {
                     string maThuoc = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.MaThuoc.Text;
-                    THUOC thuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault();
+                    THUOC thuoc = DataProvider.Ins.DB.THUOC.FirstOrDefault();
                     if (thuoc != null)
                     {
                         thuoc.TenThuoc = p.TenThuoc.Text;
-                        thuoc.NgayNhap = (DateTime)p.NgayNhap.SelectedDate;
+                        //thuoc.NgayNhap = (DateTime)p.NgayNhap.SelectedDate;
                         thuoc.DonGiaNhap = double.Parse(p.DonGiaNhap.Text);
-                        thuoc.TenDVT = p.TenDVT.Text;
-                        thuoc.SoLuong = int.Parse(p.SoLuong.Text);
+                        //thuoc.TenDVT = p.TenDVT.Text;
+                        //thuoc.SoLuong = int.Parse(p.SoLuong.Text);
 
                         DataProvider.Ins.DB.SaveChanges();
                         MessageBox.Show("Cập nhật thông tin thuốc thành công!", "THÔNG BÁO");
 
 
                         QuanLiKhoThuocView quanLiThuocView = new QuanLiKhoThuocView();
-                        quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+                        quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
                         quanLiThuocView.MedicineListView.Items.Refresh();
                     }
                     else

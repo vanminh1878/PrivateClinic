@@ -9,9 +9,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="ThemThuocMoiViewPage"
     Title="ThemThuocMoiView"
-    d:DesignHeight="632"
-    d:DesignWidth="877"
-    Background="Transparent"
+    Height="632"
+    Width="877"
+    ResizeMode="NoResize"
+Background="Transparent"
+AllowsTransparency="True"
+    WindowStyle="None"
     FontFamily="Segoe UI"
     TextElement.FontSize="22"
     TextElement.FontWeight="Regular"
@@ -24,8 +27,306 @@
         BorderBrush="DarkGray"
         BorderThickness="0.7"
         CornerRadius="12">
-
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock
+    Margin="10"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    FontSize="30"
+    FontWeight="Bold"
+    Text="Nhập thuốc" />
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Column="0" GroupName="ThuocGroup" HorizontalAlignment="Right" Content="Thuốc cũ" Margin="0 0 40 0" FontSize="25" FontFamily="Segoe UI" FontWeight="DemiBold" />
+
+                    <RadioButton Grid.Column="1" GroupName="ThuocGroup" HorizontalAlignment="Left" Content="Thuốc mới" Margin="40 0 0 0" FontSize="25" FontFamily="Segoe UI" FontWeight="DemiBold" />
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+     Grid.Column="0"
+     Margin="10,0,50,10"
+     HorizontalAlignment="Center"
+     VerticalAlignment="Center"
+                                FontSize="22"
+     Text="Mã thuốc:" />
+                            <Border
+     Grid.Column="1"
+     Width="150"
+     Height="40"
+     Margin="0,0,0,10"
+     HorizontalAlignment="Left"
+     BorderBrush="Black"
+     BorderThickness="0.7"
+     CornerRadius="10">
+
+                                <TextBox
+         x:Name="MaThuoc"
+         Width="180"
+         Height="40"
+         Padding="15,0,0,0"
+         HorizontalAlignment="Left"
+         VerticalAlignment="Center"
+         VerticalContentAlignment="Center"
+                                    FontSize="20"
+         materialDesign:HintAssist.Hint="Mã thuốc" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+Grid.Column="0"
+Margin="10,0,50,10"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+                           FontSize="22"
+Text="Tên thuốc:" />
+                            <Border
+Grid.Column="1"
+Width="180"
+Height="40"
+Margin="0,0,0,10"
+HorizontalAlignment="Left"
+BorderBrush="Black"
+BorderThickness="0.7"
+CornerRadius="10">
+
+                                <TextBox
+    x:Name="TenThuoc"
+    Width="180"
+    Height="40"
+    Padding="15,0,0,0"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Center"
+    VerticalContentAlignment="Center"
+                               FontSize="20"
+    materialDesign:HintAssist.Hint="Nhập tên thuốc" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+Grid.Column="0"
+Margin="10,0,50,10"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+                           FontSize="22"
+Text="Đơn vị tính:" />
+                            <Border
+Grid.Column="1"
+Width="180"
+Height="40"
+Margin="-10,0,0,10"
+HorizontalAlignment="Left"
+BorderBrush="Black"
+BorderThickness="0.7"
+CornerRadius="10">
+
+                                <ComboBox
+    x:Name="DonVi"
+    Width="170"
+    Height="40"
+    Padding="15,0,0,0"
+                                    
+    HorizontalAlignment="Left"
+    VerticalAlignment="Center"
+    VerticalContentAlignment="Center"
+                               FontSize="20"
+    materialDesign:HintAssist.Hint="Chọn DVT" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+     Grid.Column="0"
+     Margin="10,0,50,10"
+     HorizontalAlignment="Center"
+     VerticalAlignment="Center"
+                                FontSize="22"
+     Text="Số Lượng:" />
+                            <Border
+     Grid.Column="1"
+     Width="180"
+     Height="40"
+     Margin="0,0,0,10"
+     HorizontalAlignment="Left"
+     BorderBrush="Black"
+     BorderThickness="0.7"
+     CornerRadius="10">
+
+                                <TextBox
+         x:Name="SL"
+         Width="180"
+         Height="40"
+         Padding="15,0,0,0"
+         HorizontalAlignment="Left"
+         VerticalAlignment="Center"
+         VerticalContentAlignment="Center"
+                                    FontSize="20"
+         materialDesign:HintAssist.Hint="Nhập số lượng" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+Grid.Column="0"
+Margin="10,0,50,10"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+                           FontSize="22"
+Text="Giá Nhập:" />
+                            <Border
+Grid.Column="1"
+Width="180"
+Height="40"
+Margin="0,0,0,10"
+HorizontalAlignment="Left"
+BorderBrush="Black"
+BorderThickness="0.7"
+CornerRadius="10">
+
+                                <TextBox
+    x:Name="GiaNhap"
+    Width="180"
+    Height="40"
+    Padding="15,0,0,0"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Center"
+    VerticalContentAlignment="Center"
+                               FontSize="20"
+    materialDesign:HintAssist.Hint="Nhập giá nhập" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+Grid.Column="0"
+Margin="10,0,50,10"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+                           FontSize="22"
+Text="Ngày nhập:" />
+                            <Border
+Grid.Column="1"
+Width="220"
+Height="40"
+Margin="-13,0,0,10"
+HorizontalAlignment="Left"
+BorderBrush="Black"
+BorderThickness="0.7"
+CornerRadius="10">
+
+                                <DatePicker
+    x:Name="Ngaynhap"
+    Width="200"
+    Height="40"
+    Padding="15,0,0,0"
+                                    
+    HorizontalAlignment="Left"
+    VerticalAlignment="Center"
+    VerticalContentAlignment="Center"
+                               FontSize="20"
+    materialDesign:HintAssist.Hint="Chọn ngày nhập" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+Grid.Column="0"
+Margin="10,0,50,10"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+                           FontSize="22"
+Text="Ngày hết hạn:" />
+                            <Border
+Grid.Column="1"
+Width="230"
+Height="40"
+Margin="-37,0,0,10"
+HorizontalAlignment="Left"
+BorderBrush="Black"
+BorderThickness="0.7"
+CornerRadius="10">
+
+                                <DatePicker
+    x:Name="Ngayhethan"
+    Width="210"
+    Height="40"
+    Padding="15,0,0,0"
+                                    
+    HorizontalAlignment="Left"
+    VerticalAlignment="Center"
+    VerticalContentAlignment="Center"
+                               FontSize="20"
+    materialDesign:HintAssist.Hint="Chọn ngày hết hạn" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <!--<Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition />
@@ -39,7 +340,9 @@
 
             <Grid Grid.Row="0">
                 <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                    <!--  Tiêu đề  -->
+                    -->
+        <!--  Tiêu đề  -->
+        <!--
                     <TextBlock
                         Margin="10"
                         HorizontalAlignment="Center"
@@ -69,7 +372,9 @@
                 </StackPanel>
             </Grid>
 
-            <!--  Row 1  -->
+            -->
+        <!--  Row 1  -->
+        <!--
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -106,7 +411,9 @@
                 </Border>
             </Grid>
 
-            <!--  Row 2  -->
+            -->
+        <!--  Row 2  -->
+        <!--
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -145,7 +452,9 @@
 
             </Grid>
 
-            <!--  Row 3  -->
+            -->
+        <!--  Row 3  -->
+        <!--
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -185,8 +494,9 @@
 
             </Grid>
 
-            <!--  Row 4  -->
-            <!--<Grid Grid.Row="4">
+            -->
+        <!--  Row 4  -->
+        <!--<Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -223,7 +533,8 @@
 
             </Grid>-->
 
-            <!--  Row 4  -->
+        <!--  Row 4  -->
+        <!--
             <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -260,7 +571,9 @@
                 </Border>
 
             </Grid>
-            <!--  Row 5  -->
+            -->
+        <!--  Row 5  -->
+        <!--
             <Grid Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -304,7 +617,9 @@
 
             </Grid>
 
-            <!--  Row 6  -->
+            -->
+        <!--  Row 6  -->
+        <!--
             <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -343,7 +658,9 @@
 
 
             </Grid>
-            <!--  Row 7  -->
+            -->
+        <!--  Row 7  -->
+        <!--
             <Grid Grid.Row="7">
                 <StackPanel
                     Margin="0,0,10,0"
@@ -351,7 +668,9 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
 
-                    <!--  Cancel Button  -->
+                    -->
+        <!--  Cancel Button  -->
+        <!--
                     <Button
                         Width="170"
                         Height="50"
@@ -388,7 +707,9 @@
                         </i:Interaction.Triggers>
                     </Button>
 
-                    <!--  Add Button  -->
+                    -->
+        <!--  Add Button  -->
+        <!--
                     <Button
                         Width="170"
                         Height="50"
@@ -427,7 +748,7 @@
 
                 </StackPanel>
             </Grid>
-        </Grid>
+        </Grid>-->
 
 
     </Border>
