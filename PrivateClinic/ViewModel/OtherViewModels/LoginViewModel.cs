@@ -27,7 +27,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
         public ICommand MinimizeLogin { get; set; }
         public ICommand MoveLogin { get; set; }
         public Button LoginButton { get; set; }
-
+        public ICommand ForgotPasswordCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public LoginViewModel()
         {
@@ -37,7 +37,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             CloseLogin = new RelayCommand<LoginView>((p) => true, (p) => Close());
             MinimizeLogin = new RelayCommand<LoginView>((p) => true, (p) => Minimize(p));
             MoveLogin = new RelayCommand<LoginView>((p) => true, (p) => Move(p));
-
+            ForgotPasswordCommand = new RelayCommand<ForgetPasswordView>((p) =>true, p=> Open(p));
             PasswordChangedCommand = new RelayCommand<PasswordBox>((FloatingPasswordBox) => { return true; }, (FloatingPasswordBox) => { Password = FloatingPasswordBox.Password; });
             LoginCommand = new RelayCommand<Window>((p) => { return true; }, p =>
             {
@@ -119,6 +119,12 @@ namespace PrivateClinic.ViewModel.OtherViewModels
         {
             var plainTextBytes = Encoding.UTF8.GetBytes(password);
             return Convert.ToBase64String(plainTextBytes);
+        }
+        
+        public void Open(ForgetPasswordView p)
+        {
+            p = new ForgetPasswordView();
+            p.ShowDialog();
         }
     
     }

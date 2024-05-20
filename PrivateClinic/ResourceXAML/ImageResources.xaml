@@ -63,5 +63,6 @@
     <BitmapImage x:Key="icX" UriSource="pack://application:,,,/ResourceXAML/image/ic_x.png"/>
     <BitmapImage x:Key="icPerson" UriSource="pack://application:,,,/ResourceXAML/image/ic_person.png"/>
     <BitmapImage x:Key="imgDefault" UriSource="pack://application:,,,/ResourceXAML/image/img_default.png"/>
+    <BitmapImage x:Key="icEmail" UriSource="pack://application:,,,/ResourceXAML/image/ic_email.png"/>
 
 </ResourceDictionary>
