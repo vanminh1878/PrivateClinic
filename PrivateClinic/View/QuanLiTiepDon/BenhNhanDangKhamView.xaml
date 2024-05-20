@@ -1,15 +1,15 @@
 ﻿<UserControl x:Class="PrivateClinic.View.QuanLiTiepDon.BenhNhanDangKhamView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PrivateClinic.View.QuanLiTiepDon"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              FontFamily="Segoe UI"
              FontSize="18"
-FontWeight="Regular"
-             mc:Ignorable="d" 
+             FontWeight="Regular"
+             mc:Ignorable="d"
              x:Name="BenhNhanDangKhamUC"
              d:DesignHeight="750" d:DesignWidth="990">
     <Grid Background="White">
@@ -33,99 +33,99 @@ FontWeight="Regular"
             <!--Thông tin bệnh nhân đang khám-->
             <Grid >
                 <Rectangle
-                   Width="277"
-                   HorizontalAlignment="Left"
-                   Stroke="Black"
-                   StrokeDashArray="5"
-                   Margin="10,10,0,10"
-                   />
+                    Width="277"
+                    HorizontalAlignment="Left"
+                    Stroke="Black"
+                    StrokeDashArray="5"
+                    Margin="10,10,0,10"
+                    />
 
                 <StackPanel Margin="0,0,0,5">
 
                     <!--Mã BN-->
                     <StackPanel
-                       Width="250"
-                       Height="20"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Margin="20,10,0,0"
-                       Orientation="Horizontal">
+                        Width="250"
+                        Height="20"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="20,10,0,0"
+                        Orientation="Horizontal">
                         <TextBlock Text="Mã BN:"
-                                  VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"/>
 
                         <!--Binding-->
                         <TextBlock FontWeight="SemiBold"
-                                  VerticalAlignment="Center"
-                                  x:Name="MaBN"
-                                  Margin="15,0,0,0"/>
+                                   VerticalAlignment="Center"
+                                   x:Name="MaBN"
+                                   Margin="15,0,0,0"/>
 
                     </StackPanel>
 
                     <!--Họ tên-->
                     <StackPanel
-                       Width="250"
-                       Height="22"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Margin="20,5,0,0"
-                       Orientation="Horizontal">
+                        Width="250"
+                        Height="22"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="20,5,0,0"
+                        Orientation="Horizontal">
                         <TextBlock Text="Họ tên:"
-                                  VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"/>
 
                         <!--Binding-->
                         <TextBlock FontWeight="SemiBold"
-                                  VerticalAlignment="Center"
-                                  x:Name="TenBN"
-                                  Foreground="#D51F2A"
-                                  Margin="15,0,0,0"/>
+                                   VerticalAlignment="Center"
+                                   x:Name="TenBN"
+                                   Foreground="#D51F2A"
+                                   Margin="15,0,0,0"/>
 
                     </StackPanel>
 
                     <!--Ngày sinh-->
                     <StackPanel
-                       Width="250"
-                       Height="20"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Margin="20,5,0,0"
-                       Orientation="Horizontal">
+                        Width="250"
+                        Height="20"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="20,5,0,0"
+                        Orientation="Horizontal">
                         <TextBlock Text="Ngày sinh:"
-                                  VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"/>
 
                         <!--Binding-->
                         <TextBlock FontWeight="SemiBold"
-                                  VerticalAlignment="Center"
-                                  x:Name="NgsinhBN"
-                                  Margin="15,0,0,0"/>
+                                   VerticalAlignment="Center"
+                                   x:Name="NgsinhBN"
+                                   Margin="15,0,0,0"/>
 
                     </StackPanel>
 
                     <!--Tuổi + Giới tính-->
                     <StackPanel
-                       Width="250"
-                       Height="20"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Margin="20,5,0,0"
-                       Orientation="Horizontal">
+                        Width="250"
+                        Height="20"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="20,5,0,0"
+                        Orientation="Horizontal">
                         <TextBlock Text="Tuổi:"
-                                  VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"/>
 
                         <!--Binding tuổi-->
                         <TextBlock FontWeight="SemiBold"
-                                  VerticalAlignment="Center"
-                                  x:Name="Tuoi"
-                                  Margin="15,0,0,0"/>
+                                   VerticalAlignment="Center"
+                                   x:Name="Tuoi"
+                                   Margin="15,0,0,0"/>
 
                         <TextBlock Text="Giới tính:"
-                                  VerticalAlignment="Center"
-                                  Margin="20,0,0,0"/>
+                                   VerticalAlignment="Center"
+                                   Margin="20,0,0,0"/>
 
                         <!--Binding giới tính-->
                         <TextBlock FontWeight="SemiBold"
-                                  VerticalAlignment="Center"
-                                  x:Name="GioiTinh"
-                                  Margin="15,0,0,0"/>
+                                   VerticalAlignment="Center"
+                                   x:Name="GioiTinh"
+                                   Margin="15,0,0,0"/>
 
                     </StackPanel>
                 </StackPanel>
@@ -135,29 +135,29 @@ FontWeight="Regular"
 
             <!--Triệu chứng-->
             <TextBlock Text="Triệu chứng"
-                      Grid.Column="1"
-                      FontWeight="Medium"
-                      Margin="0,10,0,0"/>
+                       Grid.Column="1"
+                       FontWeight="Medium"
+                       Margin="0,10,0,0"/>
 
             <Border Grid.Column="2"
-                   Height="80"
-                   Width="390"
-                   VerticalAlignment="Center"
-                   Margin="0,0,30,30"
-                   BorderThickness="1"
-                   BorderBrush="Black"
-                   CornerRadius="5">
+                    Height="80"
+                    Width="390"
+                    VerticalAlignment="Center"
+                    Margin="0,0,30,30"
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    CornerRadius="5">
 
                 <!--Nội dung-->
                 <TextBox
-                   TextWrapping="Wrap"
-                   VerticalScrollBarVisibility="Auto"
-                   Height="100"
-                   Padding="5,0,0,0"
-                   BorderThickness="0"
-                   Text="Nhập vào triệu chứng"
-                   Width="390"
-                   />
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Height="100"
+                    Padding="5,0,0,0"
+                    BorderThickness="0"
+                    Text="Nhập vào triệu chứng"
+                    Width="390"
+                    />
             </Border>
 
         </Grid>
@@ -165,8 +165,8 @@ FontWeight="Regular"
         <!--Bác sĩ + chuẩn đoán-->
         <StackPanel Grid.Row="1">
             <Border BorderThickness="0,1,0,0"
-                   BorderBrush="Black"
-                   VerticalAlignment="Top"/>
+                    BorderBrush="Black"
+                    VerticalAlignment="Top"/>
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -178,60 +178,60 @@ FontWeight="Regular"
                 <!--Thông tin bác sĩ -->
                 <Grid >
                     <Rectangle
-                       Width="277"
-                       Height="69"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Stroke="Black"
-                       StrokeDashArray="5"
-                       Margin="8,5,0,0"/>
+                        Width="277"
+                        Height="69"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Stroke="Black"
+                        StrokeDashArray="5"
+                        Margin="8,5,0,0"/>
 
                     <StackPanel>
                         <!--Tên bác sĩ-->
                         <StackPanel
-                           Width="250"
-                           Height="20"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Left"
-                           Margin="20,10,0,0"
-                           Orientation="Horizontal">
+                            Width="250"
+                            Height="20"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            Margin="20,10,0,0"
+                            Orientation="Horizontal">
                             <Image Source="{StaticResource icDoctor}"
-                                  Width="30"
-                                  Height="30"/>
+                                   Width="30"
+                                   Height="30"/>
                             <TextBlock Text="Bác sĩ:"
-                                      Margin="0,2,0,0"
-                                      VerticalAlignment="Center"/>
+                                       Margin="0,2,0,0"
+                                       VerticalAlignment="Center"/>
 
                             <!--Binding-->
                             <TextBlock FontWeight="SemiBold"
-                                      VerticalAlignment="Center"
-                                      x:Name="TenBS"
-                                      Foreground="#0010A1"
-                                      Margin="15,2,0,0"/>
+                                       VerticalAlignment="Center"
+                                       x:Name="TenBS"
+                                       Foreground="#0010A1"
+                                       Margin="15,2,0,0"/>
 
                         </StackPanel>
 
                         <!--Ngày khám-->
                         <StackPanel
-                           Width="250"
-                           Height="25"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Left"
-                           Margin="20,5,0,0"
-                           Orientation="Horizontal">
+                            Width="250"
+                            Height="25"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            Margin="20,5,0,0"
+                            Orientation="Horizontal">
                             <Image Source="{StaticResource icBabyCalendar}"
-                                  Width="30"
-                                  Height="30"/>
+                                   Width="30"
+                                   Height="30"/>
 
                             <TextBlock Text="Ngày khám:"
-                                      VerticalAlignment="Center"
-                                      Margin="0,2,0,0"/>
+                                       VerticalAlignment="Center"
+                                       Margin="0,2,0,0"/>
 
                             <!--Binding-->
                             <TextBlock FontWeight="SemiBold"
-                                      VerticalAlignment="Center"
-                                      x:Name="NgKham"
-                                      Margin="10,2,0,0"/>
+                                       VerticalAlignment="Center"
+                                       x:Name="NgKham"
+                                       Margin="10,2,0,0"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -240,30 +240,30 @@ FontWeight="Regular"
 
                 <!--Chẩn đoán-->
                 <TextBlock Text="Chẩn đoán"
-                          Grid.Column="1"
-                          FontWeight="Medium"
-                          Margin="0,10,0,0"/>
+                           Grid.Column="1"
+                           FontWeight="Medium"
+                           Margin="0,10,0,0"/>
 
                 <Border Grid.Column="2"
-                       Height="55"
-                       Width="390"
-                       VerticalAlignment="Center"
-                       Margin="0,5,30,30"
-                       BorderThickness="1"
-                       BorderBrush="Black"
-                       CornerRadius="5">
+                        Height="55"
+                        Width="390"
+                        VerticalAlignment="Center"
+                        Margin="0,5,30,30"
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        CornerRadius="5">
 
                     <!--Nội dung-->
                     <TextBox
-                       TextWrapping="Wrap"
-                       VerticalScrollBarVisibility="Auto"
-                       Height="75"
-                       Margin="0,5,0,0"
-                       Padding="5,0,0,0"
-                       BorderThickness="0"
-                       Text="sốt cao"
-                       Width="390"
-                       />
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        Height="75"
+                        Margin="0,5,0,0"
+                        Padding="5,0,0,0"
+                        BorderThickness="0"
+                        Text="sốt cao"
+                        Width="390"
+                        />
                 </Border>
 
             </Grid>
@@ -272,78 +272,78 @@ FontWeight="Regular"
 
         <!--Số thuốc đã chọn + tìm tên thuốc-->
         <StackPanel Grid.Row="2"
-                   Orientation="Horizontal"
-                   Margin="18,0,0,0">
+                    Orientation="Horizontal"
+                    Margin="18,0,0,0">
             <Image Source="{StaticResource icTreatmentBlack}"
-                  Width="30"
-                  Height="30"/>
+                   Width="30"
+                   Height="30"/>
 
             <TextBlock  Text="Số thuốc đã chọn:"
-                      Margin="5,0,0,0"
-                      VerticalAlignment="Center"
-                      FontWeight="Bold"
-                        FontSize="24"
-                      Foreground="#348F6C"/>
+                       Margin="5,0,0,0"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       FontSize="24"
+                       Foreground="#348F6C"/>
 
             <!--Tổng số thuốc-->
             <TextBlock  Text="10"
-                      Margin="5,0,0,0"
-                        FontSize="24"
-                      VerticalAlignment="Center"
-                      FontWeight="Bold"
-                      Foreground="#348F6C"/>
+                       Margin="5,0,0,0"
+                       FontSize="24"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       Foreground="#348F6C"/>
 
             <Border
-               Width="427"
-               Height="44"
-               Margin="240,0,15,0"
-               BorderThickness="0.7"
-               CornerRadius="4"
-               BorderBrush="Black"
-               >
+                Width="427"
+                Height="44"
+                Margin="240,0,15,0"
+                BorderThickness="0.7"
+                CornerRadius="4"
+                BorderBrush="Black"
+                >
                 <!--Tìm kiếm thuốc-->
-              
-                        <Grid Height="40">
-                            <TextBox
-                 Margin="20 0 0 0"
-                 HorizontalAlignment="Left"
-                 materialDesign:HintAssist.Hint="Nhập họ tên thuốc đã thêm cần tìm"
-                 FontFamily="Segoe UI"
-                 FontSize="20"
-                 FontStyle="Italic"
-                 VerticalAlignment="Center"
-                 BorderThickness="0"
-                 Width="360"
-                 Height="45"
-                 x:Name="txbSearch">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="TextChanged">
-                                        <i:InvokeCommandAction Command="{Binding SearchCommand}"
-                         CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </TextBox>
 
-                            <Button Margin="0 0 5 0"  Width="40" Height="40" HorizontalAlignment="Right"
-                     Command="{Binding ElementName=listBox, Path=DataContext.SearchCommand}">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Grid>
-                                            <Image Source="{StaticResource icSearch}" />
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                        </Grid>
-                    </Border>
+                <Grid Height="40">
+                    <TextBox
+                        Margin="20 0 0 0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Nhập họ tên thuốc đã thêm cần tìm"
+                        FontFamily="Segoe UI"
+                        FontSize="20"
+                        FontStyle="Italic"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
+                        Width="360"
+                        Height="45"
+                        x:Name="txbSearch">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding SearchCommand}"
+                                                       CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+
+                    <Button Margin="0 0 5 0"  Width="40" Height="40" HorizontalAlignment="Right"
+                            Command="{Binding ElementName=listBox, Path=DataContext.SearchCommand}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="{StaticResource icSearch}" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
         </StackPanel>
 
         <!--Thêm thuốc-->
         <Grid Grid.Row="3">
             <!--Nút thêm mới thuốc-->
             <Button
-    ToolTip="Thêm bệnh nhân"
-    Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 35 0"  Width="170" Height="50" HorizontalAlignment="Right" >
+                ToolTip="Thêm bệnh nhân"
+                Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 35 0"  Width="170" Height="50" HorizontalAlignment="Right" >
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -360,7 +360,7 @@ FontWeight="Regular"
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <i:InvokeCommandAction Command="{Binding AddCommand}"
-   CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
+                                               CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
@@ -369,13 +369,13 @@ FontWeight="Regular"
         <!--Danh sách thuốc-->
         <!--header-->
         <Border
-           Grid.Row="4"
-           Margin="20 5 10 0"
-           Width="960"
-           Height="50"
-           CornerRadius="10"
-           VerticalAlignment="Top"
-           Background="#D9D9D9">
+            Grid.Row="4"
+            Margin="20 5 10 0"
+            Width="960"
+            Height="50"
+            CornerRadius="10"
+            VerticalAlignment="Top"
+            Background="#D9D9D9">
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70"/>
@@ -389,67 +389,67 @@ FontWeight="Regular"
 
                 <Grid Grid.Column="0">
                     <TextBlock HorizontalAlignment="Center"
-                              FontWeight="DemiBold"
-                              Text="STT"
+                               FontWeight="DemiBold"
+                               Text="STT"
                                Margin="15 0 0 0"
-                              VerticalAlignment="Center" />
+                               VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid Grid.Column="1">
                     <TextBlock HorizontalAlignment="Center"
-                              FontWeight="DemiBold"
-                              Text="Mã thuốc"
+                               FontWeight="DemiBold"
+                               Text="Mã thuốc"
                                Margin="-8 0 0 0"
-                              VerticalAlignment="Center" />
+                               VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid Grid.Column="2">
                     <TextBlock HorizontalAlignment="Center"
-                              FontWeight="DemiBold"
-                              Text="Tên thuốc"
-                              VerticalAlignment="Center" />
+                               FontWeight="DemiBold"
+                               Text="Tên thuốc"
+                               VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid Grid.Column="3">
                     <TextBlock HorizontalAlignment="Center"
-                              FontWeight="DemiBold"
-                              Text="Số lượng"
+                               FontWeight="DemiBold"
+                               Text="Số lượng"
                                Margin="10 0 0 0"
-                              VerticalAlignment="Center" />
+                               VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid Grid.Column="4">
                     <TextBlock HorizontalAlignment="Center"
-                              FontWeight="DemiBold"
-                              Text="Đơn vị"
-                              VerticalAlignment="Center" />
+                               FontWeight="DemiBold"
+                               Text="Đơn vị"
+                               VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid Grid.Column="5">
                     <TextBlock HorizontalAlignment="Center"
-                              FontWeight="DemiBold"
-                              Text="Cách dùng"
-                              VerticalAlignment="Center" />
+                               FontWeight="DemiBold"
+                               Text="Cách dùng"
+                               VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid Grid.Column="6">
                     <TextBlock HorizontalAlignment="Center"
-                              FontWeight="DemiBold"
-                              Text="Thao tác"
-                              VerticalAlignment="Center" />
+                               FontWeight="DemiBold"
+                               Text="Thao tác"
+                               VerticalAlignment="Center" />
                 </Grid>
             </Grid>
-            
+
         </Border>
         <Grid Grid.Row="5">
             <ListView
-      x:Name="ListViewMed"
-      SelectedItem="selecteditem "
-      ItemsSource="{Binding listMed}"
-      Margin="20 0 0 0"
-      SelectionMode="Single"
-      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-      ScrollViewer.VerticalScrollBarVisibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=4}"  >
+                x:Name="ListViewMed"
+                SelectedItem="selecteditem "
+                ItemsSource="{Binding ListThuoc}"
+                Margin="20 0 0 0"
+                SelectionMode="Single"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=4}"  >
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -488,7 +488,7 @@ FontWeight="Regular"
                                 </Grid>
                                 <Grid Grid.Column="6">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                       
+
                                         <Button ToolTip="Sửa thuốc " Command="{Binding EditMedCommand}" CommandParameter="{Binding}" Click="EditMedButton_Click" Margin="0 0 15 4" Width="50" Height="50" HorizontalAlignment="Right" >
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
@@ -499,7 +499,7 @@ FontWeight="Regular"
                                             </Button.Template>
                                         </Button>
                                         <Button ToolTip="Xóa thuốc " Command="{Binding DeleteCommand}" CommandParameter="{Binding}"
-Margin="0 0 0 4" Width="50" Height="50" Padding="0 0 0 10" HorizontalAlignment="Right" Click="DeleteButton_Click">
+                                                Margin="0 0 0 4" Width="50" Height="50" Padding="0 0 0 10" HorizontalAlignment="Right" Click="DeleteButton_Click">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
                                                     <Grid>
@@ -523,6 +523,6 @@ Margin="0 0 0 4" Width="50" Height="50" Padding="0 0 0 10" HorizontalAlignment="
                 </ListView.ItemsPanel>
             </ListView>
         </Grid>
-       
+
     </Grid>
 </UserControl>

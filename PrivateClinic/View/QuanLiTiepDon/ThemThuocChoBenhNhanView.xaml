@@ -14,7 +14,7 @@
         FontSize="22"
         FontWeight="Regular"
         WindowStartupLocation="CenterScreen"
-         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         WindowStyle="None"
         x:Name="ThemThuocViewPage"
         mc:Ignorable="d">
@@ -59,7 +59,7 @@
                     BorderBrush="Black"
                     CornerRadius="10"
                     HorizontalAlignment="Left">
-                    <TextBox Text="BN002"
+                    <TextBox Text="{Binding MaBN}"
                              VerticalAlignment="Center"
                              Padding="5,0,0,0"
                              BorderThickness="0"
@@ -81,7 +81,7 @@
                     BorderBrush="Black"
                     CornerRadius="10"
                     HorizontalAlignment="Left">
-                    <TextBox Text="MD025"
+                    <TextBox Text="{Binding MaThuoc}"
                              VerticalAlignment="Center"
                              Padding="5,0,0,0"
                              BorderThickness="0"
@@ -123,10 +123,11 @@
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         BorderThickness="0"
-                        VerticalContentAlignment="Center" >
-                        <ComboBoxItem Content="Alcohole"/>
-                        <ComboBoxItem Content="Gread"/>
-                    </ComboBox>
+                        VerticalContentAlignment="Center"
+                        ItemsSource="{Binding ListThuoc}"
+                        SelectedItem="{Binding SelectedThuoc, Mode=TwoWay}"
+                        DisplayMemberPath="TenThuoc"
+                        />
 
                 </Border>
 
@@ -145,17 +146,17 @@
                         CornerRadius="10"
                         BorderBrush="Black"
                         >
-                    <!--Tên thuốc-->
-                    <ComboBox
+                    <!--Đon vị-->
+                    <TextBox
                         Width="122"
                         Height="35"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         BorderThickness="0"
-                        VerticalContentAlignment="Center">
-                        <ComboBoxItem Content="Alcohole"/>
-                        <ComboBoxItem Content="Gread"/>
-                    </ComboBox>
+                        Text="{Binding DonVi}"
+                        VerticalContentAlignment="Center"
+                        IsReadOnly="True"/>
+
 
                 </Border>
 
@@ -173,25 +174,14 @@
                         Height="40"
                         Grid.Column="5">
                     <Grid>
-                        <TextBox BorderThickness="0" Margin="5 0 0 0" HorizontalAlignment="Left"  Width="50" Height="40" VerticalAlignment="Center" />
-                        <Button Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Image Source="\ResourceXAML\image\UpArrow.png"  Stretch="UniformToFill"/>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                        <Button  Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Image Source="\ResourceXAML\image\DownArrow.png" Stretch="UniformToFill"/>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                        <TextBox BorderThickness="0"
+                                 Margin="5 2 0 0"
+                                 HorizontalAlignment="Left"
+                                 Width="110"
+                                 Height="40"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding SoLuong}"/>
+
                     </Grid>
                 </Border>
 
@@ -226,10 +216,10 @@
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         BorderThickness="0"
-                        VerticalContentAlignment="Center">
-                        <ComboBoxItem Content="Alcohole"/>
-                        <ComboBoxItem Content="Gread"/>
-                    </ComboBox>
+                        VerticalContentAlignment="Center"
+                        ItemsSource="{Binding ListCachDung}"
+                        SelectedItem="{Binding SelectedCachDung}"
+                        DisplayMemberPath="TenCachDung"/>
 
                 </Border>
 
@@ -337,7 +327,7 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding CancelCommand}"
-CommandParameter="{Binding ElementName=ThemThuocViewPage}" />
+                                                   CommandParameter="{Binding ElementName=ThemThuocViewPage}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
