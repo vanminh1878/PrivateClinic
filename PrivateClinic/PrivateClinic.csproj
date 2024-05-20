@@ -182,6 +182,7 @@
     <Compile Include="ViewModel\HoSoBacSiVM\ThongTinCaNhanViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThongTinChiTietCuaMotBacSiViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModel\OtherViewModels\ForgetPasswordViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\ImageViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\MainViewModel.cs" />
@@ -213,6 +214,9 @@
     <Compile Include="ViewModel\QuanLiTiepDon\QuanLiTiepDonViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\SuaBenhNhanViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\ThemBenhNhanViewModel.cs" />
+    <Compile Include="View\OtherViews\ForgetPasswordView.xaml.cs">
+      <DependentUpon>ForgetPasswordView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -291,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HoSoBacSi\ThongTinChiTietCuaMotBacSIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OtherViews\ForgetPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -430,6 +438,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="ResourceXAML\image\ic_email.png" />
     <Resource Include="ResourceXAML\image\img_default.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
