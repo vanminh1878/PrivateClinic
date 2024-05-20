@@ -236,11 +236,11 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                         DonGiaBan = double.Parse(DonGiaBan)
                     };
 
-                    DataProvider.Ins.DB.THUOC.Add(thuoc);
+                    DataProvider.Ins.DB.THUOCs.Add(thuoc);
                     DataProvider.Ins.DB.SaveChanges();
 
                     QuanLiKhoThuocView quanlikhothuocview = new QuanLiKhoThuocView();
-                    quanlikhothuocview.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
+                    quanlikhothuocview.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
                     quanlikhothuocview.MedicineListView.Items.Refresh();
 
                     MessageBox.Show("Thêm thuốc mới thành công", "Thông báo");

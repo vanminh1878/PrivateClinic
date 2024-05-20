@@ -18,11 +18,31 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         public ICommand CancelCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand SetEditThuocView { get; set; }
+        public ICommand LoadCommand { get; set; }
+        private ObservableCollection<DVT> _dvt;
+
+        public ObservableCollection<DVT> dvt
+        {
+            get => _dvt;
+            set { _dvt = value; OnPropertyChanged(nameof(dvt)); }
+
+        }
+        private ObservableCollection<string> _tenDVTs;
+        public ObservableCollection<string> tenDVTs
+        {
+            get { return _tenDVTs; }
+            set
+            {
+                _tenDVTs = value;
+                OnPropertyChanged(nameof(tenDVTs));
+            }
+        }
 
         public ThayDoiThongTinThuocViewModel()
         {
             CancelCommand = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, p => _CancelCommand(p));
             SaveCommand = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, (p) => _SaveCommand(p));
+            LoadCommand = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, (p) => _LoadCommand(p));
             SetEditThuocView = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, (p) => _SetEditThuocView(p));
         }
 
@@ -34,7 +54,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 EditThuocView2 = EditThuocView;
             }
         }
+        void  _LoadCommand(ThayDoiThongTinThuocView p)
+        {
+            // Lấy danh sách các TenDVT từ dvt
+            var tenDVTs = dvt.Select(x => x.TenDVT);
 
+            // Gán danh sách TenDVT vào các ComboBoxItem của p.TenDVT
+            p.TenDVT.ItemsSource = tenDVTs;
+        }
         void _SaveCommand(ThayDoiThongTinThuocView paramater)
         {
             var p = new ThayDoiThongTinThuocView();
@@ -54,7 +81,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 if (result == MessageBoxResult.Yes)
                 {
                     string maThuoc = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.MaThuoc.Text;
-                    THUOC thuoc = DataProvider.Ins.DB.THUOC.FirstOrDefault();
+                    THUOC thuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault();
                     if (thuoc != null)
                     {
                         thuoc.TenThuoc = p.TenThuoc.Text;
@@ -68,7 +95,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
 
                         QuanLiKhoThuocView quanLiThuocView = new QuanLiKhoThuocView();
-                        quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
+                        quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
                         quanLiThuocView.MedicineListView.Items.Refresh();
                     }
                     else

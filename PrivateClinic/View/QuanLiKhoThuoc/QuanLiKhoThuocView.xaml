@@ -53,7 +53,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition Height="60" />
-                <RowDefinition Height="120" />
+                <RowDefinition Height="80" />
                 <RowDefinition Height="80" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="270" />
@@ -89,11 +89,7 @@
                     </StackPanel>
 
                 </StackPanel>
-                <Border
-                    Margin="30,0,30,0"
-                    VerticalAlignment="Bottom"
-                    BorderBrush="Black"
-                    BorderThickness="1" />
+
 
             </Grid>
             <StackPanel
@@ -178,12 +174,12 @@
                             FontSize="30"
                             FontWeight="SemiBold"
                             Foreground="#348F6C"
-                            Text="Số loại thuốc trong kho: 5/30" />
+                            Text="Số loại thuốc trong kho: 30" />
                     </Border>
                 </StackPanel>
-                <Button
+                <Button 
     ToolTip="Thêm bệnh nhân"
-    Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 5 0"  Width="170" Height="50" HorizontalAlignment="Right" >
+    Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 20 0"  Width="170" Height="50" HorizontalAlignment="Right" >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>
@@ -295,8 +291,8 @@
                 <ListView
                     x:Name="MedicineListView"
                     Margin="10,0,0,-24"
-                    d:ItemsSource="{d:SampleData ItemCount=4}"
-                    ItemsSource="{Binding ListMedicine}"
+                    d:ItemsSource="{d:SampleData ItemCount=5}"
+                    ItemsSource="{Binding listMed}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
                     SelectedItem="selecteditem "
@@ -353,7 +349,7 @@
                                             VerticalAlignment="Center"
                                             FontFamily="Segoe UI"
                                             FontSize="20"
-                                            Text="{Binding TenDVT}" />
+                                            Text="{Binding DVT}" />
 
                                     </Grid>
                                     <Grid Grid.Column="4">
@@ -362,7 +358,7 @@
                                             VerticalAlignment="Center"
                                             FontFamily="Segoe UI"
                                             FontSize="20"
-                                            Text="{Binding SoLuong}" />
+                                            Text="{Binding SL}" />
                                     </Grid>
                                     <Grid Grid.Column="5">
                                         <TextBlock
@@ -370,7 +366,7 @@
                                             VerticalAlignment="Center"
                                             FontFamily="Segoe UI"
                                             FontSize="20"
-                                            Text="{Binding DonGiaNhap}" />
+                                            Text="{Binding Gia}" />
                                     </Grid>
                                     <Grid Grid.Column="6">
                                         <StackPanel

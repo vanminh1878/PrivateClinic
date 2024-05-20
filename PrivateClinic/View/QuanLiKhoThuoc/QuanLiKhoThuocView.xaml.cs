@@ -41,7 +41,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
         {
             if (DataContext is QuanLyThuocViewModel viewModel)
             {
-                var selectedMedicine = (sender as Button)?.CommandParameter as THUOC;
+                var selectedMedicine = (sender as Button)?.CommandParameter as ThuocDTO;
 
                 if (selectedMedicine != null)
                 {
