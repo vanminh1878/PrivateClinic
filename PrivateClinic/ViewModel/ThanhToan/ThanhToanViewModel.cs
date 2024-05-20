@@ -22,7 +22,11 @@ namespace PrivateClinic.ViewModel.ThanhToan
     {
         #region Properties
         private ObservableCollection<HOADON> _listHD;
-        public ObservableCollection<HOADON> listHD { get => _listHD; set { _listHD = value; OnPropertyChanged(); } }
+        public ObservableCollection<HOADON> listHD { get => _listHD; set { 
+                _listHD = value;
+                OnPropertyChanged();
+                UpdateUnpaidInvoiceCount();
+            }}
 
         private PaymentStatus _selectedPaymentStatus = PaymentStatus.All;
         public PaymentStatus SelectedPaymentStatus
@@ -44,6 +48,17 @@ namespace PrivateClinic.ViewModel.ThanhToan
             {
                 _hoaDon = value;
                 OnPropertyChanged(nameof(HoaDon));
+            }
+        }
+
+        private int _unpaidInvoiceCount;
+        public int UnpaidInvoiceCount
+        {
+            get => _unpaidInvoiceCount;
+            set
+            {
+                _unpaidInvoiceCount = value;
+                OnPropertyChanged(nameof(UnpaidInvoiceCount));
             }
         }
 
@@ -71,17 +86,18 @@ namespace PrivateClinic.ViewModel.ThanhToan
         {
             listHD = new ObservableCollection<HOADON>(DataProvider.Ins.DB.HOADONs);
             SearchCommand = new RelayCommand<ThanhToanView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
-            LoadSLHDCommand = new RelayCommand<ThanhToanView>((p) => { return p == null ? false : true; }, (p) => _LoadSLHDCommand(p));
             PayHDCommand = new RelayCommand<HOADON>((p) => { return p == null ? false : true; }, (p) => _PayHDCommand(p));
             DeleteCommand = new RelayCommand<HOADON>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
         }
 
         #region Functions
-        void _LoadSLHDCommand(ThanhToanView parameter)
+        private void UpdateUnpaidInvoiceCount()
         {
-            parameter.txbSLHD.Text = listHD.Count.ToString();
-            parameter.txbSLHD.FontSize = 25;
+            var listHDFull = new ObservableCollection<HOADON>(DataProvider.Ins.DB.HOADONs);
+            UnpaidInvoiceCount = listHDFull.Count(hd => hd.TrangThai == "0");
+            OnPropertyChanged(nameof(UnpaidInvoiceCount));
         }
+
 
         void _SearchCommand(ThanhToanView parameter)
         {
@@ -90,12 +106,12 @@ namespace PrivateClinic.ViewModel.ThanhToan
             {
                 string searchKeyword = parameter.txbSearch.Text.ToLower();
                 temp = new ObservableCollection<HOADON>(listHD.Where(s => s.BENHNHAN.HoTen.ToLower().Contains(searchKeyword)));
+                listHD = temp;
             }
             else
             {
-                temp = new ObservableCollection<HOADON>(listHD);
+                FilterListHD();
             }
-            parameter.ListViewHD.ItemsSource = temp;
         }
 
         void _DeleteCommand(HOADON selectedItem)
@@ -105,27 +121,26 @@ namespace PrivateClinic.ViewModel.ThanhToan
             {
                 if (selectedItem != null)
                 {
-                    var relatedHoadons = DataProvider.Ins.DB.HOADONs.Where(h => h.MaBN == selectedItem.MaBN).ToList();
-                    DataProvider.Ins.DB.HOADONs.RemoveRange(relatedHoadons);
-                    var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.HOADON.MaBN == selectedItem.MaBN).ToList();
+                    var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.SoHD == selectedItem.SoHD).ToList();
                     DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
-                    var relatedPHIEUKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).ToList();
-                    DataProvider.Ins.DB.PHIEUKHAMBENHs.RemoveRange(relatedPHIEUKBs);
-                    var relatedMaPKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).Select(pkb => pkb.MaPKB).ToList();
-                    var relatedCT_PKBs = DataProvider.Ins.DB.CT_PKB.Where(ctpkb => relatedMaPKBs.Contains(ctpkb.MaPKB)).ToList();
+
+                    var relatedCT_PKBs = DataProvider.Ins.DB.CT_PKB.Where(ctpkb => ctpkb.MaPKB == selectedItem.MaPKB).ToList();
                     DataProvider.Ins.DB.CT_PKB.RemoveRange(relatedCT_PKBs);
+
+                    var relatedPHIEUKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaPKB == selectedItem.MaPKB).ToList();
+                    DataProvider.Ins.DB.PHIEUKHAMBENHs.RemoveRange(relatedPHIEUKBs);
 
                     DataProvider.Ins.DB.HOADONs.Remove(selectedItem);
 
                     DataProvider.Ins.DB.SaveChanges();
 
                     listHD.Remove(selectedItem);
-                    ThanhToanView thanhToanView = new ThanhToanView();
-                    thanhToanView.txbSLHD.Text = listHD.Count.ToString();
-                    thanhToanView.txbSLHD.FontSize = 25;
+                    UpdateUnpaidInvoiceCount();
+                    RefreshData();
                 }
             }
         }
+
         public void SetThanhToanHDView(HoaDonView view)
         {
             hoaDonView = view;
@@ -150,7 +165,7 @@ namespace PrivateClinic.ViewModel.ThanhToan
         {
             listHD = new ObservableCollection<HOADON>(DataProvider.Ins.DB.HOADONs); // Refresh the list
             OnPropertyChanged(nameof(listHD));
-            SelectedPaymentStatus = PaymentStatus.All; // Reset the combo box or similar UI element
+            SelectedPaymentStatus = PaymentStatus.All;
         }
 
         void _PayHDCommand(HOADON selectedItem)
@@ -160,12 +175,17 @@ namespace PrivateClinic.ViewModel.ThanhToan
                 HoaDonViewModel hoaDonVM = new HoaDonViewModel();
                 hoaDonVM.CurrentHoaDon = selectedItem;
 
-                HoaDonView hoaDonView = new HoaDonView();
+                HoaDonView hoaDonView = new HoaDonView(hoaDonVM);
                 hoaDonView.DataContext = hoaDonVM;
                 double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
                 hoaDonView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 hoaDonView.Height = 550;
                 hoaDonView.ShowDialog();
+
+                if (hoaDonView.DialogResult == true)
+                {
+                    this.RefreshData();
+                }
             }
         }
         #endregion

@@ -22,11 +22,10 @@ namespace PrivateClinic.View.ThanhToan
     /// </summary>
     public partial class HoaDonView : Window
     {
-        public HoaDonView()
+        public HoaDonView(HoaDonViewModel viewModel)
         {
             InitializeComponent();
-            HoaDonViewModel viewmodel = new HoaDonViewModel();
-            this.DataContext = viewmodel;
+            this.DataContext = viewModel;
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

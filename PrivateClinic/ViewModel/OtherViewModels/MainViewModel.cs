@@ -3,6 +3,7 @@ using PrivateClinic.View.BangDieuKhien;
 using PrivateClinic.View.OtherViews;
 using PrivateClinic.View.QuanLiTiepDon;
 using PrivateClinic.View.ThanhToan;
+using PrivateClinic.ViewModel.ThanhToan;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,7 +65,11 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                       
             ThanhToanCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                MainFrame.Content = new ThanhToanView();
+                var view = new ThanhToanView();
+                var viewModel = new ThanhToanViewModel();
+                viewModel.RefreshData();
+                view.DataContext = viewModel;
+                MainFrame.Content = view;
             });
 
 

@@ -12,6 +12,9 @@
       d:DesignHeight="700" d:DesignWidth="924"
       x:Name="HoaDonViewPage"
       Title="HoaDonView">
+    <Window.InputBindings>
+        <KeyBinding Key="F2" Command="{Binding CancelCommand}" />
+    </Window.InputBindings>
     <Window.Resources>
         <convert:IndexConverter x:Key="indexConverter"/>
     </Window.Resources>
@@ -61,9 +64,11 @@
                 <TextBlock Text="Ngày khám:"
                            Margin="0 0 0 0"
                            Style="{StaticResource ColumnHeaderText1}"/>
-                <TextBlock x:Name="NgayKham" Text="{Binding CurrentHoaDon.PHIEUKHAMBENH.NgayKham, StringFormat=dd/MM/yyyy, Mode=TwoWay}"
+
+                <TextBlock x:Name="NgayKham" Text="{Binding PhieuKhamBenh.NgayKham, StringFormat='{}{0:dd/MM/yyyy}', Mode=TwoWay}"
                            Margin="5,0,40,0"
                            Style="{StaticResource ContentText1}"/>
+
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                 <TextBlock Text="Tuổi:"

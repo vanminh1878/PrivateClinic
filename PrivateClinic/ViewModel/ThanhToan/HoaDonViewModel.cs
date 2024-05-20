@@ -1,17 +1,11 @@
 ﻿using PrivateClinic.Model;
-using PrivateClinic.View.QuanLiTiepDon;
-using PrivateClinic.ViewModel.OtherViewModels;
-using PrivateClinic.ViewModel.QuanLiTiepDon;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
 using PrivateClinic.View.ThanhToan;
-using System.Windows.Documents;
+using PrivateClinic.ViewModel.OtherViewModels;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 using static PrivateClinic.ViewModel.ThanhToan.ThanhToanViewModel;
 
 namespace PrivateClinic.ViewModel.ThanhToan
@@ -32,11 +26,38 @@ namespace PrivateClinic.ViewModel.ThanhToan
             get => _currentHoaDon;
             set
             {
-                _currentHoaDon = value;
-                OnPropertyChanged(nameof(CurrentHoaDon));
-                UpdateMedicationList();
+                if (_currentHoaDon != value)
+                {
+                    _currentHoaDon = value;
+                    OnPropertyChanged(nameof(CurrentHoaDon));
+
+
+                    if (PhieuKhamBenh == null)
+                    {
+                        Debug.WriteLine("Không tìm thấy PHIEUKHAMBENH với MaPKB: " + _currentHoaDon.MaPKB);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Tìm thấy PHIEUKHAMBENH, Ngày Khám: " + PhieuKhamBenh.NgayKham);
+                    }
+
+                    UpdateMedicationList();
+                }
             }
         }
+
+
+        private PHIEUKHAMBENH _phieuKhamBenh;
+        public PHIEUKHAMBENH PhieuKhamBenh
+        {
+            get => _phieuKhamBenh;
+            set
+            {
+                _phieuKhamBenh = value;
+                OnPropertyChanged(nameof(PhieuKhamBenh));
+            }
+        }
+
 
         private ObservableCollection<MedicationDetails> _listThuoc;
         public ObservableCollection<MedicationDetails> ListThuoc
@@ -60,24 +81,29 @@ namespace PrivateClinic.ViewModel.ThanhToan
         private void UpdateMedicationList()
         {
             ListThuoc.Clear();
-            if (CurrentHoaDon != null && CurrentHoaDon.PHIEUKHAMBENH != null)
+            if (CurrentHoaDon != null && CurrentHoaDon.MaPKB != null)
             {
-                foreach (var ctPkb in CurrentHoaDon.PHIEUKHAMBENH.CT_PKB)
+                var phieuKhamBenh = DataProvider.Ins.DB.PHIEUKHAMBENHs.FirstOrDefault(pkb => pkb.MaPKB == CurrentHoaDon.MaPKB);
+
+                var listCT_PKB = DataProvider.Ins.DB.CT_PKB.Where(ct => ct.MaPKB == CurrentHoaDon.MaPKB).ToList();
+
+                foreach (var ctPkb in listCT_PKB)
                 {
-                    if (ctPkb.THUOC != null && ctPkb.SoLuong.HasValue)
+                    var thuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault(t => t.MaThuoc == ctPkb.MaThuoc);
+                    if (thuoc != null && ctPkb.SoLuong.HasValue)
                     {
                         ListThuoc.Add(new MedicationDetails
                         {
-                            Thuoc = ctPkb.THUOC,
+                            Thuoc = thuoc,
                             SoLuong = ctPkb.SoLuong.Value,
-                            TienThuoc = (float)(ctPkb.SoLuong.Value * (ctPkb.THUOC.DonGiaBan ?? 0)) 
+                            TienThuoc = (float)(ctPkb.SoLuong.Value * (thuoc.DonGiaBan ?? 0))
                         });
                     }
                 }
             }
         }
 
-        void _SaveCommand(HoaDonView paramater)
+        void _SaveCommand(HoaDonView parameter)
         {
             if (CurrentHoaDon == null)
             {
@@ -93,28 +119,20 @@ namespace PrivateClinic.ViewModel.ThanhToan
                     invoiceToUpdate.TrangThai = ((int)PaymentStatus.Paid).ToString();
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thanh toán thành công!", "THÔNG BÁO");
-                    ThanhToanView thanhToanView = new ThanhToanView();
-                    thanhToanView.ListViewHD.ItemsSource = new ObservableCollection<HOADON>(DataProvider.Ins.DB.HOADONs);
-                    thanhToanView.ListViewHD.Items.Refresh();
-                    thanhToanView.cboSelectCustomerSort1.SelectedIndex = 0;
-
-                    //if (paramater.Owner is ThanhToanView ownerView)
-                    //{
-                    //    ownerView.RefreshData();
-                    //}
+                    parameter.DialogResult = true;
                 }
                 else
                 {
                     MessageBox.Show("Hóa đơn không tồn tại.", "Error");
                 }
-                paramater.Close();
+                parameter.Close();
 
             }
         }
 
-        void _CancelCommand(HoaDonView paramater)
+        void _CancelCommand(HoaDonView parameter)
         {
-            paramater.Close();
+            parameter.Close();
         }
     }
     public class MedicationDetails : BaseViewModel

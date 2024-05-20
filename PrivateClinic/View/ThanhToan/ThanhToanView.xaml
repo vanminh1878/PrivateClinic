@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:PrivateClinic.View.ThanhToan"
       xmlns:convert="clr-namespace:PrivateClinic.Converters"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="710" d:DesignWidth="990"
       x:Name="ThanhToanViewPage"
@@ -86,8 +87,15 @@
                                         VerticalAlignment="Center"
                                         BorderThickness="0"
                                         Width="520"
-                                        Height="40"
-                                        />
+                                        Height="40">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="TextChanged">
+                                                <i:InvokeCommandAction Command="{Binding SearchCommand}"
+                                                                        CommandParameter="{Binding ElementName=ThanhToanViewPage}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                            
                                     <Button Margin="0 0 5 0"  Width="40" Height="40" HorizontalAlignment="Right"
                                             Command="{Binding ElementName=listBox, Path=DataContext.SearchCommand}">
                                         <Button.Template>
@@ -138,15 +146,14 @@
                     <Image Source="{StaticResource icTip}"
                                    Width="30" Height="30"
                                    VerticalAlignment="Center" Margin="0,0,20,0"/>
-                    <TextBlock x:Name="txbSLHD"
-                                       Text="Số lượng hóa đơn cần thanh toán:"
+                    <TextBlock         Text="Số lượng hóa đơn cần thanh toán:"
                                        FontFamily="Segoe UI"
                                        FontSize="30"
                                        FontWeight="Bold"
                                        VerticalAlignment="Center"
                                        Foreground="{StaticResource color348F6C}"
                                       />
-                    <TextBlock Text="5"
+                    <TextBlock         Text="{Binding UnpaidInvoiceCount}"
                                        Margin="5,0,0,0"
                                        FontSize="30"
                                        FontWeight="Bold"
