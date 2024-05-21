@@ -22,7 +22,7 @@ namespace PrivateClinic.View.QuanLiTiepDon
         public ThemThuocChoBenhNhanView()
         {
             InitializeComponent();
-            ThemThuocChoBenhNhanViewModel viewModel= new ThemThuocChoBenhNhanViewModel();
+            ThemThuocChoBenhNhanViewModel viewModel= new ThemThuocChoBenhNhanViewModel(this);
             this.DataContext = viewModel;
         }
     }

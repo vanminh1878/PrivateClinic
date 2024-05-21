@@ -8,13 +8,23 @@ using System.Windows.Input;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System.Collections.ObjectModel;
 using PrivateClinic.Model;
+using System.Windows;
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
     
     public class ThemThuocChoBenhNhanViewModel:BaseViewModel
     {
         #region Các property và Command
-        public ObservableCollection<ThuocDTO> ListThuocDTO;
+        private ObservableCollection<ThuocDTO> listthuocDTO;
+        public ObservableCollection<ThuocDTO> ListThuocDTO
+        {
+            get => listthuocDTO;
+            set
+            {
+                listthuocDTO = value;
+                OnPropertyChanged(nameof(ListThuocDTO));
+            }
+        }
         private ObservableCollection<THUOC> listthuoc;
         public ObservableCollection <THUOC> ListThuoc
         {
@@ -107,16 +117,20 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
         }
 
-
+        public ICommand AddCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-
+        private ThemThuocChoBenhNhanView _view;
         #endregion
-        public ThemThuocChoBenhNhanViewModel()
+        public ThemThuocChoBenhNhanViewModel(ThemThuocChoBenhNhanView view)
         {
+            this._view = view;
+            ListThuocDTO = new ObservableCollection<ThuocDTO>();
             ListThuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
             ListCachDung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNG);
             ListDVT = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVT);
             CancelCommand = new RelayCommand<ThemThuocChoBenhNhanView>((p) => true, (p) => _CancelCommand(p));
+            AddCommand = new ViewModelCommand(AcceptAdd);
         }
         void _CancelCommand(ThemThuocChoBenhNhanView paramater)
         {
@@ -148,8 +162,37 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 MaThuoc = "";
             }
         }
+        int stt = 0;
+        private void AcceptAdd(object obj)
+        {
+            
+            if (SelectedThuoc == null || SelectedCachDung == null || string.IsNullOrEmpty(SoLuong)) 
+            {
+                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!SoLuong.All(char.IsDigit))
+            {
+                MessageBox.Show("Số lượng chỉ chứa số", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
 
-        
+            }
+            else
+            {
+                    ThuocDTO thuocDTO = new ThuocDTO();
+                    stt++;
+                    thuocDTO.STT = stt;
+                    thuocDTO.MaThuoc= MaThuoc;
+                    thuocDTO.TenThuoc = selectedThuoc.TenThuoc;
+                    thuocDTO.SoLuong = SoLuong;
+                    thuocDTO.CachDung = SelectedCachDung.TenCachDung;
+                    thuocDTO.DonVi = DonVi;
+                    ListThuocDTO.Add(thuocDTO);
+                    MessageBox.Show("Đã thêm","Thông báo",MessageBoxButton.OK);
+            }
+        }
+
+
+
+
 
     }
 

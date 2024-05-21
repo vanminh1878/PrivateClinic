@@ -294,6 +294,7 @@
                     materialDesign:ButtonAssist.CornerRadius="5"
                     FontSize="20"
                     Background="#364C9A"
+                    Command="{Binding SaveCommand}"
                     >
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
@@ -343,6 +344,7 @@
                     materialDesign:ButtonAssist.CornerRadius="5"
                     FontSize="20"
                     Background="#348F6C"
+                    Command="{Binding AddCommand}"
                     >
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
@@ -437,7 +439,9 @@
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
                     <ListView FontSize="22"
-                              FontWeight="SemiBold" d:ItemsSource="{d:SampleData ItemCount=5}">
+                              FontWeight="SemiBold"
+                              ItemsSource="{Binding ListThuocDTO}"
+                              d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <!-- Thiết lập đường viền dưới cho mỗi hàng -->
@@ -452,7 +456,7 @@
 
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="1"
+                                            <TextBlock Text="{Binding STT}"
                                                        FontWeight="Regular"
                                                        Margin="20,20,0,0"
                                                        />
@@ -464,7 +468,7 @@
                                 <GridViewColumn Width="170">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="Pana001"
+                                            <TextBlock Text="{Binding MaThuoc}"
                                                        FontWeight="Regular"
                                                        Margin="40,20,0,0"/>
                                         </DataTemplate>
@@ -475,7 +479,7 @@
                                 <GridViewColumn Width="170">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="Panadol"
+                                            <TextBlock Text="{Binding TenThuoc}"
                                                        FontWeight="Regular"
                                                        Margin="36,20,0,0"/>
                                         </DataTemplate>
@@ -486,7 +490,7 @@
                                 <GridViewColumn Width="100">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="10"
+                                            <TextBlock Text="{Binding SoLuong}"
                                                        FontWeight="Regular"
                                                        Margin="30,20,0,0"/>
                                         </DataTemplate>
@@ -497,7 +501,7 @@
                                 <GridViewColumn Width="140">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="Viên"
+                                            <TextBlock Text="{Binding DonVi}"
                                                        FontWeight="Regular"
                                                        Margin="40,20,0,0"/>
                                         </DataTemplate>
@@ -508,7 +512,7 @@
                                 <GridViewColumn Width="150">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="Uống"
+                                            <TextBlock Text="{Binding CachDung}"
                                                        FontWeight="Regular"
                                                        Margin="40,20,0,0"/>
                                         </DataTemplate>
