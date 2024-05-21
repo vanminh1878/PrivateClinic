@@ -1,4 +1,5 @@
-﻿using PrivateClinic.ViewModel.QuanLiTiepDon;
+﻿using PrivateClinic.Model;
+using PrivateClinic.ViewModel.QuanLiTiepDon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace PrivateClinic.View.QuanLiTiepDon
     /// </summary>
     public partial class SuaThongTinDonThuocView : Window
     {
-        public SuaThongTinDonThuocView()
+        public SuaThongTinDonThuocView(ThuocDTO thuoc)
         {
             InitializeComponent();
             SuaThongTinDonThuocViewModel viewModel = new SuaThongTinDonThuocViewModel();

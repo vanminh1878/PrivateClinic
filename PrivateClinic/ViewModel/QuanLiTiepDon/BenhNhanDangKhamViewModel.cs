@@ -17,7 +17,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         private ObservableCollection<THUOC> _listMed;
         public ObservableCollection<THUOC> listMed { get => _listMed; set { _listMed = value; OnPropertyChanged(); } }
 
-        //Lấy danh sách cách dùng thuốc DTO
+        //Lấy danh sách  thuốc DTO
         private ObservableCollection<ThuocDTO> listThuoc;
         public ObservableCollection<ThuocDTO> ListThuoc
         {
@@ -28,42 +28,54 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 OnPropertyChanged(nameof(ListThuoc));
             }
         }
+
+        private ObservableCollection<ThuocDTO> listThuocView;
+        public ObservableCollection<ThuocDTO> ListThuocView
+        {
+            get => listThuocView;
+            set
+            {
+                listThuocView = value;
+                OnPropertyChanged(nameof(ListThuocView));
+            }
+        }
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
-        public ICommand EditMedCommand { get; set; }
+        public ICommand EditThuocCommand { get; set; }
 
         public BenhNhanDangKhamViewModel()
         {
             listMed = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
+            AddThuoc();
+            EditThuoc();
+            ListThuoc = new ObservableCollection<ThuocDTO>();
             SearchCommand = new RelayCommand<BenhNhanDangKhamView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             DeleteCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
-            AddCommand = new RelayCommand<BenhNhanDangKhamView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
-            EditMedCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _EditMedCommand(p));
         }
-        void _AddCommand(BenhNhanDangKhamView parameter)
+        void AddThuoc()
         {
-
-            ThemThuocChoBenhNhanView themThuocChoBenhNhanView = new ThemThuocChoBenhNhanView();
-            double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-            themThuocChoBenhNhanView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            themThuocChoBenhNhanView.ShowDialog();
-
+            AddCommand = new ViewModelCommand(showAdd);
         }
-        void _EditMedCommand(THUOC selectedItem)
+        private void showAdd(object obj)
         {
-            if (selectedItem != null)
-            {
-
-                SuaThongTinDonThuocViewModel.Instance.EditMedView = new SuaThongTinDonThuocView();
-                SuaThongTinDonThuocViewModel.Instance.EditMedView.TenThuoc.SelectedIndex = SuaThongTinDonThuocViewModel.Instance.EditMedView.TenThuoc.Items.IndexOf(selectedItem.TenThuoc.ToString());
-
-                double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-                SuaThongTinDonThuocViewModel.Instance.EditMedView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                SuaThongTinDonThuocViewModel.Instance.EditMedView.ShowDialog();
-
-            }
+            ThemThuocChoBenhNhanView view = new ThemThuocChoBenhNhanView();
+            view.ShowDialog();
+            LoadData();
         }
+        #region Chức năng sửa 1 bác sĩ
+        void EditThuoc()
+        {
+            EditThuocCommand = new ViewModelCommand(ShowWDEditThuoc);
+        }
+        private void ShowWDEditThuoc(object obj)
+        {
+            SuaThongTinDonThuocView view = new SuaThongTinDonThuocView((ThuocDTO)obj);
+            view.ShowDialog();
+            LoadData();
+        }
+
+        #endregion
         void _SearchCommand(BenhNhanDangKhamView parameter)
         {
             ObservableCollection<THUOC> temp = new ObservableCollection<THUOC>();
@@ -114,6 +126,25 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             //}
         }
 
+        void LoadData()
+        {
+            if (ListThuocView == null)
+            {
+                ListThuocView = new ObservableCollection<ThuocDTO>();
+            }
+            // Add items from ListThuoc to ListThuocView
+            if (Const.ListThuoc == null)
+                return;
+            else
+            {
+                foreach (var thuocDTO in Const.ListThuoc)
+                {
+                    ListThuocView.Add(thuocDTO);
+                }
+                Const.ListThuoc.Clear();
+            }
+            
+        }
 
     }
 }

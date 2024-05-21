@@ -148,6 +148,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             CancelCommand = new RelayCommand<ThemThuocChoBenhNhanView>((p) => true, (p) => _CancelCommand(p));
             AddCommand = new ViewModelCommand(AcceptAdd);
             DeleteCommand = new RelayCommand<ThuocDTO>((p) => p != null, DeleteAccept);
+            SaveCommand = new ViewModelCommand(Save);
         }
         void _CancelCommand(ThemThuocChoBenhNhanView paramater)
         {
@@ -226,7 +227,25 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 }
             }
         }
-        
+        //Chức năng lưu
+        private void Save(object obj)
+        {
+            if (ListThuocDTO == null || !ListThuocDTO.Any())
+            {
+                MessageBox.Show("Không có thuốc nào để lưu.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            Const.ListThuoc = new ObservableCollection<ThuocDTO>();
+            // Assuming benhnhanvm.ListThuoc is of type List<ThuocDTO> or ObservableCollection<ThuocDTO>
+            foreach (var thuocDTO in ListThuocDTO)
+            {
+                Const.ListThuoc.Add(thuocDTO);
+            }
+
+            MessageBox.Show("Đã lưu thuốc thành công.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            _view.Close();
+        }
+
 
 
 
