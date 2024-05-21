@@ -49,32 +49,5 @@ namespace PrivateClinic.View.QuanLiTiepDon
 
             NgKham.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is BenhNhanDangKhamViewModel viewModel)
-            {
-                var selectedBenhNhan = (sender as Button)?.CommandParameter as BENHNHAN;
-
-                if (selectedBenhNhan != null)
-                {
-                    viewModel.DeleteCommand.Execute(selectedBenhNhan);
-                    ListViewMed.Items.Refresh();
-                }
-            }
-        }
-
-        private void EditMedButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is BenhNhanDangKhamViewModel viewModel)
-            {
-                var selectedBenhNhan = (sender as Button)?.CommandParameter as THUOC;
-
-                if (selectedBenhNhan != null)
-                {
-                    viewModel.EditMedCommand.Execute(selectedBenhNhan);
-                    ListViewMed.Items.Refresh();
-                }
-            }
-        }
     }
 }

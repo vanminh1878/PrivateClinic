@@ -378,24 +378,15 @@
             Background="#D9D9D9">
             <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="170"/>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="300"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <TextBlock HorizontalAlignment="Center"
-                               FontWeight="DemiBold"
-                               Text="STT"
-                               Margin="15 0 0 0"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <Grid Grid.Column="1">
                     <TextBlock HorizontalAlignment="Center"
                                FontWeight="DemiBold"
                                Text="Mã thuốc"
@@ -403,14 +394,15 @@
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <Grid Grid.Column="2">
-                    <TextBlock HorizontalAlignment="Center"
+                <Grid Grid.Column="1">
+                    <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
                                Text="Tên thuốc"
+                               Margin="10,0,0,0"
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <Grid Grid.Column="3">
+                <Grid Grid.Column="2">
                     <TextBlock HorizontalAlignment="Center"
                                FontWeight="DemiBold"
                                Text="Số lượng"
@@ -418,21 +410,23 @@
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <Grid Grid.Column="4">
-                    <TextBlock HorizontalAlignment="Center"
+                <Grid Grid.Column="3">
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="28,0,0,0"
                                FontWeight="DemiBold"
                                Text="Đơn vị"
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <Grid Grid.Column="5">
-                    <TextBlock HorizontalAlignment="Center"
+                <Grid Grid.Column="4">
+                    <TextBlock HorizontalAlignment="Left"
                                FontWeight="DemiBold"
+                               Margin="5,0,0,0"
                                Text="Cách dùng"
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <Grid Grid.Column="6">
+                <Grid Grid.Column="5">
                     <TextBlock HorizontalAlignment="Center"
                                FontWeight="DemiBold"
                                Text="Thao tác"
@@ -445,70 +439,110 @@
             <ListView
                 x:Name="ListViewMed"
                 SelectedItem="selecteditem "
-                ItemsSource="{Binding ListThuoc}"
-                Margin="20 0 0 0"
+                ItemsSource="{Binding ListThuocView}"
+                Margin="15 0 0 0"
                 SelectionMode="Single"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ScrollViewer.VerticalScrollBarVisibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=4}"  >
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Width="924" Height="55" Margin="10 0 0 0" CornerRadius="10" Background="White">
+                        <Border Width="960"
+                                Height="55"
+                                Margin="0 0 0 0"
+                                CornerRadius="10" Background="White">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="170"/>
-                                    <ColumnDefinition Width="170"/>
                                     <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="110"/>
-                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="300"/>
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
+
                                 <Grid Grid.Column="0">
-                                    <TextBlock Text="{Binding STT}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
+                                    <TextBlock x:Name="MaThuoc"
+                                               Margin="15,0,0,0"
+                                               HorizontalAlignment="Left" Text="{Binding MaThuoc}" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
 
                                 </Grid>
                                 <Grid Grid.Column="1">
-                                    <TextBlock x:Name="MaThuoc"  HorizontalAlignment="Center" Text="{Binding MaThuoc}" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
+                                    <TextBlock x:Name="TenThuoc" Text="{Binding TenThuoc}"
+                                               Margin="7,0,0,0"
+                                               HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
 
                                 </Grid>
+
                                 <Grid Grid.Column="2">
-                                    <TextBlock x:Name="TenThuoc" Text="{Binding TenThuoc}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
-
+                                    <TextBlock x:Name="SL" Text="{Binding  SoLuong}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Segoe UI" FontSize="20"/>
                                 </Grid>
-
                                 <Grid Grid.Column="3">
-                                    <TextBlock x:Name="SL" Text="{Binding  SL}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Segoe UI" FontSize="20"/>
+                                    <TextBlock x:Name="DVT" Text="{Binding DonVi}" HorizontalAlignment="Left"
+                                               Margin="25,0,0,0"
+                                               VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
                                 </Grid>
                                 <Grid Grid.Column="4">
-                                    <TextBlock x:Name="DVT" Text="{Binding MaDVT}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
+                                    <TextBlock x:Name="CachDung" Text="{Binding CachDung}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
                                 </Grid>
                                 <Grid Grid.Column="5">
-                                    <TextBlock x:Name="CachDung" Text="{Binding MaCachDung}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
-                                </Grid>
-                                <Grid Grid.Column="6">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center">
+                                        <Border
+                                            BorderBrush="Black"
+                                            BorderThickness="0.5"
+                                            CornerRadius="50"
+                                            Width="45"
+                                            Height="45"
+                                            Margin="10,0,0,0"
+                                            Cursor="Hand">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#00e5ff" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.EditThuocCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
 
-                                        <Button ToolTip="Sửa thuốc " Command="{Binding EditMedCommand}" CommandParameter="{Binding}" Click="EditMedButton_Click" Margin="0 0 15 4" Width="50" Height="50" HorizontalAlignment="Right" >
-                                            <Button.Template>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Grid>
-                                                        <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
-                                                    </Grid>
-                                                </ControlTemplate>
-                                            </Button.Template>
-                                        </Button>
-                                        <Button ToolTip="Xóa thuốc " Command="{Binding DeleteCommand}" CommandParameter="{Binding}"
-                                                Margin="0 0 0 4" Width="50" Height="50" Padding="0 0 0 10" HorizontalAlignment="Right" Click="DeleteButton_Click">
-                                            <Button.Template>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Grid>
-                                                        <Image Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
-                                                    </Grid>
-                                                </ControlTemplate>
-                                            </Button.Template>
-                                        </Button>
+
+                                        </Border>
+                                        <!--  Nút xóa -->
+                                        <Border
+                                            BorderBrush="Black"
+                                            BorderThickness="0.5"
+                                            CornerRadius="50"
+                                            Margin="10,0,0,0"
+                                            Width="45"
+                                            Height="45"
+                                            Cursor="Hand">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#DFD7BF" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Image Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
+                                        </Border>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown" >
+                                                <i:InvokeCommandAction Command="{Binding DataContext.DeleteDoctorCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+
                                     </StackPanel>
+
                                 </Grid>
                                 <Border BorderBrush="Black" BorderThickness="0 0 0 1" Margin="0,0,10,0" Grid.ColumnSpan="7" />
                             </Grid>
