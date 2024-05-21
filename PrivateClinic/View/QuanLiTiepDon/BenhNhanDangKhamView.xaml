@@ -286,7 +286,7 @@
                        Foreground="#348F6C"/>
 
             <!--Tổng số thuốc-->
-            <TextBlock  Text="10"
+            <TextBlock  Text="{Binding SoLuongThuocDangChon}"
                        Margin="5,0,0,0"
                        FontSize="24"
                        VerticalAlignment="Center"

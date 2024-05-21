@@ -37,13 +37,23 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             {
                 listThuocView = value;
                 OnPropertyChanged(nameof(ListThuocView));
+                SoLuongThuocDangChon = ListThuocView.Count;
             }
         }
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditThuocCommand { get; set; }
-
+        private int soLuongThuocDangChon;
+        public int SoLuongThuocDangChon
+        {
+            get => soLuongThuocDangChon;
+            set
+            {
+                soLuongThuocDangChon = value;
+                OnPropertyChanged(nameof(SoLuongThuocDangChon));
+            }
+        }
         public BenhNhanDangKhamViewModel()
         {
             listMed = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
@@ -104,6 +114,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 {
                     Const.ListThuocTemp.Remove(selectedItem);
                     MessageBox.Show("Xóa thành công", "Thông báo");
+                    SoLuongThuocDangChon = Const.ListThuocTemp.Count;
                 }
             }
         }
@@ -127,7 +138,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 Const.ListThuocTemp = new ObservableCollection<ThuocDTO>(ListThuocView);
             }
             ListThuocView = Const.ListThuocTemp;
-            
+            SoLuongThuocDangChon = ListThuocView.Count;
+
+
         }
        
     }
