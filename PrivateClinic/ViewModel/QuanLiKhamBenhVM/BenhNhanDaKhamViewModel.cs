@@ -105,6 +105,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
                 filterDate = value;
                 OnPropertyChanged(nameof(FilterDate));
                 ApplyFilter();
+                SoLuongBNDaKhamHomNay();
             }
         }
         #endregion
@@ -203,12 +204,21 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
         private void SoLuongBNDaKhamHomNay()
         {
             int soluong = 0;
-            ListPKB = new ObservableCollection<PHIEUKHAMBENH>(DataProvider.Ins.DB.PHIEUKHAMBENH);
-            foreach ( var pkb in originalListBN)
+            foreach (var pkb in originalListBN)
             {
-                if (pkb.NgayKham.Value.Date == DateTime.UtcNow.Date)
+                if (filterDate.HasValue)
                 {
-                    soluong++;
+                    if (pkb.NgayKham.Value.Date == filterDate.Value.Date)
+                    {
+                        soluong++;
+                    }
+                }
+                else
+                {
+                    if (pkb.NgayKham.Value.Date == DateTime.UtcNow.Date)
+                    {
+                        soluong++;
+                    }
                 }
             }
             SoLuong = soluong;
