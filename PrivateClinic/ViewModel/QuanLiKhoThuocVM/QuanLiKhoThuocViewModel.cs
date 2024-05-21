@@ -5,11 +5,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
-    public class QuanLyThuocViewModel : BaseViewModel
+    public class QuanLiKhoThuocViewModel : BaseViewModel
     {
         private ObservableCollection<THUOC> _thuoc;
 
@@ -77,7 +78,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         public ICommand DetailMedicineCommand { get; set; }
 
 
-        public QuanLyThuocViewModel()
+        public QuanLiKhoThuocViewModel()
         {
             LoadData();
             AddMedicineCommand = new RelayCommand<QuanLiKhoThuocView>((p) => { return p == null ? false : true; }, (p) => _AddMedicineCommand(p));
@@ -89,72 +90,63 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             Thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
             donvitinh = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
+            phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);
+            ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
             listMed = new ObservableCollection<ThuocDTO>();
             int stt = 1;
             foreach (var thuoc in Thuoc)
             {
                 foreach (var dvt in donvitinh)
                 {
-                    ThuocDTO thuocDTO = new ThuocDTO()
+                    foreach( var ctpnt in ctphieunhap)
                     {
-                        STT = stt,
-                        DVT = dvt.TenDVT,
-                        MaThuoc = thuoc.MaThuoc,
-                        TenThuoc = thuoc.TenThuoc,
-                        Gia = thuoc.DonGiaNhap,
-                        SL = thuoc.SoLuong
+                        foreach( var pnt in phieunhap)
+                        {
+                            ThuocDTO thuocDTO = new ThuocDTO()
+                            {
+                                STT = stt,
+                                DVT = dvt.TenDVT,
+                                MaThuoc = thuoc.MaThuoc,
+                                TenThuoc = thuoc.TenThuoc,
+                                Gia = thuoc.DonGiaNhap,
+                                SL = thuoc.SoLuong,
+                                NgayNhap = pnt.NgayNhap,
 
-                    };
-                    listMed.Add(thuocDTO);
-                    stt++;
-                    break;
-                }
+                            };
+                            listMed.Add(thuocDTO);
+                            stt++;
+                            break;
+                        }
+                    }
+                    }
+                    
             }
             SoLuongThuoc = listMed.Count();
         }
+            
 
         private void LoadMedicines()
         {
-            //var context = DataProvider.Ins.DB;
-            //var thuocList = from t in context.THUOCs
-            //                join d in context.DVTs on t.MaDVT equals d.MaDVT
-            //                select new
-            //                {
-            //                    //t.STT,
-            //                    t.MaThuoc,
-            //                    t.TenThuoc,
-            //                    t.DonGiaNhap,
-            //                    //t.SoLuong,
-            //                    d.TenDVT
-            //                };
 
-            //ListMedicine = new ObservableCollection<THUOC>(
-            //thuocList.ToList().Select((t, index) => new THUOC
-            //{
-            //    //STT = index + 1,
-            //    MaThuoc = t.MaThuoc,
-            //    TenThuoc = t.TenThuoc,
-            //    //TenDVT = t.TenDVT,
-            //    DonGiaNhap = t.DonGiaNhap,
-            //    //SoLuong = t.SoLuong
-            //}));
         }
         void _EditMedicineCommand(ThuocDTO selectedItem)
         {
             if (selectedItem != null)
             {
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView = new ThayDoiThongTinThuocView();
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.TenThuoc.Text = selectedItem.TenThuoc.ToString();
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.MaThuoc.Text = selectedItem.MaThuoc.ToString();
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.DonGiaNhap.Text = selectedItem.Gia.ToString();
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.SoLuong.Text = selectedItem.SL.ToString();
-                var itemList = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.TenDVT.Items;
-                int index = itemList.IndexOf(selectedItem.DVT.ToString());
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.TenDVT.SelectedIndex = index;
-                double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                ThayDoiThongTinThuocViewModel.Instance.EditThuocView.ShowDialog();
+                SuaThongTinThuocViewModel.Instance.EditThuocView = new ThayDoiThongTinThuocView();
+                SuaThongTinThuocViewModel.Instance.EditThuocView.TenThuoc.Text = selectedItem.TenThuoc.ToString();
+                SuaThongTinThuocViewModel.Instance.EditThuocView.MaThuoc.Text = selectedItem.MaThuoc.ToString();
+                SuaThongTinThuocViewModel.Instance.EditThuocView.DonGiaNhap.Text = selectedItem.Gia.ToString();
+                SuaThongTinThuocViewModel.Instance.EditThuocView.SoLuong.Text = selectedItem.SL.ToString();
+                SuaThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate = selectedItem.NgayNhap;
+                SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.SelectedItem =
+    SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.Items
+    .Cast<string>()
+    .FirstOrDefault(item => item == selectedItem.DVT.ToString());
 
+                double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
+                SuaThongTinThuocViewModel.Instance.EditThuocView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                SuaThongTinThuocViewModel.Instance.EditThuocView.ShowDialog();
             }
         }
 

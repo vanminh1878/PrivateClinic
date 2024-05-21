@@ -21,7 +21,7 @@ namespace PrivateClinic.Model
             this.PHIEUKHAMBENHs = new HashSet<PHIEUKHAMBENH>();
         }
     
-        public string MaBN { get; set; }
+        public int MaBN { get; set; }
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public System.DateTime NamSinh { get; set; }

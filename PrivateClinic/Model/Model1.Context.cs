@@ -44,5 +44,6 @@ namespace PrivateClinic.Model
         public virtual DbSet<PHIEUNHAPTHUOC> PHIEUNHAPTHUOCs { get; set; }
         public virtual DbSet<THAMSO> THAMSOes { get; set; }
         public virtual DbSet<THUOC> THUOCs { get; set; }
+        public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
     }
 }

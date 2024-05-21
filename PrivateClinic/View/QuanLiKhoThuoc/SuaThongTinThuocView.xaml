@@ -143,7 +143,7 @@
                                 CornerRadius="10">
 
                                 <ComboBox
-                                    x:Name="TenDVT"
+                                    x:Name="TenDVTcbx"
                                     Width="170"
                                     Height="40"
                                     Padding="15,0,0,0"
@@ -152,10 +152,9 @@
                                     VerticalContentAlignment="Center"
                                     materialDesign:HintAssist.Hint="Chọn DVT"
                                     FontSize="20"
+                                    Loaded="TenDVTcbx_Loaded"
                                     ItemsSource="{Binding tenDVTs}">
 
-                                    <ComboBoxItem Content="Viên" />
-                                    <ComboBoxItem Content="Chai" />
                                 </ComboBox>
 
                             </Border>

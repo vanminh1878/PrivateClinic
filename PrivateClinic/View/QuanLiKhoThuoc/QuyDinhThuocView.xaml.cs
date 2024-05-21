@@ -12,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
     /// <summary>
-    /// Interaction logic for ThemThuocCuView.xaml
+    /// Interaction logic for QuyDinhThuocView.xaml
     /// </summary>
-    public partial class ThemThuocCuView : UserControl
+    public partial class QuyDinhThuocView : UserControl
     {
-        public ThemThuocCuView()
+        public QuyDinhThuocView()
         {
             InitializeComponent();
-            ThemThuocCuViewModel viewModel = new ThemThuocCuViewModel();
-            this.DataContext = viewModel;
-            viewModel.LoadCommand.Execute(null);
-            ChonThuoccbx.ItemsSource = viewModel.TenThuocs;
         }
     }
 }

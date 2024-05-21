@@ -13,7 +13,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
         public QuanLiKhoThuocView()
         {
             InitializeComponent();
-            QuanLyThuocViewModel viewModel = new QuanLyThuocViewModel();
+            QuanLiKhoThuocViewModel viewModel = new QuanLiKhoThuocViewModel();
             this.DataContext = viewModel;
         }
 
@@ -25,7 +25,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
         }
         private void DeleteMedicineButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is QuanLyThuocViewModel viewModel)
+            if (DataContext is QuanLiKhoThuocViewModel viewModel)
             {
                 var selectedMedicine = (sender as Button)?.CommandParameter as THUOC;
 
@@ -39,7 +39,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
 
         private void EditMedicineButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is QuanLyThuocViewModel viewModel)
+            if (DataContext is QuanLiKhoThuocViewModel viewModel)
             {
                 var selectedMedicine = (sender as Button)?.CommandParameter as ThuocDTO;
 

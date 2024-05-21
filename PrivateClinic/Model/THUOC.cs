@@ -17,22 +17,22 @@ namespace PrivateClinic.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public THUOC()
         {
+            this.BAOCAOSUDUNGTHUOCs = new HashSet<BAOCAOSUDUNGTHUOC>();
             this.CT_PKB = new HashSet<CT_PKB>();
             this.CT_PNT = new HashSet<CT_PNT>();
         }
-        
-        public int STT { get; set; }
+    
         public int MaThuoc { get; set; }
         public int MaLoaiThuoc { get; set; }
         public string TenThuoc { get; set; }
-        public string TenDVT { get; set; }
-        public System.DateTime NgayNhap { get; set; }
         public int MaDVT { get; set; }
         public int MaCachDung { get; set; }
         public Nullable<double> DonGiaNhap { get; set; }
         public Nullable<double> DonGiaBan { get; set; }
         public Nullable<int> SoLuong { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BAOCAOSUDUNGTHUOC> BAOCAOSUDUNGTHUOCs { get; set; }
         public virtual CACHDUNG CACHDUNG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PKB> CT_PKB { get; set; }

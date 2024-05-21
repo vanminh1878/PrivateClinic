@@ -13,7 +13,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
             InitializeComponent();
             Main.Content = new ThemThuocCuView();
             ThuocCuRBtn.IsChecked = true;
-            ThemThuocViewModel viewModel = new ThemThuocViewModel();
+            NhapThuocViewModel viewModel = new NhapThuocViewModel();
             this.DataContext = viewModel;
         }
     }

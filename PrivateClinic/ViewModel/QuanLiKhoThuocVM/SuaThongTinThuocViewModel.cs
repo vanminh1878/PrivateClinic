@@ -2,6 +2,7 @@
 using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -9,9 +10,9 @@ using System.Windows.Input;
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
-    public class ThayDoiThongTinThuocViewModel : BaseViewModel
+    public class SuaThongTinThuocViewModel : BaseViewModel
     {
-        public static ThayDoiThongTinThuocViewModel Instance { get; } = new ThayDoiThongTinThuocViewModel();
+        public static SuaThongTinThuocViewModel Instance { get; set; } = new SuaThongTinThuocViewModel();
 
         public ThayDoiThongTinThuocView EditThuocView { get; set; }
         private ThayDoiThongTinThuocView EditThuocView2 { get; set; }
@@ -19,6 +20,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         public ICommand SaveCommand { get; set; }
         public ICommand SetEditThuocView { get; set; }
         public ICommand LoadCommand { get; set; }
+     
         private ObservableCollection<DVT> _dvt;
 
         public ObservableCollection<DVT> dvt
@@ -55,12 +57,24 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             set { _phieunhap = value; OnPropertyChanged(nameof(phieunhap)); }
 
         }
-
-        public ThayDoiThongTinThuocViewModel()
+        private List<string> _TenDVTs;
+        public List<string> TenDVTs
         {
+            get { return _TenDVTs; }
+            set
+            {
+                _TenDVTs = value;
+                OnPropertyChanged(nameof(TenDVTs));
+            }
+        }
+
+        public SuaThongTinThuocViewModel()
+        {
+            LoadCommand = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, (p) => _LoadCommand(p));
             CancelCommand = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, p => _CancelCommand(p));
             SaveCommand = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, (p) => _SaveCommand(p));
-            LoadCommand = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, (p) => _LoadCommand(p));
+            
+            
             SetEditThuocView = new RelayCommand<ThayDoiThongTinThuocView>((p) => true, (p) => _SetEditThuocView(p));
         }
 
@@ -72,27 +86,24 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 EditThuocView2 = EditThuocView;
             }
         }
-        void _LoadCommand(ThayDoiThongTinThuocView p)
+         private void _LoadCommand(ThayDoiThongTinThuocView p)       
         {
-            // Lấy danh sách các TenDVT từ dvt
-            var tenDVTs = dvt.Select(x => x.TenDVT);
-
-            // Gán danh sách TenDVT vào các ComboBoxItem của p.TenDVT
-            p.TenDVT.ItemsSource = tenDVTs;
+            dvt = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
+            TenDVTs = dvt.Select(x => x.TenDVT).ToList();
 
 
         }
         void _SaveCommand(ThayDoiThongTinThuocView paramater)
         {
             var p = new ThayDoiThongTinThuocView();
-            p.TenThuoc.Text = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.TenThuoc.Text;
-            p.NgayNhap.SelectedDate = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate;
-            p.DonGiaNhap.Text = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.DonGiaNhap.Text;
-            p.TenDVT.Text = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.TenDVT.Text;
-            p.SoLuong.Text = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.SoLuong.Text;
-            p.MaThuoc.Text = ThayDoiThongTinThuocViewModel.Instance.EditThuocView.MaThuoc.Text;
+            p.TenThuoc.Text = SuaThongTinThuocViewModel.Instance.EditThuocView.TenThuoc.Text;
+            p.NgayNhap.SelectedDate = SuaThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate;
+            p.DonGiaNhap.Text = SuaThongTinThuocViewModel.Instance.EditThuocView.DonGiaNhap.Text;
+            p.TenDVTcbx.Text = SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.Text;
+            p.SoLuong.Text = SuaThongTinThuocViewModel.Instance.EditThuocView.SoLuong.Text;
+            p.MaThuoc.Text = SuaThongTinThuocViewModel.Instance.EditThuocView.MaThuoc.Text;
 
-            if (string.IsNullOrEmpty(p.TenThuoc.Text) || p.NgayNhap.SelectedDate == null || string.IsNullOrEmpty(p.DonGiaNhap.Text) || string.IsNullOrEmpty(p.TenDVT.SelectedItem.ToString()) || string.IsNullOrEmpty(p.SoLuong.Text))
+            if (string.IsNullOrEmpty(p.TenThuoc.Text) || p.NgayNhap.SelectedDate == null || string.IsNullOrEmpty(p.DonGiaNhap.Text) || string.IsNullOrEmpty(p.TenDVTcbx.SelectedItem.ToString()) || string.IsNullOrEmpty(p.SoLuong.Text))
             {
                 MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -114,10 +125,13 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
                         // Tìm hoặc thêm mới đơn vị tính (DVT)
                         //var dvt = DataProvider.Ins.DB.DVTs.FirstOrDefault(d => d.TenDVT == p.TenDVT.Text);
+                      
+                        var ctpnt = DataProvider.Ins.DB.CT_PNT.FirstOrDefault(ct => ct.MaThuoc == maThuoc);
+                        var pnth = DataProvider.Ins.DB.PHIEUNHAPTHUOCs.FirstOrDefault(pn => pn.SoPhieuNhap == ctpnt.SoPhieuNhap);
 
-                        var dvtinh = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
-                        DVT dvt = dvtinh.FirstOrDefault(d => d.MaDVT == thuoc.MaDVT);
-                        dvt.TenDVT = p.TenDVT.Text;
+                        var donvi = DataProvider.Ins.DB.DVTs.FirstOrDefault(dv => dv.MaDVT == thuoc.MaDVT);
+                        //DVT dvt = dvtinh.FirstOrDefault(d => d.MaDVT == thuoc.MaDVT);
+                        donvi.TenDVT = p.TenDVTcbx.Text;
 
                         ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
                         phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);

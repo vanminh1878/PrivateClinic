@@ -11,8 +11,10 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
         public ThemThuocMoiView()
         {
             InitializeComponent();
-            ThemThuocViewModel viewModel = new ThemThuocViewModel();
+            ThemThuocMoiViewModel viewModel = new ThemThuocMoiViewModel();
             this.DataContext = viewModel;
+            viewModel.LoadCommand.Execute(null);
+            TenDVTcbx.ItemsSource = viewModel.TenDVTs;
         }
     }
 }
