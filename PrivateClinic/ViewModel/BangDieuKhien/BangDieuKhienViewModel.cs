@@ -11,6 +11,18 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
 
         #region Properties
         public ObservableCollection<Doctor> listBS { get; set; }
+        public ObservableCollection<string> Months { get; set; }
+        private string _selectedMonth;
+        public string SelectedMonth
+        {
+            get { return _selectedMonth; }
+            set
+            {
+                _selectedMonth = value;
+                OnPropertyChanged(nameof(SelectedMonth));
+                UpdateChartData();
+            }
+        }
 
         //Config Chart
         public SeriesCollection RevenueData { get; set; }
@@ -26,6 +38,9 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
             new Doctor { Name = "Nguyễn Văn A", StatusText = "Nhan vien" },
             new Doctor { Name = "Nguyễn Văn A", StatusText = "Nhan vien" }
         };
+            Months = new ObservableCollection<string> { "Tháng 3", "Tháng 4", "Tháng 5" };
+            SelectedMonth = Months[0];
+
             InitializeChartData();
             InitializeMedicineChartData();
             InitializeUsageChartData();
@@ -82,6 +97,55 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
             }
         };
         }
+
+        private void UpdateChartData()
+        {
+            if (RevenueData == null || RevenueData.Count == 0)
+            {
+                InitializeChartData();
+            }
+
+            if (MedicineData == null || MedicineData.Count == 0)
+            {
+                InitializeMedicineChartData();
+            }
+
+            if (UsageData == null || UsageData.Count == 0)
+            {
+                InitializeUsageChartData();
+            }
+
+            switch (SelectedMonth)
+            {
+                case "Tháng 3":
+                    RevenueData[0].Values = new ChartValues<double> { 40 };
+                    RevenueData[1].Values = new ChartValues<double> { 25 };
+                    RevenueData[2].Values = new ChartValues<double> { 35 };
+
+                    MedicineData[0].Values = new ChartValues<double> { 10, 50, 39, 50 };
+                    UsageData[0].Values = new ChartValues<double> { 20, 36, 18, 40 };
+                    break;
+
+                case "Tháng 4":
+                    RevenueData[0].Values = new ChartValues<double> { 30 };
+                    RevenueData[1].Values = new ChartValues<double> { 20 };
+                    RevenueData[2].Values = new ChartValues<double> { 50 };
+
+                    MedicineData[0].Values = new ChartValues<double> { 15, 60, 29, 60 };
+                    UsageData[0].Values = new ChartValues<double> { 25, 46, 28, 50 };
+                    break;
+
+                case "Tháng 5":
+                    RevenueData[0].Values = new ChartValues<double> { 50 };
+                    RevenueData[1].Values = new ChartValues<double> { 30 };
+                    RevenueData[2].Values = new ChartValues<double> { 20 };
+
+                    MedicineData[0].Values = new ChartValues<double> { 20, 70, 49, 70 };
+                    UsageData[0].Values = new ChartValues<double> { 30, 56, 38, 60 };
+                    break;
+            }
+        }
+
         #endregion
 
 

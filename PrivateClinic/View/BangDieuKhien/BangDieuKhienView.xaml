@@ -53,7 +53,32 @@
                     <Border Background="Transparent" Grid.Row="1" Margin="10">
                         <liveCharts:PieChart Series="{Binding RevenueData}"/>
                     </Border>
-
+                    <Border CornerRadius="10"
+                            Grid.Row="1"
+                            BorderThickness="1"
+                            BorderBrush="Black"
+                            Background="White"
+                            Padding="0"
+                            Height="60" 
+                            Width="150" 
+                            Margin="10"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right">
+                        <ComboBox x:Name="cboSelectMonth"
+                                  ItemsSource="{Binding Months}"
+                                  SelectedItem="{Binding SelectedMonth}"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  Height="50"
+                                  Width="230"
+                                  FontSize="18"
+                                  BorderThickness="0"
+                                  Padding="10,0,10,0"
+                                  VerticalContentAlignment="Center"
+                                  HorizontalContentAlignment="Left"
+                                  FontWeight="Light"
+                                  FontStyle="Italic"
+                                  Background="Transparent"/>
+                    </Border>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
