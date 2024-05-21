@@ -161,7 +161,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         }
         public void _AddMedicineCommand(QuanLiKhoThuocView parameter)
         {
-            ThemThuocMoiView addMedicineView = new ThemThuocMoiView();
+            NhapThuocView addMedicineView = new NhapThuocView();
             double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
             addMedicineView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             addMedicineView.ShowDialog();

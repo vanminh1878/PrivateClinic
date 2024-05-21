@@ -1,9 +1,11 @@
 ﻿using PrivateClinic.Model;
 using PrivateClinic.View.QuanLiKhoThuoc;
+using PrivateClinic.View.QuanLiTiepDon;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
@@ -12,7 +14,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
     {
 
         public ICommand AddMedicineCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
         public ICommand quitCommand { get; set; }
 
         //private ThemThuocMoiView _themThuocMoiView;
@@ -24,16 +26,42 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         //    AddMedicineCommand = new RelayCommand<object>(CanExecuteAdd, ExecuteAdd);
         //    quitCommand = new ViewModelCommand(quit);
         //}
-
+        private UserControl currentView;
+        public UserControl CurrentView
+        {
+            get => currentView;
+            set
+            {
+                currentView = value;
+                OnPropertyChanged(nameof(CurrentView));
+            }
+        }
+        public ICommand SwitchViewCommand { get; set; }
         public ThemThuocViewModel()
         {
             AddMedicineCommand = new RelayCommand<ThemThuocMoiView>((p) => true, (p) => ExecuteAdd(p));
-            CancelCommand = new RelayCommand<ThemThuocMoiView>((p) => true, (p) => _CancelCommand(p));
+            ExitCommand = new RelayCommand<NhapThuocView>((p) => { return p == null ? false : true; }, (p) => _ExitCommand(p));
+
+            SwitchViewCommand = new ViewModelCommand(SwitchView);
+        }
+        private void SwitchView(object userControlName)
+        {
+            string userControlNameStr = userControlName as string;
+            switch (userControlNameStr)
+            {
+                case "Thuoccu":
+                    
+                    CurrentView= new ThemThuocCuView();
+                    break;
+                case "Thuocmoi":
+                    CurrentView = new ThemThuocMoiView();
+                    break;
+            }
         }
 
-        void _CancelCommand(ThemThuocMoiView paramater)
+        private void _ExitCommand(NhapThuocView p)
         {
-            paramater.Close();
+            p.Close();
         }
 
         private string maLoaiThuoc;

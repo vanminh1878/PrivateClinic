@@ -10,19 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
     /// <summary>
-    /// Interaction logic for ThemThuocMoiView.xaml
+    /// Interaction logic for NhapThuocView.xaml
     /// </summary>
-    public partial class ThemThuocMoiView : UserControl
+    public partial class NhapThuocView : Window
     {
-        public ThemThuocMoiView()
+        public NhapThuocView()
         {
             InitializeComponent();
+            Main.Content= new ThemThuocCuView();
+            ThuocCuRBtn.IsChecked = true;
+            ThemThuocViewModel viewModel = new ThemThuocViewModel();
+            this.DataContext = viewModel;
         }
     }
 }

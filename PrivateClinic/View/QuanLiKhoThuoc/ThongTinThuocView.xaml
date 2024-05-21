@@ -18,7 +18,7 @@
     TextElement.FontSize="19"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d">
 
     <Border

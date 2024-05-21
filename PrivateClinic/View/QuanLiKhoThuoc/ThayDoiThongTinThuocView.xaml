@@ -39,7 +39,7 @@ AllowsTransparency="True"
     VerticalAlignment="Center"
     FontSize="30"
     FontWeight="Bold"
-    Text="Nhập thuốc" />
+    Text="Sửa thuốc" />
             </Grid>
 
             <Grid Grid.Row="1">

@@ -1,11 +1,11 @@
-﻿<Window
+﻿<UserControl
     x:Class="PrivateClinic.View.QuanLiKhoThuoc.ThemThuocCuView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="ThemThuocCuView"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     d:DesignHeight="345"
     d:DesignWidth="877"
     Background="Transparent"
@@ -13,6 +13,7 @@
     TextElement.FontSize="22"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    x:Name="ThemThuocCuViewPage"
     mc:Ignorable="d">
 
 
@@ -24,46 +25,16 @@
         CornerRadius="12">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
+
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                    <!--  Tiêu đề  -->
-                    <TextBlock
-                        Margin="10"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="30"
-                        FontWeight="Bold"
-                        Text="Nhập thuốc" />
 
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button
-                            Margin="0,0,0,0"
-                            HorizontalAlignment="Left"
-                            Content="Thuốc cũ"
-                            FontSize="18"
-                            FontWeight="Bold"
-                            Foreground="White" />
-
-                        <Button
-                            Margin="50,0,0,0"
-                            HorizontalAlignment="Center"
-                            Background="White"
-                            Content="Thuốc mới"
-                            FontSize="18"
-                            FontWeight="Bold"
-                            Foreground="Black" />
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
 
             <!--  Row 1  -->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -79,7 +50,7 @@
                 <Border
                     Grid.Column="1"
                     Width="510"
-                    Height="35"
+                    Height="45"
                     Margin="0,0,0,10"
                     HorizontalAlignment="Left"
                     BorderBrush="Black"
@@ -88,7 +59,7 @@
 
                     <ComboBox
                         Width="500"
-                        Height="35"
+                        Height="45"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -100,7 +71,7 @@
             </Grid>
 
             <!--  Row 2  -->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition />
@@ -115,7 +86,7 @@
                 <Border
                     Grid.Column="1"
                     Width="310"
-                    Height="35"
+                    Height="45"
                     Margin="0,0,0,10"
                     HorizontalAlignment="Left"
                     BorderBrush="Black"
@@ -124,12 +95,12 @@
 
                     <TextBox
                         Width="310"
-                        Height="35"
+                        Height="45"
                         Margin="-1,0,0,0"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalContentAlignment="Center"
-                        Text="Nhập số lượng" />
+                         />
 
                 </Border>
 
@@ -137,61 +108,44 @@
 
             </Grid>
 
-
-
-            <!--  Row 3  -->
-            <Grid Grid.Row="3">
-                <StackPanel
-                    Margin="0,0,10,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-
-                    <!--  Nút hủy  -->
-                    <Button
-                        Width="150"
-                        Height="45"
-                        Padding="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Background="#D51F2A"
-                        FontSize="20">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{StaticResource icCancel}" Stretch="Uniform" />
-                                <TextBlock
-                                    Margin="5,0,0,0"
-                                    VerticalAlignment="Center"
-                                    FontWeight="Bold"
-                                    Text="Hủy (F2)" />
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
-
-                    <!--  Nút thêm  -->
-                    <Button
-                        Width="150"
-                        Height="45"
-                        Margin="25,0,25,0"
-                        Padding="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Background="#348F6C"
-                        FontSize="20">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{StaticResource icAdd}" Stretch="Uniform" />
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    VerticalAlignment="Center"
-                                    FontWeight="Bold"
-                                    Text="Nhập (F1)" />
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
+            <Grid Grid.Row="2">
+                <Button
+Width="170"
+Height="50"
+Margin="5,0,30,0"
+HorizontalAlignment="Right"
+Content="       Lưu (F3)"
+FontFamily="Segoe UI"
+FontSize="22"
+FontWeight="Bold">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border
+                Background="#364C9A"
+                BorderBrush="Transparent"
+                CornerRadius="10">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="0.5"
+                        ShadowDepth="5"
+                        Color="Black" />
+                                    </Border.Effect>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <Image HorizontalAlignment="Left" Source="{StaticResource icSaveWhite}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=ThemThuocCuViewPage}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
             </Grid>
         </Grid>
 
     </Border>
-</Window>
+</UserControl>
