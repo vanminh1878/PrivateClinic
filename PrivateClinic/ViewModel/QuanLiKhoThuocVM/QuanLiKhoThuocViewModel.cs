@@ -6,219 +6,51 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.Generic;
+using System.Windows.Controls;
 
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
     public class QuanLiKhoThuocViewModel : BaseViewModel
     {
-        private ObservableCollection<THUOC> _thuoc;
 
-        public ObservableCollection<THUOC> Thuoc
+        public static QuanLiKhoThuocViewModel Instance { get; } = new QuanLiKhoThuocViewModel();
+
+        public ICommand ExitCommand { get; set; }
+       
+        private UserControl currentView;
+        public UserControl CurrentView
         {
-            get => _thuoc;
-            set { _thuoc = value; OnPropertyChanged(nameof(Thuoc)); }
-
-        }
-        private ObservableCollection<CT_PNT> _ctphieunhap;
-
-        public ObservableCollection<CT_PNT> ctphieunhap
-        {
-            get => _ctphieunhap;
-            set { _ctphieunhap = value; OnPropertyChanged(nameof(ctphieunhap)); }
-
-        }
-        private ObservableCollection<PHIEUNHAPTHUOC> _phieunhap;
-
-        public ObservableCollection<PHIEUNHAPTHUOC> phieunhap
-        {
-            get => _phieunhap;
-            set { _phieunhap = value; OnPropertyChanged(nameof(phieunhap)); }
-
-        }
-        private ObservableCollection<ThuocDTO> _listMed;
-
-        public ObservableCollection<ThuocDTO> listMed
-        {
-            get => _listMed;
+            get => currentView;
             set
             {
-                _listMed = value; OnPropertyChanged(nameof(listMed));
-            }
-
-        }
-
-        private ObservableCollection<DVT> _donvitinh;
-
-        public ObservableCollection<DVT> donvitinh
-        {
-            get => _donvitinh;
-            set { _donvitinh = value; OnPropertyChanged(nameof(donvitinh)); }
-
-        }
-
-        private int soLuongThuoc;
-        public int SoLuongThuoc
-        {
-            get => soLuongThuoc;
-            set
-            {
-                if (soLuongThuoc != value)
-                {
-                    soLuongThuoc = value;
-                    OnPropertyChanged(nameof(SoLuongThuoc));
-                }
+                currentView = value;
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
-
-
-        public ICommand AddMedicineCommand { get; set; }
-        public ICommand EditMedicineCommand { get; set; }
-        public ICommand DeleteMedicineCommand { get; set; }
-        public ICommand DetailMedicineCommand { get; set; }
-
-
+        public ICommand SwitchViewCommand { get; set; }
         public QuanLiKhoThuocViewModel()
         {
-            LoadData();
-            AddMedicineCommand = new RelayCommand<QuanLiKhoThuocView>((p) => { return p == null ? false : true; }, (p) => _AddMedicineCommand(p));
-            EditMedicineCommand = new RelayCommand<ThuocDTO>((p) => { return p == null ? false : true; }, (p) => _EditMedicineCommand(p));
-            DeleteMedicineCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _DeleteMedicineCommand(p));
-            DetailMedicineCommand = new RelayCommand<QuanLiKhoThuocView>((p) => { return p == null ? false : true; }, (p) => _DetailMedicineCommand(p));
+
+          
+            SwitchViewCommand = new ViewModelCommand(SwitchView);
         }
-        void LoadData()
+        private void SwitchView(object userControlName)
         {
-            Thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
-            donvitinh = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
-            phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);
-            ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
-            listMed = new ObservableCollection<ThuocDTO>();
-            int stt = 1;
-            foreach (var thuoc in Thuoc)
+            string userControlNameStr = userControlName as string;
+            switch (userControlNameStr)
             {
-                foreach (var dvt in donvitinh)
-                {
-                    foreach( var ctpnt in ctphieunhap)
-                    {
-                        foreach( var pnt in phieunhap)
-                        {
-                            ThuocDTO thuocDTO = new ThuocDTO()
-                            {
-                                STT = stt,
-                                DVT = dvt.TenDVT,
-                                MaThuoc = thuoc.MaThuoc,
-                                TenThuoc = thuoc.TenThuoc,
-                                Gia = thuoc.DonGiaNhap,
-                                SL = thuoc.SoLuong,
-                                NgayNhap = pnt.NgayNhap,
+                case "Quydinh":
 
-                            };
-                            listMed.Add(thuocDTO);
-                            stt++;
-                            break;
-                        }
-                    }
-                    }
-                    
-            }
-            SoLuongThuoc = listMed.Count();
-        }
-            
-
-        private void LoadMedicines()
-        {
-
-        }
-        void _EditMedicineCommand(ThuocDTO selectedItem)
-        {
-            if (selectedItem != null)
-            {
-                SuaThongTinThuocViewModel.Instance.EditThuocView = new ThayDoiThongTinThuocView();
-                SuaThongTinThuocViewModel.Instance.EditThuocView.TenThuoc.Text = selectedItem.TenThuoc.ToString();
-                SuaThongTinThuocViewModel.Instance.EditThuocView.MaThuoc.Text = selectedItem.MaThuoc.ToString();
-                SuaThongTinThuocViewModel.Instance.EditThuocView.DonGiaNhap.Text = selectedItem.Gia.ToString();
-                SuaThongTinThuocViewModel.Instance.EditThuocView.SoLuong.Text = selectedItem.SL.ToString();
-                SuaThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate = selectedItem.NgayNhap;
-                SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.SelectedItem =
-    SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.Items
-    .Cast<string>()
-    .FirstOrDefault(item => item == selectedItem.DVT.ToString());
-
-                double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-                SuaThongTinThuocViewModel.Instance.EditThuocView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                SuaThongTinThuocViewModel.Instance.EditThuocView.ShowDialog();
+                    CurrentView = new QuyDinhThuocView();
+                    break;
+                case "KhoThuoc":
+                    CurrentView = new KhoThuocView();
+                    break;
             }
         }
 
-        private void _DeleteMedicineCommand(THUOC selectedItem)
-        {
-            //MessageBoxResult r = MessageBox.Show("Bạn muốn xóa thuốc này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            //if (r == MessageBoxResult.Yes)
-            //{
-            //    if (selectedItem != null)
-            //    {
-            //        // Thực hiện xóa thuốc
-            //        var context = DataProvider.Ins.DB;
-            //        // Xóa thuốc
-            //        context.THUOCs.Remove(selectedItem);
-            //        // Lưu thay đổi vào cơ sở dữ liệu
-            //        context.SaveChanges();
-            //        // Xóa khỏi danh sách thuốc
-            //        listMed.Remove(selectedItem);
-            //    }
-            //}
-        }
-        public void _AddMedicineCommand(QuanLiKhoThuocView parameter)
-        {
-            NhapThuocView addMedicineView = new NhapThuocView();
-            double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-            addMedicineView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            addMedicineView.ShowDialog();
-
-        }
-        public void _DetailMedicineCommand(QuanLiKhoThuocView parameter)
-        {
-            ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
-            phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);
-            ThongTinThuocView detail = new ThongTinThuocView();
-            ThuocDTO selectedThuocDTO = (ThuocDTO)parameter.MedicineListView.SelectedItem;
-            THUOC temp = Thuoc.FirstOrDefault(t => t.MaThuoc == selectedThuocDTO.MaThuoc);
-            detail.DonGia.Text = temp.DonGiaNhap.ToString();
-            detail.TenThuoc.Text = temp.TenThuoc;
-            detail.MaThuoc.Text = temp.MaThuoc.ToString();
-            detail.DVT.Text = temp.DVT.TenDVT.ToString();
-            detail.SL.Text = temp.SoLuong.ToString();
-            if (ctphieunhap != null)
-            {
-                CT_PNT ct = ctphieunhap.FirstOrDefault(t => t.MaThuoc == temp.MaThuoc);
-                if (ct != null)
-                {
-                    PHIEUNHAPTHUOC pnt = phieunhap.FirstOrDefault(a => a.SoPhieuNhap == ct.SoPhieuNhap);
-                    if (pnt != null)
-                    {
-                        detail.NgNhap.Text = pnt.NgayNhap.ToString("dd/MM/yyyy");
-                    }
-                    else
-                    {
-                        // Xử lý trường hợp pnt là null
-                        detail.NgNhap.Text = "Chưa có ngày nhập";
-                    }
-                }
-                else
-                {
-                    // Xử lý trường hợp ct là null
-                    detail.NgNhap.Text = "Chưa có ngày nhập";
-                }
-            }
-            else
-            {
-                // Xử lý trường hợp ctphieunhap là null
-                detail.NgNhap.Text = "Chưa có ngày nhập";
-            }
-            detail.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            detail.ShowDialog();
-        }
-
+       
 
 
 

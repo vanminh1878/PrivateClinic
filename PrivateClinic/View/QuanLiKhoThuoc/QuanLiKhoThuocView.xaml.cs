@@ -13,42 +13,14 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
         public QuanLiKhoThuocView()
         {
             InitializeComponent();
+            Main.Content = new KhoThuocView();
             QuanLiKhoThuocViewModel viewModel = new QuanLiKhoThuocViewModel();
             this.DataContext = viewModel;
         }
 
         
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-        private void DeleteMedicineButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is QuanLiKhoThuocViewModel viewModel)
-            {
-                var selectedMedicine = (sender as Button)?.CommandParameter as THUOC;
-
-                if (selectedMedicine != null)
-                {
-                    viewModel.DeleteMedicineCommand.Execute(selectedMedicine);
-                    MedicineListView.Items.Refresh();
-                }
-            }
-        }
-
-        private void EditMedicineButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is QuanLiKhoThuocViewModel viewModel)
-            {
-                var selectedMedicine = (sender as Button)?.CommandParameter as ThuocDTO;
-
-                if (selectedMedicine != null)
-                {
-                    viewModel.EditMedicineCommand.Execute(selectedMedicine);
-                    MedicineListView.Items.Refresh();
-                }
-            }
-        }
+       
     }
 }

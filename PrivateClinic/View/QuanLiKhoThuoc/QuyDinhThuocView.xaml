@@ -18,10 +18,22 @@
         BorderBrush="DarkGray"
         BorderThickness="0.7"
         CornerRadius="12">
-
-        <StackPanel>
-            <TextBlock Text="QUY ĐỊNH " FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" Margin="0 13"/>
-            <Grid HorizontalAlignment="Left" Margin="80 0" Width="400" Height="100">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock Text="QUY ĐỊNH " FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" Margin="0 13"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Grid>
                     <Rectangle HorizontalAlignment="Left" Width="50" Height="50">
                         <Rectangle.Fill>
@@ -41,12 +53,8 @@
                         <TextBox Margin="0 0 " Text="4" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="cách dùng thuốc" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
-
                 </Grid>
-
-            </Grid>
-            <Grid HorizontalAlignment="Left" Margin="80 0" Width="400" Height="100">
-                <Grid>
+                <Grid Grid.Column="1">
                     <Rectangle HorizontalAlignment="Left" Width="50" Height="50">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -65,11 +73,14 @@
                         <TextBox Margin="0 0 " Text="1.01" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="x Giá nhập" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
-
                 </Grid>
 
             </Grid>
-            <Grid HorizontalAlignment="Left" Margin="80 0" Width="400" Height="100">
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Grid>
                     <Rectangle HorizontalAlignment="Left" Width="50" Height="50">
                         <Rectangle.Fill>
@@ -89,12 +100,8 @@
                         <TextBox Margin="0 0 " Text="2" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="loại đơn vị tính" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
-
                 </Grid>
-
-            </Grid>
-            <Grid HorizontalAlignment="Left" Margin="80 0" Width="400" Height="100">
-                <Grid>
+                <Grid Grid.Column="1">
                     <Rectangle HorizontalAlignment="Left" Width="50" Height="50">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -113,11 +120,14 @@
                         <TextBox Margin="0 0 " Text="30.000" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text=" VND" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
-
                 </Grid>
 
             </Grid>
-            <Grid HorizontalAlignment="Left" Margin="80 0" Width="400" Height="100">
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Grid>
                     <Rectangle HorizontalAlignment="Left" Width="50" Height="50">
                         <Rectangle.Fill>
@@ -137,11 +147,12 @@
                         <TextBox Margin="0 0 " Text="5" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text=" loại bệnh" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
-
                 </Grid>
+              
 
             </Grid>
-        </StackPanel>
+        </Grid>
+     
 
     </Border>
 </UserControl>

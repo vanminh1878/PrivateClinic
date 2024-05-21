@@ -163,7 +163,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                         MessageBox.Show("Cập nhật thông tin thuốc thành công!", "THÔNG BÁO");
 
 
-                        QuanLiKhoThuocView quanLiThuocView = new QuanLiKhoThuocView();
+                        KhoThuocView quanLiThuocView = new KhoThuocView();
                         quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
                         quanLiThuocView.MedicineListView.Items.Refresh();
                     }
