@@ -51,7 +51,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             EditThuoc();
             ListThuoc = new ObservableCollection<ThuocDTO>();
             SearchCommand = new RelayCommand<BenhNhanDangKhamView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
-            DeleteCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
+            DeleteCommand = new RelayCommand<ThuocDTO>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
         }
         void AddThuoc()
         {
@@ -91,40 +91,17 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
             parameter.ListViewMed.ItemsSource = temp;
         }
-        void _DeleteCommand(THUOC selectedItem)
+        void _DeleteCommand(ThuocDTO selectedItem)
         {
-            //MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            //if (r == MessageBoxResult.Yes)
-            //{
-            //    if (selectedItem != null)
-            //    {
-            //        // Remove related HOADON records
-            //        var relatedHoadons = DataProvider.Ins.DB.HOADONs.Where(h => h.MaBN == selectedItem.MaBN).ToList();
-            //        DataProvider.Ins.DB.HOADONs.RemoveRange(relatedHoadons);
-            //        // Remove related CT_BCDT records
-            //        var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.HOADON.MaBN == selectedItem.MaBN).ToList();
-            //        DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
-            //        // Remove related PHIEUKHAMBENH records
-            //        var relatedPHIEUKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).ToList();
-            //        DataProvider.Ins.DB.PHIEUKHAMBENHs.RemoveRange(relatedPHIEUKBs);
-            //        var relatedMaPKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).Select(pkb => pkb.MaPKB).ToList();
-            //        var relatedCT_PKBs = DataProvider.Ins.DB.CT_PKB.Where(ctpkb => relatedMaPKBs.Contains(ctpkb.MaPKB)).ToList();
-            //        DataProvider.Ins.DB.CT_PKB.RemoveRange(relatedCT_PKBs);
-
-            //        // Remove the selected BENHNHAN
-            //        DataProvider.Ins.DB.BENHNHANs.Remove(selectedItem);
-
-            //        // Save changes to the database
-            //        DataProvider.Ins.DB.SaveChanges();
-
-            //        // Remove the item from the list
-            //        listMed.Remove(selectedItem);
-       
-            //        QuanLiTiepDonView quanLiTiepDonView = new QuanLiTiepDonView();
-            //        quanLiTiepDonView.txbSLBNDK.Text = listMed.Count.ToString();
-            //        quanLiTiepDonView.txbSLBNDK.FontSize = 25;
-            //    }
-            //}
+            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa thuốc này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (r == MessageBoxResult.Yes)
+            {
+                if (selectedItem != null)
+                {
+                    Const.ListThuocTemp.Remove(selectedItem);
+                    MessageBox.Show("Xóa thành công", "Thông báo");
+                }
+            }
         }
 
         void LoadData()

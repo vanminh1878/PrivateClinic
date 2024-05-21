@@ -49,5 +49,19 @@ namespace PrivateClinic.View.QuanLiTiepDon
 
             NgKham.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is BenhNhanDangKhamViewModel viewModel)
+            {
+                var selected= (sender as System.Windows.Controls.Button)?.CommandParameter as ThuocDTO;
+
+                if (selected != null)
+                {
+                    viewModel.EditThuocCommand.Execute(selected);
+
+                }
+            }
+        }
+
     }
 }
