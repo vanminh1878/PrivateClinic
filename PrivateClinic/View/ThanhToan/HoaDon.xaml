@@ -13,7 +13,8 @@
       x:Name="HoaDonViewPage"
       Title="HoaDonView">
     <Window.InputBindings>
-        <KeyBinding Key="F2" Command="{Binding CancelCommand}" />
+        <KeyBinding Key="F2" Command="{Binding CancelCommand}" 
+                    CommandParameter="{Binding ElementName=HoaDonViewPage}" />
     </Window.InputBindings>
     <Window.Resources>
         <convert:IndexConverter x:Key="indexConverter"/>
