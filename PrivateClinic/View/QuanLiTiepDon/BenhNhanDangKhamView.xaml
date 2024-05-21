@@ -151,11 +151,12 @@
                 <!--Nội dung-->
                 <TextBox
                     TextWrapping="Wrap"
-                    VerticalScrollBarVisibility="Auto"
-                    Height="100"
+                    VerticalScrollBarVisibility="Hidden"
+                    Height="80"
                     Padding="5,0,0,0"
                     BorderThickness="0"
-                    Text="Nhập vào triệu chứng"
+                    materialDesign:HintAssist.Hint="Nhập triệu chứng bệnh"
+
                     Width="390"
                     />
             </Border>
@@ -239,32 +240,39 @@
                 </Grid>
 
                 <!--Chẩn đoán-->
-                <TextBlock Text="Chẩn đoán"
+                <TextBlock Text="Loại bệnh"
                            Grid.Column="1"
                            FontWeight="Medium"
-                           Margin="0,10,0,0"/>
+                           Margin="0,20,0,0"/>
 
+
+
+                <!--Loại bệnh-->
                 <Border Grid.Column="2"
-                        Height="55"
                         Width="390"
-                        VerticalAlignment="Center"
-                        Margin="0,5,30,30"
-                        BorderThickness="1"
+                        Height="35"
+                        HorizontalAlignment="Left"
+                        Margin="5,0,0,0"
+                        BorderThickness="0.7"
+                        CornerRadius="5"
                         BorderBrush="Black"
-                        CornerRadius="5">
-
-                    <!--Nội dung-->
-                    <TextBox
-                        TextWrapping="Wrap"
-                        VerticalScrollBarVisibility="Auto"
-                        Height="75"
-                        Margin="0,5,0,0"
+                        >
+                    <!--Tên thuốc-->
+                    <ComboBox
+                        Width="385"
+                        Height="35"
                         Padding="5,0,0,0"
+                        HorizontalAlignment="Left"
                         BorderThickness="0"
-                        Text="sốt cao"
-                        Width="390"
+                        VerticalContentAlignment="Center"
+                        materialDesign:HintAssist.Hint="Chọn loại bệnh"
+                        ItemsSource="{Binding ListLoaiBenh}"
+                        SelectedItem="{Binding SelectedLoaiBenh, Mode=TwoWay}"
+                        DisplayMemberPath="TenLoaiBenh"
                         />
+
                 </Border>
+
 
             </Grid>
 
@@ -296,7 +304,7 @@
             <Border
                 Width="427"
                 Height="44"
-                Margin="240,0,15,0"
+                Margin="255,0,15,0"
                 BorderThickness="0.7"
                 CornerRadius="4"
                 BorderBrush="Black"
@@ -340,30 +348,64 @@
 
         <!--Thêm thuốc-->
         <Grid Grid.Row="3">
-            <!--Nút thêm mới thuốc-->
-            <Button
-                ToolTip="Thêm bệnh nhân"
-                Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 35 0"  Width="170" Height="50" HorizontalAlignment="Right" >
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Border BorderBrush="Transparent" Background="#348F6C" CornerRadius="10">
-                                <Border.Effect>
-                                    <DropShadowEffect ShadowDepth="5" Color="Black" Opacity="0.5" BlurRadius="5"/>
-                                </Border.Effect>
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <Image HorizontalAlignment="Left" Source="{StaticResource icAdd}"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding AddCommand}"
-                                               CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,4,0">
+                <!--Nút Lưu-->
+                <Button
+                    Content="       Lưu (F3)"
+                    FontSize="22"
+                    FontFamily="Segoe UI"
+                    FontWeight="Bold"
+                    Margin="5 0 35 0"
+                    Width="170"
+                    Height="50"
+                    HorizontalAlignment="Right" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border BorderBrush="Transparent" Background="#364C9A" CornerRadius="10">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="5" Color="Black" Opacity="0.5" BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Image HorizontalAlignment="Left" Source="{StaticResource icSaveWhite}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveCommand}"
+                                                   CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button
+                    ToolTip="Thêm bệnh nhân"
+                    Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 35 0"  Width="170" Height="50" HorizontalAlignment="Right" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border BorderBrush="Transparent" Background="#348F6C" CornerRadius="10">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="5" Color="Black" Opacity="0.5" BlurRadius="5"/>
+                                    </Border.Effect>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Image HorizontalAlignment="Left" Source="{StaticResource icAdd}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding AddCommand}"
+                                                   CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
         </Grid>
 
         <!--Danh sách thuốc-->

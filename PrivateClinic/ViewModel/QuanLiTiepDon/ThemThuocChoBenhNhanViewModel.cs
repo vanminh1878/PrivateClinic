@@ -150,9 +150,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             DeleteCommand = new RelayCommand<ThuocDTO>((p) => p != null, DeleteAccept);
             SaveCommand = new ViewModelCommand(Save);
         }
-        void _CancelCommand(ThemThuocChoBenhNhanView paramater)
+        void _CancelCommand(object paramater)
         {
-            paramater.Close();
+            _view.Close();
         }
 
         private void XacDinhTenDonVi()

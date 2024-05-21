@@ -34,7 +34,7 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"/>
 
-            <!--Mã bệnh nhân + mã thuốc-->
+            <!--Tên thuốc + mã thuốc-->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
@@ -43,23 +43,30 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Mã BN:"
+                <TextBlock Text="Tên thuốc:"
                            VerticalAlignment="Center"
                            Margin="18,0,0,0"/>
-                <!--Mã bệnh nhân-->
-                <Border
-                    Grid.Column="1"
-                    Width="172"
-                    Height="40"
-                    BorderThickness="0.7"
-                    BorderBrush="Black"
-                    CornerRadius="10"
-                    HorizontalAlignment="Left">
-                    <TextBox Text=""
-                             VerticalAlignment="Center"
-                             Padding="5,0,0,0"
-                             BorderThickness="0"
-                             IsReadOnly="True"/>
+                <!--Tên thuốc-->
+                <!--Tên thuốc-->
+                <Border Grid.Column="1"
+                        Width="229"
+                        Height="35"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,0"
+                        BorderThickness="0.7"
+                        CornerRadius="10"
+                        BorderBrush="Black"
+                        >
+                    <!--Tên thuốc-->
+                    <ComboBox
+                        Width="226"
+                        Height="35"
+                        Padding="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        BorderThickness="0"
+                        VerticalContentAlignment="Center" ItemsSource="{Binding ListThuoc}"
+                        SelectedItem="{Binding SelectedThuoc, Mode=TwoWay}"
+                        DisplayMemberPath="TenThuoc"/>
 
                 </Border>
 
@@ -93,46 +100,17 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition  Width="150"/>
                     <ColumnDefinition  Width="260"/>
-                    <ColumnDefinition  Width="100"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition  Width="120"/>
+                    <ColumnDefinition  Width="200"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Tên thuốc:"
-                           VerticalAlignment="Center"
-                           Margin="15,0,0,0"/>
-                <!--Tên thuốc-->
-                <Border Grid.Column="1"
-                        Width="229"
-                        Height="35"
-                        HorizontalAlignment="Left"
-                        Margin="0,0,0,0"
-                        BorderThickness="0.7"
-                        CornerRadius="10"
-                        BorderBrush="Black"
-                        >
-                    <!--Tên thuốc-->
-                    <ComboBox
-                        Width="226"
-                        Height="35"
-                        Padding="5,0,0,0"
-                        HorizontalAlignment="Left"
-                        BorderThickness="0"
-                        x:Name="TenThuoc"
-                        VerticalContentAlignment="Center" ItemsSource="{Binding ListThuoc}"
-                        SelectedItem="{Binding SelectedThuoc, Mode=TwoWay}"
-                        DisplayMemberPath="TenThuoc"/>
-
-                </Border>
-
                 <TextBlock
-                    Grid.Column="2"
+                    Grid.Column="0"
                     Text="Đơn vị:"
                     VerticalAlignment="Center"
                     Margin="20,0,0,0"/>
                 <!--Đơn vị-->
-                <Border Grid.Column="3"
+                <Border Grid.Column="1"
                         Width="125"
                         Height="35"
                         HorizontalAlignment="Left"
@@ -158,13 +136,15 @@
                 </Border>
 
                 <TextBlock
-                    Grid.Column="4"
+                    Grid.Column="2"
                     Text="Số lượng:"
                     VerticalAlignment="Center"
-                    Margin="20,0,0,0"/>
+                    HorizontalAlignment="Right"
+                    Margin="0,0,14,0"/>
                 <!--Số lượng-->
-                <Border Margin="0,0,0,0"
+                <Border Margin="15,0,0,0"
                         BorderThickness="0.7"
+                        HorizontalAlignment="Left"
                         BorderBrush="Black"
                         CornerRadius="10"
                         Width="125"

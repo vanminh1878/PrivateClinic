@@ -40,6 +40,30 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 SoLuongThuocDangChon = ListThuocView.Count;
             }
         }
+        //Lấy danh sách các loại bệnh
+        private ObservableCollection<LOAIBENH> listloaibenh;
+        public ObservableCollection<LOAIBENH> ListLoaiBenh
+        {
+            get => listloaibenh;
+            set
+            {
+                listloaibenh = value;
+                OnPropertyChanged(nameof(ListLoaiBenh));
+            }
+        }
+        //Lấy đối tượng LoaiBenh
+        private LOAIBENH selectedLoaiBenh;
+        public LOAIBENH SelectedLoaiBenh
+        {
+            get => selectedLoaiBenh;
+            set
+            {
+                selectedLoaiBenh = value;
+                OnPropertyChanged(nameof (SelectedLoaiBenh));
+            }
+        }
+
+
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -56,6 +80,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         }
         public BenhNhanDangKhamViewModel()
         {
+            ListLoaiBenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENH);
             listMed = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
             AddThuoc();
             EditThuoc();
@@ -142,6 +167,6 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
 
         }
-       
+        
     }
 }
