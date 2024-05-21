@@ -25,6 +25,8 @@ namespace PrivateClinic.View.QuanLiTiepDon
         {
             InitializeComponent();
             SuaThongTinDonThuocViewModel viewModel = new SuaThongTinDonThuocViewModel();
+            viewModel.thuocDTO = thuoc;
+            viewModel.LoadEditCurrent();
             this.DataContext = viewModel;
         }
     }

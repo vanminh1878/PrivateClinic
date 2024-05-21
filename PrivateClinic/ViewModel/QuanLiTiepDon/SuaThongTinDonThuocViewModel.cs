@@ -118,6 +118,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 OnPropertyChanged(nameof(SoLuong));
             }
         }
+        public ThuocDTO thuocDTO { get; set; }
         public SuaThongTinDonThuocViewModel()
         {
             ListThuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
@@ -154,5 +155,30 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 MaThuoc = "";
             }
         }
+        //Hàm load thông tin hiện tại của item đang được chọn
+        public void LoadEditCurrent()
+        {
+            if (thuocDTO != null)
+            {
+                // Tìm và gán thuốc được chọn dựa trên MaThuoc của thuocDTO
+                SelectedThuoc = ListThuoc.FirstOrDefault(t => t.MaThuoc.ToString() == thuocDTO.MaThuoc);
+
+                // Tìm và gán cách dùng dựa trên tên cách dùng của thuocDTO
+                SelectedCachDung = ListCachDung.FirstOrDefault(cd => cd.TenCachDung == thuocDTO.CachDung);
+                MaThuoc = thuocDTO.MaThuoc;
+                // Gán các thuộc tính còn lại
+                DonVi = thuocDTO.DonVi;
+                SoLuong = thuocDTO.SoLuong;
+            }
+            else
+            {
+                // Nếu thuocDTO là null, reset các thuộc tính về giá trị mặc định
+                SelectedThuoc = null;
+                SelectedCachDung = null;
+                DonVi = string.Empty;
+                SoLuong = string.Empty;
+            }
+        }
+
     }
 }

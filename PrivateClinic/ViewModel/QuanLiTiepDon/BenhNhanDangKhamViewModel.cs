@@ -70,6 +70,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         }
         private void ShowWDEditThuoc(object obj)
         {
+            ThuocDTO thuoc = obj as ThuocDTO;
             SuaThongTinDonThuocView view = new SuaThongTinDonThuocView((ThuocDTO)obj);
             view.ShowDialog();
             LoadData();
