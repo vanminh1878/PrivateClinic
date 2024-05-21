@@ -307,7 +307,7 @@
                     <TextBox
                         Margin="20 0 0 0"
                         HorizontalAlignment="Left"
-                        materialDesign:HintAssist.Hint="Nhập họ tên thuốc đã thêm cần tìm"
+                        materialDesign:HintAssist.Hint="Nhập tên thuốc đã thêm cần tìm"
                         FontFamily="Segoe UI"
                         FontSize="20"
                         FontStyle="Italic"

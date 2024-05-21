@@ -79,17 +79,21 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         #endregion
         void _SearchCommand(BenhNhanDangKhamView parameter)
         {
-            ObservableCollection<THUOC> temp = new ObservableCollection<THUOC>();
-            if (!string.IsNullOrEmpty(parameter.txbSearch.Text))
+            ObservableCollection<ThuocDTO> temp = new ObservableCollection<ThuocDTO>();
+            if (ListThuocView != null)
             {
-                string searchKeyword = parameter.txbSearch.Text.ToLower();
-                temp = new ObservableCollection<THUOC>(listMed.Where(s => s.TenThuoc.ToLower().Contains(searchKeyword)));
+                if (!string.IsNullOrEmpty(parameter.txbSearch.Text))
+                {
+                    string searchKeyword = parameter.txbSearch.Text.ToLower();
+                    temp = new ObservableCollection<ThuocDTO>(ListThuocView.Where(s => s.TenThuoc.ToLower().Contains(searchKeyword)));
+                }
+                else
+                {
+                    temp = new ObservableCollection<ThuocDTO>(ListThuocView);
+                }
+                parameter.ListViewMed.ItemsSource = temp;
             }
-            else
-            {
-                temp = new ObservableCollection<THUOC>(listMed);
-            }
-            parameter.ListViewMed.ItemsSource = temp;
+            
         }
         void _DeleteCommand(ThuocDTO selectedItem)
         {
