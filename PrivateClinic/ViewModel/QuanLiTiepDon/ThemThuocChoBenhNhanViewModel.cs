@@ -120,6 +120,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public ICommand AddCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+
+        public ICommand DeleteCommand { get; set; }
         private ThemThuocChoBenhNhanView _view;
         #endregion
         public ThemThuocChoBenhNhanViewModel(ThemThuocChoBenhNhanView view)
@@ -131,6 +133,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             ListDVT = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVT);
             CancelCommand = new RelayCommand<ThemThuocChoBenhNhanView>((p) => true, (p) => _CancelCommand(p));
             AddCommand = new ViewModelCommand(AcceptAdd);
+            DeleteCommand = new RelayCommand<ThuocDTO>((p) => p != null, DeleteAccept);
         }
         void _CancelCommand(ThemThuocChoBenhNhanView paramater)
         {
@@ -163,6 +166,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
         }
         int stt = 0;
+
+        //Chức năng thêm
         private void AcceptAdd(object obj)
         {
             
@@ -177,18 +182,36 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
             else
             {
-                    ThuocDTO thuocDTO = new ThuocDTO();
-                    stt++;
-                    thuocDTO.STT = stt;
-                    thuocDTO.MaThuoc= MaThuoc;
-                    thuocDTO.TenThuoc = selectedThuoc.TenThuoc;
-                    thuocDTO.SoLuong = SoLuong;
-                    thuocDTO.CachDung = SelectedCachDung.TenCachDung;
-                    thuocDTO.DonVi = DonVi;
-                    ListThuocDTO.Add(thuocDTO);
-                    MessageBox.Show("Đã thêm","Thông báo",MessageBoxButton.OK);
+                ThuocDTO thuocDTO = new ThuocDTO();
+                stt++;
+                thuocDTO.STT = stt;
+                thuocDTO.MaThuoc = MaThuoc;
+                thuocDTO.TenThuoc = selectedThuoc.TenThuoc;
+                thuocDTO.SoLuong = SoLuong;
+                thuocDTO.CachDung = SelectedCachDung.TenCachDung;
+                thuocDTO.DonVi = DonVi;
+                ListThuocDTO.Add(thuocDTO);
+                MessageBox.Show("Đã thêm", "Thông báo", MessageBoxButton.OK);
+                SelectedThuoc = null;
+                SoLuong = "";
+                SelectedCachDung = null;
+                DonVi = "";
+                MaThuoc = "";
             }
         }
+        //Chức năng xóa
+        private void DeleteAccept (ThuocDTO selecteditem)
+        {
+            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa thuốc này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (r == MessageBoxResult.Yes) 
+            {
+                if (selecteditem != null)
+                {
+                    ListThuocDTO.Remove(selecteditem);
+                }
+            }
+        }
+        
 
 
 
