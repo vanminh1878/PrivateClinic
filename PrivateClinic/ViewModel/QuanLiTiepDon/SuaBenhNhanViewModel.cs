@@ -58,17 +58,17 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin bệnh nhân ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (h == MessageBoxResult.Yes)
                 {
-                    int maBN = int.Parse(p.MaBN.Text);
-                    BENHNHAN a = DataProvider.Ins.DB.BENHNHANs.FirstOrDefault(bn => bn.MaBN == maBN);
-                    a.HoTen = p.HoTen.Text;
-                    a.GioiTinh = p.GioiTinh.Text;
-                    a.DiaChi = p.DiaChi.Text;
-                    a.NamSinh = (DateTime)p.NgSinh.SelectedDate;
-                    MessageBox.Show("Cập nhật thông tin bệnh nhân thành công!", "THÔNG BÁO");
-                    DataProvider.Ins.DB.SaveChanges();
-                    QuanLiTiepDonView quanlitiepdonView = new QuanLiTiepDonView();
-                    quanlitiepdonView.ListViewBN.ItemsSource = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
-                    quanlitiepdonView.ListViewBN.Items.Refresh();
+                    //int maBN = int.Parse(p.MaBN.Text);
+                    //BENHNHAN a = DataProvider.Ins.DB.BENHNHANs.FirstOrDefault(bn => bn.MaBN == maBN);
+                    //a.HoTen = p.HoTen.Text;
+                    //a.GioiTinh = p.GioiTinh.Text;
+                    //a.DiaChi = p.DiaChi.Text;
+                    //a.NamSinh = (DateTime)p.NgSinh.SelectedDate;
+                    //MessageBox.Show("Cập nhật thông tin bệnh nhân thành công!", "THÔNG BÁO");
+                    //DataProvider.Ins.DB.SaveChanges();
+                    //QuanLiTiepDonView quanlitiepdonView = new QuanLiTiepDonView();
+                    //quanlitiepdonView.ListViewBN.ItemsSource = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
+                    //quanlitiepdonView.ListViewBN.Items.Refresh();
                 }
             }
         }

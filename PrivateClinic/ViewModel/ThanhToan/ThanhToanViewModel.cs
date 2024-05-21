@@ -1,20 +1,10 @@
 ﻿using PrivateClinic.Model;
 using PrivateClinic.ViewModel.OtherViewModels;
 using PrivateClinic.View.ThanhToan;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Controls;
 using System.Windows;
-using MaterialDesignThemes.Wpf;
-using PrivateClinic.View.QuanLiTiepDon;
-using PrivateClinic.ViewModel.QuanLiTiepDon;
-using System.Windows.Documents;
-using System.Runtime.InteropServices;
 
 namespace PrivateClinic.ViewModel.ThanhToan
 {

@@ -1,12 +1,19 @@
 ﻿using PrivateClinic.Model;
 using PrivateClinic.View.ThanhToan;
 using PrivateClinic.ViewModel.OtherViewModels;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using static PrivateClinic.ViewModel.ThanhToan.ThanhToanViewModel;
+using Color = System.Drawing.Color;
+using FontStyle = System.Drawing.FontStyle;
+using Pen = System.Drawing.Pen;
 
 namespace PrivateClinic.ViewModel.ThanhToan
 {
@@ -119,56 +126,145 @@ namespace PrivateClinic.ViewModel.ThanhToan
                     invoiceToUpdate.TrangThai = ((int)PaymentStatus.Paid).ToString();
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thanh toán thành công!", "THÔNG BÁO");
-                    parameter.DialogResult = true;
+                    ConfirmPrintInvoice(parameter);
                 }
                 else
                 {
                     MessageBox.Show("Hóa đơn không tồn tại.", "Error");
+                    parameter.DialogResult = true;
+                    parameter.Close();
                 }
-                parameter.Close();
-
             }
         }
+
+
 
         void _CancelCommand(HoaDonView parameter)
         {
             parameter.Close();
         }
-    }
-    public class MedicationDetails : BaseViewModel
-    {
-        private THUOC _thuoc;
-        public THUOC Thuoc
+
+        private void ConfirmPrintInvoice(HoaDonView parameter)
         {
-            get => _thuoc;
-            set
+            MessageBoxResult printConfirmation = MessageBox.Show("Bạn có muốn in hóa đơn không?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (printConfirmation == MessageBoxResult.Yes)
             {
-                _thuoc = value;
-                OnPropertyChanged(nameof(Thuoc));
-                OnPropertyChanged(nameof(TienThuoc));
+                PrintInvoice();
             }
+
+            parameter.DialogResult = true;
+            parameter.Close();
         }
 
-        private int _soLuong;
-        public int SoLuong
+
+        private void PrintInvoice()
         {
-            get => _soLuong;
-            set
-            {
-                _soLuong = value;
-                OnPropertyChanged(nameof(SoLuong));
-                OnPropertyChanged(nameof(TienThuoc));
-            }
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += new PrintPageEventHandler(PrintPage);
+            printDocument.Print();
         }
 
-        private float _tienThuoc;
-        public float TienThuoc
+        private void PrintPage(object sender, PrintPageEventArgs e)
         {
-            get => _tienThuoc;
-            set
+            Graphics graphics = e.Graphics;
+            Font titleFont = new Font("Segoe UI", 18, FontStyle.Bold);
+            Font headerFont = new Font("Segoe UI", 14, FontStyle.Bold);
+            Font bodyFont = new Font("Segoe UI", 12);
+            float fontHeight = bodyFont.GetHeight();
+            int startX = 10;
+            int startY = 10;
+            int offset = 40;
+
+            graphics.DrawString("Hóa đơn thanh toán", titleFont, new SolidBrush(Color.Black), startX, startY);
+            offset += titleFont.Height + 10;
+
+            graphics.DrawString("Mã hóa đơn: " + CurrentHoaDon.SoHD, headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+            offset += headerFont.Height + 5;
+            graphics.DrawString("Họ và tên: " + CurrentHoaDon.BENHNHAN.HoTen, headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+            offset += headerFont.Height + 5;
+
+            string ngayKhamText = PhieuKhamBenh != null ? PhieuKhamBenh.NgayKham.ToString("dd/MM/yyyy") : "Không xác định";
+            graphics.DrawString("Ngày khám: " + ngayKhamText, headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+            offset += headerFont.Height + 5;
+
+            int yearOfBirth;
+            int age = int.TryParse(CurrentHoaDon.BENHNHAN.NamSinh.ToString(), out yearOfBirth) ? DateTime.Now.Year - yearOfBirth : -1;
+            graphics.DrawString("Tuổi: " + (age != -1 ? age.ToString() : "Không xác định"), headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+            offset += headerFont.Height + 5;
+
+            graphics.DrawString("Tổng tiền: " + CurrentHoaDon.TongTien.ToString("#,##0") + " VND", headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+            offset += headerFont.Height + 20;
+
+            Pen pen = new Pen(Color.Black);
+            graphics.DrawLine(pen, startX, startY + offset, startX + 600, startY + offset);
+            offset += 10;
+
+            graphics.DrawString("STT", headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+            graphics.DrawString("Tên thuốc", headerFont, new SolidBrush(Color.Black), startX + 40, startY + offset);
+            graphics.DrawString("Số lượng", headerFont, new SolidBrush(Color.Black), startX + 250, startY + offset);
+            graphics.DrawString("Đơn giá", headerFont, new SolidBrush(Color.Black), startX + 350, startY + offset);
+            graphics.DrawString("Thành tiền", headerFont, new SolidBrush(Color.Black), startX + 450, startY + offset);
+            offset += headerFont.Height + 10;
+
+            graphics.DrawLine(pen, startX, startY + offset, startX + 600, startY + offset);
+            offset += 10;
+
+            for (int i = 0; i < ListThuoc.Count; i++)
             {
-                _tienThuoc = value;
-                OnPropertyChanged(nameof(TienThuoc));
+                var item = ListThuoc[i];
+                graphics.DrawString((i + 1).ToString(), bodyFont, new SolidBrush(Color.Black), startX, startY + offset);
+                graphics.DrawString(item.Thuoc.TenThuoc, bodyFont, new SolidBrush(Color.Black), startX + 40, startY + offset);
+                graphics.DrawString(item.SoLuong.ToString(), bodyFont, new SolidBrush(Color.Black), startX + 250, startY + offset);
+                graphics.DrawString(item.Thuoc.DonGiaBan?.ToString("#,##0") + " VND", bodyFont, new SolidBrush(Color.Black), startX + 350, startY + offset);
+                graphics.DrawString(item.TienThuoc.ToString("#,##0") + " VND", bodyFont, new SolidBrush(Color.Black), startX + 450, startY + offset);
+                offset += bodyFont.Height + 5;
+            }
+
+            graphics.DrawLine(pen, startX, startY + offset, startX + 600, startY + offset);
+            offset += 20;
+
+            float totalMedicationCost = ListThuoc.Sum(item => item.TienThuoc);
+            graphics.DrawString("Tổng tiền thuốc: " + totalMedicationCost.ToString("#,##0") + " VND", headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+            offset += headerFont.Height + 5;
+
+            graphics.DrawString("Tổng cộng: " + CurrentHoaDon.TongTien.ToString("#,##0") + " VND", headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+        }
+
+        public class MedicationDetails : BaseViewModel
+        {
+            private THUOC _thuoc;
+            public THUOC Thuoc
+            {
+                get => _thuoc;
+                set
+                {
+                    _thuoc = value;
+                    OnPropertyChanged(nameof(Thuoc));
+                    OnPropertyChanged(nameof(TienThuoc));
+                }
+            }
+
+            private int _soLuong;
+            public int SoLuong
+            {
+                get => _soLuong;
+                set
+                {
+                    _soLuong = value;
+                    OnPropertyChanged(nameof(SoLuong));
+                    OnPropertyChanged(nameof(TienThuoc));
+                }
+            }
+
+            private float _tienThuoc;
+            public float TienThuoc
+            {
+                get => _tienThuoc;
+                set
+                {
+                    _tienThuoc = value;
+                    OnPropertyChanged(nameof(TienThuoc));
+                }
             }
         }
     }

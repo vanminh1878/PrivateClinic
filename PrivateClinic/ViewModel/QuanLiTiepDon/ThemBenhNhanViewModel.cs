@@ -47,7 +47,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
                         if (int.TryParse(paramater.MaBN.Text, out int intMaBN))
                         {
-                            a.MaBN = intMaBN;
+                            //a.MaBN = intMaBN;
                         }
                         else
                         {
