@@ -106,8 +106,8 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         Background="#F5F5F5"
-                        BorderThickness="2"
                         BorderBrush="Transparent"
+                        BorderThickness="2"
                         FontSize="22">
                         <Button.Content>
                             <TextBlock
@@ -128,8 +128,8 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         Background="#F5F5F5"
-                        BorderThickness="2"
                         BorderBrush="Transparent"
+                        BorderThickness="2"
                         FontSize="22">
                         <Button.Content>
                             <TextBlock
@@ -153,8 +153,7 @@
                     Margin="350,10,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Orientation="Vertical">
-                </StackPanel>
+                    Orientation="Vertical" />
             </Grid>
 
             <Grid Grid.Row="3">
@@ -162,41 +161,73 @@
                     Margin="30,20,0,0"
                     VerticalAlignment="Top"
                     Orientation="Horizontal">
-                    <Image
-                        Width="40"
-                        Height="40"
-                        Source="{StaticResource icPill}"
-                        Stretch="Uniform" />
 
                     <Border VerticalAlignment="Center">
-                        <TextBlock
+                        <!--<TextBlock
                             VerticalAlignment="Center"
                             FontSize="30"
                             FontWeight="SemiBold"
                             Foreground="#348F6C"
-                            Text="Số loại thuốc trong kho: 30" />
+                            Text="Số loại thuốc trong kho" />-->
+                        <!--  Tiêu đề  -->
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <Image
+                                Width="45"
+                                Height="45"
+                                Source="{StaticResource icPill}" />
+
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                FontWeight="Bold"
+                                Foreground="#348F6C"
+                                Text="Số thuốc trong kho:" />
+
+                            <!--  Tổng số loại thuốc  -->
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                FontWeight="Bold"
+                                Foreground="#348F6C"
+                                Text="{Binding SoLuongThuoc}" />
+                        </StackPanel>
                     </Border>
                 </StackPanel>
-                <Button 
-    ToolTip="Thêm bệnh nhân"
-    Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 20 0"  Width="170" Height="50" HorizontalAlignment="Right" >
+                <Button
+                    Width="170"
+                    Height="50"
+                    Margin="5,0,20,0"
+                    HorizontalAlignment="Right"
+                    Content="       Thêm (F1)"
+                    FontFamily="Segoe UI"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    ToolTip="Thêm bệnh nhân">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>
-                                <Border BorderBrush="Transparent" Background="#348F6C" CornerRadius="10">
+                                <Border
+                                    Background="#348F6C"
+                                    BorderBrush="Transparent"
+                                    CornerRadius="10">
                                     <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="5" Color="Black" Opacity="0.5" BlurRadius="5"/>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="0.5"
+                                            ShadowDepth="5"
+                                            Color="Black" />
                                     </Border.Effect>
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
-                                <Image HorizontalAlignment="Left" Source="{StaticResource icAdd}"/>
+                                <Image HorizontalAlignment="Left" Source="{StaticResource icAdd}" />
                             </Grid>
                         </ControlTemplate>
                     </Button.Template>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding AddMedicineCommand}"
-   CommandParameter="{Binding ElementName=QuanLiKhoThuocViewPage}" />
+                            <i:InvokeCommandAction Command="{Binding AddMedicineCommand}" CommandParameter="{Binding ElementName=QuanLiKhoThuocViewPage}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
@@ -295,8 +326,7 @@
                     ItemsSource="{Binding listMed}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                    SelectedItem="selecteditem "
-                    >
+                    SelectedItem="selecteditem ">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -376,7 +406,7 @@
                                             <Button
                                                 Width="40"
                                                 Height="40"
-                                                Margin="0,0,10,10"
+                                                Margin="0,0,0,0"
                                                 HorizontalAlignment="Right"
                                                 Click="EditMedicineButton_Click"
                                                 Command="{Binding EditMedicineCommand}"
@@ -390,7 +420,7 @@
                                                     </ControlTemplate>
                                                 </Button.Template>
                                             </Button>
-                                            <Button
+                                            <!--<Button
                                                 Width="40"
                                                 Height="40"
                                                 Margin="0,0,0,4"
@@ -407,7 +437,7 @@
                                                         </Grid>
                                                     </ControlTemplate>
                                                 </Button.Template>
-                                            </Button>
+                                            </Button>-->
                                         </StackPanel>
                                     </Grid>
                                     <Border
@@ -427,8 +457,7 @@
                     </ListView.ItemsPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding DetailMedicineCommand}"
-                      CommandParameter="{Binding ElementName=QuanLiKhoThuocViewPage}"></i:InvokeCommandAction>
+                            <i:InvokeCommandAction Command="{Binding DetailMedicineCommand}" CommandParameter="{Binding ElementName=QuanLiKhoThuocViewPage}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListView>

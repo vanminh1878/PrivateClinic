@@ -40,7 +40,10 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         public ObservableCollection<ThuocDTO> listMed
         {
             get => _listMed;
-            set { _listMed = value; OnPropertyChanged(nameof(listMed)); }
+            set
+            {
+                _listMed = value; OnPropertyChanged(nameof(listMed));
+            }
 
         }
 
@@ -53,6 +56,19 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
         }
 
+        private int soLuongThuoc;
+        public int SoLuongThuoc
+        {
+            get => soLuongThuoc;
+            set
+            {
+                if (soLuongThuoc != value)
+                {
+                    soLuongThuoc = value;
+                    OnPropertyChanged(nameof(SoLuongThuoc));
+                }
+            }
+        }
 
 
         public ICommand AddMedicineCommand { get; set; }
@@ -60,14 +76,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         public ICommand DeleteMedicineCommand { get; set; }
         public ICommand DetailMedicineCommand { get; set; }
 
+
         public QuanLyThuocViewModel()
         {
-            LoadMedicines();
+            LoadData();
             AddMedicineCommand = new RelayCommand<QuanLiKhoThuocView>((p) => { return p == null ? false : true; }, (p) => _AddMedicineCommand(p));
             EditMedicineCommand = new RelayCommand<ThuocDTO>((p) => { return p == null ? false : true; }, (p) => _EditMedicineCommand(p));
             DeleteMedicineCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _DeleteMedicineCommand(p));
             DetailMedicineCommand = new RelayCommand<QuanLiKhoThuocView>((p) => { return p == null ? false : true; }, (p) => _DetailMedicineCommand(p));
-            LoadData();
         }
         void LoadData()
         {
@@ -75,9 +91,9 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             donvitinh = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
             listMed = new ObservableCollection<ThuocDTO>();
             int stt = 1;
-            foreach(var  thuoc in Thuoc)
+            foreach (var thuoc in Thuoc)
             {
-                foreach(var dvt in donvitinh)
+                foreach (var dvt in donvitinh)
                 {
                     ThuocDTO thuocDTO = new ThuocDTO()
                     {
@@ -86,7 +102,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                         MaThuoc = thuoc.MaThuoc,
                         TenThuoc = thuoc.TenThuoc,
                         Gia = thuoc.DonGiaNhap,
-                        SL= thuoc.SoLuong
+                        SL = thuoc.SoLuong
 
                     };
                     listMed.Add(thuocDTO);
@@ -94,6 +110,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     break;
                 }
             }
+            SoLuongThuoc = listMed.Count();
         }
 
         private void LoadMedicines()
@@ -209,6 +226,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             detail.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             detail.ShowDialog();
         }
+
+
 
 
     }

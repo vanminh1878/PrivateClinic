@@ -3,9 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    x:Name="ThemThuocCuViewPage"
     d:DesignHeight="345"
     d:DesignWidth="877"
     Background="Transparent"
@@ -13,7 +14,6 @@
     TextElement.FontSize="22"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    x:Name="ThemThuocCuViewPage"
     mc:Ignorable="d">
 
 
@@ -99,8 +99,7 @@
                         Margin="-1,0,0,0"
                         Padding="5,0,0,0"
                         HorizontalAlignment="Left"
-                        VerticalContentAlignment="Center"
-                         />
+                        VerticalContentAlignment="Center" />
 
                 </Border>
 
@@ -110,27 +109,27 @@
 
             <Grid Grid.Row="2">
                 <Button
-Width="170"
-Height="50"
-Margin="5,0,30,0"
-HorizontalAlignment="Right"
-Content="       Lưu (F3)"
-FontFamily="Segoe UI"
-FontSize="22"
-FontWeight="Bold">
+                    Width="170"
+                    Height="50"
+                    Margin="5,0,30,0"
+                    HorizontalAlignment="Right"
+                    Content="       Lưu (F3)"
+                    FontFamily="Segoe UI"
+                    FontSize="22"
+                    FontWeight="Bold">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>
                                 <Border
-                Background="#364C9A"
-                BorderBrush="Transparent"
-                CornerRadius="10">
+                                    Background="#364C9A"
+                                    BorderBrush="Transparent"
+                                    CornerRadius="10">
                                     <Border.Effect>
                                         <DropShadowEffect
-                        BlurRadius="5"
-                        Opacity="0.5"
-                        ShadowDepth="5"
-                        Color="Black" />
+                                            BlurRadius="5"
+                                            Opacity="0.5"
+                                            ShadowDepth="5"
+                                            Color="Black" />
                                     </Border.Effect>
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>

@@ -5,20 +5,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     x:Name="ThayDoiThongTinThuocViewPage"
     Title="ThayDoiThongTinThuocView"
-    Height="632"
     Width="877"
-    ResizeMode="NoResize"
-Background="Transparent"
-AllowsTransparency="True"
-    WindowStyle="None"
+    Height="550"
+    AllowsTransparency="True"
+    Background="Transparent"
     FontFamily="Segoe UI"
+    ResizeMode="NoResize"
     TextElement.FontSize="22"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Border
         Padding="10"
@@ -28,18 +28,18 @@ AllowsTransparency="True"
         CornerRadius="12">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="100" />
 
-                <RowDefinition/>
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <TextBlock
-    Margin="10"
-    HorizontalAlignment="Center"
-    VerticalAlignment="Center"
-    FontSize="30"
-    FontWeight="Bold"
-    Text="Sửa thuốc" />
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="34"
+                    FontWeight="Bold"
+                    Text="Sửa thuốc" />
             </Grid>
 
             <Grid Grid.Row="1">
@@ -58,32 +58,32 @@ AllowsTransparency="True"
                     <Grid Grid.Row="0">
                         <WrapPanel VerticalAlignment="Center">
                             <TextBlock
-     Grid.Column="0"
-     Margin="10,0,50,10"
-     HorizontalAlignment="Center"
-     VerticalAlignment="Center"
+                                Grid.Column="0"
+                                Margin="10,0,50,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 FontSize="22"
-     Text="Mã thuốc:" />
+                                Text="Mã thuốc:" />
                             <Border
-     Grid.Column="1"
-     Width="150"
-     Height="40"
-     Margin="0,0,0,10"
-     HorizontalAlignment="Left"
-     BorderBrush="Black"
-     BorderThickness="0.7"
-     CornerRadius="10">
+                                Grid.Column="1"
+                                Width="150"
+                                Height="40"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Left"
+                                BorderBrush="Black"
+                                BorderThickness="0.7"
+                                CornerRadius="10">
 
                                 <TextBox
-         x:Name="MaThuoc"
-         Width="180"
-         Height="40"
-         Padding="15,0,0,0"
-         HorizontalAlignment="Left"
-         VerticalAlignment="Center"
-         VerticalContentAlignment="Center"
-                                    FontSize="20"
-         materialDesign:HintAssist.Hint="Mã thuốc" />
+                                    x:Name="MaThuoc"
+                                    Width="180"
+                                    Height="40"
+                                    Padding="15,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Mã thuốc"
+                                    FontSize="20" />
 
                             </Border>
 
@@ -92,32 +92,32 @@ AllowsTransparency="True"
                     <Grid Grid.Row="1">
                         <WrapPanel VerticalAlignment="Center">
                             <TextBlock
-Grid.Column="0"
-Margin="10,0,50,10"
-HorizontalAlignment="Center"
-VerticalAlignment="Center"
-                           FontSize="22"
-Text="Tên thuốc:" />
+                                Grid.Column="0"
+                                Margin="10,0,50,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="22"
+                                Text="Tên thuốc:" />
                             <Border
-Grid.Column="1"
-Width="180"
-Height="40"
-Margin="0,0,0,10"
-HorizontalAlignment="Left"
-BorderBrush="Black"
-BorderThickness="0.7"
-CornerRadius="10">
+                                Grid.Column="1"
+                                Width="180"
+                                Height="40"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Left"
+                                BorderBrush="Black"
+                                BorderThickness="0.7"
+                                CornerRadius="10">
 
                                 <TextBox
-    x:Name="TenThuoc"
-    Width="180"
-    Height="40"
-    Padding="15,0,0,0"
-    HorizontalAlignment="Left"
-    VerticalAlignment="Center"
-    VerticalContentAlignment="Center"
-                               FontSize="20"
-    materialDesign:HintAssist.Hint="Nhập tên thuốc" />
+                                    x:Name="TenThuoc"
+                                    Width="180"
+                                    Height="40"
+                                    Padding="15,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Nhập tên thuốc"
+                                    FontSize="20" />
 
                             </Border>
 
@@ -126,33 +126,37 @@ CornerRadius="10">
                     <Grid Grid.Row="2">
                         <WrapPanel VerticalAlignment="Center">
                             <TextBlock
-Grid.Column="0"
-Margin="10,0,50,10"
-HorizontalAlignment="Center"
-VerticalAlignment="Center"
-                           FontSize="22"
-Text="Đơn vị tính:" />
+                                Grid.Column="0"
+                                Margin="10,0,50,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="22"
+                                Text="Đơn vị tính:" />
                             <Border
-Grid.Column="1"
-Width="180"
-Height="40"
-Margin="-10,0,0,10"
-HorizontalAlignment="Left"
-BorderBrush="Black"
-BorderThickness="0.7"
-CornerRadius="10">
+                                Grid.Column="1"
+                                Width="180"
+                                Height="40"
+                                Margin="-10,0,0,10"
+                                HorizontalAlignment="Left"
+                                BorderBrush="Black"
+                                BorderThickness="0.7"
+                                CornerRadius="10">
 
                                 <ComboBox
-    x:Name="TenDVT"
-    Width="170"
-    Height="40"
-    Padding="15,0,0,0"
-      ItemsSource="{Binding tenDVTs}"                      
-    HorizontalAlignment="Left"
-    VerticalAlignment="Center"
-    VerticalContentAlignment="Center"
-                               FontSize="20"
-    materialDesign:HintAssist.Hint="Chọn DVT" />
+                                    x:Name="TenDVT"
+                                    Width="170"
+                                    Height="40"
+                                    Padding="15,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Chọn DVT"
+                                    FontSize="20"
+                                    ItemsSource="{Binding tenDVTs}">
+
+                                    <ComboBoxItem Content="Viên" />
+                                    <ComboBoxItem Content="Chai" />
+                                </ComboBox>
 
                             </Border>
 
@@ -164,38 +168,38 @@ CornerRadius="10">
                         <RowDefinition Height="100" />
                         <RowDefinition Height="100" />
                         <RowDefinition Height="100" />
-                        <RowDefinition Height="100" />
+
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <WrapPanel VerticalAlignment="Center">
                             <TextBlock
-     Grid.Column="0"
-     Margin="10,0,50,10"
-     HorizontalAlignment="Center"
-     VerticalAlignment="Center"
+                                Grid.Column="0"
+                                Margin="10,0,50,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 FontSize="22"
-     Text="Số Lượng:" />
+                                Text="Số Lượng:" />
                             <Border
-     Grid.Column="1"
-     Width="180"
-     Height="40"
-     Margin="0,0,0,10"
-     HorizontalAlignment="Left"
-     BorderBrush="Black"
-     BorderThickness="0.7"
-     CornerRadius="10">
+                                Grid.Column="1"
+                                Width="180"
+                                Height="40"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Left"
+                                BorderBrush="Black"
+                                BorderThickness="0.7"
+                                CornerRadius="10">
 
                                 <TextBox
-         x:Name="SoLuong"
-         Width="180"
-         Height="40"
-         Padding="15,0,0,0"
-         HorizontalAlignment="Left"
-         VerticalAlignment="Center"
-         VerticalContentAlignment="Center"
-                                    FontSize="20"
-         materialDesign:HintAssist.Hint="Nhập số lượng" />
+                                    x:Name="SoLuong"
+                                    Width="180"
+                                    Height="40"
+                                    Padding="15,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Nhập số lượng"
+                                    FontSize="20" />
 
                             </Border>
 
@@ -204,32 +208,32 @@ CornerRadius="10">
                     <Grid Grid.Row="1">
                         <WrapPanel VerticalAlignment="Center">
                             <TextBlock
-Grid.Column="0"
-Margin="10,0,50,10"
-HorizontalAlignment="Center"
-VerticalAlignment="Center"
-                           FontSize="22"
-Text="Giá Nhập:" />
+                                Grid.Column="0"
+                                Margin="10,0,50,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="22"
+                                Text="Giá Nhập:" />
                             <Border
-Grid.Column="1"
-Width="180"
-Height="40"
-Margin="0,0,0,10"
-HorizontalAlignment="Left"
-BorderBrush="Black"
-BorderThickness="0.7"
-CornerRadius="10">
+                                Grid.Column="1"
+                                Width="180"
+                                Height="40"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Left"
+                                BorderBrush="Black"
+                                BorderThickness="0.7"
+                                CornerRadius="10">
 
                                 <TextBox
-    x:Name="DonGiaNhap"
-    Width="180"
-    Height="40"
-    Padding="15,0,0,0"
-    HorizontalAlignment="Left"
-    VerticalAlignment="Center"
-    VerticalContentAlignment="Center"
-                               FontSize="20"
-    materialDesign:HintAssist.Hint="Nhập giá nhập" />
+                                    x:Name="DonGiaNhap"
+                                    Width="180"
+                                    Height="40"
+                                    Padding="15,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Nhập giá nhập"
+                                    FontSize="20" />
 
                             </Border>
 
@@ -238,33 +242,32 @@ CornerRadius="10">
                     <Grid Grid.Row="2">
                         <WrapPanel VerticalAlignment="Center">
                             <TextBlock
-Grid.Column="0"
-Margin="10,0,50,10"
-HorizontalAlignment="Center"
-VerticalAlignment="Center"
-                           FontSize="22"
-Text="Ngày nhập:" />
+                                Grid.Column="0"
+                                Margin="10,0,50,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="22"
+                                Text="Ngày nhập:" />
                             <Border
-Grid.Column="1"
-Width="220"
-Height="40"
-Margin="-13,0,0,10"
-HorizontalAlignment="Left"
-BorderBrush="Black"
-BorderThickness="0.7"
-CornerRadius="10">
+                                Grid.Column="1"
+                                Width="220"
+                                Height="40"
+                                Margin="-13,0,0,10"
+                                HorizontalAlignment="Left"
+                                BorderBrush="Black"
+                                BorderThickness="0.7"
+                                CornerRadius="10">
 
                                 <DatePicker
-    x:Name="NgayNhap"
-    Width="200"
-    Height="40"
-    Padding="15,0,0,0"
-                                    
-    HorizontalAlignment="Left"
-    VerticalAlignment="Center"
-    VerticalContentAlignment="Center"
-                               FontSize="20"
-    materialDesign:HintAssist.Hint="Chọn ngày nhập" />
+                                    x:Name="NgayNhap"
+                                    Width="200"
+                                    Height="40"
+                                    Padding="15,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Chọn ngày nhập"
+                                    FontSize="20" />
 
                             </Border>
 
@@ -272,31 +275,29 @@ CornerRadius="10">
                     </Grid>
 
                     <Grid Grid.Row="4">
-                    
-                     
 
                         <Button
-                        Width="170"
-                        Height="50"
-                        Margin="5,0,22,0"
-                        HorizontalAlignment="Left"
-                        Content="       Hủy (F2)"
-                        FontFamily="Segoe UI"
-                        FontSize="22"
-                        FontWeight="Bold">
+                            Width="170"
+                            Height="50"
+                            Margin="5,0,22,0"
+                            HorizontalAlignment="Left"
+                            Content="       Hủy (F2)"
+                            FontFamily="Segoe UI"
+                            FontSize="22"
+                            FontWeight="Bold">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid>
                                         <Border
-                                        Background="#D51F2A"
-                                        BorderBrush="Transparent"
-                                        CornerRadius="10">
+                                            Background="#D51F2A"
+                                            BorderBrush="Transparent"
+                                            CornerRadius="10">
                                             <Border.Effect>
                                                 <DropShadowEffect
-                                                BlurRadius="5"
-                                                Opacity="0.5"
-                                                ShadowDepth="5"
-                                                Color="Black" />
+                                                    BlurRadius="5"
+                                                    Opacity="0.5"
+                                                    ShadowDepth="5"
+                                                    Color="Black" />
                                             </Border.Effect>
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
@@ -312,40 +313,40 @@ CornerRadius="10">
                         </Button>
 
                         <Button
-                        Width="170"
-                        Height="50"
-                        Margin="5,0,30,0"
-                        HorizontalAlignment="Right"
-                        Content="       Lưu (F3)"
-                        FontFamily="Segoe UI"
-                        FontSize="22"
-                        FontWeight="Bold">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <Border
-                                        Background="#364C9A"
-                                        BorderBrush="Transparent"
-                                        CornerRadius="10">
-                                        <Border.Effect>
-                                            <DropShadowEffect
-                                                BlurRadius="5"
-                                                Opacity="0.5"
-                                                ShadowDepth="5"
-                                                Color="Black" />
-                                        </Border.Effect>
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Border>
-                                    <Image HorizontalAlignment="Left" Source="{StaticResource icSaveWhite}" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=ThayDoiThongTinThuocViewPage}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
+                            Width="170"
+                            Height="50"
+                            Margin="5,0,30,0"
+                            HorizontalAlignment="Right"
+                            Content="       Lưu (F3)"
+                            FontFamily="Segoe UI"
+                            FontSize="22"
+                            FontWeight="Bold">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <Border
+                                            Background="#364C9A"
+                                            BorderBrush="Transparent"
+                                            CornerRadius="10">
+                                            <Border.Effect>
+                                                <DropShadowEffect
+                                                    BlurRadius="5"
+                                                    Opacity="0.5"
+                                                    ShadowDepth="5"
+                                                    Color="Black" />
+                                            </Border.Effect>
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <Image HorizontalAlignment="Left" Source="{StaticResource icSaveWhite}" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=ThayDoiThongTinThuocViewPage}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
