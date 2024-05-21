@@ -15,6 +15,8 @@ namespace PrivateClinic.Model
         public static NGUOIDUNG ND { get; set; }
         public static PHANQUYEN PQ { get; set; }
         public static ObservableCollection<ThuocDTO> ListThuoc { get; set; }
+        public static ObservableCollection<ThuocDTO> ListThuocTemp { get; set; }
+
 
         public static string _localLink = System.Reflection.Assembly.GetExecutingAssembly().Location.Remove(System.Reflection.Assembly.GetExecutingAssembly().Location.IndexOf(@"bin\Debug"));
     }

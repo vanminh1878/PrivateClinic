@@ -8,6 +8,7 @@ using PrivateClinic.View.QuanLiTiepDon;
 using System.Windows.Input;
 using PrivateClinic.Model;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
@@ -119,12 +120,15 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
         }
         public ThuocDTO thuocDTO { get; set; }
-        public SuaThongTinDonThuocViewModel()
+        private SuaThongTinDonThuocView _view;
+        public SuaThongTinDonThuocViewModel(SuaThongTinDonThuocView view)
         {
+            this._view = view;
             ListThuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
             ListCachDung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNG);
             ListDVT = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVT);
             CancelCommand = new RelayCommand<SuaThongTinDonThuocView>((p) => true, (p) => _CancelCommand(p));
+            SaveCommand = new ViewModelCommand(acceptSave);
         }
         void _CancelCommand(SuaThongTinDonThuocView paramater)
         {
@@ -180,5 +184,21 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
         }
 
+        //Hàm lưu thông tin thuốc
+        void acceptSave(object obj)
+        {
+            MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin thuốc ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (h == MessageBoxResult.Yes)
+            {
+                ThuocDTO thuoc = Const.ListThuocTemp.FirstOrDefault(t => t.MaThuoc == thuocDTO.MaThuoc);
+                thuoc.MaThuoc = MaThuoc;
+                thuoc.DonVi = DonVi;
+                thuoc.SoLuong = SoLuong;
+                thuoc.TenThuoc = SelectedThuoc.TenThuoc;
+                thuoc.CachDung = SelectedCachDung.TenCachDung;
+                MessageBox.Show("Thành công", "Thông báo");
+                _view.Close();
+            }
+        }
     }
 }

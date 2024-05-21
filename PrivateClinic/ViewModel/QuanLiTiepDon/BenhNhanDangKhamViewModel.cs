@@ -143,9 +143,11 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     ListThuocView.Add(thuocDTO);
                 }
                 Const.ListThuoc.Clear();
+                Const.ListThuocTemp = new ObservableCollection<ThuocDTO>(ListThuocView);
             }
+            ListThuocView = Const.ListThuocTemp;
             
         }
-
+       
     }
 }
