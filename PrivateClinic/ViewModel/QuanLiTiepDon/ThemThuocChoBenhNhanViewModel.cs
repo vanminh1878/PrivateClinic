@@ -23,6 +23,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             {
                 listthuocDTO = value;
                 OnPropertyChanged(nameof(ListThuocDTO));
+                SoLuongThuocDaChon = ListThuocDTO.Count;
             }
         }
         private ObservableCollection<THUOC> listthuoc;
@@ -117,6 +118,19 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
         }
 
+        private int soLuongThuocDaChon;
+        public int SoLuongThuocDaChon
+        {
+            get => soLuongThuocDaChon;
+            set
+            {
+                if(soLuongThuocDaChon != value)
+                {
+                    soLuongThuocDaChon = value;
+                    OnPropertyChanged(nameof(SoLuongThuocDaChon));
+                }
+            }
+        }
         public ICommand AddCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -191,6 +205,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 thuocDTO.CachDung = SelectedCachDung.TenCachDung;
                 thuocDTO.DonVi = DonVi;
                 ListThuocDTO.Add(thuocDTO);
+                SoLuongThuocDaChon = ListThuocDTO.Count();
                 MessageBox.Show("Đã thêm", "Thông báo", MessageBoxButton.OK);
                 SelectedThuoc = null;
                 SoLuong = "";
