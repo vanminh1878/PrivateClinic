@@ -187,18 +187,30 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         //Hàm lưu thông tin thuốc
         void acceptSave(object obj)
         {
-            MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin thuốc ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (h == MessageBoxResult.Yes)
+            if (SelectedThuoc == null || SelectedCachDung == null || string.IsNullOrEmpty(SoLuong))
             {
-                ThuocDTO thuoc = Const.ListThuocTemp.FirstOrDefault(t => t.MaThuoc == thuocDTO.MaThuoc);
-                thuoc.MaThuoc = MaThuoc;
-                thuoc.DonVi = DonVi;
-                thuoc.SoLuong = SoLuong;
-                thuoc.TenThuoc = SelectedThuoc.TenThuoc;
-                thuoc.CachDung = SelectedCachDung.TenCachDung;
-                MessageBox.Show("Thành công", "Thông báo");
-                _view.Close();
+                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else if (!SoLuong.All(char.IsDigit))
+            {
+                MessageBox.Show("Số lượng chỉ chứa số", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin thuốc ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (h == MessageBoxResult.Yes)
+                {
+                    ThuocDTO thuoc = Const.ListThuocTemp.FirstOrDefault(t => t.MaThuoc == thuocDTO.MaThuoc);
+                    thuoc.MaThuoc = MaThuoc;
+                    thuoc.DonVi = DonVi;
+                    thuoc.SoLuong = SoLuong;
+                    thuoc.TenThuoc = SelectedThuoc.TenThuoc;
+                    thuoc.CachDung = SelectedCachDung.TenCachDung;
+                    MessageBox.Show("Thành công", "Thông báo");
+                    _view.Close();
+                }
+            }
+            
         }
     }
 }
