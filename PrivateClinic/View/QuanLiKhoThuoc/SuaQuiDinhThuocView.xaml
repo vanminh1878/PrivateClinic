@@ -70,7 +70,7 @@
                     Grid.Column="1"
                     Width="250"
                     Height="35"
-                    Margin="40,0,0,10"
+                    Margin="20,0,0,10"
                     HorizontalAlignment="Left"
                     BorderBrush="Black"
                     BorderThickness="0.7"
@@ -84,7 +84,7 @@
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
                         FontSize="18"
-                        Text="30" />
+                        x:Name="TienKham"/>
 
                 </Border>
 
@@ -110,7 +110,7 @@
                     Grid.Column="1"
                     Width="250"
                     Height="35"
-                    Margin="40,0,0,10"
+                    Margin="20,0,0,10"
                     HorizontalAlignment="Left"
                     BorderBrush="Black"
                     BorderThickness="0.7"
@@ -124,7 +124,7 @@
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
                         FontSize="18"
-                        Text="1.01" />
+                        x:Name="Tilegia" />
 
                 </Border>
 
@@ -152,30 +152,36 @@
                     <Border
                         Width="250"
                         Height="35"
-                        Margin="40,0,0,10"
+                        Margin="25, 0,0,10"
                         HorizontalAlignment="Left"
                         BorderBrush="Black"
                         BorderThickness="0.7"
                         CornerRadius="10">
-                        <ComboBox
-                            Width="230"
-                            Margin="10,0,0,0"
-                            FontSize="18"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            SelectedIndex="0">
-                            <ComboBoxItem Content="Viên" />
-                            <ComboBoxItem Content="Hộp" />
-                        </ComboBox>
+                        <TextBox
+    Width="250"
+    Height="35"
+    Padding="20,0,0,0"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    VerticalContentAlignment="Center"
+    FontSize="18"
+    x:Name="Dvt" />
                     </Border>
-                    <Image
-                        Width="40"
-                        Height="40"
-                        Margin="10,0,0,7"
-                        Source="{StaticResource icRepair}"
-                        Stretch="Uniform" />
+                    <Button ToolTip="Sửa đơn vị tính" Margin="20 0"  Width="40" Height="40" HorizontalAlignment="Right" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding EditDvtCommand}"
+CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
 
                 </StackPanel>
 
@@ -211,15 +217,24 @@
        VerticalAlignment="Center"
                        FontSize="18"
        VerticalContentAlignment="Center"
-       Text="4" />
+       x:Name="cachdung" />
 
                     </Border>
-                    <Image
-Width="40"
-Height="40"
-Margin="10,0,0,7"
-Source="{StaticResource icRepair}"
-Stretch="Uniform" />
+                    <Button ToolTip="Sửa số cách dùng" Margin="20 0"  Width="40" Height="40" HorizontalAlignment="Right" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding EditSoCachDungCommand}"
+CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
                 </WrapPanel>
 
             </Grid>
@@ -253,15 +268,24 @@ Stretch="Uniform" />
             VerticalAlignment="Center"
                             FontSize="18"
             VerticalContentAlignment="Center"
-            Text="4" />
+            x:Name="loaibenh" />
 
                     </Border>
-                    <Image
-     Width="40"
-     Height="40"
-     Margin="10,0,0,7"
-     Source="{StaticResource icRepair}"
-     Stretch="Uniform" />
+                    <Button ToolTip="Sửa số loại bệnh" Margin="20 0"  Width="40" Height="40" HorizontalAlignment="Right" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding EditSLBenhCommand}"
+CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
                 </WrapPanel>
 
             </Grid>

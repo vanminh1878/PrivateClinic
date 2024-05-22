@@ -173,6 +173,8 @@
     <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\KhoThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\QuanLiKhoThuocViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiKhoThuocVM\QuyDinhThuocViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiKhoThuocVM\SuaDonViTinhViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\SuaQuiDinhThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\SuaThongTinThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\NhapThuocViewModel.cs" />
@@ -197,14 +199,17 @@
     <Compile Include="View\QuanLiKhoThuoc\QuyDinhThuocView.xaml.cs">
       <DependentUpon>QuyDinhThuocView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLiKhoThuoc\SuaDonViTinhView.xaml.cs">
+      <DependentUpon>SuaDonViTinhView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLiKhoThuoc\SuaQuiDinhThuocView.xaml.cs">
       <DependentUpon>SuaQuiDinhThuocView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLiKhoThuoc\SuaThongTinThuocView.xaml.cs">
       <DependentUpon>SuaThongTinThuocView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\QuanLiKhoThuoc\ThemDonViTinhView.xaml.cs">
-      <DependentUpon>ThemDonViTinhView.xaml</DependentUpon>
+    <Compile Include="View\QuanLiKhoThuoc\ThemDonViTinhUS.xaml.cs">
+      <DependentUpon>ThemDonViTinhUS.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLiKhoThuoc\ThemThuocCuView.xaml.cs">
       <DependentUpon>ThemThuocCuView.xaml</DependentUpon>
@@ -215,8 +220,8 @@
     <Compile Include="View\QuanLiKhoThuoc\ThongTinThuocView.xaml.cs">
       <DependentUpon>ThongTinThuocView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\QuanLiKhoThuoc\XoaDonViTinhView.xaml.cs">
-      <DependentUpon>XoaDonViTinhView.xaml</DependentUpon>
+    <Compile Include="View\QuanLiKhoThuoc\XoaDonViTinhUS.xaml.cs">
+      <DependentUpon>XoaDonViTinhUS.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
@@ -280,6 +285,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\QuanLiKhoThuoc\SuaDonViTinhView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\QuanLiKhoThuoc\SuaQuiDinhThuocView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -288,7 +297,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\ThemDonViTinhView.xaml">
+    <Page Include="View\QuanLiKhoThuoc\ThemDonViTinhUS.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,7 +313,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuanLiKhoThuoc\XoaDonViTinhView.xaml">
+    <Page Include="View\QuanLiKhoThuoc\XoaDonViTinhUS.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

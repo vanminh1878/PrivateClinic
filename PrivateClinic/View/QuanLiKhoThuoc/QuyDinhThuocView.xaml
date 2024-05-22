@@ -22,15 +22,35 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="125"/>
+                <RowDefinition Height="125"/>
+                <RowDefinition Height="125"/>
+                
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <TextBlock Text="QUY ĐỊNH " FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" Margin="0 13"/>
             </Grid>
             <Grid Grid.Row="1">
+                <Button Margin="0 0 100 0"  Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding EditQDCommand}"
+CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+               
+               
+            </Grid>
+            <Grid Margin="30 0 0 0" Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -47,11 +67,11 @@
                         </Rectangle.Stroke>
                     </Rectangle>
                     <TextBlock Margin="20 0 " Text="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" />
-                    <Line X1="50" Y1="75" X2="70" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <Line X1="70" Y1="25" X2="370" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Line X1="50" Y1="88" X2="70" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Có" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBox Margin="0 0 " Text="4" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="cachdung" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="cách dùng thuốc" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
@@ -67,17 +87,17 @@
                         </Rectangle.Stroke>
                     </Rectangle>
                     <TextBlock Margin="20 0 " Text="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" />
-                    <Line X1="50" Y1="75" X2="70" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <Line X1="70" Y1="25" X2="370" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Line X1="50" Y1="88" X2="70" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Giá bán = " Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBox Margin="0 0 " Text="1.01" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="Tilegia" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="x Giá nhập" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
 
             </Grid>
-            <Grid Grid.Row="2">
+            <Grid Margin="30 0 0 0" Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -94,11 +114,11 @@
                         </Rectangle.Stroke>
                     </Rectangle>
                     <TextBlock Margin="20 0 " Text="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" />
-                    <Line X1="50" Y1="75" X2="70" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <Line X1="70" Y1="25" X2="370" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Line X1="50" Y1="88" X2="70" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Thuốc có " Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBox Margin="0 0 " Text="2" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="dvt" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="loại đơn vị tính" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
@@ -114,17 +134,17 @@
                         </Rectangle.Stroke>
                     </Rectangle>
                     <TextBlock Margin="20 0 " Text="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" />
-                    <Line X1="50" Y1="75" X2="70" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <Line X1="70" Y1="25" X2="370" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Line X1="50" Y1="88" X2="70" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Tiền khám: " Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBox Margin="0 0 " Text="30.000" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="tienkham" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text=" VND" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
 
             </Grid>
-            <Grid Grid.Row="3">
+            <Grid Margin="30 0 0 0" Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -141,77 +161,18 @@
                         </Rectangle.Stroke>
                     </Rectangle>
                     <TextBlock Margin="20 0 " Text="5" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" />
-                    <Line X1="50" Y1="75" X2="70" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <Line X1="70" Y1="25" X2="370" Y2="25" Stroke="Black" StrokeThickness="2" />
-                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Line X1="50" Y1="88" X2="70" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Có" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBox Margin="0 0 " Text="5" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="loaibenh" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text=" loại bệnh" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
               
 
             </Grid>
-            <Grid Grid.Row="4">
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <Button Content="       Hủy (F2)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 22 0"  Width="170" Height="50" HorizontalAlignment="Right" >
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <Border BorderBrush="Transparent" Background="#D51F2A" CornerRadius="10">
-                                        <Border.Effect>
-                                            <DropShadowEffect ShadowDepth="5" Color="Black" Opacity="0.5" BlurRadius="5"/>
-                                        </Border.Effect>
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <Image HorizontalAlignment="Left" Source="{StaticResource icCancel}"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding CancelCommand}"
-CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button
-    Width="170"
-    Height="50"
-    Margin="5,0,30,0"
-    HorizontalAlignment="Right"
-    Content="       Sửa (F3)"
-    FontFamily="Segoe UI"
-    FontSize="22"
-    FontWeight="Bold">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <Border
-                    Background="#348F6C"
-                    BorderBrush="Transparent"
-                    CornerRadius="10">
-                                        <Border.Effect>
-                                            <DropShadowEffect
-                            BlurRadius="5"
-                            Opacity="0.5"
-                            ShadowDepth="5"
-                            Color="Black" />
-                                        </Border.Effect>
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Border>
-                                    <Image HorizontalAlignment="Left" Source="{StaticResource icRepair}" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                </StackPanel>
-            </Grid>
+            
         </Grid>
      
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
         public QuyDinhThuocView()
         {
             InitializeComponent();
+            QuyDinhThuocViewModel viewModel = new QuyDinhThuocViewModel();
+            this.DataContext = viewModel;
+            viewModel.LoadCommand.Execute(null);
+            cachdung.Text = string.Join(", ", viewModel.CachDung);
+            Tilegia.Text = string.Join(", ", viewModel.Tilegia);
+            tienkham.Text = string.Join(", ", viewModel.tienkham);
+            dvt.Text = string.Join(", ", viewModel.dvt);
+            loaibenh.Text = string.Join(", ", viewModel.loaibenh);
         }
     }
 }
