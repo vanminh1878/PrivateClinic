@@ -57,6 +57,7 @@
                         <TextBlock FontWeight="SemiBold"
                                    VerticalAlignment="Center"
                                    x:Name="MaBN"
+                                   Text="{Binding MaBN,UpdateSourceTrigger=PropertyChanged}"
                                    Margin="15,0,0,0"/>
 
                     </StackPanel>
@@ -76,6 +77,7 @@
                         <TextBlock FontWeight="SemiBold"
                                    VerticalAlignment="Center"
                                    x:Name="TenBN"
+                                   Text="{Binding HoTenBN}"
                                    Foreground="#D51F2A"
                                    Margin="15,0,0,0"/>
 
@@ -96,6 +98,7 @@
                         <TextBlock FontWeight="SemiBold"
                                    VerticalAlignment="Center"
                                    x:Name="NgsinhBN"
+                                   Text="{Binding NgaySinh}"
                                    Margin="15,0,0,0"/>
 
                     </StackPanel>
@@ -115,6 +118,7 @@
                         <TextBlock FontWeight="SemiBold"
                                    VerticalAlignment="Center"
                                    x:Name="Tuoi"
+                                   Text="{Binding Tuoi}"
                                    Margin="15,0,0,0"/>
 
                         <TextBlock Text="Giới tính:"
@@ -125,6 +129,7 @@
                         <TextBlock FontWeight="SemiBold"
                                    VerticalAlignment="Center"
                                    x:Name="GioiTinh"
+                                   Text="{Binding GioiTinh}"
                                    Margin="15,0,0,0"/>
 
                     </StackPanel>
@@ -156,7 +161,7 @@
                     Padding="5,0,0,0"
                     BorderThickness="0"
                     materialDesign:HintAssist.Hint="Nhập triệu chứng bệnh"
-
+                    Text="{Binding TrieuChung}"
                     Width="390"
                     />
             </Border>
@@ -206,7 +211,7 @@
                             <!--Binding-->
                             <TextBlock FontWeight="SemiBold"
                                        VerticalAlignment="Center"
-                                       x:Name="TenBS"
+                                       Text="{Binding UserName}"
                                        Foreground="#0010A1"
                                        Margin="15,2,0,0"/>
 
@@ -232,6 +237,7 @@
                             <TextBlock FontWeight="SemiBold"
                                        VerticalAlignment="Center"
                                        x:Name="NgKham"
+                                       Text="{Binding NgayKham}"
                                        Margin="10,2,0,0"/>
                         </StackPanel>
                     </StackPanel>
@@ -301,49 +307,6 @@
                        FontWeight="Bold"
                        Foreground="#348F6C"/>
 
-            <Border
-                Width="427"
-                Height="44"
-                Margin="255,0,15,0"
-                BorderThickness="0.7"
-                CornerRadius="4"
-                BorderBrush="Black"
-                >
-                <!--Tìm kiếm thuốc-->
-
-                <Grid Height="40">
-                    <TextBox
-                        Margin="20 0 0 0"
-                        HorizontalAlignment="Left"
-                        materialDesign:HintAssist.Hint="Nhập tên thuốc đã thêm cần tìm"
-                        FontFamily="Segoe UI"
-                        FontSize="20"
-                        FontStyle="Italic"
-                        VerticalAlignment="Center"
-                        BorderThickness="0"
-                        Width="360"
-                        Height="45"
-                        x:Name="txbSearch">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding SearchCommand}"
-                                                       CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </TextBox>
-
-                    <Button Margin="0 0 5 0"  Width="40" Height="40" HorizontalAlignment="Right"
-                            Command="{Binding ElementName=listBox, Path=DataContext.SearchCommand}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <Image Source="{StaticResource icSearch}" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Grid>
-            </Border>
         </StackPanel>
 
         <!--Thêm thuốc-->

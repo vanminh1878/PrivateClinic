@@ -36,6 +36,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public ICommand SaveSLBNCommand { get; set; }    
         public ICommand EditBNCommand { get; set; }
 
+        public ICommand selectedItemBenhNhan { get; set; }
+
        
         public QuanLiTiepDonViewModel()
         {
@@ -47,6 +49,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             LoadSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadSLBNCommand(p));
             EditBNCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _EditBNCommand(p));
            
+
+            selectedItemBenhNhan= new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _selectedItemBenhNhan(p));
+
             UpdateSTT();
             if (Const.PQ.MaNhom == "NHOM1")
             {
@@ -218,7 +223,11 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             KhamBNView = view;
         }
-        
-       
+
+        void _selectedItemBenhNhan(BENHNHAN bENHNHAN)
+        {
+            MessageBox.Show("hihi");
+        }
+
     }
 }

@@ -30,7 +30,6 @@ namespace PrivateClinic.View.QuanLiTiepDon
             InitializeComponent();
             BenhNhanDangKhamViewModel viewModel= new BenhNhanDangKhamViewModel();
             this.DataContext = viewModel;
-            
         }
         public void SetData(BENHNHAN benhNhan)
         {

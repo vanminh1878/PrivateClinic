@@ -69,7 +69,7 @@ namespace PrivateClinic.View.QuanLiTiepDon
 
             // Tìm kiếm QuanLiKhamBenhView hoặc Window chứa UserControl hiện tại
             var parent = FindParent<QuanLiKhamBenhView>(this);
-            
+
             if (parent != null && parent.DataContext is QuanLiKhamBenhViewModel parentViewModel)
             {
                 // Thiết lập CurrentView trong QuanLiKhamBenhViewModel thành UserControl
@@ -80,7 +80,7 @@ namespace PrivateClinic.View.QuanLiTiepDon
                 }
 
             }
-        }
+    }
 
         private T FindParent<T>(DependencyObject child) where T : DependencyObject
         {

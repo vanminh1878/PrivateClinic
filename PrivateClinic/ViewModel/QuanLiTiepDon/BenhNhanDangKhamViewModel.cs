@@ -9,10 +9,11 @@ using System.Windows.Input;
 using PrivateClinic.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Media.Media3D;
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
-    public class BenhNhanDangKhamViewModel: BaseViewModel
+    public class BenhNhanDangKhamViewModel : BaseViewModel
     {
         private ObservableCollection<THUOC> _listMed;
         public ObservableCollection<THUOC> listMed { get => _listMed; set { _listMed = value; OnPropertyChanged(); } }
@@ -59,15 +60,25 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             set
             {
                 selectedLoaiBenh = value;
-                OnPropertyChanged(nameof (SelectedLoaiBenh));
+                OnPropertyChanged(nameof(SelectedLoaiBenh));
+            }
+        }
+        //Họ tên bệnh nhân
+        private string hoTenBN;
+        public string HoTenBN
+        {
+            get => hoTenBN;
+            set
+            {
+                hoTenBN = value;
+                OnPropertyChanged(nameof(HoTenBN));
             }
         }
 
-
-        public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditThuocCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
         private int soLuongThuocDangChon;
         public int SoLuongThuocDangChon
         {
@@ -78,6 +89,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 OnPropertyChanged(nameof(SoLuongThuocDangChon));
             }
         }
+
         public BenhNhanDangKhamViewModel()
         {
             ListLoaiBenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENH);
@@ -85,8 +97,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             AddThuoc();
             EditThuoc();
             ListThuoc = new ObservableCollection<ThuocDTO>();
-            SearchCommand = new RelayCommand<BenhNhanDangKhamView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             DeleteCommand = new RelayCommand<ThuocDTO>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
+            SaveCommand = new ViewModelCommand(Save);
+
         }
         void AddThuoc()
         {
@@ -98,7 +111,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             view.ShowDialog();
             LoadData();
         }
-        #region Chức năng sửa 1 bác sĩ
+        #region Chức năng sửa thuốc
         void EditThuoc()
         {
             EditThuocCommand = new ViewModelCommand(ShowWDEditThuoc);
@@ -112,24 +125,6 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         }
 
         #endregion
-        void _SearchCommand(BenhNhanDangKhamView parameter)
-        {
-            ObservableCollection<ThuocDTO> temp = new ObservableCollection<ThuocDTO>();
-            if (ListThuocView != null)
-            {
-                if (!string.IsNullOrEmpty(parameter.txbSearch.Text))
-                {
-                    string searchKeyword = parameter.txbSearch.Text.ToLower();
-                    temp = new ObservableCollection<ThuocDTO>(ListThuocView.Where(s => s.TenThuoc.ToLower().Contains(searchKeyword)));
-                }
-                else
-                {
-                    temp = new ObservableCollection<ThuocDTO>(ListThuocView);
-                }
-                parameter.ListViewMed.ItemsSource = temp;
-            }
-            
-        }
         void _DeleteCommand(ThuocDTO selectedItem)
         {
             MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa thuốc này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -144,6 +139,11 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
         }
 
+
+
+
+
+      
         void LoadData()
         {
             if (ListThuocView == null)
@@ -167,6 +167,19 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
 
         }
+        //Hàm lưu 
+        private void Save(object p)
+        {
+            if (p != null)
+            {
+                if(p is BenhNhanDangKhamView benhNhanDangKhamView)
+                {
+                    MessageBox.Show(benhNhanDangKhamView.MaBN.Text);
+                }
+            }
+        }
         
+
+
     }
 }
