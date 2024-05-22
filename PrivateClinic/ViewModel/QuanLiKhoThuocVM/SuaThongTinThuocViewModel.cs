@@ -131,7 +131,9 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
                         var donvi = DataProvider.Ins.DB.DVTs.FirstOrDefault(dv => dv.MaDVT == thuoc.MaDVT);
                         //DVT dvt = dvtinh.FirstOrDefault(d => d.MaDVT == thuoc.MaDVT);
-                        donvi.TenDVT = p.TenDVTcbx.Text;
+                        
+                        var ma = DataProvider.Ins.DB.DVTs.FirstOrDefault(a => a.TenDVT==p.TenDVTcbx.Text);
+                        thuoc.MaDVT = ma.MaDVT;
 
                         ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
                         phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);

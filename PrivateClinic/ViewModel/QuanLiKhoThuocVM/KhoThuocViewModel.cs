@@ -9,6 +9,7 @@ using System.Windows.Input;
 using PrivateClinic.ViewModel.OtherViewModels;
 using PrivateClinic.View.QuanLiKhoThuoc;
 using System.Windows;
+using static System.Net.WebRequestMethods;
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
@@ -98,37 +99,42 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             {
                 foreach (var dvt in donvitinh)
                 {
-                    foreach (var ctpnt in ctphieunhap)
+                    if (thuoc.MaDVT == dvt.MaDVT)
                     {
+                        ThuocDTO thuocDTO = new ThuocDTO()
+                        {
+                            STT = stt,
+                            DVT = dvt.TenDVT,
+                            MaThuoc = thuoc.MaThuoc,
+                            TenThuoc = thuoc.TenThuoc,
+                            Gia = thuoc.DonGiaNhap,
+                            SL = thuoc.SoLuong
+                        };
+
+                    
                         foreach (var pnt in phieunhap)
                         {
-                            ThuocDTO thuocDTO = new ThuocDTO()
+                            foreach (var ct in ctphieunhap)
                             {
-                                STT = stt,
-                                DVT = dvt.TenDVT,
-                                MaThuoc = thuoc.MaThuoc,
-                                TenThuoc = thuoc.TenThuoc,
-                                Gia = thuoc.DonGiaNhap,
-                                SL = thuoc.SoLuong,
-                                NgayNhap = pnt.NgayNhap,
-
-                            };
-                            listMed.Add(thuocDTO);
-                            stt++;
-                            break;
+                                if (ct.SoPhieuNhap == pnt.SoPhieuNhap && ct.MaThuoc == thuoc.MaThuoc)
+                                {
+                                    thuocDTO.NgayNhap = pnt.NgayNhap;
+                                    break;
+                                }
+                            }
                         }
+
+                        listMed.Add(thuocDTO);
+                        stt++;
+                        break;
                     }
                 }
-
             }
             SoLuongThuoc = listMed.Count();
         }
 
 
-        private void LoadMedicines()
-        {
-
-        }
+    
         void _EditMedicineCommand(ThuocDTO selectedItem)
         {
             if (selectedItem != null)
@@ -152,21 +158,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
         private void _DeleteMedicineCommand(THUOC selectedItem)
         {
-            //MessageBoxResult r = MessageBox.Show("Bạn muốn xóa thuốc này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            //if (r == MessageBoxResult.Yes)
-            //{
-            //    if (selectedItem != null)
-            //    {
-            //        // Thực hiện xóa thuốc
-            //        var context = DataProvider.Ins.DB;
-            //        // Xóa thuốc
-            //        context.THUOCs.Remove(selectedItem);
-            //        // Lưu thay đổi vào cơ sở dữ liệu
-            //        context.SaveChanges();
-            //        // Xóa khỏi danh sách thuốc
-            //        listMed.Remove(selectedItem);
-            //    }
-            //}
+            
         }
         public void _AddMedicineCommand(KhoThuocView parameter)
         {

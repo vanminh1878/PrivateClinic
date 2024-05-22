@@ -176,6 +176,7 @@
     <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\KhoThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\QuanLiKhoThuocViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiKhoThuocVM\SuaQuiDinhThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\SuaThongTinThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\NhapThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\ThemThuocCuViewModel.cs" />

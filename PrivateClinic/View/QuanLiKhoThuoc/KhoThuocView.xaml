@@ -325,7 +325,7 @@
                     </ListView.ItemsPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding DetailMedicineCommand}" CommandParameter="{Binding ElementName=QuanLiKhoThuocViewPage}" />
+                            <i:InvokeCommandAction Command="{Binding DetailMedicineCommand}" CommandParameter="{Binding ElementName=KhoThuocViewPage}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListView>

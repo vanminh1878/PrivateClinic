@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
              mc:Ignorable="d" 
+             x:Name="QuiDinhThuocViewPage"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
    
     Background="Transparent"
@@ -20,10 +21,10 @@
         CornerRadius="12">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="150"/>
-                <RowDefinition Height="150"/>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -150,6 +151,66 @@
                 </Grid>
               
 
+            </Grid>
+            <Grid Grid.Row="4">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Content="       Hủy (F2)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 22 0"  Width="170" Height="50" HorizontalAlignment="Right" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Border BorderBrush="Transparent" Background="#D51F2A" CornerRadius="10">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="5" Color="Black" Opacity="0.5" BlurRadius="5"/>
+                                        </Border.Effect>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Source="{StaticResource icCancel}"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding CancelCommand}"
+CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button
+    Width="170"
+    Height="50"
+    Margin="5,0,30,0"
+    HorizontalAlignment="Right"
+    Content="       Sửa (F3)"
+    FontFamily="Segoe UI"
+    FontSize="22"
+    FontWeight="Bold">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Border
+                    Background="#348F6C"
+                    BorderBrush="Transparent"
+                    CornerRadius="10">
+                                        <Border.Effect>
+                                            <DropShadowEffect
+                            BlurRadius="5"
+                            Opacity="0.5"
+                            ShadowDepth="5"
+                            Color="Black" />
+                                        </Border.Effect>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <Image HorizontalAlignment="Left" Source="{StaticResource icRepair}" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Grid>
      

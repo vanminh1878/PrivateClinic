@@ -98,6 +98,7 @@
                     CornerRadius="10">
 
                     <TextBox
+                        x:Name="SL"
                         Width="310"
                         Height="45"
                         Margin="-1,0,0,0"
