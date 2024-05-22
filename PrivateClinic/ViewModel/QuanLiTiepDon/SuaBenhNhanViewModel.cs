@@ -59,7 +59,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 if (h == MessageBoxResult.Yes)
                 {
                     string maBN = p.MaBN.Text;
-                    BENHNHAN a = DataProvider.Ins.DB.BENHNHAN.FirstOrDefault(bn => bn.MaBN == maBN);
+                    BENHNHAN a = DataProvider.Ins.DB.BENHNHANs.FirstOrDefault(bn => bn.MaBN.ToString() == maBN);
                     a.HoTen = p.HoTen.Text;
                     a.GioiTinh = p.GioiTinh.Text;
                     a.DiaChi = p.DiaChi.Text;
@@ -67,7 +67,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     MessageBox.Show("Cập nhật thông tin bệnh nhân thành công!", "THÔNG BÁO");
                     DataProvider.Ins.DB.SaveChanges();
                     QuanLiTiepDonView quanlitiepdonView = new QuanLiTiepDonView();
-                    quanlitiepdonView.ListViewBN.ItemsSource = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHAN);
+                    quanlitiepdonView.ListViewBN.ItemsSource = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
                     quanlitiepdonView.ListViewBN.Items.Refresh();
                 }
             }

@@ -77,9 +77,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             try
             {
                 string tendangnhap = Const.TenDangNhap;
-                User = DataProvider.Ins.DB.NGUOIDUNG.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+                User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
                 MaBS = User.MaBS.ToString();
-                DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
+                DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
                 foreach (BACSI bac in DSBS)
                 {
                     if (bac.MaBS.ToString() == MaBS)
@@ -151,9 +151,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             ChooseImage();
             //Lấy thông tin bác sĩ đang dùng app
             string tendangnhap = Const.TenDangNhap;
-            User = DataProvider.Ins.DB.NGUOIDUNG.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+            User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
             MaBS = User.MaBS.ToString();
-            DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
+            DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             foreach (var item in DSBS)
             {
                 if (item.MaBS.ToString() == MaBS) 

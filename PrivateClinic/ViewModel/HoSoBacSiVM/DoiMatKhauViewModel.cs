@@ -46,7 +46,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             //Lấy tên đăng nhập hiện tại của user
             string tendangnhap = Const.TenDangNhap;
             //Lấy đối tượng đang dùng app
-            User = DataProvider.Ins.DB.NGUOIDUNG.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+            User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
             if (_view.txtMKmoi.Password.ToString() == "" || _view.txtNhapLai.Password.ToString() == " " || _view.txtMKcu.Password.ToString() == " ")
             {
                 MessageBox.Show("Chưa nhập đủ thông tin", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);

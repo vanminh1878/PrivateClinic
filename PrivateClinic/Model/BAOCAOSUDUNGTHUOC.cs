@@ -14,10 +14,12 @@ namespace PrivateClinic.Model
     
     public partial class BAOCAOSUDUNGTHUOC
     {
-        public string MaBaoCaoSuDungThuoc { get; set; }
+        public int MaBaoCaoSuDungThuoc { get; set; }
         public Nullable<int> Thang { get; set; }
         public Nullable<int> SoLanDung { get; set; }
         public Nullable<int> TongSoLuongDaDung { get; set; }
         public Nullable<int> MaThuoc { get; set; }
+    
+        public virtual THUOC THUOC { get; set; }
     }
 }

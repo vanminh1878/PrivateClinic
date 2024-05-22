@@ -258,7 +258,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     }
                 }
                 bacsi.Image = imageBytes;
-                DataProvider.Ins.DB.BACSI.Add(bacsi);
+                DataProvider.Ins.DB.BACSIs.Add(bacsi);
                 DataProvider.Ins.DB.SaveChanges();
                 //Thêm tài khoản
                 NGUOIDUNG nguoi = new NGUOIDUNG();
@@ -266,7 +266,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 nguoi.MaNhom = "NHOM2";
                 nguoi.TenDangNhap = TaoTenDangNhap(bacsi);
                 nguoi.MatKhau = TaoMK();
-                DataProvider.Ins.DB.NGUOIDUNG.Add(nguoi);
+                DataProvider.Ins.DB.NGUOIDUNGs.Add(nguoi);
                 DataProvider.Ins.DB.SaveChanges();
                 //Gửi mail tài khoản cho bác sĩ
                 Task.Run(async () =>

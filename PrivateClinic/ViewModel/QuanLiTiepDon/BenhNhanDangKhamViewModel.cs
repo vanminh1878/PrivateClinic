@@ -92,8 +92,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         public BenhNhanDangKhamViewModel()
         {
-            ListLoaiBenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENH);
-            listMed = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
+            ListLoaiBenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
+            listMed = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
             AddThuoc();
             EditThuoc();
             ListThuoc = new ObservableCollection<ThuocDTO>();

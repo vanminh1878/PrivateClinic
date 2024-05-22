@@ -41,11 +41,10 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     a.GioiTinh = paramater.GioiTinh.Text;
                     a.DiaChi = paramater.DiaChi.Text;
                     a.NamSinh = (DateTime)paramater.NgSinh.SelectedDate;
-                    a.MaBN=paramater.MaBN.Text;
 
 
                     MessageBox.Show("Thêm bệnh nhân mới thành công !", "THÔNG BÁO");
-                    DataProvider.Ins.DB.BENHNHAN.Add(a);
+                    DataProvider.Ins.DB.BENHNHANs.Add(a);
                     DataProvider.Ins.DB.SaveChanges();
                     // Xóa thông tin các TextBox
                     paramater.HoTen.Clear();
@@ -55,7 +54,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     paramater.NgSinh.SelectedDate = null;
 
                     QuanLiTiepDonView quanlitiepdonView = new QuanLiTiepDonView();
-                    quanlitiepdonView.ListViewBN.ItemsSource = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHAN);
+                    quanlitiepdonView.ListViewBN.ItemsSource = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
                     quanlitiepdonView.ListViewBN.Items.Refresh();
 
                 }

@@ -101,9 +101,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         private void ThongTinND()
         {
             string tendangnhap = Const.TenDangNhap;
-            User = DataProvider.Ins.DB.NGUOIDUNG.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+            User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
             string MaBS = User.MaBS.ToString();
-            ObservableCollection<BACSI> DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
+            ObservableCollection<BACSI> DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             if (Const.PQ.MaNhom == "NHOM1")
                 ChucVu = "Admin";
             else

@@ -145,7 +145,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
 
 
                 //sửa lại password trong bảng account theo username
-                ObservableCollection<NGUOIDUNG> list = new ObservableCollection<NGUOIDUNG>(DataProvider.Ins.DB.NGUOIDUNG);
+                ObservableCollection<NGUOIDUNG> list = new ObservableCollection<NGUOIDUNG>(DataProvider.Ins.DB.NGUOIDUNGs);
                 foreach (NGUOIDUNG item in list) 
                 {
                     if ( username == item.TenDangNhap)
@@ -163,12 +163,12 @@ namespace PrivateClinic.ViewModel.OtherViewModels
         private bool notify()
         {
             // Lấy người dùng có tên đăng nhập khớp với Username
-            var user = DataProvider.Ins.DB.NGUOIDUNG.FirstOrDefault(u => u.TenDangNhap == Username);
+            var user = DataProvider.Ins.DB.NGUOIDUNGs.FirstOrDefault(u => u.TenDangNhap == Username);
 
             if (user != null)
             {
                 // Lấy bác sĩ có mã bác sĩ khớp với mã của người dùng và email khớp với Email
-                var bs = DataProvider.Ins.DB.BACSI.FirstOrDefault(b => b.MaBS == user.MaBS && b.Email == Email);
+                var bs = DataProvider.Ins.DB.BACSIs.FirstOrDefault(b => b.MaBS == user.MaBS && b.Email == Email);
 
                 // Kiểm tra nếu tìm thấy bác sĩ phù hợp
                 if (bs != null)

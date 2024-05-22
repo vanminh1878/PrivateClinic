@@ -25,25 +25,25 @@ namespace PrivateClinic.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BACSI> BACSI { get; set; }
-        public virtual DbSet<BAOCAODOANHTHU> BAOCAODOANHTHU { get; set; }
-        public virtual DbSet<BAOCAOSUDUNGTHUOC> BAOCAOSUDUNGTHUOC { get; set; }
-        public virtual DbSet<BENHNHAN> BENHNHAN { get; set; }
-        public virtual DbSet<CACHDUNG> CACHDUNG { get; set; }
+        public virtual DbSet<BACSI> BACSIs { get; set; }
+        public virtual DbSet<BAOCAODOANHTHU> BAOCAODOANHTHUs { get; set; }
+        public virtual DbSet<BAOCAOSUDUNGTHUOC> BAOCAOSUDUNGTHUOCs { get; set; }
+        public virtual DbSet<BENHNHAN> BENHNHANs { get; set; }
+        public virtual DbSet<CACHDUNG> CACHDUNGs { get; set; }
         public virtual DbSet<CT_BCDT> CT_BCDT { get; set; }
         public virtual DbSet<CT_PKB> CT_PKB { get; set; }
         public virtual DbSet<CT_PNT> CT_PNT { get; set; }
-        public virtual DbSet<CHUCNANG> CHUCNANG { get; set; }
-        public virtual DbSet<DVT> DVT { get; set; }
-        public virtual DbSet<HOADON> HOADON { get; set; }
-        public virtual DbSet<LOAIBENH> LOAIBENH { get; set; }
-        public virtual DbSet<LOAITHUOC> LOAITHUOC { get; set; }
-        public virtual DbSet<NGUOIDUNG> NGUOIDUNG { get; set; }
-        public virtual DbSet<NHOMNGUOIDUNG> NHOMNGUOIDUNG { get; set; }
-        public virtual DbSet<PHIEUKHAMBENH> PHIEUKHAMBENH { get; set; }
-        public virtual DbSet<PHIEUNHAPTHUOC> PHIEUNHAPTHUOC { get; set; }
-        public virtual DbSet<THAMSO> THAMSO { get; set; }
-        public virtual DbSet<THUOC> THUOC { get; set; }
-        public virtual DbSet<PHANQUYEN> PHANQUYEN { get; set; }
+        public virtual DbSet<CHUCNANG> CHUCNANGs { get; set; }
+        public virtual DbSet<DVT> DVTs { get; set; }
+        public virtual DbSet<HOADON> HOADONs { get; set; }
+        public virtual DbSet<LOAIBENH> LOAIBENHs { get; set; }
+        public virtual DbSet<LOAITHUOC> LOAITHUOCs { get; set; }
+        public virtual DbSet<NGUOIDUNG> NGUOIDUNGs { get; set; }
+        public virtual DbSet<NHOMNGUOIDUNG> NHOMNGUOIDUNGs { get; set; }
+        public virtual DbSet<PHIEUKHAMBENH> PHIEUKHAMBENHs { get; set; }
+        public virtual DbSet<PHIEUNHAPTHUOC> PHIEUNHAPTHUOCs { get; set; }
+        public virtual DbSet<THAMSO> THAMSOes { get; set; }
+        public virtual DbSet<THUOC> THUOCs { get; set; }
+        public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
     }
 }

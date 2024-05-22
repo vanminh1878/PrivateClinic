@@ -121,11 +121,11 @@ namespace PrivateClinic.ViewModel.QuanLiKhamBenhVM
         void LoadData()
         {
             // Lấy tất cả phiếu khám bệnh
-            ListPKB = new ObservableCollection<PHIEUKHAMBENH>(DataProvider.Ins.DB.PHIEUKHAMBENH);
+            ListPKB = new ObservableCollection<PHIEUKHAMBENH>(DataProvider.Ins.DB.PHIEUKHAMBENHs);
             // Lấy tất cả loại bệnh
-            ListLoaiBenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENH);
+            ListLoaiBenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
             // Lấy tất cả bệnh nhân
-            BenhNhan = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHAN);
+            BenhNhan = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
 
             // Tạo từ điển để tra cứu nhanh
             var pkbDictionary = ListPKB.GroupBy(pkb => pkb.MaBN).ToDictionary(group => group.Key, group => group.ToList());

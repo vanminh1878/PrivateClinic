@@ -14,7 +14,7 @@
           <Property Name="NgaySinh" Type="date" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="20" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="SDT" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="10" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NgayVaoLam" Type="date" Nullable="false" />
           <Property Name="BangCap" Type="nvarchar" MaxLength="50" />
@@ -33,7 +33,7 @@
           <Key>
             <PropertyRef Name="MaBaoCaoSuDungThuoc" />
           </Key>
-          <Property Name="MaBaoCaoSuDungThuoc" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaBaoCaoSuDungThuoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Thang" Type="int" />
           <Property Name="SoLanDung" Type="int" />
           <Property Name="TongSoLuongDaDung" Type="int" />
@@ -43,7 +43,7 @@
           <Key>
             <PropertyRef Name="MaBN" />
           </Key>
-          <Property Name="MaBN" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaBN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="NamSinh" Type="date" Nullable="false" />
@@ -109,7 +109,7 @@
           <Property Name="TienKham" Type="float" Nullable="false" />
           <Property Name="TienThuoc" Type="float" />
           <Property Name="TongTien" Type="float" Nullable="false" />
-          <Property Name="MaBN" Type="nvarchar" MaxLength="10" />
+          <Property Name="MaBN" Type="int" />
           <Property Name="MaPKB" Type="int" />
           <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -162,7 +162,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="MaLoaiBenh" Type="int" Nullable="false" />
           <Property Name="MaBS" Type="int" />
           <Property Name="TrieuChung" Type="nvarchar" MaxLength="200" />
-          <Property Name="MaBN" Type="nvarchar" MaxLength="10" />
+          <Property Name="MaBN" Type="int" />
         </EntityType>
         <EntityType Name="PHIEUNHAPTHUOC">
           <Key>
@@ -191,7 +191,20 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="MaCachDung" Type="int" Nullable="false" />
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="DonGiaBan" Type="float" />
+          <Property Name="SoLuong" Type="int" />
         </EntityType>
+        <Association Name="FK_BAOCAOSUDUNGTHUOC_THUOC">
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
+          <End Role="BAOCAOSUDUNGTHUOC" Type="Self.BAOCAOSUDUNGTHUOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="BAOCAOSUDUNGTHUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CT_BCDT_MaBCDT">
           <End Role="BAOCAODOANHTHU" Type="Self.BAOCAODOANHTHU" Multiplicity="1" />
           <End Role="CT_BCDT" Type="Self.CT_BCDT" Multiplicity="*" />
@@ -213,6 +226,18 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
             </Principal>
             <Dependent Role="CT_BCDT">
               <PropertyRef Name="SoHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_PKB_PHIEUKHAMBENH">
+          <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="1" />
+          <End Role="CT_PKB" Type="Self.CT_PKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUKHAMBENH">
+              <PropertyRef Name="MaPKB" />
+            </Principal>
+            <Dependent Role="CT_PKB">
+              <PropertyRef Name="MaPKB" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -261,6 +286,18 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
             </Principal>
             <Dependent Role="HOADON">
               <PropertyRef Name="MaBN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HOADON_MaPKB">
+          <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUKHAMBENH">
+              <PropertyRef Name="MaPKB" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaPKB" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -386,6 +423,10 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
     [PHANQUYEN].[MaChucNang] AS [MaChucNang]
     FROM [dbo].[PHANQUYEN] AS [PHANQUYEN]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_BAOCAOSUDUNGTHUOC_THUOC" Association="Self.FK_BAOCAOSUDUNGTHUOC_THUOC">
+            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="BAOCAOSUDUNGTHUOC" EntitySet="BAOCAOSUDUNGTHUOC" />
+          </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_MaBCDT" Association="Self.FK_CT_BCDT_MaBCDT">
             <End Role="BAOCAODOANHTHU" EntitySet="BAOCAODOANHTHU" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
@@ -393,6 +434,10 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <AssociationSet Name="FK_CT_BCDT_SoHD" Association="Self.FK_CT_BCDT_SoHD">
             <End Role="HOADON" EntitySet="HOADON" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_PKB_PHIEUKHAMBENH" Association="Self.FK_CT_PKB_PHIEUKHAMBENH">
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
+            <End Role="CT_PKB" EntitySet="CT_PKB" />
           </AssociationSet>
           <AssociationSet Name="FK_CT_PKB_THUOC" Association="Self.FK_CT_PKB_THUOC">
             <End Role="THUOC" EntitySet="THUOC" />
@@ -408,6 +453,10 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           </AssociationSet>
           <AssociationSet Name="FK_HOADON_MaBN" Association="Self.FK_HOADON_MaBN">
             <End Role="BENHNHAN" EntitySet="BENHNHAN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOADON_MaPKB" Association="Self.FK_HOADON_MaPKB">
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
             <End Role="HOADON" EntitySet="HOADON" />
           </AssociationSet>
           <AssociationSet Name="FK_NGUOIDUNG_BACSI" Association="Self.FK_NGUOIDUNG_BACSI">
@@ -457,13 +506,13 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="NgaySinh" Type="DateTime" Precision="0" />
           <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgayVaoLam" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="BangCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="NGUOIDUNG" Relationship="Self.FK_NGUOIDUNG_BACSI" FromRole="BACSI" ToRole="NGUOIDUNG" />
-          <NavigationProperty Name="PHIEUKHAMBENH" Relationship="Self.FK_PHIEUKHAMBENH_MaBS" FromRole="BACSI" ToRole="PHIEUKHAMBENH" />
+          <NavigationProperty Name="NGUOIDUNGs" Relationship="Self.FK_NGUOIDUNG_BACSI" FromRole="BACSI" ToRole="NGUOIDUNG" />
+          <NavigationProperty Name="PHIEUKHAMBENHs" Relationship="Self.FK_PHIEUKHAMBENH_MaBS" FromRole="BACSI" ToRole="PHIEUKHAMBENH" />
         </EntityType>
         <EntityType Name="BAOCAODOANHTHU">
           <Key>
@@ -479,23 +528,24 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Key>
             <PropertyRef Name="MaBaoCaoSuDungThuoc" />
           </Key>
-          <Property Name="MaBaoCaoSuDungThuoc" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaBaoCaoSuDungThuoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Thang" Type="Int32" />
           <Property Name="SoLanDung" Type="Int32" />
           <Property Name="TongSoLuongDaDung" Type="Int32" />
           <Property Name="MaThuoc" Type="Int32" />
+          <NavigationProperty Name="THUOC" Relationship="Self.FK_BAOCAOSUDUNGTHUOC_THUOC" FromRole="BAOCAOSUDUNGTHUOC" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="BENHNHAN">
           <Key>
             <PropertyRef Name="MaBN" />
           </Key>
-          <Property Name="MaBN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaBN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NamSinh" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HOADON" Relationship="Self.FK_HOADON_MaBN" FromRole="BENHNHAN" ToRole="HOADON" />
-          <NavigationProperty Name="PHIEUKHAMBENH" Relationship="Self.FK_PHIEUKHAMBENH_MaBN" FromRole="BENHNHAN" ToRole="PHIEUKHAMBENH" />
+          <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_MaBN" FromRole="BENHNHAN" ToRole="HOADON" />
+          <NavigationProperty Name="PHIEUKHAMBENHs" Relationship="Self.FK_PHIEUKHAMBENH_MaBN" FromRole="BENHNHAN" ToRole="PHIEUKHAMBENH" />
         </EntityType>
         <EntityType Name="CACHDUNG">
           <Key>
@@ -503,7 +553,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           </Key>
           <Property Name="MaCachDung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenCachDung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="THUOC" Relationship="Self.FK_THUOC_MaCachDung" FromRole="CACHDUNG" ToRole="THUOC" />
+          <NavigationProperty Name="THUOCs" Relationship="Self.FK_THUOC_MaCachDung" FromRole="CACHDUNG" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="CT_BCDT">
           <Key>
@@ -526,6 +576,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="MaPKB" Type="Int32" Nullable="false" />
           <Property Name="MaThuoc" Type="Int32" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
+          <NavigationProperty Name="PHIEUKHAMBENH" Relationship="Self.FK_CT_PKB_PHIEUKHAMBENH" FromRole="CT_PKB" ToRole="PHIEUKHAMBENH" />
           <NavigationProperty Name="THUOC" Relationship="Self.FK_CT_PKB_THUOC" FromRole="CT_PKB" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="CT_PNT">
@@ -554,7 +605,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           </Key>
           <Property Name="MaDVT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenDVT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="THUOC" Relationship="Self.FK_THUOC_MaDVT" FromRole="DVT" ToRole="THUOC" />
+          <NavigationProperty Name="THUOCs" Relationship="Self.FK_THUOC_MaDVT" FromRole="DVT" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
@@ -564,11 +615,12 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="TienKham" Type="Double" Nullable="false" />
           <Property Name="TienThuoc" Type="Double" />
           <Property Name="TongTien" Type="Double" Nullable="false" />
-          <Property Name="MaBN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MaBN" Type="Int32" />
           <Property Name="MaPKB" Type="Int32" />
           <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BENHNHAN" Relationship="Self.FK_HOADON_MaBN" FromRole="HOADON" ToRole="BENHNHAN" />
           <NavigationProperty Name="CT_BCDT" Relationship="Self.FK_CT_BCDT_SoHD" FromRole="HOADON" ToRole="CT_BCDT" />
+          <NavigationProperty Name="PHIEUKHAMBENH" Relationship="Self.FK_HOADON_MaPKB" FromRole="HOADON" ToRole="PHIEUKHAMBENH" />
         </EntityType>
         <EntityType Name="LOAIBENH">
           <Key>
@@ -576,7 +628,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           </Key>
           <Property Name="MaLoaiBenh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenLoaiBenh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="PHIEUKHAMBENH" Relationship="Self.FK_PHIEUKHAMBENH_MaLoaiBenh" FromRole="LOAIBENH" ToRole="PHIEUKHAMBENH" />
+          <NavigationProperty Name="PHIEUKHAMBENHs" Relationship="Self.FK_PHIEUKHAMBENH_MaLoaiBenh" FromRole="LOAIBENH" ToRole="PHIEUKHAMBENH" />
         </EntityType>
         <EntityType Name="LOAITHUOC">
           <Key>
@@ -584,7 +636,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           </Key>
           <Property Name="MaLoaiThuoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenLoaiThuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="THUOC" Relationship="Self.FK_THUOC_MaLoaiThuoc" FromRole="LOAITHUOC" ToRole="THUOC" />
+          <NavigationProperty Name="THUOCs" Relationship="Self.FK_THUOC_MaLoaiThuoc" FromRole="LOAITHUOC" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="NGUOIDUNG">
           <Key>
@@ -603,7 +655,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           </Key>
           <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="NGUOIDUNG" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NHOMNGUOIDUNG" ToRole="NGUOIDUNG" />
+          <NavigationProperty Name="NGUOIDUNGs" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NHOMNGUOIDUNG" ToRole="NGUOIDUNG" />
         </EntityType>
         <EntityType Name="PHIEUKHAMBENH">
           <Key>
@@ -614,9 +666,11 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="MaLoaiBenh" Type="Int32" Nullable="false" />
           <Property Name="MaBS" Type="Int32" />
           <Property Name="TrieuChung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MaBN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MaBN" Type="Int32" />
           <NavigationProperty Name="BACSI" Relationship="Self.FK_PHIEUKHAMBENH_MaBS" FromRole="PHIEUKHAMBENH" ToRole="BACSI" />
           <NavigationProperty Name="BENHNHAN" Relationship="Self.FK_PHIEUKHAMBENH_MaBN" FromRole="PHIEUKHAMBENH" ToRole="BENHNHAN" />
+          <NavigationProperty Name="CT_PKB" Relationship="Self.FK_CT_PKB_PHIEUKHAMBENH" FromRole="PHIEUKHAMBENH" ToRole="CT_PKB" />
+          <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_MaPKB" FromRole="PHIEUKHAMBENH" ToRole="HOADON" />
           <NavigationProperty Name="LOAIBENH" Relationship="Self.FK_PHIEUKHAMBENH_MaLoaiBenh" FromRole="PHIEUKHAMBENH" ToRole="LOAIBENH" />
         </EntityType>
         <EntityType Name="PHIEUNHAPTHUOC">
@@ -647,6 +701,8 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           <Property Name="MaCachDung" Type="Int32" Nullable="false" />
           <Property Name="DonGiaNhap" Type="Double" />
           <Property Name="DonGiaBan" Type="Double" />
+          <Property Name="SoLuong" Type="Int32" />
+          <NavigationProperty Name="BAOCAOSUDUNGTHUOCs" Relationship="Self.FK_BAOCAOSUDUNGTHUOC_THUOC" FromRole="THUOC" ToRole="BAOCAOSUDUNGTHUOC" />
           <NavigationProperty Name="CACHDUNG" Relationship="Self.FK_THUOC_MaCachDung" FromRole="THUOC" ToRole="CACHDUNG" />
           <NavigationProperty Name="CT_PKB" Relationship="Self.FK_CT_PKB_THUOC" FromRole="THUOC" ToRole="CT_PKB" />
           <NavigationProperty Name="CT_PNT" Relationship="Self.FK_CT_PNT_MaThuoc" FromRole="THUOC" ToRole="CT_PNT" />
@@ -694,6 +750,18 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
             </Principal>
             <Dependent Role="CT_BCDT">
               <PropertyRef Name="MaBCDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAOCAOSUDUNGTHUOC_THUOC">
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
+          <End Role="BAOCAOSUDUNGTHUOC" Type="Self.BAOCAOSUDUNGTHUOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="BAOCAOSUDUNGTHUOC">
+              <PropertyRef Name="MaThuoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -745,6 +813,18 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CT_PKB_PHIEUKHAMBENH">
+          <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="1" />
+          <End Role="CT_PKB" Type="Self.CT_PKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUKHAMBENH">
+              <PropertyRef Name="MaPKB" />
+            </Principal>
+            <Dependent Role="CT_PKB">
+              <PropertyRef Name="MaPKB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CT_PKB_THUOC">
           <End Role="THUOC" Type="Self.THUOC" Multiplicity="1" />
           <End Role="CT_PKB" Type="Self.CT_PKB" Multiplicity="*" />
@@ -793,6 +873,18 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HOADON_MaPKB">
+          <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUKHAMBENH">
+              <PropertyRef Name="MaPKB" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaPKB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PHIEUKHAMBENH_MaLoaiBenh">
           <End Role="LOAIBENH" Type="Self.LOAIBENH" Multiplicity="1" />
           <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="*" />
@@ -830,81 +922,93 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="QUANLYPHONGMACHTUEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BACSI" EntityType="Self.BACSI" />
-          <EntitySet Name="BAOCAODOANHTHU" EntityType="Self.BAOCAODOANHTHU" />
-          <EntitySet Name="BAOCAOSUDUNGTHUOC" EntityType="Self.BAOCAOSUDUNGTHUOC" />
-          <EntitySet Name="BENHNHAN" EntityType="Self.BENHNHAN" />
-          <EntitySet Name="CACHDUNG" EntityType="Self.CACHDUNG" />
+          <EntitySet Name="BACSIs" EntityType="Self.BACSI" />
+          <EntitySet Name="BAOCAODOANHTHUs" EntityType="Self.BAOCAODOANHTHU" />
+          <EntitySet Name="BAOCAOSUDUNGTHUOCs" EntityType="Self.BAOCAOSUDUNGTHUOC" />
+          <EntitySet Name="BENHNHANs" EntityType="Self.BENHNHAN" />
+          <EntitySet Name="CACHDUNGs" EntityType="Self.CACHDUNG" />
           <EntitySet Name="CT_BCDT" EntityType="Self.CT_BCDT" />
           <EntitySet Name="CT_PKB" EntityType="Self.CT_PKB" />
           <EntitySet Name="CT_PNT" EntityType="Self.CT_PNT" />
-          <EntitySet Name="CHUCNANG" EntityType="Self.CHUCNANG" />
-          <EntitySet Name="DVT" EntityType="Self.DVT" />
-          <EntitySet Name="HOADON" EntityType="Self.HOADON" />
-          <EntitySet Name="LOAIBENH" EntityType="Self.LOAIBENH" />
-          <EntitySet Name="LOAITHUOC" EntityType="Self.LOAITHUOC" />
-          <EntitySet Name="NGUOIDUNG" EntityType="Self.NGUOIDUNG" />
-          <EntitySet Name="NHOMNGUOIDUNG" EntityType="Self.NHOMNGUOIDUNG" />
-          <EntitySet Name="PHIEUKHAMBENH" EntityType="Self.PHIEUKHAMBENH" />
-          <EntitySet Name="PHIEUNHAPTHUOC" EntityType="Self.PHIEUNHAPTHUOC" />
-          <EntitySet Name="THAMSO" EntityType="Self.THAMSO" />
-          <EntitySet Name="THUOC" EntityType="Self.THUOC" />
-          <EntitySet Name="PHANQUYEN" EntityType="Self.PHANQUYEN" />
+          <EntitySet Name="CHUCNANGs" EntityType="Self.CHUCNANG" />
+          <EntitySet Name="DVTs" EntityType="Self.DVT" />
+          <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
+          <EntitySet Name="LOAIBENHs" EntityType="Self.LOAIBENH" />
+          <EntitySet Name="LOAITHUOCs" EntityType="Self.LOAITHUOC" />
+          <EntitySet Name="NGUOIDUNGs" EntityType="Self.NGUOIDUNG" />
+          <EntitySet Name="NHOMNGUOIDUNGs" EntityType="Self.NHOMNGUOIDUNG" />
+          <EntitySet Name="PHIEUKHAMBENHs" EntityType="Self.PHIEUKHAMBENH" />
+          <EntitySet Name="PHIEUNHAPTHUOCs" EntityType="Self.PHIEUNHAPTHUOC" />
+          <EntitySet Name="THAMSOes" EntityType="Self.THAMSO" />
+          <EntitySet Name="THUOCs" EntityType="Self.THUOC" />
+          <EntitySet Name="PHANQUYENs" EntityType="Self.PHANQUYEN" />
           <AssociationSet Name="FK_NGUOIDUNG_BACSI" Association="Self.FK_NGUOIDUNG_BACSI">
-            <End Role="BACSI" EntitySet="BACSI" />
-            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNG" />
+            <End Role="BACSI" EntitySet="BACSIs" />
+            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNGs" />
           </AssociationSet>
           <AssociationSet Name="FK_PHIEUKHAMBENH_MaBS" Association="Self.FK_PHIEUKHAMBENH_MaBS">
-            <End Role="BACSI" EntitySet="BACSI" />
-            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
+            <End Role="BACSI" EntitySet="BACSIs" />
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
           </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_MaBCDT" Association="Self.FK_CT_BCDT_MaBCDT">
-            <End Role="BAOCAODOANHTHU" EntitySet="BAOCAODOANHTHU" />
+            <End Role="BAOCAODOANHTHU" EntitySet="BAOCAODOANHTHUs" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAOCAOSUDUNGTHUOC_THUOC" Association="Self.FK_BAOCAOSUDUNGTHUOC_THUOC">
+            <End Role="THUOC" EntitySet="THUOCs" />
+            <End Role="BAOCAOSUDUNGTHUOC" EntitySet="BAOCAOSUDUNGTHUOCs" />
           </AssociationSet>
           <AssociationSet Name="FK_HOADON_MaBN" Association="Self.FK_HOADON_MaBN">
-            <End Role="BENHNHAN" EntitySet="BENHNHAN" />
-            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="BENHNHAN" EntitySet="BENHNHANs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
           </AssociationSet>
           <AssociationSet Name="FK_PHIEUKHAMBENH_MaBN" Association="Self.FK_PHIEUKHAMBENH_MaBN">
-            <End Role="BENHNHAN" EntitySet="BENHNHAN" />
-            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
+            <End Role="BENHNHAN" EntitySet="BENHNHANs" />
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
           </AssociationSet>
           <AssociationSet Name="FK_THUOC_MaCachDung" Association="Self.FK_THUOC_MaCachDung">
-            <End Role="CACHDUNG" EntitySet="CACHDUNG" />
-            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="CACHDUNG" EntitySet="CACHDUNGs" />
+            <End Role="THUOC" EntitySet="THUOCs" />
           </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_SoHD" Association="Self.FK_CT_BCDT_SoHD">
-            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="HOADON" EntitySet="HOADONs" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
           </AssociationSet>
+          <AssociationSet Name="FK_CT_PKB_PHIEUKHAMBENH" Association="Self.FK_CT_PKB_PHIEUKHAMBENH">
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
+            <End Role="CT_PKB" EntitySet="CT_PKB" />
+          </AssociationSet>
           <AssociationSet Name="FK_CT_PKB_THUOC" Association="Self.FK_CT_PKB_THUOC">
-            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="THUOC" EntitySet="THUOCs" />
             <End Role="CT_PKB" EntitySet="CT_PKB" />
           </AssociationSet>
           <AssociationSet Name="FK_CT_PNT_MaThuoc" Association="Self.FK_CT_PNT_MaThuoc">
-            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="THUOC" EntitySet="THUOCs" />
             <End Role="CT_PNT" EntitySet="CT_PNT" />
           </AssociationSet>
           <AssociationSet Name="FK_CT_PNT_SoPhieuNhap" Association="Self.FK_CT_PNT_SoPhieuNhap">
-            <End Role="PHIEUNHAPTHUOC" EntitySet="PHIEUNHAPTHUOC" />
+            <End Role="PHIEUNHAPTHUOC" EntitySet="PHIEUNHAPTHUOCs" />
             <End Role="CT_PNT" EntitySet="CT_PNT" />
           </AssociationSet>
           <AssociationSet Name="FK_THUOC_MaDVT" Association="Self.FK_THUOC_MaDVT">
-            <End Role="DVT" EntitySet="DVT" />
-            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="DVT" EntitySet="DVTs" />
+            <End Role="THUOC" EntitySet="THUOCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOADON_MaPKB" Association="Self.FK_HOADON_MaPKB">
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
           </AssociationSet>
           <AssociationSet Name="FK_PHIEUKHAMBENH_MaLoaiBenh" Association="Self.FK_PHIEUKHAMBENH_MaLoaiBenh">
-            <End Role="LOAIBENH" EntitySet="LOAIBENH" />
-            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
+            <End Role="LOAIBENH" EntitySet="LOAIBENHs" />
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
           </AssociationSet>
           <AssociationSet Name="FK_THUOC_MaLoaiThuoc" Association="Self.FK_THUOC_MaLoaiThuoc">
-            <End Role="LOAITHUOC" EntitySet="LOAITHUOC" />
-            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="LOAITHUOC" EntitySet="LOAITHUOCs" />
+            <End Role="THUOC" EntitySet="THUOCs" />
           </AssociationSet>
           <AssociationSet Name="FK_NGUOIDUNG_NHOMNGUOIDUNG" Association="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG">
-            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNG" />
-            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNG" />
+            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNGs" />
+            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNGs" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -913,7 +1017,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="QUANLYPHONGMACHTUModelStoreContainer" CdmEntityContainer="QUANLYPHONGMACHTUEntities">
-          <EntitySetMapping Name="BACSI">
+          <EntitySetMapping Name="BACSIs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.BACSI">
               <MappingFragment StoreEntitySet="BACSI">
                 <ScalarProperty Name="MaBS" ColumnName="MaBS" />
@@ -929,7 +1033,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BAOCAODOANHTHU">
+          <EntitySetMapping Name="BAOCAODOANHTHUs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.BAOCAODOANHTHU">
               <MappingFragment StoreEntitySet="BAOCAODOANHTHU">
                 <ScalarProperty Name="MaBCDT" ColumnName="MaBCDT" />
@@ -939,7 +1043,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BAOCAOSUDUNGTHUOC">
+          <EntitySetMapping Name="BAOCAOSUDUNGTHUOCs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.BAOCAOSUDUNGTHUOC">
               <MappingFragment StoreEntitySet="BAOCAOSUDUNGTHUOC">
                 <ScalarProperty Name="MaBaoCaoSuDungThuoc" ColumnName="MaBaoCaoSuDungThuoc" />
@@ -950,7 +1054,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BENHNHAN">
+          <EntitySetMapping Name="BENHNHANs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.BENHNHAN">
               <MappingFragment StoreEntitySet="BENHNHAN">
                 <ScalarProperty Name="MaBN" ColumnName="MaBN" />
@@ -961,7 +1065,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CACHDUNG">
+          <EntitySetMapping Name="CACHDUNGs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CACHDUNG">
               <MappingFragment StoreEntitySet="CACHDUNG">
                 <ScalarProperty Name="MaCachDung" ColumnName="MaCachDung" />
@@ -1000,7 +1104,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CHUCNANG">
+          <EntitySetMapping Name="CHUCNANGs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CHUCNANG">
               <MappingFragment StoreEntitySet="CHUCNANG">
                 <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
@@ -1009,7 +1113,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DVT">
+          <EntitySetMapping Name="DVTs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.DVT">
               <MappingFragment StoreEntitySet="DVT">
                 <ScalarProperty Name="MaDVT" ColumnName="MaDVT" />
@@ -1017,7 +1121,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HOADON">
+          <EntitySetMapping Name="HOADONs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.HOADON">
               <MappingFragment StoreEntitySet="HOADON">
                 <ScalarProperty Name="SoHD" ColumnName="SoHD" />
@@ -1030,7 +1134,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LOAIBENH">
+          <EntitySetMapping Name="LOAIBENHs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.LOAIBENH">
               <MappingFragment StoreEntitySet="LOAIBENH">
                 <ScalarProperty Name="MaLoaiBenh" ColumnName="MaLoaiBenh" />
@@ -1038,7 +1142,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LOAITHUOC">
+          <EntitySetMapping Name="LOAITHUOCs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.LOAITHUOC">
               <MappingFragment StoreEntitySet="LOAITHUOC">
                 <ScalarProperty Name="MaLoaiThuoc" ColumnName="MaLoaiThuoc" />
@@ -1046,7 +1150,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NGUOIDUNG">
+          <EntitySetMapping Name="NGUOIDUNGs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.NGUOIDUNG">
               <MappingFragment StoreEntitySet="NGUOIDUNG">
                 <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
@@ -1056,7 +1160,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NHOMNGUOIDUNG">
+          <EntitySetMapping Name="NHOMNGUOIDUNGs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.NHOMNGUOIDUNG">
               <MappingFragment StoreEntitySet="NHOMNGUOIDUNG">
                 <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
@@ -1064,7 +1168,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PHIEUKHAMBENH">
+          <EntitySetMapping Name="PHIEUKHAMBENHs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.PHIEUKHAMBENH">
               <MappingFragment StoreEntitySet="PHIEUKHAMBENH">
                 <ScalarProperty Name="MaPKB" ColumnName="MaPKB" />
@@ -1076,7 +1180,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PHIEUNHAPTHUOC">
+          <EntitySetMapping Name="PHIEUNHAPTHUOCs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.PHIEUNHAPTHUOC">
               <MappingFragment StoreEntitySet="PHIEUNHAPTHUOC">
                 <ScalarProperty Name="SoPhieuNhap" ColumnName="SoPhieuNhap" />
@@ -1085,7 +1189,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="THAMSO">
+          <EntitySetMapping Name="THAMSOes">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.THAMSO">
               <MappingFragment StoreEntitySet="THAMSO">
                 <ScalarProperty Name="MaThamSo" ColumnName="MaThamSo" />
@@ -1094,7 +1198,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="THUOC">
+          <EntitySetMapping Name="THUOCs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.THUOC">
               <MappingFragment StoreEntitySet="THUOC">
                 <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
@@ -1104,10 +1208,11 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
                 <ScalarProperty Name="MaCachDung" ColumnName="MaCachDung" />
                 <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
                 <ScalarProperty Name="DonGiaBan" ColumnName="DonGiaBan" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PHANQUYEN">
+          <EntitySetMapping Name="PHANQUYENs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.PHANQUYEN">
               <MappingFragment StoreEntitySet="PHANQUYEN">
                 <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
@@ -1129,7 +1234,7 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.PHANQUYEN' does not have a p
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

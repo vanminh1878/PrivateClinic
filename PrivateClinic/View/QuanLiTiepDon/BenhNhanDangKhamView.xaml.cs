@@ -33,7 +33,7 @@ namespace PrivateClinic.View.QuanLiTiepDon
         }
         public void SetData(BENHNHAN benhNhan)
         {
-            MaBN.Text = benhNhan.MaBN;
+            MaBN.Text = benhNhan.MaBN.ToString();
             TenBN.Text = benhNhan.HoTen;
             NgsinhBN.Text = benhNhan.NamSinh.ToString("dd/MM/yyyy");
             GioiTinh.Text = benhNhan.GioiTinh;

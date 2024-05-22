@@ -112,7 +112,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         #region Chức năng hiển thị danh sách bác sĩ
         void LoadData()
         {
-            DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSI);
+            DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             FormatMaBS();
             SearchBS();
         }
@@ -155,14 +155,14 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 if (selectedItem != null && selectedItem.MaBS != 1) 
                 {
                     //Xóa tài khoàn trước
-                    var taikhoan = DataProvider.Ins.DB.NGUOIDUNG.Where(h => h.MaBS == selectedItem.MaBS).ToList();
-                    DataProvider.Ins.DB.NGUOIDUNG.RemoveRange(taikhoan);
+                    var taikhoan = DataProvider.Ins.DB.NGUOIDUNGs.Where(h => h.MaBS == selectedItem.MaBS).ToList();
+                    DataProvider.Ins.DB.NGUOIDUNGs.RemoveRange(taikhoan);
                     //Cập nhật mã bác sĩ trong các phiếu khám bệnh bằng NULL
-                    var phieukhambenh = DataProvider.Ins.DB.PHIEUKHAMBENH.Where(h => h.MaBS == selectedItem.MaBS).ToList();
+                    var phieukhambenh = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(h => h.MaBS == selectedItem.MaBS).ToList();
                     foreach (var h in phieukhambenh) 
                         h.MaBS = null;
                     //Xóa bác sĩ
-                    DataProvider.Ins.DB.BACSI.Remove(selectedItem);
+                    DataProvider.Ins.DB.BACSIs.Remove(selectedItem);
 
                     //Lưu xuống CSDL
                     DataProvider.Ins.DB.SaveChanges();

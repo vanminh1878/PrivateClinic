@@ -142,9 +142,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             this._view = view;
             ListThuocDTO = new ObservableCollection<ThuocDTO>();
-            ListThuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOC);
-            ListCachDung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNG);
-            ListDVT = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVT);
+            ListThuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+            ListCachDung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
+            ListDVT = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
             CancelCommand = new RelayCommand<ThemThuocChoBenhNhanView>((p) => true, (p) => _CancelCommand(p));
             AddCommand = new ViewModelCommand(AcceptAdd);
             DeleteCommand = new RelayCommand<ThuocDTO>((p) => p != null, DeleteAccept);
