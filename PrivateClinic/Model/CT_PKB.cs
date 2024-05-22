@@ -12,12 +12,13 @@ namespace PrivateClinic.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class PHIEUNHAPTHUOC
+    public partial class CT_PKB
     {
-        public int SoPhieuNhap { get; set; }
-        public System.DateTime NgayNhap { get; set; }
-        public double TongTien { get; set; }
+        public int MaPKB { get; set; }
+        public int MaThuoc { get; set; }
+        public Nullable<int> SoLuong { get; set; }
     
-        public virtual CT_PNT CT_PNT { get; set; }
+        public virtual PHIEUKHAMBENH PHIEUKHAMBENH { get; set; }
+        public virtual THUOC THUOC { get; set; }
     }
 }

@@ -10,20 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PrivateClinic.ViewModel.QuanLiTiepDon;
+
 namespace PrivateClinic.View.QuanLiTiepDon
 {
     /// <summary>
-    /// Interaction logic for ThemBenhNhanView.xaml
+    /// Interaction logic for SuaBenhNhanView.xaml
     /// </summary>
-    public partial class ThemBenhNhanView : Window
+    public partial class SuaBenhNhanView : Window
     {
-        public ThemBenhNhanView()
+        public SuaBenhNhanView()
         {
             InitializeComponent();
-            ThemBenhNhanViewModel viewmodel = new ThemBenhNhanViewModel();
+            SuaBenhNhanViewModel viewmodel = new SuaBenhNhanViewModel();
             this.DataContext = viewmodel;
         }
     }

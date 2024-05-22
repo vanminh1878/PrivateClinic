@@ -28,6 +28,16 @@
           <Property Name="Nam" Type="int" />
           <Property Name="TongDoanhThu" Type="float" />
         </EntityType>
+        <EntityType Name="BAOCAOSUDUNGTHUOC">
+          <Key>
+            <PropertyRef Name="MaBaoCaoSuDungThuoc" />
+          </Key>
+          <Property Name="MaBaoCaoSuDungThuoc" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Thang" Type="int" />
+          <Property Name="SoLanDung" Type="int" />
+          <Property Name="TongSoLuongDaDung" Type="int" />
+          <Property Name="MaThuoc" Type="int" />
+        </EntityType>
         <EntityType Name="BENHNHAN">
           <Key>
             <PropertyRef Name="MaBN" />
@@ -45,16 +55,14 @@
           <Property Name="MaCachDung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenCachDung" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="CHUCVU">
+        <EntityType Name="CHUCNANG">
           <Key>
-            <PropertyRef Name="MaChucVu" />
+            <PropertyRef Name="MaChucNang" />
           </Key>
-          <Property Name="MaChucVu" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="TenChucVu" Type="nvarchar" MaxLength="50" />
-          <Property Name="NoiDung" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaChucNang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenChucNang" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenManHinhDuocLoad" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.CT_BCDT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CT_BCDT">
           <Key>
             <PropertyRef Name="MaBCDT" />
@@ -66,15 +74,25 @@ warning 6002: The table/view 'QUANLYPHONGMACHTU.dbo.CT_BCDT' does not have a pri
           <Property Name="DoanhThu" Type="float" />
           <Property Name="TiLe" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'QUANLYPHONGMACHTU.dbo.CT_PNT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CT_PKB">
+          <Key>
+            <PropertyRef Name="MaPKB" />
+            <PropertyRef Name="MaThuoc" />
+          </Key>
+          <Property Name="MaPKB" Type="int" Nullable="false" />
+          <Property Name="MaThuoc" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" />
+        </EntityType>
         <EntityType Name="CT_PNT">
-          <Property Name="SoPhieuNhap" Type="int" />
-          <Property Name="MaThuocNhap" Type="int" />
+          <Key>
+            <PropertyRef Name="SoPhieuNhap" />
+          </Key>
+          <Property Name="SoPhieuNhap" Type="int" Nullable="false" />
+          <Property Name="MaThuoc" Type="int" />
           <Property Name="SoLuongNhap" Type="int" />
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="ThanhTien" Type="float" />
-        </EntityType>-->
+        </EntityType>
         <EntityType Name="DVT">
           <Key>
             <PropertyRef Name="MaDVT" />
@@ -107,6 +125,29 @@ warning 6013: The table/view 'QUANLYPHONGMACHTU.dbo.CT_PNT' does not have a prim
           <Property Name="MaLoaiThuoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenLoaiThuoc" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="NGUOIDUNG">
+          <Key>
+            <PropertyRef Name="TenDangNhap" />
+          </Key>
+          <Property Name="TenDangNhap" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="MatKhau" Type="nchar" MaxLength="50" />
+          <Property Name="MaNhom" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="NHOMNGUOIDUNG">
+          <Key>
+            <PropertyRef Name="MaNhom" />
+          </Key>
+          <Property Name="MaNhom" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenNhom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PHANQUYEN">
+          <Key>
+            <PropertyRef Name="MaNhom" />
+            <PropertyRef Name="MaChucNang" />
+          </Key>
+          <Property Name="MaNhom" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaChucNang" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="PHIEUKHAMBENH">
           <Key>
             <PropertyRef Name="MaPKB" />
@@ -126,16 +167,6 @@ warning 6013: The table/view 'QUANLYPHONGMACHTU.dbo.CT_PNT' does not have a prim
           <Property Name="NgayNhap" Type="date" Nullable="false" />
           <Property Name="TongTien" Type="float" Nullable="false" />
         </EntityType>
-        <EntityType Name="TAIKHOAN">
-          <Key>
-            <PropertyRef Name="TaiKhoanID" />
-          </Key>
-          <Property Name="TaiKhoanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenDangNhap" Type="varchar" MaxLength="50" />
-          <Property Name="MatKhau" Type="varchar" MaxLength="50" />
-          <Property Name="MaBS" Type="int" />
-          <Property Name="ChucVu" Type="char" MaxLength="10" />
-        </EntityType>
         <EntityType Name="THAMSO">
           <Key>
             <PropertyRef Name="MaThamSo" />
@@ -144,24 +175,30 @@ warning 6013: The table/view 'QUANLYPHONGMACHTU.dbo.CT_PNT' does not have a prim
           <Property Name="TenThamSo" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="GiaTri" Type="float" Nullable="false" />
         </EntityType>
-        <EntityType Name="THUOC1">
+        <EntityType Name="THUOC">
           <Key>
             <PropertyRef Name="MaThuoc" />
           </Key>
           <Property Name="MaThuoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaLoaiThuoc" Type="int" Nullable="false" />
           <Property Name="TenThuoc" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DonGia" Type="float" Nullable="false" />
           <Property Name="MaDVT" Type="int" Nullable="false" />
           <Property Name="MaCachDung" Type="int" Nullable="false" />
+          <Property Name="DonGiaNhap" Type="float" />
+          <Property Name="DonGiaBan" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'QUANLYPHONGMACHTU.dbo.TOATHUOC' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="TOATHUOC">
-          <Property Name="MaPKB" Type="int" />
-          <Property Name="MaThuoc" Type="int" />
-          <Property Name="SoLuong" Type="int" />
-        </EntityType>-->
+        <Association Name="FK_BAOCAOSUDUNGTHUOC_THUOC">
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
+          <End Role="BAOCAOSUDUNGTHUOC" Type="Self.BAOCAOSUDUNGTHUOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="BAOCAOSUDUNGTHUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CT_BCDT_MaBCDT">
           <End Role="BAOCAODOANHTHU" Type="Self.BAOCAODOANHTHU" Multiplicity="1" />
           <End Role="CT_BCDT" Type="Self.CT_BCDT" Multiplicity="*" />
@@ -186,12 +223,54 @@ warning 6013: The table/view 'QUANLYPHONGMACHTU.dbo.TOATHUOC' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'QUANLYPHONGMACHTU.dbo.CT_PNT' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_CT_PNT_MaThuocNhap" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'QUANLYPHONGMACHTU.dbo.CT_PNT' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_CT_PNT_SoPhieuNhap" />-->
+        <Association Name="FK_CT_PKB_PHIEUKHAMBENH">
+          <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="1" />
+          <End Role="CT_PKB" Type="Self.CT_PKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUKHAMBENH">
+              <PropertyRef Name="MaPKB" />
+            </Principal>
+            <Dependent Role="CT_PKB">
+              <PropertyRef Name="MaPKB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_PKB_THUOC">
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="1" />
+          <End Role="CT_PKB" Type="Self.CT_PKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="CT_PKB">
+              <PropertyRef Name="MaThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_PNT_MaThuoc">
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
+          <End Role="CT_PNT" Type="Self.CT_PNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="CT_PNT">
+              <PropertyRef Name="MaThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_PNT_SoPhieuNhap">
+          <End Role="PHIEUNHAPTHUOC" Type="Self.PHIEUNHAPTHUOC" Multiplicity="1" />
+          <End Role="CT_PNT" Type="Self.CT_PNT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUNHAPTHUOC">
+              <PropertyRef Name="SoPhieuNhap" />
+            </Principal>
+            <Dependent Role="CT_PNT">
+              <PropertyRef Name="SoPhieuNhap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HOADON_MaBN">
           <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
           <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
@@ -213,6 +292,18 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.CT_PNT' is referenced by a relation
             </Principal>
             <Dependent Role="HOADON">
               <PropertyRef Name="MaPKB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NGUOIDUNG_NHOMNGUOIDUNG">
+          <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="0..1" />
+          <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMNGUOIDUNG">
+              <PropertyRef Name="MaNhom" />
+            </Principal>
+            <Dependent Role="NGUOIDUNG">
+              <PropertyRef Name="MaNhom" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -252,96 +343,67 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.CT_PNT' is referenced by a relation
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TAIKHOAN_ChucVu">
-          <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="0..1" />
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CHUCVU">
-              <PropertyRef Name="MaChucVu" />
-            </Principal>
-            <Dependent Role="TAIKHOAN">
-              <PropertyRef Name="ChucVu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAIKHOAN_MaBS">
-          <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BACSI">
-              <PropertyRef Name="MaBS" />
-            </Principal>
-            <Dependent Role="TAIKHOAN">
-              <PropertyRef Name="MaBS" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_THUOC1_MaCachDung">
+        <Association Name="FK_THUOC_MaCachDung">
           <End Role="CACHDUNG" Type="Self.CACHDUNG" Multiplicity="1" />
-          <End Role="THUOC1" Type="Self.THUOC1" Multiplicity="*" />
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CACHDUNG">
               <PropertyRef Name="MaCachDung" />
             </Principal>
-            <Dependent Role="THUOC1">
+            <Dependent Role="THUOC">
               <PropertyRef Name="MaCachDung" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_THUOC1_MaDVT">
+        <Association Name="FK_THUOC_MaDVT">
           <End Role="DVT" Type="Self.DVT" Multiplicity="1" />
-          <End Role="THUOC1" Type="Self.THUOC1" Multiplicity="*" />
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DVT">
               <PropertyRef Name="MaDVT" />
             </Principal>
-            <Dependent Role="THUOC1">
+            <Dependent Role="THUOC">
               <PropertyRef Name="MaDVT" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_THUOC1_MaLoaiThuoc">
+        <Association Name="FK_THUOC_MaLoaiThuoc">
           <End Role="LOAITHUOC" Type="Self.LOAITHUOC" Multiplicity="1" />
-          <End Role="THUOC1" Type="Self.THUOC1" Multiplicity="*" />
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LOAITHUOC">
               <PropertyRef Name="MaLoaiThuoc" />
             </Principal>
-            <Dependent Role="THUOC1">
+            <Dependent Role="THUOC">
               <PropertyRef Name="MaLoaiThuoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_TOATHUOC_MaPKB" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_TOATHUOC_MaThuoc" />-->
         <EntityContainer Name="QUANLYPHONGMACHTUModelStoreContainer">
           <EntitySet Name="BACSI" EntityType="Self.BACSI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BAOCAODOANHTHU" EntityType="Self.BAOCAODOANHTHU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BAOCAOSUDUNGTHUOC" EntityType="Self.BAOCAOSUDUNGTHUOC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BENHNHAN" EntityType="Self.BENHNHAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CACHDUNG" EntityType="Self.CACHDUNG" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CHUCVU" EntityType="Self.CHUCVU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUCNANG" EntityType="Self.CHUCNANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CT_BCDT" EntityType="Self.CT_BCDT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CT_PKB" EntityType="Self.CT_PKB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CT_PNT" EntityType="Self.CT_PNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DVT" EntityType="Self.DVT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAIBENH" EntityType="Self.LOAIBENH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAITHUOC" EntityType="Self.LOAITHUOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NGUOIDUNG" EntityType="Self.NGUOIDUNG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHOMNGUOIDUNG" EntityType="Self.NHOMNGUOIDUNG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHANQUYEN" EntityType="Self.PHANQUYEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUKHAMBENH" EntityType="Self.PHIEUKHAMBENH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUNHAPTHUOC" EntityType="Self.PHIEUNHAPTHUOC" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THAMSO" EntityType="Self.THAMSO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="THUOC1" EntityType="Self.THUOC1" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CT_BCDT" EntityType="Self.CT_BCDT" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CT_BCDT].[MaBCDT] AS [MaBCDT], 
-    [CT_BCDT].[SoHD] AS [SoHD], 
-    [CT_BCDT].[SoBenhNhan] AS [SoBenhNhan], 
-    [CT_BCDT].[DoanhThu] AS [DoanhThu], 
-    [CT_BCDT].[TiLe] AS [TiLe]
-    FROM [dbo].[CT_BCDT] AS [CT_BCDT]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="THUOC" EntityType="Self.THUOC" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BAOCAOSUDUNGTHUOC_THUOC" Association="Self.FK_BAOCAOSUDUNGTHUOC_THUOC">
+            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="BAOCAOSUDUNGTHUOC" EntitySet="BAOCAOSUDUNGTHUOC" />
+          </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_MaBCDT" Association="Self.FK_CT_BCDT_MaBCDT">
             <End Role="BAOCAODOANHTHU" EntitySet="BAOCAODOANHTHU" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
@@ -350,6 +412,22 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             <End Role="HOADON" EntitySet="HOADON" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
           </AssociationSet>
+          <AssociationSet Name="FK_CT_PKB_PHIEUKHAMBENH" Association="Self.FK_CT_PKB_PHIEUKHAMBENH">
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
+            <End Role="CT_PKB" EntitySet="CT_PKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_PKB_THUOC" Association="Self.FK_CT_PKB_THUOC">
+            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="CT_PKB" EntitySet="CT_PKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_PNT_MaThuoc" Association="Self.FK_CT_PNT_MaThuoc">
+            <End Role="THUOC" EntitySet="THUOC" />
+            <End Role="CT_PNT" EntitySet="CT_PNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_PNT_SoPhieuNhap" Association="Self.FK_CT_PNT_SoPhieuNhap">
+            <End Role="PHIEUNHAPTHUOC" EntitySet="PHIEUNHAPTHUOC" />
+            <End Role="CT_PNT" EntitySet="CT_PNT" />
+          </AssociationSet>
           <AssociationSet Name="FK_HOADON_MaBN" Association="Self.FK_HOADON_MaBN">
             <End Role="BENHNHAN" EntitySet="BENHNHAN" />
             <End Role="HOADON" EntitySet="HOADON" />
@@ -357,6 +435,10 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           <AssociationSet Name="FK_HOADON_MaPKB" Association="Self.FK_HOADON_MaPKB">
             <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
             <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NGUOIDUNG_NHOMNGUOIDUNG" Association="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG">
+            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNG" />
+            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNG" />
           </AssociationSet>
           <AssociationSet Name="FK_PHIEUKHAMBENH_MaBN" Association="Self.FK_PHIEUKHAMBENH_MaBN">
             <End Role="BENHNHAN" EntitySet="BENHNHAN" />
@@ -370,25 +452,17 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             <End Role="LOAIBENH" EntitySet="LOAIBENH" />
             <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
           </AssociationSet>
-          <AssociationSet Name="FK_TAIKHOAN_ChucVu" Association="Self.FK_TAIKHOAN_ChucVu">
-            <End Role="CHUCVU" EntitySet="CHUCVU" />
-            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAIKHOAN_MaBS" Association="Self.FK_TAIKHOAN_MaBS">
-            <End Role="BACSI" EntitySet="BACSI" />
-            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_THUOC1_MaCachDung" Association="Self.FK_THUOC1_MaCachDung">
+          <AssociationSet Name="FK_THUOC_MaCachDung" Association="Self.FK_THUOC_MaCachDung">
             <End Role="CACHDUNG" EntitySet="CACHDUNG" />
-            <End Role="THUOC1" EntitySet="THUOC1" />
+            <End Role="THUOC" EntitySet="THUOC" />
           </AssociationSet>
-          <AssociationSet Name="FK_THUOC1_MaDVT" Association="Self.FK_THUOC1_MaDVT">
+          <AssociationSet Name="FK_THUOC_MaDVT" Association="Self.FK_THUOC_MaDVT">
             <End Role="DVT" EntitySet="DVT" />
-            <End Role="THUOC1" EntitySet="THUOC1" />
+            <End Role="THUOC" EntitySet="THUOC" />
           </AssociationSet>
-          <AssociationSet Name="FK_THUOC1_MaLoaiThuoc" Association="Self.FK_THUOC1_MaLoaiThuoc">
+          <AssociationSet Name="FK_THUOC_MaLoaiThuoc" Association="Self.FK_THUOC_MaLoaiThuoc">
             <End Role="LOAITHUOC" EntitySet="LOAITHUOC" />
-            <End Role="THUOC1" EntitySet="THUOC1" />
+            <End Role="THUOC" EntitySet="THUOC" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -410,7 +484,6 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           <Property Name="NgayVaoLam" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="BangCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PHIEUKHAMBENHs" Relationship="Self.FK_PHIEUKHAMBENH_MaBS" FromRole="BACSI" ToRole="PHIEUKHAMBENH" />
-          <NavigationProperty Name="TAIKHOANs" Relationship="Self.FK_TAIKHOAN_MaBS" FromRole="BACSI" ToRole="TAIKHOAN" />
         </EntityType>
         <EntityType Name="BAOCAODOANHTHU">
           <Key>
@@ -421,6 +494,17 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           <Property Name="Nam" Type="Int32" />
           <Property Name="TongDoanhThu" Type="Double" />
           <NavigationProperty Name="CT_BCDT" Relationship="Self.FK_CT_BCDT_MaBCDT" FromRole="BAOCAODOANHTHU" ToRole="CT_BCDT" />
+        </EntityType>
+        <EntityType Name="BAOCAOSUDUNGTHUOC">
+          <Key>
+            <PropertyRef Name="MaBaoCaoSuDungThuoc" />
+          </Key>
+          <Property Name="MaBaoCaoSuDungThuoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Thang" Type="Int32" />
+          <Property Name="SoLanDung" Type="Int32" />
+          <Property Name="TongSoLuongDaDung" Type="Int32" />
+          <Property Name="MaThuoc" Type="Int32" />
+          <NavigationProperty Name="THUOC" Relationship="Self.FK_BAOCAOSUDUNGTHUOC_THUOC" FromRole="BAOCAOSUDUNGTHUOC" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="BENHNHAN">
           <Key>
@@ -440,16 +524,51 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           </Key>
           <Property Name="MaCachDung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenCachDung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="THUOC1" Relationship="Self.FK_THUOC1_MaCachDung" FromRole="CACHDUNG" ToRole="THUOC1" />
+          <NavigationProperty Name="THUOCs" Relationship="Self.FK_THUOC_MaCachDung" FromRole="CACHDUNG" ToRole="THUOC" />
         </EntityType>
-        <EntityType Name="CHUCVU">
+        <EntityType Name="CHUCNANG">
           <Key>
-            <PropertyRef Name="MaChucVu" />
+            <PropertyRef Name="MaChucNang" />
           </Key>
-          <Property Name="MaChucVu" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="TenChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NoiDung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TAIKHOANs" Relationship="Self.FK_TAIKHOAN_ChucVu" FromRole="CHUCVU" ToRole="TAIKHOAN" />
+          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TenChucNang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenManHinhDuocLoad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CT_BCDT">
+          <Key>
+            <PropertyRef Name="MaBCDT" />
+            <PropertyRef Name="SoHD" />
+          </Key>
+          <Property Name="MaBCDT" Type="Int32" Nullable="false" />
+          <Property Name="SoHD" Type="Int32" Nullable="false" />
+          <Property Name="SoBenhNhan" Type="Int32" />
+          <Property Name="DoanhThu" Type="Double" />
+          <Property Name="TiLe" Type="Double" />
+          <NavigationProperty Name="BAOCAODOANHTHU" Relationship="Self.FK_CT_BCDT_MaBCDT" FromRole="CT_BCDT" ToRole="BAOCAODOANHTHU" />
+          <NavigationProperty Name="HOADON" Relationship="Self.FK_CT_BCDT_SoHD" FromRole="CT_BCDT" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="CT_PKB">
+          <Key>
+            <PropertyRef Name="MaPKB" />
+            <PropertyRef Name="MaThuoc" />
+          </Key>
+          <Property Name="MaPKB" Type="Int32" Nullable="false" />
+          <Property Name="MaThuoc" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" />
+          <NavigationProperty Name="PHIEUKHAMBENH" Relationship="Self.FK_CT_PKB_PHIEUKHAMBENH" FromRole="CT_PKB" ToRole="PHIEUKHAMBENH" />
+          <NavigationProperty Name="THUOC" Relationship="Self.FK_CT_PKB_THUOC" FromRole="CT_PKB" ToRole="THUOC" />
+        </EntityType>
+        <EntityType Name="CT_PNT">
+          <Key>
+            <PropertyRef Name="SoPhieuNhap" />
+          </Key>
+          <Property Name="SoPhieuNhap" Type="Int32" Nullable="false" />
+          <Property Name="MaThuoc" Type="Int32" />
+          <Property Name="SoLuongNhap" Type="Int32" />
+          <Property Name="DonGiaNhap" Type="Double" />
+          <Property Name="ThanhTien" Type="Double" />
+          <NavigationProperty Name="THUOC" Relationship="Self.FK_CT_PNT_MaThuoc" FromRole="CT_PNT" ToRole="THUOC" />
+          <NavigationProperty Name="PHIEUNHAPTHUOC" Relationship="Self.FK_CT_PNT_SoPhieuNhap" FromRole="CT_PNT" ToRole="PHIEUNHAPTHUOC" />
         </EntityType>
         <EntityType Name="DVT">
           <Key>
@@ -457,7 +576,7 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           </Key>
           <Property Name="MaDVT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenDVT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="THUOC1" Relationship="Self.FK_THUOC1_MaDVT" FromRole="DVT" ToRole="THUOC1" />
+          <NavigationProperty Name="THUOCs" Relationship="Self.FK_THUOC_MaDVT" FromRole="DVT" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
@@ -487,7 +606,32 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           </Key>
           <Property Name="MaLoaiThuoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenLoaiThuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="THUOC1" Relationship="Self.FK_THUOC1_MaLoaiThuoc" FromRole="LOAITHUOC" ToRole="THUOC1" />
+          <NavigationProperty Name="THUOCs" Relationship="Self.FK_THUOC_MaLoaiThuoc" FromRole="LOAITHUOC" ToRole="THUOC" />
+        </EntityType>
+        <EntityType Name="NGUOIDUNG">
+          <Key>
+            <PropertyRef Name="TenDangNhap" />
+          </Key>
+          <Property Name="TenDangNhap" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NGUOIDUNG" ToRole="NHOMNGUOIDUNG" />
+        </EntityType>
+        <EntityType Name="NHOMNGUOIDUNG">
+          <Key>
+            <PropertyRef Name="MaNhom" />
+          </Key>
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TenNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NGUOIDUNGs" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NHOMNGUOIDUNG" ToRole="NGUOIDUNG" />
+        </EntityType>
+        <EntityType Name="PHANQUYEN">
+          <Key>
+            <PropertyRef Name="MaNhom" />
+            <PropertyRef Name="MaChucNang" />
+          </Key>
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="PHIEUKHAMBENH">
           <Key>
@@ -501,6 +645,7 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           <Property Name="TrieuChung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BACSI" Relationship="Self.FK_PHIEUKHAMBENH_MaBS" FromRole="PHIEUKHAMBENH" ToRole="BACSI" />
           <NavigationProperty Name="BENHNHAN" Relationship="Self.FK_PHIEUKHAMBENH_MaBN" FromRole="PHIEUKHAMBENH" ToRole="BENHNHAN" />
+          <NavigationProperty Name="CT_PKB" Relationship="Self.FK_CT_PKB_PHIEUKHAMBENH" FromRole="PHIEUKHAMBENH" ToRole="CT_PKB" />
           <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_MaPKB" FromRole="PHIEUKHAMBENH" ToRole="HOADON" />
           <NavigationProperty Name="LOAIBENH" Relationship="Self.FK_PHIEUKHAMBENH_MaLoaiBenh" FromRole="PHIEUKHAMBENH" ToRole="LOAIBENH" />
         </EntityType>
@@ -511,18 +656,7 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           <Property Name="SoPhieuNhap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NgayNhap" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TongTien" Type="Double" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TAIKHOAN">
-          <Key>
-            <PropertyRef Name="TaiKhoanID" />
-          </Key>
-          <Property Name="TaiKhoanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MaBS" Type="Int32" />
-          <Property Name="ChucVu" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="BACSI" Relationship="Self.FK_TAIKHOAN_MaBS" FromRole="TAIKHOAN" ToRole="BACSI" />
-          <NavigationProperty Name="CHUCVU1" Relationship="Self.FK_TAIKHOAN_ChucVu" FromRole="TAIKHOAN" ToRole="CHUCVU" />
+          <NavigationProperty Name="CT_PNT" Relationship="Self.FK_CT_PNT_SoPhieuNhap" FromRole="PHIEUNHAPTHUOC" ToRole="CT_PNT" />
         </EntityType>
         <EntityType Name="THAMSO">
           <Key>
@@ -532,32 +666,23 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
           <Property Name="TenThamSo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GiaTri" Type="Double" Nullable="false" />
         </EntityType>
-        <EntityType Name="THUOC1">
+        <EntityType Name="THUOC">
           <Key>
             <PropertyRef Name="MaThuoc" />
           </Key>
           <Property Name="MaThuoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaLoaiThuoc" Type="Int32" Nullable="false" />
           <Property Name="TenThuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DonGia" Type="Double" Nullable="false" />
           <Property Name="MaDVT" Type="Int32" Nullable="false" />
           <Property Name="MaCachDung" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CACHDUNG" Relationship="Self.FK_THUOC1_MaCachDung" FromRole="THUOC1" ToRole="CACHDUNG" />
-          <NavigationProperty Name="DVT" Relationship="Self.FK_THUOC1_MaDVT" FromRole="THUOC1" ToRole="DVT" />
-          <NavigationProperty Name="LOAITHUOC" Relationship="Self.FK_THUOC1_MaLoaiThuoc" FromRole="THUOC1" ToRole="LOAITHUOC" />
-        </EntityType>
-        <EntityType Name="CT_BCDT">
-          <Key>
-            <PropertyRef Name="MaBCDT" />
-            <PropertyRef Name="SoHD" />
-          </Key>
-          <Property Name="MaBCDT" Type="Int32" Nullable="false" />
-          <Property Name="SoHD" Type="Int32" Nullable="false" />
-          <Property Name="SoBenhNhan" Type="Int32" />
-          <Property Name="DoanhThu" Type="Double" />
-          <Property Name="TiLe" Type="Double" />
-          <NavigationProperty Name="BAOCAODOANHTHU" Relationship="Self.FK_CT_BCDT_MaBCDT" FromRole="CT_BCDT" ToRole="BAOCAODOANHTHU" />
-          <NavigationProperty Name="HOADON" Relationship="Self.FK_CT_BCDT_SoHD" FromRole="CT_BCDT" ToRole="HOADON" />
+          <Property Name="DonGiaNhap" Type="Double" />
+          <Property Name="DonGiaBan" Type="Double" />
+          <NavigationProperty Name="BAOCAOSUDUNGTHUOCs" Relationship="Self.FK_BAOCAOSUDUNGTHUOC_THUOC" FromRole="THUOC" ToRole="BAOCAOSUDUNGTHUOC" />
+          <NavigationProperty Name="CACHDUNG" Relationship="Self.FK_THUOC_MaCachDung" FromRole="THUOC" ToRole="CACHDUNG" />
+          <NavigationProperty Name="CT_PKB" Relationship="Self.FK_CT_PKB_THUOC" FromRole="THUOC" ToRole="CT_PKB" />
+          <NavigationProperty Name="CT_PNT" Relationship="Self.FK_CT_PNT_MaThuoc" FromRole="THUOC" ToRole="CT_PNT" />
+          <NavigationProperty Name="DVT" Relationship="Self.FK_THUOC_MaDVT" FromRole="THUOC" ToRole="DVT" />
+          <NavigationProperty Name="LOAITHUOC" Relationship="Self.FK_THUOC_MaLoaiThuoc" FromRole="THUOC" ToRole="LOAITHUOC" />
         </EntityType>
         <Association Name="FK_PHIEUKHAMBENH_MaBS">
           <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
@@ -571,18 +696,6 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TAIKHOAN_MaBS">
-          <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BACSI">
-              <PropertyRef Name="MaBS" />
-            </Principal>
-            <Dependent Role="TAIKHOAN">
-              <PropertyRef Name="MaBS" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CT_BCDT_MaBCDT">
           <End Role="BAOCAODOANHTHU" Type="Self.BAOCAODOANHTHU" Multiplicity="1" />
           <End Role="CT_BCDT" Type="Self.CT_BCDT" Multiplicity="*" />
@@ -592,6 +705,18 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             </Principal>
             <Dependent Role="CT_BCDT">
               <PropertyRef Name="MaBCDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAOCAOSUDUNGTHUOC_THUOC">
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
+          <End Role="BAOCAOSUDUNGTHUOC" Type="Self.BAOCAOSUDUNGTHUOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="BAOCAOSUDUNGTHUOC">
+              <PropertyRef Name="MaThuoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -619,39 +744,15 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_THUOC1_MaCachDung">
+        <Association Name="FK_THUOC_MaCachDung">
           <End Role="CACHDUNG" Type="Self.CACHDUNG" Multiplicity="1" />
-          <End Role="THUOC1" Type="Self.THUOC1" Multiplicity="*" />
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CACHDUNG">
               <PropertyRef Name="MaCachDung" />
             </Principal>
-            <Dependent Role="THUOC1">
+            <Dependent Role="THUOC">
               <PropertyRef Name="MaCachDung" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAIKHOAN_ChucVu">
-          <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="0..1" />
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CHUCVU">
-              <PropertyRef Name="MaChucVu" />
-            </Principal>
-            <Dependent Role="TAIKHOAN">
-              <PropertyRef Name="ChucVu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_THUOC1_MaDVT">
-          <End Role="DVT" Type="Self.DVT" Multiplicity="1" />
-          <End Role="THUOC1" Type="Self.THUOC1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DVT">
-              <PropertyRef Name="MaDVT" />
-            </Principal>
-            <Dependent Role="THUOC1">
-              <PropertyRef Name="MaDVT" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -664,6 +765,66 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             </Principal>
             <Dependent Role="CT_BCDT">
               <PropertyRef Name="SoHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_PKB_PHIEUKHAMBENH">
+          <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="1" />
+          <End Role="CT_PKB" Type="Self.CT_PKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUKHAMBENH">
+              <PropertyRef Name="MaPKB" />
+            </Principal>
+            <Dependent Role="CT_PKB">
+              <PropertyRef Name="MaPKB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_PKB_THUOC">
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="1" />
+          <End Role="CT_PKB" Type="Self.CT_PKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="CT_PKB">
+              <PropertyRef Name="MaThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_PNT_MaThuoc">
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
+          <End Role="CT_PNT" Type="Self.CT_PNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THUOC">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="CT_PNT">
+              <PropertyRef Name="MaThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_PNT_SoPhieuNhap">
+          <End Role="PHIEUNHAPTHUOC" Type="Self.PHIEUNHAPTHUOC" Multiplicity="1" />
+          <End Role="CT_PNT" Type="Self.CT_PNT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUNHAPTHUOC">
+              <PropertyRef Name="SoPhieuNhap" />
+            </Principal>
+            <Dependent Role="CT_PNT">
+              <PropertyRef Name="SoPhieuNhap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THUOC_MaDVT">
+          <End Role="DVT" Type="Self.DVT" Multiplicity="1" />
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVT">
+              <PropertyRef Name="MaDVT" />
+            </Principal>
+            <Dependent Role="THUOC">
+              <PropertyRef Name="MaDVT" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -691,45 +852,62 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_THUOC1_MaLoaiThuoc">
+        <Association Name="FK_THUOC_MaLoaiThuoc">
           <End Role="LOAITHUOC" Type="Self.LOAITHUOC" Multiplicity="1" />
-          <End Role="THUOC1" Type="Self.THUOC1" Multiplicity="*" />
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LOAITHUOC">
               <PropertyRef Name="MaLoaiThuoc" />
             </Principal>
-            <Dependent Role="THUOC1">
+            <Dependent Role="THUOC">
               <PropertyRef Name="MaLoaiThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NGUOIDUNG_NHOMNGUOIDUNG">
+          <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="0..1" />
+          <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMNGUOIDUNG">
+              <PropertyRef Name="MaNhom" />
+            </Principal>
+            <Dependent Role="NGUOIDUNG">
+              <PropertyRef Name="MaNhom" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="QUANLYPHONGMACHTUEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BACSIs" EntityType="Self.BACSI" />
           <EntitySet Name="BAOCAODOANHTHUs" EntityType="Self.BAOCAODOANHTHU" />
+          <EntitySet Name="BAOCAOSUDUNGTHUOCs" EntityType="Self.BAOCAOSUDUNGTHUOC" />
           <EntitySet Name="BENHNHANs" EntityType="Self.BENHNHAN" />
           <EntitySet Name="CACHDUNGs" EntityType="Self.CACHDUNG" />
-          <EntitySet Name="CHUCVUs" EntityType="Self.CHUCVU" />
+          <EntitySet Name="CHUCNANGs" EntityType="Self.CHUCNANG" />
+          <EntitySet Name="CT_BCDT" EntityType="Self.CT_BCDT" />
+          <EntitySet Name="CT_PKB" EntityType="Self.CT_PKB" />
+          <EntitySet Name="CT_PNT" EntityType="Self.CT_PNT" />
           <EntitySet Name="DVTs" EntityType="Self.DVT" />
           <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
           <EntitySet Name="LOAIBENHs" EntityType="Self.LOAIBENH" />
           <EntitySet Name="LOAITHUOCs" EntityType="Self.LOAITHUOC" />
+          <EntitySet Name="NGUOIDUNGs" EntityType="Self.NGUOIDUNG" />
+          <EntitySet Name="NHOMNGUOIDUNGs" EntityType="Self.NHOMNGUOIDUNG" />
+          <EntitySet Name="PHANQUYENs" EntityType="Self.PHANQUYEN" />
           <EntitySet Name="PHIEUKHAMBENHs" EntityType="Self.PHIEUKHAMBENH" />
           <EntitySet Name="PHIEUNHAPTHUOCs" EntityType="Self.PHIEUNHAPTHUOC" />
-          <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOAN" />
           <EntitySet Name="THAMSOes" EntityType="Self.THAMSO" />
-          <EntitySet Name="THUOC1" EntityType="Self.THUOC1" />
-          <EntitySet Name="CT_BCDT" EntityType="Self.CT_BCDT" />
+          <EntitySet Name="THUOCs" EntityType="Self.THUOC" />
           <AssociationSet Name="FK_PHIEUKHAMBENH_MaBS" Association="Self.FK_PHIEUKHAMBENH_MaBS">
             <End Role="BACSI" EntitySet="BACSIs" />
             <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
           </AssociationSet>
-          <AssociationSet Name="FK_TAIKHOAN_MaBS" Association="Self.FK_TAIKHOAN_MaBS">
-            <End Role="BACSI" EntitySet="BACSIs" />
-            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
-          </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_MaBCDT" Association="Self.FK_CT_BCDT_MaBCDT">
             <End Role="BAOCAODOANHTHU" EntitySet="BAOCAODOANHTHUs" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAOCAOSUDUNGTHUOC_THUOC" Association="Self.FK_BAOCAOSUDUNGTHUOC_THUOC">
+            <End Role="THUOC" EntitySet="THUOCs" />
+            <End Role="BAOCAOSUDUNGTHUOC" EntitySet="BAOCAOSUDUNGTHUOCs" />
           </AssociationSet>
           <AssociationSet Name="FK_HOADON_MaBN" Association="Self.FK_HOADON_MaBN">
             <End Role="BENHNHAN" EntitySet="BENHNHANs" />
@@ -739,21 +917,33 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             <End Role="BENHNHAN" EntitySet="BENHNHANs" />
             <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
           </AssociationSet>
-          <AssociationSet Name="FK_THUOC1_MaCachDung" Association="Self.FK_THUOC1_MaCachDung">
+          <AssociationSet Name="FK_THUOC_MaCachDung" Association="Self.FK_THUOC_MaCachDung">
             <End Role="CACHDUNG" EntitySet="CACHDUNGs" />
-            <End Role="THUOC1" EntitySet="THUOC1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAIKHOAN_ChucVu" Association="Self.FK_TAIKHOAN_ChucVu">
-            <End Role="CHUCVU" EntitySet="CHUCVUs" />
-            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_THUOC1_MaDVT" Association="Self.FK_THUOC1_MaDVT">
-            <End Role="DVT" EntitySet="DVTs" />
-            <End Role="THUOC1" EntitySet="THUOC1" />
+            <End Role="THUOC" EntitySet="THUOCs" />
           </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_SoHD" Association="Self.FK_CT_BCDT_SoHD">
             <End Role="HOADON" EntitySet="HOADONs" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_PKB_PHIEUKHAMBENH" Association="Self.FK_CT_PKB_PHIEUKHAMBENH">
+            <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
+            <End Role="CT_PKB" EntitySet="CT_PKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_PKB_THUOC" Association="Self.FK_CT_PKB_THUOC">
+            <End Role="THUOC" EntitySet="THUOCs" />
+            <End Role="CT_PKB" EntitySet="CT_PKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_PNT_MaThuoc" Association="Self.FK_CT_PNT_MaThuoc">
+            <End Role="THUOC" EntitySet="THUOCs" />
+            <End Role="CT_PNT" EntitySet="CT_PNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_PNT_SoPhieuNhap" Association="Self.FK_CT_PNT_SoPhieuNhap">
+            <End Role="PHIEUNHAPTHUOC" EntitySet="PHIEUNHAPTHUOCs" />
+            <End Role="CT_PNT" EntitySet="CT_PNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THUOC_MaDVT" Association="Self.FK_THUOC_MaDVT">
+            <End Role="DVT" EntitySet="DVTs" />
+            <End Role="THUOC" EntitySet="THUOCs" />
           </AssociationSet>
           <AssociationSet Name="FK_HOADON_MaPKB" Association="Self.FK_HOADON_MaPKB">
             <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
@@ -763,9 +953,13 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
             <End Role="LOAIBENH" EntitySet="LOAIBENHs" />
             <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
           </AssociationSet>
-          <AssociationSet Name="FK_THUOC1_MaLoaiThuoc" Association="Self.FK_THUOC1_MaLoaiThuoc">
+          <AssociationSet Name="FK_THUOC_MaLoaiThuoc" Association="Self.FK_THUOC_MaLoaiThuoc">
             <End Role="LOAITHUOC" EntitySet="LOAITHUOCs" />
-            <End Role="THUOC1" EntitySet="THUOC1" />
+            <End Role="THUOC" EntitySet="THUOCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NGUOIDUNG_NHOMNGUOIDUNG" Association="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG">
+            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNGs" />
+            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNGs" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -799,6 +993,17 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BAOCAOSUDUNGTHUOCs">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.BAOCAOSUDUNGTHUOC">
+              <MappingFragment StoreEntitySet="BAOCAOSUDUNGTHUOC">
+                <ScalarProperty Name="MaBaoCaoSuDungThuoc" ColumnName="MaBaoCaoSuDungThuoc" />
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="SoLanDung" ColumnName="SoLanDung" />
+                <ScalarProperty Name="TongSoLuongDaDung" ColumnName="TongSoLuongDaDung" />
+                <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BENHNHANs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.BENHNHAN">
               <MappingFragment StoreEntitySet="BENHNHAN">
@@ -818,12 +1023,43 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CHUCVUs">
-            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CHUCVU">
-              <MappingFragment StoreEntitySet="CHUCVU">
-                <ScalarProperty Name="MaChucVu" ColumnName="MaChucVu" />
-                <ScalarProperty Name="TenChucVu" ColumnName="TenChucVu" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <EntitySetMapping Name="CHUCNANGs">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CHUCNANG">
+              <MappingFragment StoreEntitySet="CHUCNANG">
+                <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
+                <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
+                <ScalarProperty Name="TenManHinhDuocLoad" ColumnName="TenManHinhDuocLoad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CT_BCDT">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CT_BCDT">
+              <MappingFragment StoreEntitySet="CT_BCDT">
+                <ScalarProperty Name="MaBCDT" ColumnName="MaBCDT" />
+                <ScalarProperty Name="SoHD" ColumnName="SoHD" />
+                <ScalarProperty Name="SoBenhNhan" ColumnName="SoBenhNhan" />
+                <ScalarProperty Name="DoanhThu" ColumnName="DoanhThu" />
+                <ScalarProperty Name="TiLe" ColumnName="TiLe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CT_PKB">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CT_PKB">
+              <MappingFragment StoreEntitySet="CT_PKB">
+                <ScalarProperty Name="MaPKB" ColumnName="MaPKB" />
+                <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CT_PNT">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CT_PNT">
+              <MappingFragment StoreEntitySet="CT_PNT">
+                <ScalarProperty Name="SoPhieuNhap" ColumnName="SoPhieuNhap" />
+                <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
+                <ScalarProperty Name="SoLuongNhap" ColumnName="SoLuongNhap" />
+                <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -863,6 +1099,31 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="NGUOIDUNGs">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.NGUOIDUNG">
+              <MappingFragment StoreEntitySet="NGUOIDUNG">
+                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHOMNGUOIDUNGs">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.NHOMNGUOIDUNG">
+              <MappingFragment StoreEntitySet="NHOMNGUOIDUNG">
+                <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+                <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHANQUYENs">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.PHANQUYEN">
+              <MappingFragment StoreEntitySet="PHANQUYEN">
+                <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+                <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PHIEUKHAMBENHs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.PHIEUKHAMBENH">
               <MappingFragment StoreEntitySet="PHIEUKHAMBENH">
@@ -884,17 +1145,6 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TAIKHOANs">
-            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.TAIKHOAN">
-              <MappingFragment StoreEntitySet="TAIKHOAN">
-                <ScalarProperty Name="TaiKhoanID" ColumnName="TaiKhoanID" />
-                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="MaBS" ColumnName="MaBS" />
-                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="THAMSOes">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.THAMSO">
               <MappingFragment StoreEntitySet="THAMSO">
@@ -904,26 +1154,16 @@ error 6004: The table 'QUANLYPHONGMACHTU.dbo.TOATHUOC' is referenced by a relati
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="THUOC1">
-            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.THUOC1">
-              <MappingFragment StoreEntitySet="THUOC1">
+          <EntitySetMapping Name="THUOCs">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.THUOC">
+              <MappingFragment StoreEntitySet="THUOC">
                 <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
                 <ScalarProperty Name="MaLoaiThuoc" ColumnName="MaLoaiThuoc" />
                 <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
-                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
                 <ScalarProperty Name="MaDVT" ColumnName="MaDVT" />
                 <ScalarProperty Name="MaCachDung" ColumnName="MaCachDung" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CT_BCDT">
-            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CT_BCDT">
-              <MappingFragment StoreEntitySet="CT_BCDT">
-                <ScalarProperty Name="MaBCDT" ColumnName="MaBCDT" />
-                <ScalarProperty Name="SoHD" ColumnName="SoHD" />
-                <ScalarProperty Name="SoBenhNhan" ColumnName="SoBenhNhan" />
-                <ScalarProperty Name="DoanhThu" ColumnName="DoanhThu" />
-                <ScalarProperty Name="TiLe" ColumnName="TiLe" />
+                <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
+                <ScalarProperty Name="DonGiaBan" ColumnName="DonGiaBan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

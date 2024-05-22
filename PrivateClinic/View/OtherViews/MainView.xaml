@@ -92,7 +92,7 @@
                                  IsChecked="True" 
                                  FontFamily="Segoe UI"
                                  Uid="0"
-                                 Command="{Binding BangdieukhienCM}" Width="280" />
+                                 Command="{Binding BangDieuKhienCM}" Width="280" />
 
                             <RadioButton
                                  Style="{StaticResource TiepDon}"

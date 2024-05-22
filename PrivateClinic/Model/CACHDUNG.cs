@@ -17,13 +17,13 @@ namespace PrivateClinic.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CACHDUNG()
         {
-            this.THUOC1 = new HashSet<THUOC1>();
+            this.THUOCs = new HashSet<THUOC>();
         }
     
         public int MaCachDung { get; set; }
         public string TenCachDung { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THUOC1> THUOC1 { get; set; }
+        public virtual ICollection<THUOC> THUOCs { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PrivateClinic.ViewModel.QuanLiTiepDon;
+using PrivateClinic.ViewModel.ThanhToan;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +13,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using PrivateClinic.ViewModel.QuanLiTiepDon;
-namespace PrivateClinic.View.QuanLiTiepDon
+
+
+namespace PrivateClinic.View.ThanhToan
 {
     /// <summary>
-    /// Interaction logic for ThemBenhNhanView.xaml
+    /// Interaction logic for HoaDonView.xaml
     /// </summary>
-    public partial class ThemBenhNhanView : Window
+    public partial class HoaDonView : Window
     {
-        public ThemBenhNhanView()
+        public HoaDonView(HoaDonViewModel viewModel)
         {
             InitializeComponent();
-            ThemBenhNhanViewModel viewmodel = new ThemBenhNhanViewModel();
-            this.DataContext = viewmodel;
+            this.DataContext = viewModel;
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -27,18 +27,23 @@ namespace PrivateClinic.Model
     
         public virtual DbSet<BACSI> BACSIs { get; set; }
         public virtual DbSet<BAOCAODOANHTHU> BAOCAODOANHTHUs { get; set; }
+        public virtual DbSet<BAOCAOSUDUNGTHUOC> BAOCAOSUDUNGTHUOCs { get; set; }
         public virtual DbSet<BENHNHAN> BENHNHANs { get; set; }
         public virtual DbSet<CACHDUNG> CACHDUNGs { get; set; }
-        public virtual DbSet<CHUCVU> CHUCVUs { get; set; }
+        public virtual DbSet<CHUCNANG> CHUCNANGs { get; set; }
+        public virtual DbSet<CT_BCDT> CT_BCDT { get; set; }
+        public virtual DbSet<CT_PKB> CT_PKB { get; set; }
+        public virtual DbSet<CT_PNT> CT_PNT { get; set; }
         public virtual DbSet<DVT> DVTs { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
         public virtual DbSet<LOAIBENH> LOAIBENHs { get; set; }
         public virtual DbSet<LOAITHUOC> LOAITHUOCs { get; set; }
+        public virtual DbSet<NGUOIDUNG> NGUOIDUNGs { get; set; }
+        public virtual DbSet<NHOMNGUOIDUNG> NHOMNGUOIDUNGs { get; set; }
+        public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
         public virtual DbSet<PHIEUKHAMBENH> PHIEUKHAMBENHs { get; set; }
         public virtual DbSet<PHIEUNHAPTHUOC> PHIEUNHAPTHUOCs { get; set; }
-        public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
         public virtual DbSet<THAMSO> THAMSOes { get; set; }
-        public virtual DbSet<THUOC1> THUOC1 { get; set; }
-        public virtual DbSet<CT_BCDT> CT_BCDT { get; set; }
+        public virtual DbSet<THUOC> THUOCs { get; set; }
     }
 }

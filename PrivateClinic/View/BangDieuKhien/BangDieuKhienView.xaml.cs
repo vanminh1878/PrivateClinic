@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PrivateClinic.Model;
+using PrivateClinic.ViewModel.BangDieuKhien;
+using PrivateClinic.ViewModel.ThanhToan;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,18 +15,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PrivateClinic.ViewModel.QuanLiTiepDon;
-namespace PrivateClinic.View.QuanLiTiepDon
+
+namespace PrivateClinic.View.BangDieuKhien
 {
     /// <summary>
-    /// Interaction logic for ThemBenhNhanView.xaml
+    /// Interaction logic for BangDieuKhienView.xaml
     /// </summary>
-    public partial class ThemBenhNhanView : Window
+    public partial class BangDieuKhienView : Page
     {
-        public ThemBenhNhanView()
+        public BangDieuKhienView()
         {
             InitializeComponent();
-            ThemBenhNhanViewModel viewmodel = new ThemBenhNhanViewModel();
+            BangDieuKhienViewModel viewmodel = new BangDieuKhienViewModel();
             this.DataContext = viewmodel;
         }
     }

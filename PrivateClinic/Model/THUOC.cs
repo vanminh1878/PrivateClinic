@@ -12,28 +12,32 @@ namespace PrivateClinic.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class PHIEUKHAMBENH
+    public partial class THUOC
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PHIEUKHAMBENH()
+        public THUOC()
         {
+            this.BAOCAOSUDUNGTHUOCs = new HashSet<BAOCAOSUDUNGTHUOC>();
             this.CT_PKB = new HashSet<CT_PKB>();
-            this.HOADONs = new HashSet<HOADON>();
+            this.CT_PNT = new HashSet<CT_PNT>();
         }
     
-        public int MaPKB { get; set; }
-        public System.DateTime NgayKham { get; set; }
-        public int MaLoaiBenh { get; set; }
-        public int MaBN { get; set; }
-        public Nullable<int> MaBS { get; set; }
-        public string TrieuChung { get; set; }
+        public int MaThuoc { get; set; }
+        public int MaLoaiThuoc { get; set; }
+        public string TenThuoc { get; set; }
+        public int MaDVT { get; set; }
+        public int MaCachDung { get; set; }
+        public Nullable<double> DonGiaNhap { get; set; }
+        public Nullable<double> DonGiaBan { get; set; }
     
-        public virtual BACSI BACSI { get; set; }
-        public virtual BENHNHAN BENHNHAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BAOCAOSUDUNGTHUOC> BAOCAOSUDUNGTHUOCs { get; set; }
+        public virtual CACHDUNG CACHDUNG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PKB> CT_PKB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HOADON> HOADONs { get; set; }
-        public virtual LOAIBENH LOAIBENH { get; set; }
+        public virtual ICollection<CT_PNT> CT_PNT { get; set; }
+        public virtual DVT DVT { get; set; }
+        public virtual LOAITHUOC LOAITHUOC { get; set; }
     }
 }
