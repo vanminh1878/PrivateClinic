@@ -15,7 +15,7 @@ namespace PrivateClinic.Model
     public partial class PHIEUNHAPTHUOC
     {
         public int SoPhieuNhap { get; set; }
-        public System.DateTime NgayNhap { get; set; }
+        public Nullable<System.DateTime> NgayNhap { get; set; }
         public double TongTien { get; set; }
     
         public virtual CT_PNT CT_PNT { get; set; }

@@ -72,6 +72,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                         KhoThuocView quanLiThuocView = new KhoThuocView();
                         quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
                         quanLiThuocView.MedicineListView.Items.Refresh();
+                        
                     }
                     else
                     {

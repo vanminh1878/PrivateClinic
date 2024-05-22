@@ -11,6 +11,6 @@ namespace PrivateClinic.Model
         public int? SL { get; set; }
         public double? Gia { get; set; }
 
-        public DateTime NgayNhap { get; set; }
+        public DateTime? NgayNhap { get; set; }
     }
 }

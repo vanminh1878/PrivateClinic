@@ -31,9 +31,7 @@ namespace PrivateClinic.Model
         public virtual DbSet<BENHNHAN> BENHNHANs { get; set; }
         public virtual DbSet<CACHDUNG> CACHDUNGs { get; set; }
         public virtual DbSet<CHUCNANG> CHUCNANGs { get; set; }
-        public virtual DbSet<CT_BCDT> CT_BCDT { get; set; }
         public virtual DbSet<CT_PKB> CT_PKB { get; set; }
-        public virtual DbSet<CT_PNT> CT_PNT { get; set; }
         public virtual DbSet<DVT> DVTs { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
         public virtual DbSet<LOAIBENH> LOAIBENHs { get; set; }
@@ -44,6 +42,7 @@ namespace PrivateClinic.Model
         public virtual DbSet<PHIEUNHAPTHUOC> PHIEUNHAPTHUOCs { get; set; }
         public virtual DbSet<THAMSO> THAMSOes { get; set; }
         public virtual DbSet<THUOC> THUOCs { get; set; }
+        public virtual DbSet<CT_PNT> CT_PNT { get; set; }
         public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
     }
 }

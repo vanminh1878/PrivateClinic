@@ -14,18 +14,9 @@ namespace PrivateClinic.Model
     
     public partial class BAOCAODOANHTHU
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BAOCAODOANHTHU()
-        {
-            this.CT_BCDT = new HashSet<CT_BCDT>();
-        }
-    
         public int MaBCDT { get; set; }
         public Nullable<int> Thang { get; set; }
         public Nullable<int> Nam { get; set; }
         public Nullable<double> TongDoanhThu { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_BCDT> CT_BCDT { get; set; }
     }
 }

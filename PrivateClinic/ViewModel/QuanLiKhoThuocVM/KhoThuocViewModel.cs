@@ -10,6 +10,7 @@ using PrivateClinic.ViewModel.OtherViewModels;
 using PrivateClinic.View.QuanLiKhoThuoc;
 using System.Windows;
 using static System.Net.WebRequestMethods;
+using System.Globalization;
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
@@ -180,33 +181,41 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             detail.MaThuoc.Text = temp.MaThuoc.ToString();
             detail.DVT.Text = temp.DVT.TenDVT.ToString();
             detail.SL.Text = temp.SoLuong.ToString();
-            if (ctphieunhap != null)
-            {
-                CT_PNT ct = ctphieunhap.FirstOrDefault(t => t.MaThuoc == temp.MaThuoc);
-                if (ct != null)
-                {
-                    PHIEUNHAPTHUOC pnt = phieunhap.FirstOrDefault(a => a.SoPhieuNhap == ct.SoPhieuNhap);
-                    if (pnt != null)
-                    {
-                        detail.NgNhap.Text = pnt.NgayNhap.ToString("dd/MM/yyyy");
-                    }
-                    else
-                    {
-                        // Xử lý trường hợp pnt là null
-                        detail.NgNhap.Text = "Chưa có ngày nhập";
-                    }
-                }
-                else
-                {
-                    // Xử lý trường hợp ct là null
-                    detail.NgNhap.Text = "Chưa có ngày nhập";
-                }
-            }
-            else
-            {
-                // Xử lý trường hợp ctphieunhap là null
-                detail.NgNhap.Text = "Chưa có ngày nhập";
-            }
+            detail.NgNhap.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            //if (ctphieunhap != null)
+            //{
+            //    CT_PNT ct = ctphieunhap.FirstOrDefault(t => t.MaThuoc == temp.MaThuoc);
+            //    if (ct != null)
+            //    {
+            //        PHIEUNHAPTHUOC pnt = phieunhap.FirstOrDefault(a => a.SoPhieuNhap == ct.SoPhieuNhap);
+            //        if (pnt != null)
+            //        {
+            //            if (pnt.NgayNhap.HasValue)
+            //            {
+            //                detail.NgNhap.Text = pnt.NgayNhap.Value.ToString("dd/MM/yyyy");
+            //            }
+            //            else
+            //            {
+            //                detail.NgNhap.Text = string.Empty; // Hoặc hiển thị một giá trị mặc định nếu cần
+            //            }
+            //        }
+            //        else
+            //        {
+            //            // Xử lý trường hợp pnt là null
+            //            detail.NgNhap.Text = "Chưa có ngày nhập";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        // Xử lý trường hợp ct là null
+            //        detail.NgNhap.Text = "Chưa có ngày nhập";
+            //    }
+            //}
+            //else
+            //{
+            //    // Xử lý trường hợp ctphieunhap là null
+            //    detail.NgNhap.Text = "Chưa có ngày nhập";
+            //}
             detail.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             detail.ShowDialog();
         }

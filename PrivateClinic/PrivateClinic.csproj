@@ -111,9 +111,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Const.cs" />
-    <Compile Include="Model\CT_BCDT.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\CT_PKB.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

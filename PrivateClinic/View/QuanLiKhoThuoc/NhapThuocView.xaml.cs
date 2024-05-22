@@ -16,5 +16,6 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
             NhapThuocViewModel viewModel = new NhapThuocViewModel();
             this.DataContext = viewModel;
         }
+      
     }
 }

@@ -20,7 +20,7 @@ namespace PrivateClinic.Model
         public Nullable<double> DonGiaNhap { get; set; }
         public Nullable<double> ThanhTien { get; set; }
     
-        public virtual THUOC THUOC { get; set; }
         public virtual PHIEUNHAPTHUOC PHIEUNHAPTHUOC { get; set; }
+        public virtual THUOC THUOC { get; set; }
     }
 }

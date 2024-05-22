@@ -34,9 +34,10 @@
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="100" />
-                        <RowDefinition Height="100" />
-                        <RowDefinition Height="100" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
@@ -59,6 +60,7 @@
                                 CornerRadius="10">
 
                                 <TextBox
+                                    IsEnabled="False"
                                     x:Name="MaThuoc"
                                     Width="180"
                                     Height="40"
@@ -81,7 +83,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontSize="22"
-                                Text="Tên thuốc:" />
+                                Text="Loại thuốc" />
                             <Border
                                 Grid.Column="1"
                                 Width="180"
@@ -91,23 +93,60 @@
                                 BorderBrush="Black"
                                 BorderThickness="0.7"
                                 CornerRadius="10">
-
-                                <TextBox
-                                    x:Name="TenThuoc"
-                                    Width="180"
+                                <ComboBox
+   
+                                    Width="170"
                                     Height="40"
                                     Padding="15,0,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     VerticalContentAlignment="Center"
-                                    materialDesign:HintAssist.Hint="Nhập tên thuốc"
-                                    FontSize="20" />
+                                    materialDesign:HintAssist.Hint="Chọn loại thuốc"
+                                    FontSize="18"
+                                    x:Name="LoaiThuoccbx"> 
+
+
+                                </ComboBox>
 
                             </Border>
 
                         </WrapPanel>
                     </Grid>
                     <Grid Grid.Row="2">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+            Grid.Column="0"
+            Margin="10,0,50,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="22"
+            Text="Tên thuốc:" />
+                            <Border
+            Grid.Column="1"
+            Width="180"
+            Height="40"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Left"
+            BorderBrush="Black"
+            BorderThickness="0.7"
+            CornerRadius="10">
+
+                                <TextBox
+                x:Name="TenThuoc"
+                Width="180"
+                Height="40"
+                Padding="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                materialDesign:HintAssist.Hint="Nhập tên thuốc"
+                FontSize="18" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Grid.Row="3">
                         <WrapPanel VerticalAlignment="Center">
                             <TextBlock
                                 Grid.Column="0"
@@ -135,7 +174,7 @@
                                     VerticalAlignment="Center"
                                     VerticalContentAlignment="Center"
                                     materialDesign:HintAssist.Hint="Chọn DVT"
-                                    FontSize="20"
+                                    FontSize="18"
                                     x:Name="TenDVTcbx">
 
 
@@ -150,10 +189,11 @@
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="100" />
-                        <RowDefinition Height="100" />
-                        <RowDefinition Height="100" />
-                        <RowDefinition Height="100" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
@@ -232,7 +272,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontSize="22"
-                                Text="Ngày nhập:" />
+                                Text="Cách dùng:" />
                             <Border
                                 Grid.Column="1"
                                 Width="220"
@@ -243,22 +283,58 @@
                                 BorderThickness="0.7"
                                 CornerRadius="10">
 
-                                <DatePicker
-                                    x:Name="NgayNhap"
-                                    Width="200"
+                                <ComboBox
+   
+                                    Width="209"
                                     Height="40"
                                     Padding="15,0,0,0"
                                     HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
                                     VerticalContentAlignment="Center"
-                                    materialDesign:HintAssist.Hint="Chọn ngày nhập"
-                                    FontSize="20" />
+                                    materialDesign:HintAssist.Hint="Chọn cách dùng"
+                                    FontSize="20"
+                                    x:Name="CachDungcbx"/>
 
                             </Border>
 
                         </WrapPanel>
                     </Grid>
                     <Grid Grid.Row="3">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock
+             Grid.Column="0"
+             Margin="10,0,50,10"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center"
+             FontSize="22"
+             Text="Ngày nhập:" />
+                            <Border
+             Grid.Column="1"
+             Width="220"
+             Height="40"
+             Margin="-13,0,0,10"
+             HorizontalAlignment="Left"
+             BorderBrush="Black"
+             BorderThickness="0.7"
+             CornerRadius="10">
+
+                                <DatePicker
+                 IsEnabled="False"
+                 SelectedDateFormat="Short"
+                 x:Name="NgayNhap"
+                 Width="200"
+                 Height="40"
+                 Padding="15,0,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"
+                 VerticalContentAlignment="Center"
+                 materialDesign:HintAssist.Hint="Chọn ngày nhập"
+                 FontSize="20" />
+
+                            </Border>
+
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Grid.Row="4">
                         <Button
                             Width="170"
                             Height="50"

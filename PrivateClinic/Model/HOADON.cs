@@ -14,12 +14,6 @@ namespace PrivateClinic.Model
     
     public partial class HOADON
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HOADON()
-        {
-            this.CT_BCDT = new HashSet<CT_BCDT>();
-        }
-    
         public int SoHD { get; set; }
         public double TienKham { get; set; }
         public Nullable<double> TienThuoc { get; set; }
@@ -29,8 +23,6 @@ namespace PrivateClinic.Model
         public string TrangThai { get; set; }
     
         public virtual BENHNHAN BENHNHAN { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_BCDT> CT_BCDT { get; set; }
         public virtual PHIEUKHAMBENH PHIEUKHAMBENH { get; set; }
     }
 }

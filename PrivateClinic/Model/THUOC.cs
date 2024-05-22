@@ -36,9 +36,9 @@ namespace PrivateClinic.Model
         public virtual CACHDUNG CACHDUNG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PKB> CT_PKB { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_PNT> CT_PNT { get; set; }
         public virtual DVT DVT { get; set; }
         public virtual LOAITHUOC LOAITHUOC { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CT_PNT> CT_PNT { get; set; }
     }
 }
