@@ -181,6 +181,7 @@
     <Compile Include="ViewModel\HoSoBacSiVM\ThemBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThongTinCaNhanViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThongTinChiTietCuaMotBacSiViewModel.cs" />
+    <Compile Include="Model\ThuocDTO.cs" />
     <Compile Include="ViewModel\OtherViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\ForgetPasswordViewModel.cs" />
     <Compile Include="ViewModel\OtherViewModels\ImageViewModel.cs" />
@@ -211,12 +212,17 @@
     <Compile Include="View\HoSoBacSi\ThongTinChiTietCuaMotBacSIView.xaml.cs">
       <DependentUpon>ThongTinChiTietCuaMotBacSIView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\BenhNhanDangKhamViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\QuanLiKhamBenhViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\QuanLiTiepDonViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\SuaBenhNhanViewModel.cs" />
+    <Compile Include="ViewModel\QuanLiTiepDon\SuaThongTinDonThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\ThemBenhNhanViewModel.cs" />
     <Compile Include="View\OtherViews\ForgetPasswordView.xaml.cs">
       <DependentUpon>ForgetPasswordView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\QuanLiTiepDon\ThemThuocChoBenhNhanViewModel.cs" />
     <Compile Include="View\OtherViews\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -229,14 +235,26 @@
     <Compile Include="View\QuanLiKhamBenh\QuanLiKhamBenhView.xaml.cs">
       <DependentUpon>QuanLiKhamBenhView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLiTiepDon\BenhNhanDangKhamView.xaml.cs">
+      <DependentUpon>BenhNhanDangKhamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiTiepDon\QuanLiKhamBenhView.xaml.cs">
+      <DependentUpon>QuanLiKhamBenhView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLiTiepDon\QuanLiTiepDonView.xaml.cs">
       <DependentUpon>QuanLiTiepDonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLiTiepDon\SuaBenhNhanView.xaml.cs">
       <DependentUpon>SuaBenhNhanView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLiTiepDon\SuaThongTinDonThuocView.xaml.cs">
+      <DependentUpon>SuaThongTinDonThuocView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLiTiepDon\ThemBenhNhanView.xaml.cs">
       <DependentUpon>ThemBenhNhanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLiTiepDon\ThemThuocChoBenhNhanView.xaml.cs">
+      <DependentUpon>ThemThuocChoBenhNhanView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -310,6 +328,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\QuanLiTiepDon\BenhNhanDangKhamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLiTiepDon\QuanLiKhamBenhView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\QuanLiKhamBenh\BenhNhanDaKhamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,7 +352,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\QuanLiTiepDon\SuaThongTinDonThuocView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\QuanLiTiepDon\ThemBenhNhanView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLiTiepDon\ThemThuocChoBenhNhanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -426,6 +460,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourceXAML\image\ic_khambenh.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Model1.Context.tt">

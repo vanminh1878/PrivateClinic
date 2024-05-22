@@ -52,16 +52,16 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             LoadPageCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 MainFrame = p;
-                p.Content = new QuanLiTiepDonView();
+                p.Content = new View.QuanLiTiepDon.QuanLiKhamBenhView();
             });
             HomeCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                MainFrame.Content = new QuanLiTiepDonView();
+                MainFrame.Content = new View.QuanLiTiepDon.QuanLiKhamBenhView();
             });
 
             TiepDonCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                MainFrame.Content = new QuanLiTiepDonView();
+                MainFrame.Content = new View.QuanLiTiepDon.QuanLiKhamBenhView();
             });
 
             BacSiCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
@@ -71,7 +71,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
 
             KhamBenhCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                MainFrame.Content = new QuanLiKhamBenhView();
+                MainFrame.Content = new View.QuanLiKhamBenh.QuanLiKhamBenhView();
             });
 
 

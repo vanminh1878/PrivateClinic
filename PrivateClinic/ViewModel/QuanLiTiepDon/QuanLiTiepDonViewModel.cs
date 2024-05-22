@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 
+
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
 
@@ -19,8 +20,11 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
     {
         private ObservableCollection<BENHNHAN> _listBN;
         public ObservableCollection<BENHNHAN> listBN { get => _listBN; set { _listBN = value; OnPropertyChanged(); } }
+        private ObservableCollection<QuanLiKhamBenhView> _currentView;
+        public ObservableCollection<QuanLiKhamBenhView> CurrentView { get => _currentView; set { _currentView = value; OnPropertyChanged(); } }
 
         public SuaBenhNhanView EditBNView { get; set; }
+        public BenhNhanDangKhamView KhamBNView { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }    
@@ -30,8 +34,11 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public ICommand EditUpSLBNCommand { get; set; }    
         public ICommand EditDownSLBNCommand { get; set; }    
         public ICommand SaveSLBNCommand { get; set; }    
-        public ICommand EditBNCommand { get; set; }    
+        public ICommand EditBNCommand { get; set; }
 
+        public ICommand selectedItemBenhNhan { get; set; }
+
+       
         public QuanLiTiepDonViewModel()
         {
             listBN = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHAN);
@@ -41,8 +48,12 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             LoadCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadCommand(p));
             LoadSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadSLBNCommand(p));
             EditBNCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _EditBNCommand(p));
+           
+
+            selectedItemBenhNhan= new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _selectedItemBenhNhan(p));
+
             UpdateSTT();
-            if (Const.PQ.MaNhom == "NHOM1     ")
+            if (Const.PQ.MaNhom == "NHOM1")
             {
                 EditSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditSLBNCommand(p));
                 EditUpSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditUpSLBNCommand(p));
@@ -141,7 +152,6 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
             parameter.ListViewBN.ItemsSource = temp;
         }
-
         void _DeleteCommand(BENHNHAN selectedItem)
         {
             MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -181,9 +191,18 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             EditBNView = view;
         }
+        void _AddCommand(QuanLiTiepDonView parameter)
+        {
+
+            ThemBenhNhanView addBNView = new ThemBenhNhanView();
+            double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
+            addBNView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            addBNView.ShowDialog();
+
+        }
         void _EditBNCommand(BENHNHAN selectedItem)
         {
-            if(selectedItem != null)
+            if (selectedItem != null)
             {
                 SuaBenhNhanViewModel.Instance.EditBNView = new SuaBenhNhanView();
                 SuaBenhNhanViewModel.Instance.EditBNView.HoTen.Text = selectedItem.HoTen.ToString();
@@ -195,19 +214,20 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
                 SuaBenhNhanViewModel.Instance.EditBNView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 SuaBenhNhanViewModel.Instance.EditBNView.ShowDialog();
-                
-                
+
+
 
             }
         }
-        void _AddCommand(QuanLiTiepDonView parameter)
+        public void SetKhamBNView(BenhNhanDangKhamView view)
         {
-
-            ThemBenhNhanView addBNView = new ThemBenhNhanView();
-            double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-            addBNView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            addBNView.ShowDialog();
-
+            KhamBNView = view;
         }
+
+        void _selectedItemBenhNhan(BENHNHAN bENHNHAN)
+        {
+            MessageBox.Show("hihi");
+        }
+
     }
 }
