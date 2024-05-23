@@ -36,8 +36,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         //Hàm khởi tạo
         public ThongTinChiTietCuaMotBacSiViewModel(BACSI bs,ThongTinChiTietCuaMotBacSIView view) 
         {
-            formatMaBS = bs.formatMaBS;
             HoTen = bs.HoTen;
+            formatMaBS = bs.formatMaBS;
             GioiTinh = bs.GioiTinh;
             SDT = bs.SDT;
             Email = bs.Email;

@@ -18,7 +18,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -120,92 +119,15 @@
         </StackPanel>
 
         <!--Danh sách bác sĩ-->
-        <!--header-->
-        <Border
-            Grid.Row="2"
-            Margin="11,5,0,0"
-            Width="920"
-            Height="50"
-            CornerRadius="10"
-            VerticalAlignment="Top"
-            Background="#D9D9D9">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="260"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="160"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <!--MaBS-->
-                <Grid Grid.Column="0">
-                    <TextBlock HorizontalAlignment="Center"
-                               FontWeight="DemiBold"
-                               Text="MABS"
-                               Margin="5,0,0,0"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <!--HoTen-->
-                <Grid Grid.Column="1">
-                    <TextBlock HorizontalAlignment="Left"
-                               FontWeight="DemiBold"
-                               Text="Tên bác sĩ"
-                               Margin="21,0,0,0"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <!--Giới tính-->
-                <Grid Grid.Column="2">
-                    <TextBlock HorizontalAlignment="Left"
-                               Margin="10,0,0,0"
-                               FontWeight="DemiBold"
-                               Text="Giới tính"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <!--SDT-->
-                <Grid Grid.Column="3">
-                    <TextBlock HorizontalAlignment="Left"
-                               FontWeight="DemiBold"
-                               Text="Số điện thoại"
-                               Margin="42,0,20,0"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <!--Bang Cap-->
-                <Grid Grid.Column="4">
-                    <TextBlock HorizontalAlignment="Left"
-                               Margin="17,0,0,0"
-                               FontWeight="DemiBold"
-                               Text="Bằng cấp"
-                               VerticalAlignment="Center" />
-                </Grid>
-
-                <!--Thao tac-->
-                <Grid Grid.Column="5">
-                    <TextBlock HorizontalAlignment="Left"
-                               FontWeight="DemiBold"
-                               Text="Thao tác"
-                               Margin="10,0,0,0"
-                               VerticalAlignment="Center" />
-                </Grid>
-            </Grid>
-        </Border>
-
         <!--Chi tiết danh sách-->
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
 
-            <ListView FontSize="22"
-                      Focusable="True"
-                      x:Name="ListViewBS"
-                      Margin="20,0,0,0"
-                      FontWeight="SemiBold"
+            <ListView x:Name="ListViewBS"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      ItemsSource="{Binding FilterDSBS}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                      d:ItemsSource="{d:SampleData ItemCount=5}"
+                      ItemsSource="{Binding FilterDSBS}"
+                      >
                 <!--  Event trigger phục vụ show StaffDetail  -->
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
@@ -215,139 +137,63 @@
                                                Path=SelectedItem}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="924" Height="55" Margin="10 0 0 0" CornerRadius="10" Background="White">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="90"/>
-                                    <ColumnDefinition Width="260"/>
-                                    <ColumnDefinition Width="110"/>
-                                    <ColumnDefinition Width="170"/>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <!--Mã bác sĩ-->
-                                <Grid Grid.Column="0">
-                                    <TextBlock Text="{Binding formatMaBS}"
-                                               HorizontalAlignment="Center"
-                                               Margin="0,0,10,0"
-                                               VerticalAlignment="Center"
-                                               FontFamily="Segoe UI"
-                                               FontSize="20" />
-
-                                </Grid>
-
-                                <!--Tên bác sĩ-->
-                                <Grid Grid.Column="1">
-                                    <TextBlock
-                                        HorizontalAlignment="Left"
-                                        Margin="15,0,0,0"
-                                        Text="{Binding HoTen}"
-                                        VerticalAlignment="Center"
-                                        FontFamily="Segoe UI"
-                                        FontSize="20" />
-
-                                </Grid>
-
-                                <!--Giới tính-->
-                                <Grid Grid.Column="2">
-                                    <TextBlock Text="{Binding GioiTinh}"
-                                               HorizontalAlignment="Left"
-                                               Margin="5,0,0,0"
-                                               VerticalAlignment="Center"
-                                               FontFamily="Segoe UI"
-                                               FontSize="20" />
-
-                                </Grid>
-                                <!--Số điện thoại-->
-                                <Grid Grid.Column="3">
-                                    <TextBlock Text="{Binding SDT}"
-                                               HorizontalAlignment="Left"
-                                               Margin="25,0,0,0"
-                                               VerticalAlignment="Center"
-                                               FontFamily="Segoe UI"
-                                               FontSize="20"/>
-
-                                </Grid>
-
-                                <!--Bằng cấp-->
-                                <Grid Grid.Column="4">
-                                    <TextBlock Text="{Binding  BangCap}"
-                                               HorizontalAlignment="Left"
-                                               Margin="30,0,0,0"
-                                               VerticalAlignment="Center"
-                                               FontFamily="Segoe UI"
-                                               FontSize="20"/>
-                                </Grid>
-
-                                <Grid Grid.Column="6">
-                                    <StackPanel Orientation="Horizontal"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center">
-                                        <Button ToolTip="Sửa thông tin bệnh nhân "
-                                                Click="EditButton_Click"
-                                                Command="{Binding EditDoctorCommand}"
-                                                CommandParameter="{Binding}"
-                                                Margin="0"
-                                                VerticalAlignment="Bottom"
-                                                Width="45"
-                                                Height="45"
-                                                HorizontalAlignment="Right" >
-                                            <Button.Template>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Grid>
-                                                        <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
-                                                    </Grid>
-                                                </ControlTemplate>
-                                            </Button.Template>
-                                        </Button>
-                                        <!--  Nút xóa -->
-                                        <Border
-                                            BorderBrush="Black"
-                                            BorderThickness="0.5"
-                                            CornerRadius="50"
-                                            Margin="10,0,0,0"
-                                            Width="45"
-                                            Height="45"
-                                            Cursor="Hand">
-                                            <Border.Style>
-                                                <Style TargetType="Border">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#DFD7BF" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>
-                                            <Image Source="{StaticResource icDelete}" Stretch="UniformToFill"/>
-                                        </Border>
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="MouseLeftButtonDown" >
-                                                <i:InvokeCommandAction Command="{Binding DataContext.DeleteDoctorCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-
-                                    </StackPanel>
-                                </Grid>
-                                <Border BorderBrush="Black"
-                                        BorderThickness="0 0 0 1"
-                                        Margin="1,0,2,0"
-                                        Grid.ColumnSpan="7" />
-                            </Grid>
-                        </Border>
-
-                    </DataTemplate>
-                </ListView.ItemTemplate>
 
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical"/>
+                        <WrapPanel Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#348F6C"
+                                BorderThickness="3"
+                                Width="300"
+                                Height="125"
+                                CornerRadius="10"
+                                Margin="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
+                                <!-- Cột hình ảnh -->
+                                <Border
+                                    Width="100"
+                                    Height="100"
+                                    Margin="10"
+                                    BorderBrush="Black"
+                                    BorderThickness="1"
+                                    CornerRadius="0">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Image}" />
+                                    </Border.Background>
+                                </Border>
+
+
+                                <!-- Cột nội dung -->
+                                <StackPanel Grid.Column="1"
+                                            Orientation="Vertical"
+                                            Margin="10">
+                                    <TextBlock Margin="0 0 0 4" Text="{Binding HoTen}"
+                                               FontWeight="Bold"
+                                               FontSize="16"/>
+                                    <TextBlock Margin="0 0 0 3" Text="{Binding formatMaBS}"
+                                               FontSize="14"/>
+                                    <TextBlock Margin="0 0 0 3" Text="{Binding GioiTinh}"
+                                               FontSize="14"/>
+                                    <TextBlock Margin="0 0 0 3" Text="{Binding SDT}"
+                                               FontSize="14"/>
+                                    <TextBlock Margin="0 0 0 3" Text="{Binding BangCap}"
+                                               FontSize="14"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
             </ListView>
+
         </Grid>
     </Grid>
 </UserControl>
