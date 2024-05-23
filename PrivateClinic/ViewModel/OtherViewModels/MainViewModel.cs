@@ -8,7 +8,7 @@ using PrivateClinic.View.QuanLiTiepDon;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using System.Linq;
 namespace PrivateClinic.ViewModel.OtherViewModels
 {
     public class MainViewModel : BaseViewModel
