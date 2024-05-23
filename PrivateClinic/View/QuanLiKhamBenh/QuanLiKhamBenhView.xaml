@@ -25,7 +25,8 @@
     <Border Background="White" CornerRadius="25">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -64,8 +65,13 @@
                     </StackPanel>
 
                 </DockPanel>
-                <Border BorderThickness="0 1 0 0" BorderBrush="Black" Margin="35 0 35 0" VerticalAlignment="Bottom" />
             </Grid>
+            <Border
+                Grid.Row="1"
+                BorderThickness="0 1 0 0"
+                BorderBrush="Black"
+                Margin="35 0 35 0"
+                VerticalAlignment="Bottom" />
             <ContentControl
                 Grid.Row="2"
                 x:Name="Main"

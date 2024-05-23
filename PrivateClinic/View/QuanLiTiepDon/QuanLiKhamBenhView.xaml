@@ -1,12 +1,12 @@
 ﻿<Page x:Class="PrivateClinic.View.QuanLiTiepDon.QuanLiKhamBenhView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:PrivateClinic.View.QuanLiTiepDon"
-      
+
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="710" d:DesignWidth="990"
       Title="QuanLiKhamBenhView"
       x:Name="QuanLiKhamBenhViewPage">
@@ -16,10 +16,10 @@
             <BeginStoryboard>
                 <Storyboard>
                     <ThicknessAnimation Storyboard.TargetName="QuanLiKhamBenhViewPage"
-                                     Storyboard.TargetProperty="Margin"
-                                     From="426,0,0,0"
-                                     To="0"
-                                     Duration="0:0:0.2" />
+                                        Storyboard.TargetProperty="Margin"
+                                        From="426,0,0,0"
+                                        To="0"
+                                        Duration="0:0:0.2" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
@@ -43,19 +43,23 @@
                                Foreground="#348F6C"
                                Margin="35 0 0 0"/>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0" Orientation="Horizontal">
-                        <Image Source="{StaticResource icMaleUserBlue}"
-                               Width="60"
-                               Height="60"
-                               HorizontalAlignment="Right"
-                               Margin="0 0 7 0"/>
+                        <Border
+                            Width="60"
+                            Height="60"
+                            Margin="0,0,7,0"
+                            CornerRadius="50">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding ImageSource}" />
+                            </Border.Background>
+                        </Border>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
                             <!--Tên user-->
-                            <TextBlock Text="Trần Thu Hằng"
+                            <TextBlock Text="{Binding TenNV}"
                                        FontSize="22"
                                        FontWeight="SemiBold"
                                        FontFamily="Segoe UI"/>
-                            <TextBlock Text="Nhân viên"
+                            <TextBlock Text="{Binding ChucVu}"
                                        FontSize="22"
                                        FontWeight="SemiBold"
                                        FontFamily="Segoe UI"/>
@@ -64,7 +68,7 @@
                     </StackPanel>
 
                 </DockPanel>
-                
+
             </Grid>
 
             <StackPanel Grid.Row="1"
