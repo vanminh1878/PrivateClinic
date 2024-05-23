@@ -75,19 +75,15 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 //listBN[i].STT = i + 1;
             }
         }
-        void SoLuongBenhNhanTiepDonHomNay()
-        {
-            
-            
-        }
+       
         void _EditSLBNCommand(QuanLiTiepDonView parameter)
         {
           
             parameter.txbMaxBN.IsEnabled = true;
             parameter.btnUp.IsEnabled = true;
             parameter.btnDown.IsEnabled = true;
+            parameter.btnSave.Visibility = Visibility.Visible;
             parameter.btnSave.IsEnabled = true;
-
         }
         void _EditUpSLBNCommand(QuanLiTiepDonView parameter)
         {
@@ -131,17 +127,26 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu lại số bệnh nhân khám tối đa trong ngày không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    t.GiaTri = newValue;
-                    DataProvider.Ins.DB.SaveChanges();
-                    parameter.txbMaxBN.IsEnabled = false;
-                    parameter.btnSave.IsEnabled = false;
-                    MessageBox.Show("Đã lưu số bệnh nhân khám tối đa trong ngày thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (newValue < SoLuongBenhNhanDaTiepDon)
+                    {
+                        MessageBox.Show("Số lượng bệnh nhân khám tối đa trong ngày không hợp lệ","Thông báo",MessageBoxButton.OK,MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        t.GiaTri = newValue;
+                        DataProvider.Ins.DB.SaveChanges();
+                        parameter.txbMaxBN.IsEnabled = false;
+                        parameter.btnSave.IsEnabled = false;
+                        MessageBox.Show("Đã lưu số bệnh nhân khám tối đa trong ngày thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        parameter.btnSave.Visibility = Visibility.Hidden;
+
+                    }
+
                 }
             }
             else
             {
-                // Xử lý trường hợp không thể ép kiểu thành công (giá trị không hợp lệ)
-                // Ví dụ: Hiển thị thông báo lỗi cho người dùng
+                MessageBox.Show("Giá trị nhập lỗi","Thông báo",MessageBoxButton.OK,MessageBoxImage.Error);
             }
 
         }

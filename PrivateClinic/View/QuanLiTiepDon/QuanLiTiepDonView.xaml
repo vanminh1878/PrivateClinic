@@ -89,7 +89,9 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
-                            <Button IsEnabled="False" x:Name="btnSave"  Width="50" Height="50" HorizontalAlignment="Right" >
+                            <Button IsEnabled="False" x:Name="btnSave"
+                                    Visibility="Hidden"
+                                    Width="50" Height="50" HorizontalAlignment="Right" >
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid>

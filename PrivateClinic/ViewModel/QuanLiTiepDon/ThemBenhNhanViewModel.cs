@@ -84,12 +84,18 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             AddBN = new RelayCommand<ThemBenhNhanView>((p) => true, (p) => _AddBN(p));
             CancelCommand = new RelayCommand<ThemBenhNhanView>((p) => true, (p) => _CancelCommand(p));
         }
-
+        
         void _AddBN(ThemBenhNhanView paramater)
         {
+            QuanLiTiepDonViewModel model = new QuanLiTiepDonViewModel();
+            THAMSO t = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 1);
             if (string.IsNullOrEmpty(paramater.HoTen.Text) || string.IsNullOrEmpty(paramater.GioiTinh.SelectedItem.ToString()) || string.IsNullOrEmpty(paramater.NgSinh.Text) || string.IsNullOrEmpty(paramater.DiaChi.Text))
             {
                 MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (model.SoLuongBenhNhanDaTiepDon == t.GiaTri)
+            {
+                MessageBox.Show("Đã đạt giới hạn số lượng bệnh nhân khám trong ngày", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
