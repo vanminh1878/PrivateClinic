@@ -100,6 +100,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     if (h == MessageBoxResult.Yes)
                     {
                         benhnhan.TrangThai = false;
+                        DataProvider.Ins.DB.SaveChanges();
                         MessageBox.Show("Đã thêm bệnh nhân vào danh sách tiếp đón!", "THÔNG BÁO");
                     }
                         

@@ -217,9 +217,10 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         void LoadData()
         {
-            listBN = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
-
+            var benhnhanList = DataProvider.Ins.DB.BENHNHANs.Where(p => p.TrangThai == false).ToList();
+            listBN = new ObservableCollection<BENHNHAN>(benhnhanList);
         }
+
 
     }
 }
