@@ -156,35 +156,15 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         }
         void _DeleteCommand(BENHNHAN selectedItem)
         {
-            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này ra khỏi danh sách tiếp đón không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (r == MessageBoxResult.Yes)
             {
                 if (selectedItem != null)
                 {
-                    // Remove related HOADON records
-                    var relatedHoadons = DataProvider.Ins.DB.HOADONs.Where(h => h.MaBN == selectedItem.MaBN).ToList();
-                    DataProvider.Ins.DB.HOADONs.RemoveRange(relatedHoadons);
-                    // Remove related CT_BCDT records
-                    var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.HOADON.MaBN == selectedItem.MaBN).ToList();
-                    DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
-                    // Remove related PHIEUKHAMBENH records
-                    var relatedPHIEUKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).ToList();
-                    DataProvider.Ins.DB.PHIEUKHAMBENHs.RemoveRange(relatedPHIEUKBs);
-                    var relatedMaPKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).Select(pkb => pkb.MaPKB).ToList();
-                    var relatedCT_PKBs = DataProvider.Ins.DB.CT_PKB.Where(ctpkb => relatedMaPKBs.Contains(ctpkb.MaPKB)).ToList();
-                    DataProvider.Ins.DB.CT_PKB.RemoveRange(relatedCT_PKBs);
-                    // Remove the selected BENHNHAN
-                    DataProvider.Ins.DB.BENHNHANs.Remove(selectedItem);
-
+                    selectedItem.TrangThai = true;
                     // Save changes to the database
                     DataProvider.Ins.DB.SaveChanges();
-
-                    // Remove the item from the list
-                    listBN.Remove(selectedItem);
-                    UpdateSTT();
-                    QuanLiTiepDonView quanLiTiepDonView = new QuanLiTiepDonView();
-                    quanLiTiepDonView.txbSLBNDK.Text = listBN.Count.ToString();
-                    quanLiTiepDonView.txbSLBNDK.FontSize = 25;
+                    LoadData();
                 }
             }
         }
