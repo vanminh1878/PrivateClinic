@@ -12,6 +12,12 @@
              mc:Ignorable="d"
              x:Name="BenhNhanDangKhamUC"
              d:DesignHeight="750" d:DesignWidth="990">
+    <UserControl.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding AddCommand}"
+                    CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
+        <KeyBinding Key="F3" Command="{Binding SaveCommand}"
+                    CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
+    </UserControl.InputBindings>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="125"/>

@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="40.5"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -99,7 +99,7 @@
         <!--header-->
         <Border
             Grid.Row="2"
-            Margin="11,5,0,0"
+            Margin="11,15,0,0"
             Width="920"
             Height="50"
             CornerRadius="10"
@@ -166,7 +166,7 @@
             <ListView FontSize="22"
                       Focusable="True"
                       x:Name="ListViewBN"
-                      Margin="20,0,0,0"
+                      Margin="20,15,0,0"
                       FontWeight="SemiBold"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"

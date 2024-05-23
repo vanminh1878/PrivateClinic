@@ -18,6 +18,12 @@
         WindowStyle="None"
         x:Name="ThemThuocViewPage"
         mc:Ignorable="d">
+    <Window.InputBindings>
+        <KeyBinding Key="F2" Command="{Binding CancelCommand}"/>
+        <KeyBinding Key="F3" Command="{Binding SaveCommand}"/>
+        <KeyBinding Key="F1" Command="{Binding AddCommand}"/>
+
+    </Window.InputBindings>
     <Border Background="White" CornerRadius="25">
         <Grid>
             <Grid.RowDefinitions>

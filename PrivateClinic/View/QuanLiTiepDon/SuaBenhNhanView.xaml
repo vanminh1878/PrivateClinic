@@ -14,7 +14,12 @@
         WindowStartupLocation="CenterScreen"
         Foreground="{DynamicResource MaterialDesignBody}"
         Title="ThemBenhNhanView" Width="835">
-
+    <Window.InputBindings>
+        <KeyBinding Key="F2" Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=SuaBenhNhanViewPage}" />
+        <KeyBinding Key="F3" Command="{Binding SaveCommand}"
+                    CommandParameter="{Binding ElementName=ThemBenhNhanViewPage}" />
+    </Window.InputBindings>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition/>

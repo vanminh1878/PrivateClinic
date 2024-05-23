@@ -450,6 +450,7 @@
                         Width="150"
                         Height="45"
                         Padding="0"
+                        BorderBrush="Transparent"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         materialDesign:ButtonAssist.CornerRadius="10"
@@ -481,6 +482,7 @@
                         VerticalAlignment="Top"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         FontSize="20"
+                        BorderBrush="Transparent"
                         Background="#348F6C"
                         Command="{Binding AddDoctorCommand}"
                         >
