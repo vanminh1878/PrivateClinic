@@ -26,7 +26,35 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         public SuaBenhNhanView EditBNView { get; set; }
         public BenhNhanDangKhamView KhamBNView { get; set; }
-        public ICommand SearchCommand { get; set; }
+        private ObservableCollection<BENHNHAN> filterDSBN;
+        public ObservableCollection<BENHNHAN> FilterDSBN
+        {
+            get => filterDSBN;
+            set
+            {
+                if (filterDSBN != value)
+                {
+                    filterDSBN = value;
+                    OnPropertyChanged(nameof(FilterDSBN));
+
+                }
+            }
+        }
+
+        private string searchText;
+        public string SearchText
+        {
+            get => searchText;
+            set
+            {
+                if (searchText != value)
+                {
+                    searchText = value;
+                    OnPropertyChanged(nameof(SearchText));
+                    FilterDSBenhNhan();
+                }
+            }
+        }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }    
         public ICommand LoadSLBNCommand { get; set; }    
@@ -52,12 +80,10 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public QuanLiTiepDonViewModel()
         {
             LoadData();
-            SearchCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             DeleteCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
             AddCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
             LoadSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadSLBNCommand(p));
             EditBN();
-            UpdateSTT();
             if (Const.PQ.MaNhom == "NHOM1")
             {
                 EditSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditSLBNCommand(p));
@@ -68,13 +94,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             
         }
 
-        void UpdateSTT()
-        {
-            for (int i = 0; i < listBN.Count; i++)
-            {
-                //listBN[i].STT = i + 1;
-            }
-        }
+   
        
         void _EditSLBNCommand(QuanLiTiepDonView parameter)
         {
@@ -152,20 +172,24 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         }
 
         //Hàm tìm kiếm thông tin bệnh nhân
-        void _SearchCommand(QuanLiTiepDonView parameter)
+        void SearchBN()
         {
-            ObservableCollection<BENHNHAN> temp = new ObservableCollection<BENHNHAN>();
-            if (!string.IsNullOrEmpty(parameter.txbSearch.Text))
+            FilterDSBN = new ObservableCollection<BENHNHAN>(listBN);//ban đầu thì không cần lọc
+        }
+        private void FilterDSBenhNhan()
+        {
+            // Cập nhật FilteredDSBS dựa trên SearchText
+            if (string.IsNullOrWhiteSpace(SearchText))
             {
-                string searchKeyword = parameter.txbSearch.Text.ToLower();
-                temp = new ObservableCollection<BENHNHAN>(listBN.Where(s => s.HoTen.ToLower().Contains(searchKeyword)));
+                FilterDSBN = new ObservableCollection<BENHNHAN>(listBN);
             }
             else
             {
-                temp = new ObservableCollection<BENHNHAN>(listBN);
+                FilterDSBN = new ObservableCollection<BENHNHAN>(
+                    listBN.Where(s => s.HoTen.ToLower().Contains(SearchText.ToLower())));
             }
-            parameter.ListViewBN.ItemsSource = temp;
         }
+
         void _DeleteCommand(BENHNHAN selectedItem)
         {
             MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này ra khỏi danh sách tiếp đón không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -212,6 +236,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             var benhnhanList = DataProvider.Ins.DB.BENHNHANs.Where(p => p.TrangThai == false).ToList();
             listBN = new ObservableCollection<BENHNHAN>(benhnhanList);
+            SearchBN();
             int dem = listBN.Count;
             int soluong = 0;
             ObservableCollection<PHIEUKHAMBENH> listpkb = new ObservableCollection<PHIEUKHAMBENH>(DataProvider.Ins.DB.PHIEUKHAMBENHs);
