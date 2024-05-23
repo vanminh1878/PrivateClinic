@@ -171,8 +171,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 SelectedCachDung = ListCachDung.FirstOrDefault(cd => cd.TenCachDung == thuocDTO.CachDung);
                 MaThuoc = thuocDTO.MaThuoc;
                 // Gán các thuộc tính còn lại
-                DonVi = thuocDTO.DonVi;
-                SoLuong = thuocDTO.SoLuong;
+                DonVi = thuocDTO.DVT;
+                SoLuong = thuocDTO.SL.ToString();
             }
             else
             {
@@ -202,8 +202,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 {
                     ThuocDTO thuoc = Const.ListThuocTemp.FirstOrDefault(t => t.MaThuoc == thuocDTO.MaThuoc);
                     thuoc.MaThuoc = MaThuoc;
-                    thuoc.DonVi = DonVi;
-                    thuoc.SoLuong = SoLuong;
+                    thuoc.DVT = DonVi;
+                    thuoc.SL = int.Parse(SoLuong);
                     thuoc.TenThuoc = SelectedThuoc.TenThuoc;
                     thuoc.CachDung = SelectedCachDung.TenCachDung;
                     MessageBox.Show("Thành công", "Thông báo");

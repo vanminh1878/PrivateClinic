@@ -498,10 +498,10 @@
                                 </Grid>
 
                                 <Grid Grid.Column="2">
-                                    <TextBlock x:Name="SL" Text="{Binding  SoLuong}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Segoe UI" FontSize="20"/>
+                                    <TextBlock x:Name="SL" Text="{Binding  SL}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Segoe UI" FontSize="20"/>
                                 </Grid>
                                 <Grid Grid.Column="3">
-                                    <TextBlock x:Name="DVT" Text="{Binding DonVi}" HorizontalAlignment="Left"
+                                    <TextBlock x:Name="DVT" Text="{Binding DVT}" HorizontalAlignment="Left"
                                                Margin="25,0,0,0"
                                                VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
                                 </Grid>

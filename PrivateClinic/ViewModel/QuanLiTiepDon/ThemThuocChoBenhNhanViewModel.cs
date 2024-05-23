@@ -202,9 +202,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 thuocDTO.STT = stt;
                 thuocDTO.MaThuoc = MaThuoc;
                 thuocDTO.TenThuoc = selectedThuoc.TenThuoc;
-                thuocDTO.SoLuong = SoLuong;
+                thuocDTO.SL = int.Parse(SoLuong);
                 thuocDTO.CachDung = SelectedCachDung.TenCachDung;
-                thuocDTO.DonVi = DonVi;
+                thuocDTO.DVT = DonVi;
                 ListThuocDTO.Add(thuocDTO);
                 SoLuongThuocDaChon = ListThuocDTO.Count();
                 MessageBox.Show("Đã thêm", "Thông báo", MessageBoxButton.OK);

@@ -242,7 +242,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                             {
                                 CT_PKB chitietpkb = new CT_PKB();
                                 chitietpkb.MaPKB = pkb.MaPKB;
-                                chitietpkb.SoLuong = int.Parse(thuoc.SoLuong);
+                                chitietpkb.SoLuong = thuoc.SL;
                                 chitietpkb.MaThuoc = int.Parse(thuoc.MaThuoc);
                                 //Lưu các chi tiết hóa đơn
                                 DataProvider.Ins.DB.CT_PKB.Add(chitietpkb);
