@@ -10,6 +10,8 @@
         d:DesignHeight="430"
         WindowStyle="None"
         Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        Foreground="{DynamicResource MaterialDesignBody}"
         x:Name="ThemBenhNhanViewPage"
         Title="ThemBenhNhanView" Width="835">
 

@@ -81,47 +81,52 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public ThemBenhNhanViewModel()
         {
             ListBenhNhan = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
-           // AddBN = new RelayCommand<ThemBenhNhanView>((p) => true, (p) => _AddBN(p));
+            AddBN = new RelayCommand<ThemBenhNhanView>((p) => true, (p) => _AddBN(p));
             CancelCommand = new RelayCommand<ThemBenhNhanView>((p) => true, (p) => _CancelCommand(p));
         }
 
-        //void _AddBN(ThemBenhNhanView paramater)
-        //{
-        //    if (string.IsNullOrEmpty(paramater.HoTen.Text) || string.IsNullOrEmpty(paramater.GioiTinh.SelectedItem.ToString()) || string.IsNullOrEmpty(paramater.NgSinh.Text) || string.IsNullOrEmpty(paramater.MaBN.Text) || string.IsNullOrEmpty(paramater.DiaChi.Text))
-        //    {
-        //        MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //    else
-        //    {
-        //        MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn thêm bệnh nhân mới ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        //        if (h == MessageBoxResult.Yes)
-        //        {
-
-
-        //            BENHNHAN a = new BENHNHAN();
-        //            a.HoTen = paramater.HoTen.Text;
-        //            a.GioiTinh = paramater.GioiTinh.Text;
-        //            a.DiaChi = paramater.DiaChi.Text;
-        //            a.NamSinh = (DateTime)paramater.NgSinh.SelectedDate;
-
-
-        //            MessageBox.Show("Thêm bệnh nhân mới thành công !", "THÔNG BÁO");
-        //            DataProvider.Ins.DB.BENHNHANs.Add(a);
-        //            DataProvider.Ins.DB.SaveChanges();
-        //            // Xóa thông tin các TextBox
-        //            paramater.HoTen.Clear();
-        //            paramater.GioiTinh.SelectedIndex = -1;
-        //            paramater.DiaChi.Clear();
-        //            paramater.MaBN.Clear();
-        //            paramater.NgSinh.SelectedDate = null;
-
-        //            QuanLiTiepDonView quanlitiepdonView = new QuanLiTiepDonView();
-        //            quanlitiepdonView.ListViewBN.ItemsSource = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
-        //            quanlitiepdonView.ListViewBN.Items.Refresh();
-
-        //        }
-        //    }
-        //}
+        void _AddBN(ThemBenhNhanView paramater)
+        {
+            if (string.IsNullOrEmpty(paramater.HoTen.Text) || string.IsNullOrEmpty(paramater.GioiTinh.SelectedItem.ToString()) || string.IsNullOrEmpty(paramater.NgSinh.Text) || string.IsNullOrEmpty(paramater.DiaChi.Text))
+            {
+                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                var benhnhan = ListBenhNhan.FirstOrDefault(bn => bn.MaBN == SelectedBenhNhan?.MaBN);
+                if (benhnhan != null)
+                {
+                    MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn thêm bệnh nhân cũ vào danh sách tiếp đón ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (h == MessageBoxResult.Yes)
+                    {
+                        benhnhan.TrangThai = false;
+                        MessageBox.Show("Đã thêm bệnh nhân vào danh sách tiếp đón!", "THÔNG BÁO");
+                    }
+                        
+                }
+                else
+                {
+                    MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn thêm bệnh nhân mới vào danh sách tiếp đón ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (h == MessageBoxResult.Yes)
+                    {
+                        BENHNHAN a = new BENHNHAN();
+                        a.HoTen = paramater.HoTen.Text;
+                        a.GioiTinh = paramater.GioiTinh.Text;
+                        a.DiaChi = paramater.DiaChi.Text;
+                        a.NamSinh = (DateTime)paramater.NgSinh.SelectedDate;
+                        a.TrangThai = false;
+                        MessageBox.Show("Đã thêm bệnh nhân vào danh sách tiếp đón!", "THÔNG BÁO");
+                        DataProvider.Ins.DB.BENHNHANs.Add(a);
+                        DataProvider.Ins.DB.SaveChanges();
+                        // Xóa thông tin các TextBox
+                        paramater.HoTen.Text = string.Empty;
+                        paramater.GioiTinh.SelectedIndex = -1;
+                        paramater.DiaChi.Clear();
+                        paramater.NgSinh.SelectedDate = null;
+                    }
+                }
+            }
+        }
         void _CancelCommand(ThemBenhNhanView paramater)
         {       
             paramater.Close();

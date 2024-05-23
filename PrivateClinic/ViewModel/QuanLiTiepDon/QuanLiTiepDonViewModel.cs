@@ -199,6 +199,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
             addBNView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             addBNView.ShowDialog();
+            LoadData();
 
         }
 
