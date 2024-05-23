@@ -16,6 +16,12 @@
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     mc:Ignorable="d">
+    <UserControl.InputBindings>
+
+        <KeyBinding Key="F3" Command="{Binding SaveCommand}"
+   CommandParameter="{Binding ElementName=ThemThuocMoiViewPage}"/>
+    </UserControl.InputBindings>
+
     <Border
         Padding="10"
         Background="White"

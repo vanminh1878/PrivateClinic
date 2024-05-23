@@ -68,21 +68,27 @@
                         Foreground="#348F6C"
                         Text="Quản lý kho thuốc" />
                 </Border>
-                <StackPanel
-                    Margin="0,30,40,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal">
-                    <Image
-                        Width="60"
-                        Height="60"
-                        Source="{StaticResource icNurse1}"
-                        Stretch="Uniform" />
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0" Orientation="Horizontal">
+                    <Border
+        Width="60"
+        Height="60"
+        Margin="0,0,7,0"
+        CornerRadius="50">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding ImageSource}" />
+                        </Border.Background>
+                    </Border>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
-                    <StackPanel VerticalAlignment="Center" Orientation="Vertical">
-                        <!--  Tên user  -->
-                        <TextBlock FontWeight="SemiBold" Text="Trần Thu Hằng" />
-                        <TextBlock FontWeight="SemiBold" Text="Nhân viên" />
+                        <!--Tên user-->
+                        <TextBlock Text="{Binding TenNV}"
+                   FontSize="22"
+                   FontWeight="SemiBold"
+                   FontFamily="Segoe UI"/>
+                        <TextBlock Text="{Binding ChucVu}"
+                   FontSize="22"
+                   FontWeight="SemiBold"
+                   FontFamily="Segoe UI"/>
                     </StackPanel>
 
                 </StackPanel>

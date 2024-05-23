@@ -7,6 +7,11 @@ using System.Windows;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows.Resources;
+using System;
 
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
@@ -28,12 +33,51 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(CurrentView));
             }
         }
+        private string chucvu;
+        public string ChucVu
+        {
+            get => chucvu;
+            set
+            {
+                chucvu = value;
+                OnPropertyChanged(nameof(ChucVu));
+            }
+        }
+        private string tenNV;
+        public string TenNV
+        {
+            get => tenNV;
+            set
+            {
+                tenNV = value;
+                OnPropertyChanged(nameof(TenNV));
+            }
+        }
+        private NGUOIDUNG user;
+        public NGUOIDUNG User
+        {
+            get => user;
+            set
+            {
+                user = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+        private BitmapImage imageSource;
+        public BitmapImage ImageSource
+        {
+            get => imageSource;
+            set
+            {
+                imageSource = value;
+                OnPropertyChanged(nameof(ImageSource));
+            }
+        }
         public ICommand SwitchViewCommand { get; set; }
         public QuanLiKhoThuocViewModel()
-        {
-
-          
+        { 
             SwitchViewCommand = new ViewModelCommand(SwitchView);
+            ThongTinND();
         }
         private void SwitchView(object userControlName)
         {
@@ -50,7 +94,45 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             }
         }
 
-       
+        private void ThongTinND()
+        {
+            string tendangnhap = Const.TenDangNhap;
+            User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+            string MaBS = User.MaBS.ToString();
+            ObservableCollection<BACSI> DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
+            if (Const.PQ.MaNhom == "NHOM1")
+                ChucVu = "Admin";
+            else
+                ChucVu = "Nhân viên";
+            foreach (BACSI bs in DSBS)
+            {
+                if (bs.MaBS.ToString() == MaBS)
+                {
+                    TenNV = bs.HoTen;
+                    if (bs.Image == null)
+                    {
+                        Uri resourceUri = new Uri("pack://application:,,,/ResourceXAML/image/ic_male_user_blue.png", UriKind.Absolute);
+                        StreamResourceInfo streamInfo = System.Windows.Application.GetResourceStream(resourceUri);
+                        byte[] imageBytes;
+                        using (Stream imageStream = streamInfo.Stream)
+                        {
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                imageStream.CopyTo(ms);
+                                imageBytes = ms.ToArray();
+                            }
+                        }
+                        ImageSource = ImageViewModel.ByteArrayToBitmapImage(imageBytes);
+                    }
+                    else
+                    {
+                        BitmapImage image = ImageViewModel.ByteArrayToBitmapImage(bs.Image);
+                        ImageSource = image;
+                    }
+                    break;
+                }
+            }
+        }
 
 
 

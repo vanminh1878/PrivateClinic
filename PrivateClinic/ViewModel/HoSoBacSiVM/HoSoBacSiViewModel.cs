@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows.Resources;
 using System.Xml.Linq;
+using System.Windows;
+using PrivateClinic.View.QuanLiKhoThuoc;
 
 namespace PrivateClinic.ViewModel.HoSoBacSiVM
 {
@@ -74,10 +76,34 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
         public ICommand SwitchViewCommand { get; private set; }
         #endregion
+
+        private NGUOIDUNG _NhanVien;
+        public NGUOIDUNG NhanVien { get => _NhanVien; set { _NhanVien = value; OnPropertyChanged(); } }
+
+        private Visibility _SetQuanLy;
+        public Visibility SetQuanLy { get => _SetQuanLy; set { _SetQuanLy = value; OnPropertyChanged(); } }
+        private Visibility _SetNhanVien;
+        public Visibility SetNhanVien { get => _SetNhanVien; set { _SetNhanVien = value; OnPropertyChanged(); } }
+        public ICommand LoadCommand { get; set; }
         public HoSoBacSiViewModel()
         {
+            LoadCommand = new RelayCommand<HoSoBacSiView>((p) => true, (p) => _LoadCommand(p));
             SwitchViewCommand = new ViewModelCommand(SwitchView);
             ThongTinND();
+        }
+        private void _LoadCommand(HoSoBacSiView p)
+        {
+            if(Const.PQ.MaNhom== "NHOM1     ")
+            {
+                SetQuanLy = Visibility.Collapsed;
+                SetNhanVien = Visibility.Visible;
+            }
+            else
+            {
+                
+                SetQuanLy = Visibility.Visible;
+                SetNhanVien = Visibility.Collapsed;
+            }
         }
         private void SwitchView(object userControlName)
         {

@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows.Resources;
 using MaterialDesignThemes.Wpf;
+using System.Windows.Controls;
+
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
@@ -114,6 +116,26 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             {
                 soLuongThuocDangChon = value;
                 OnPropertyChanged(nameof(SoLuongThuocDangChon));
+            }
+        }
+        private bool _isBtnDeleteVisible = false;
+        public bool IsBtnDeleteVisible
+        {
+            get { return _isBtnDeleteVisible; }
+            set
+            {
+                _isBtnDeleteVisible = value;
+                OnPropertyChanged(nameof(IsBtnDeleteVisible));
+            }
+        }
+        private bool _isBtnEditVisible = false;
+        public bool isBtnEditVisible
+        {
+            get { return _isBtnEditVisible; }
+            set
+            {
+                _isBtnEditVisible = value;
+                OnPropertyChanged(nameof(isBtnEditVisible));
             }
         }
         #endregion
@@ -275,6 +297,52 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         DataProvider.Ins.DB.HOADONs.Add(hd);
                         DataProvider.Ins.DB.SaveChanges();
                         MessageBox.Show("Đã khám xong!","Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBoxResult printResult = System.Windows.MessageBox.Show("Bạn có muốn in phiếu khám bệnh không?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                        if (printResult == MessageBoxResult.Yes)
+                        {
+                            BenhNhanDangKhamView pkbtoPrint = new BenhNhanDangKhamView();
+                            pkbtoPrint.GioiTinh.Text = p.GioiTinh.Text;
+                            pkbtoPrint.ListViewMed.ItemsSource = p.ListViewMed.ItemsSource;
+                            pkbtoPrint.LoaiBenh.ItemsSource = p.LoaiBenh.ItemsSource;
+                            pkbtoPrint.LoaiBenh.SelectedItem = p.LoaiBenh.SelectedItem;
+                            pkbtoPrint.LoaiBenh.SelectedIndex = p.LoaiBenh.SelectedIndex;
+                            
+                           
+                            pkbtoPrint.MaBN.Text = p.MaBN.Text;
+                            pkbtoPrint.MaBNformat.Text = p.MaBNformat.Text;
+                            pkbtoPrint.NgKham.Text = p.NgKham.Text;
+                            pkbtoPrint.NgsinhBN.Text = p.NgsinhBN.Text;
+                            pkbtoPrint.TenBN.Text = p.TenBN.Text;
+                            pkbtoPrint.TenBS.Text = p.TenBS.Text;
+                            pkbtoPrint.TrieuChung.Text = p.TrieuChung.Text.ToString();
+                            pkbtoPrint.Tuoi.Text  = p.Tuoi.Text;
+                            pkbtoPrint.TongSoThuoc.Text = p.TongSoThuoc.Text;
+                            pkbtoPrint.saveBtn.Visibility = Visibility.Hidden;
+                            pkbtoPrint.AddBtn.Visibility = Visibility.Hidden;
+             
+                           
+
+                            try
+                            {
+                                pkbtoPrint.IsEnabled = false;
+                                PrintDialog printDialog = new PrintDialog();
+                                if (printDialog.ShowDialog() == true)
+                                {
+                                    pkbtoPrint.LoaiBenh.SelectedItem = p.LoaiBenh.SelectedItem;
+                                    pkbtoPrint.LoaiBenh.SelectedIndex = p.LoaiBenh.SelectedIndex;
+                                    pkbtoPrint.TrieuChung.Text = p.TrieuChung.Text.ToString();
+                                    printDialog.PrintVisual(pkbtoPrint.BenhNhanDangKhamUC, "Phiếu khám bệnh");
+                                }
+                            }
+                            finally
+                            {
+                                pkbtoPrint.IsEnabled = true;
+                            }
+
+                            // Gọi hàm in hóa đơn và truyền đối tượng hoadonToPrint
+                            //InHoaDon(pkbtoPrint);
+                        }
 
                         // Clear the input fields
                         p.MaBNformat.Text = string.Empty;
@@ -284,7 +352,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         p.Tuoi.Text = string.Empty;
                         p.GioiTinh.Text = string.Empty;
                         p.LoaiBenh.SelectedIndex = -1;
-                        if(ListThuocView != null)
+
+                        if (ListThuocView != null)
                         {
                             ListThuocView.Clear();
                         }
@@ -294,7 +363,23 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 }
             }
         }
-
+        //void InHoaDon(BenhNhanDangKhamView parameter)
+        //{
+        //    try
+        //    {
+        //        //parameter.IsEnabled = false;
+        //        PrintDialog printDialog = new PrintDialog();
+        //        if (printDialog.ShowDialog() == true)
+        //        {
+        //            parameter.LoaiBenh.SelectedItem = 
+        //            printDialog.PrintVisual(parameter, "Phiếu khám bệnh");
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        parameter.IsEnabled = true;
+        //    }
+        //}
         private void ThongTinND()
         {
             string tendangnhap = Const.TenDangNhap;

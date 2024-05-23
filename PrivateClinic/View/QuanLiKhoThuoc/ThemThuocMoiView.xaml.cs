@@ -26,7 +26,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
             nextMathuoc = DataProvider.Ins.DB.THUOCs.Max(x=> x.MaThuoc) + 1;
             THUOC thuocmoiload = new THUOC();
             thuocmoiload.MaThuoc = nextMathuoc;
-            MaThuoc.Text = thuocmoiload.MaThuoc.ToString();
+            MaThuoc.Text = "Med" +thuocmoiload.MaThuoc.ToString();
             
             
 

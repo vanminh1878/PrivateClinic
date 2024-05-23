@@ -571,9 +571,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\BangDieuKhien\" />
-    <Folder Include="View\QuanLiKhoThuoc\" />
-    <Folder Include="View\HoSoBacSi\" />
-    <Folder Include="View\QuanLiKhamBenh\" />
     <Folder Include="View\ThanhToan\" />
   </ItemGroup>
   <ItemGroup>

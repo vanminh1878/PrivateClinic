@@ -113,8 +113,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 {
                     if (thuoc.MaDVT == dvt.MaDVT)
                     {
-                        string tenThuocCat = (thuoc.TenThuoc.Length >= 4) ? thuoc.TenThuoc.Substring(0, 4) : thuoc.TenThuoc;
-                        string maThuoc = tenThuocCat + thuoc.MaThuoc.ToString();
+                  
+                        string maThuoc = "Med" + thuoc.MaThuoc.ToString();
                        
                         ThuocDTO thuocDTO = new ThuocDTO()
                         {
@@ -172,7 +172,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 SuaThongTinThuocViewModel.Instance.EditThuocView.MaThuoc.Text = selectedItem.MaThuoc.ToString();
                 SuaThongTinThuocViewModel.Instance.EditThuocView.DonGiaNhap.Text = selectedItem.Gia.ToString();
                 SuaThongTinThuocViewModel.Instance.EditThuocView.SoLuong.Text = selectedItem.SL.ToString();
-                SuaThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate = selectedItem.NgayNhap;
+                //SuaThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate = selectedItem.NgayNhap;
+                SuaThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate = DateTime.Now;
                 SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.SelectedItem =
     SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.Items
     .Cast<string>()
@@ -203,10 +204,10 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             ThongTinThuocView detail = new ThongTinThuocView();
             ThuocDTO selectedThuocDTO = (ThuocDTO)parameter.MedicineListView.SelectedItem;
             THUOC temp = Thuoc.FirstOrDefault(t => t.TenThuoc == selectedThuocDTO.TenThuoc);
-            detail.DonGia.Text = temp.DonGiaNhap.ToString();
+            detail.DonGia.Text = String.Format("{0:0,0}", temp.DonGiaNhap);
             detail.TenThuoc.Text = temp.TenThuoc;
-            string tenThuocCat = (temp.TenThuoc.Length >= 4) ? temp.TenThuoc.Substring(0, 4) : temp.TenThuoc;
-            detail.MaThuoc.Text = tenThuocCat + temp.MaThuoc.ToString();
+        
+            detail.MaThuoc.Text = "Med" + temp.MaThuoc.ToString();
 
             detail.DVT.Text = temp.DVT.TenDVT.ToString();
             detail.SL.Text = temp.SoLuong.ToString();

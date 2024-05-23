@@ -100,6 +100,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             set { _thuoc = value; OnPropertyChanged(nameof(Thuoc)); }
 
         }
+        private ObservableCollection<ThuocDTO> _thuocdto;
+
+        public ObservableCollection<ThuocDTO> Thuocdto
+        {
+            get => _thuocdto;
+            set { _thuocdto = value; OnPropertyChanged(nameof(Thuocdto)); }
+
+        }
         private ObservableCollection<CT_PNT> _ctphieunhap;
 
         public ObservableCollection<CT_PNT> ctphieunhap
@@ -169,10 +177,11 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
                     loaithuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
                     thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
+                    
 
                     THUOC newthuoc = new THUOC();
                     {
-                        newthuoc.MaThuoc = int.Parse(paramater.MaThuoc.Text);
+                        newthuoc.MaThuoc = int.Parse(paramater.MaThuoc.Text.Substring(3));
                         newthuoc.TenThuoc = paramater.TenThuoc.Text;
                         newthuoc.DonGiaNhap = dgValue;
                         newthuoc.SoLuong = slValue;

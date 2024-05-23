@@ -123,6 +123,7 @@
         <Grid Grid.Row="2">
 
             <ListView x:Name="ListViewBS"
+                      Margin="25 0 5 0"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       d:ItemsSource="{d:SampleData ItemCount=5}"
@@ -147,7 +148,7 @@
                     <DataTemplate>
                         <Border BorderBrush="#348F6C"
                                 BorderThickness="3"
-                                Width="300"
+                                Width="280"
                                 Height="125"
                                 CornerRadius="10"
                                 Margin="5">
@@ -159,8 +160,8 @@
 
                                 <!-- Cột hình ảnh -->
                                 <Border
-                                    Width="100"
-                                    Height="100"
+                                    Width="80"
+                                    Height="80"
                                     Margin="10"
                                     BorderBrush="Black"
                                     BorderThickness="1"

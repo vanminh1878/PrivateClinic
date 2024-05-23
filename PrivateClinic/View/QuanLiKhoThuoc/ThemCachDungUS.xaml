@@ -9,6 +9,7 @@
              x:Name="ThemCachDungViewPage"
               xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignWidth="408">
+    
     <Border
     Padding="10"
     Background="White"

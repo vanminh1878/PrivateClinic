@@ -23,11 +23,11 @@ namespace PrivateClinic.Model
     
         public int MaBS { get; set; }
         public string HoTen { get; set; }
-        public string formatMaBS { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string GioiTinh { get; set; }
         public string Email { get; set; }
         public string SDT { get; set; }
+        public string formatMaBS { get; set; }
         public string DiaChi { get; set; }
         public System.DateTime NgayVaoLam { get; set; }
         public string BangCap { get; set; }

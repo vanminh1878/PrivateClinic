@@ -120,7 +120,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin thuốc?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    int maThuoc = int.Parse(p.MaThuoc.Text);
+                    int maThuoc = int.Parse(p.MaThuoc.Text.Substring(3));
                     THUOC thuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault(t => t.MaThuoc == maThuoc);
 
                     if (thuoc != null)

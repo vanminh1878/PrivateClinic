@@ -68,7 +68,7 @@
                                    HorizontalAlignment="Left"
                                    Margin="5 0 0 0"/>
                                 <TextBlock x:Name="TextBlock"
-                                       Text="Quản lí tiếp đón"
+                                       Text="Quản lí khám bệnh"
                                        Foreground="White"
                                        FontFamily="Segoe UI"
                                        FontWeight="Regular"
@@ -113,7 +113,7 @@
                                    HorizontalAlignment="Left"
                                    Margin="5 0 0 0"/>
                                 <TextBlock x:Name="TextBlock"
-                                       Text="Quản lí khám bệnh"
+                                       Text="Quản lí bệnh nhân"
                                        Foreground="White"
                                        FontFamily="Segoe UI"
                                        FontWeight="Regular"

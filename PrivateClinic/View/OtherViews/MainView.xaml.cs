@@ -27,13 +27,6 @@ namespace PrivateClinic.View.OtherViews
             this.DataContext = viewModel;
         }
 
-        private void LogOut_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is MainViewModel viewModel)
-            {
-                MainView a = new MainView();
-                viewModel.LogOutCM.Execute(a);
-            }
-        }
+       
     }
 }

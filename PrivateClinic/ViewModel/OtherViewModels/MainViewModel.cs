@@ -36,7 +36,13 @@ namespace PrivateClinic.ViewModel.OtherViewModels
 
         //property
         public NGUOIDUNG User { get => _User; set { _User = value; OnPropertyChanged(); } }
+  
         public NGUOIDUNG NhanVien { get => _NhanVien; set { _NhanVien = value; OnPropertyChanged(); } }
+
+        private Visibility _SetQuanLy;
+        public Visibility SetQuanLy { get => _SetQuanLy; set { _SetQuanLy = value; OnPropertyChanged(); } }
+        private Visibility _SetNhanVien;
+        public Visibility SetNhanVien { get => _SetNhanVien; set { _SetNhanVien = value; OnPropertyChanged(); } }
 
 
         public MainViewModel()
@@ -83,8 +89,9 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                 {
                     w.Hide();
                     LoginView w1 = new LoginView();
-                    w1.ShowDialog();
+                    w1.ShowDialog(); // Hiển thị cửa sổ LoginView
                     w.Close();
+
                 }
             });
         }
@@ -109,22 +116,18 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                 if (User.MaNhom== "NHOM1     ")
                 {
                     Const.PQ.MaNhom = User.MaNhom;
+                    SetQuanLy = Visibility.Collapsed;
+                    SetNhanVien = Visibility.Visible;
+                   
                 }
                 else
                 {
-                    Const.PQ.MaNhom = User.MaNhom;;
+                    Const.PQ.MaNhom = User.MaNhom;
+                    SetQuanLy = Visibility.Visible;
+                    SetNhanVien = Visibility.Collapsed;
+
                 }
-                //if (User.QTV == true)
-                //{
-                //    SetQuanLy = Visibility.Visible;
-                //    SetNhanVien = Visibility.Collapsed;
-                //}
-                //else
-                //{
-                //    SetQuanLy = Visibility.Collapsed;
-                //    SetNhanVien = Visibility.Visible;
-                //}
-                //Ava = User.AVA;
+
                 _LoadUsername(p);
             }
         }

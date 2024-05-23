@@ -173,8 +173,9 @@
                     Height="80"
                     Padding="5,0,0,0"
                     BorderThickness="0"
-                    Name="TrieuChung"
-                    materialDesign:HintAssist.Hint="Nhập triệu chứng bệnh"
+                  
+                    x:Name="TrieuChung"
+                    
                     Text="{Binding TrieuChung}"
                     Width="390"
                     />
@@ -288,7 +289,7 @@
                         HorizontalAlignment="Left"
                         BorderThickness="0"
                         VerticalContentAlignment="Center"
-                        materialDesign:HintAssist.Hint="Chọn loại bệnh"
+                     
                         ItemsSource="{Binding ListLoaiBenh}"
                         SelectedItem="{Binding SelectedLoaiBenh, Mode=TwoWay}"
                         DisplayMemberPath="TenLoaiBenh"
@@ -321,6 +322,7 @@
             <TextBlock  Text="{Binding SoLuongThuocDangChon}"
                        Margin="5,0,0,0"
                        FontSize="24"
+                        x:Name="TongSoThuoc"
                        VerticalAlignment="Center"
                        FontWeight="Bold"
                        Foreground="#348F6C"/>
@@ -342,6 +344,7 @@
                     Margin="5 0 35 0"
                     Width="170"
                     Height="50"
+                    x:Name="saveBtn"
                     HorizontalAlignment="Right" >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -364,7 +367,7 @@
                     </i:Interaction.Triggers>
                 </Button>
                 <Button
-                    ToolTip="Thêm bệnh nhân"
+                    x:Name="AddBtn"
                     Content="       Thêm (F1)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 35 0"  Width="170" Height="50" HorizontalAlignment="Right" >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -453,6 +456,7 @@
                     <TextBlock HorizontalAlignment="Center"
                                FontWeight="DemiBold"
                                Text="Thao tác"
+                               x:Name="Thaotacheader"
                                VerticalAlignment="Center" />
                 </Grid>
             </Grid>
@@ -510,6 +514,7 @@
                                 </Grid>
                                 <Grid Grid.Column="5">
                                     <StackPanel Orientation="Horizontal"
+                                                x:Name="Thaotaccol"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
                                         <Button ToolTip="Sửa thông tin thuốc "
@@ -520,6 +525,8 @@
                                                 VerticalAlignment="Bottom"
                                                 Width="45"
                                                 Height="45"
+                                                x:Name="Editbtn"
+                                                Visibility="{Binding IsBtnEditVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                 HorizontalAlignment="Right" >
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
@@ -537,6 +544,8 @@
                                             CornerRadius="50"
                                             Margin="10,0,0,0"
                                             Width="45"
+                                            x:Name="Deletebtn"
+                                            Visibility="{Binding IsBtnDeleteVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                             Height="45"
                                             Cursor="Hand">
                                             <Border.Style>

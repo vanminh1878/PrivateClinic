@@ -94,28 +94,7 @@
                         </Button.Content>
                     </Button>
 
-                    <!-- Nút xem danh sách bác sĩ-->
-                    <Button
-                        Width="230"
-                        Height="40"
-                        Padding="0"
-                        Margin="10,0,0,0"
-                        HorizontalAlignment="Center"
-                        materialDesign:ButtonAssist.CornerRadius="5"
-                        FontSize="22"
-                        Command="{Binding SwitchViewCommand}"
-                        CommandParameter="DoctorList"
-                        Background="#F5F5F5"
-                        BorderThickness="0"
-                        VerticalAlignment="Bottom">
-                        <Button.Content>
-                            <TextBlock Margin="5,0,0,0"
-                                       VerticalAlignment="Center"
-                                       Text="Danh sách bác sĩ"
-                                       Foreground="#000000"
-                                       FontWeight="Regular"/>
-                        </Button.Content>
-                    </Button>
+                   
 
                     <!-- Nút đổi mật khẩu-->
                     <Button
@@ -137,6 +116,29 @@
                                        Text="Đổi mật khẩu"
                                        Foreground="#000000"
                                        FontWeight="Regular"/>
+                        </Button.Content>
+                    </Button>
+                    <!-- Nút xem danh sách bác sĩ-->
+                    <Button
+     Width="230"
+     Height="40"
+     Padding="0"
+     Margin="10,0,0,0"
+     HorizontalAlignment="Center"
+     materialDesign:ButtonAssist.CornerRadius="5"
+     FontSize="22"
+     Visibility="{Binding SetQuanLy}"
+     Command="{Binding SwitchViewCommand}"
+     CommandParameter="DoctorList"
+     Background="#F5F5F5"
+     BorderThickness="0"
+     VerticalAlignment="Bottom">
+                        <Button.Content>
+                            <TextBlock Margin="5,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Danh sách bác sĩ"
+                    Foreground="#000000"
+                    FontWeight="Regular"/>
                         </Button.Content>
                     </Button>
                 </StackPanel>
