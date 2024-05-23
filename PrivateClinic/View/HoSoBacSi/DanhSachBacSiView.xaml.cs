@@ -30,19 +30,7 @@ namespace PrivateClinic.View.HoSoBacSi
             this.DataContext = viewModel;
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is DanhSachBacSiViewModel viewModel)
-            {
-                var selectedBacSi = (sender as System.Windows.Controls.Button)?.CommandParameter as BACSI;
-
-                if (selectedBacSi != null)
-                {
-                    viewModel.EditDoctorCommand.Execute(selectedBacSi);
-                    
-                }
-            }
-        }
+       
         
 
         

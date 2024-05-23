@@ -192,6 +192,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             ThongTinChiTietCuaMotBacSIView doctordetailView = new ThongTinChiTietCuaMotBacSIView(bs);
             doctordetailView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             doctordetailView.ShowDialog();
+            LoadData();
+
+
         }
         #endregion
 

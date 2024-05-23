@@ -230,7 +230,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 a.BangCap = BangCap;
                 DataProvider.Ins.DB.SaveChanges();
                 MessageBox.Show("Thành công", "Thông báo");
-                _view.Close();
             }
         }
 
