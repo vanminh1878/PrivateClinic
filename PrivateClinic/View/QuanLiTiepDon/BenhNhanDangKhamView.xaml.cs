@@ -34,6 +34,16 @@ namespace PrivateClinic.View.QuanLiTiepDon
         public void SetData(BENHNHAN benhNhan)
         {
             MaBN.Text = benhNhan.MaBN.ToString();
+            if (benhNhan.MaBN < 10)
+            {
+                MaBNformat.Text = "BN00" + benhNhan.MaBN.ToString();
+            }
+            else if (benhNhan.MaBN < 100)
+            {
+                MaBNformat.Text = "BN0" + benhNhan.MaBN.ToString();
+            }
+            else
+                MaBNformat.Text= "BN" + benhNhan.MaBN.ToString(); 
             TenBN.Text = benhNhan.HoTen;
             NgsinhBN.Text = benhNhan.NamSinh.ToString("dd/MM/yyyy");
             GioiTinh.Text = benhNhan.GioiTinh;

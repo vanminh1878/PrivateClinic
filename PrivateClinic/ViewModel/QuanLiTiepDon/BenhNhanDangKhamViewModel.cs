@@ -10,11 +10,17 @@ using PrivateClinic.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media.Media3D;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows.Resources;
+using MaterialDesignThemes.Wpf;
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
     public class BenhNhanDangKhamViewModel : BaseViewModel
     {
+        #region Các Command và Property
         private ObservableCollection<THUOC> _listMed;
         public ObservableCollection<THUOC> listMed { get => _listMed; set { _listMed = value; OnPropertyChanged(); } }
 
@@ -63,17 +69,38 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 OnPropertyChanged(nameof(SelectedLoaiBenh));
             }
         }
-        //Họ tên bệnh nhân
-        private string hoTenBN;
-        public string HoTenBN
+        //Họ tên bác sĩ
+        private string hoten;
+        public string Hoten
         {
-            get => hoTenBN;
+            get => hoten;
             set
             {
-                hoTenBN = value;
-                OnPropertyChanged(nameof(HoTenBN));
+                hoten = value;
+                OnPropertyChanged(nameof(Hoten));
             }
         }
+        private int idbacsi;
+        public int IDBacSi
+        {
+            get => idbacsi;
+            set
+            {
+                idbacsi = value;
+                OnPropertyChanged(nameof(IDBacSi));
+            }
+        }
+        private NGUOIDUNG user;
+        public NGUOIDUNG User
+        {
+            get => user;
+            set
+            {
+                user = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+
 
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -89,10 +116,11 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 OnPropertyChanged(nameof(SoLuongThuocDangChon));
             }
         }
-
+        #endregion
         public BenhNhanDangKhamViewModel()
         {
             ListLoaiBenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
+            ThongTinND();
             listMed = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
             AddThuoc();
             EditThuoc();
@@ -101,6 +129,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             SaveCommand = new ViewModelCommand(Save);
 
         }
+
+        #region Chức năng thêm thuốc
         void AddThuoc()
         {
             AddCommand = new ViewModelCommand(showAdd);
@@ -111,6 +141,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             view.ShowDialog();
             LoadData();
         }
+        #endregion
+
         #region Chức năng sửa thuốc
         void EditThuoc()
         {
@@ -138,12 +170,6 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 }
             }
         }
-
-
-
-
-
-      
         void LoadData()
         {
             if (ListThuocView == null)
@@ -168,18 +194,105 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         }
         //Hàm lưu 
-        private void Save(object p)
+        private void Save(object obj)
         {
-            if (p != null)
+            if (obj != null)
             {
-                if(p is BenhNhanDangKhamView benhNhanDangKhamView)
+                if(obj is BenhNhanDangKhamView p)
                 {
-                    MessageBox.Show(benhNhanDangKhamView.MaBN.Text);
+                    if (p.LoaiBenh.Text == "" && p.TrieuChung.Text == "")
+                        MessageBox.Show("Chưa đủ thông tin về chuẩn đoán cho bệnh nhân", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    else
+                    {
+                        // tạo hóa đơn
+                        HOADON hd = new HOADON();
+                        hd.TienThuoc = 0;
+                        //Lưu phiếu khám bệnh
+                        PHIEUKHAMBENH pkb = new PHIEUKHAMBENH();
+                        pkb.TrieuChung = p.TrieuChung.Text;
+                        pkb.NgayKham = DateTime.UtcNow.Date;
+                        pkb.MaBN = int.Parse(p.MaBN.Text);
+                        pkb.MaBS = IDBacSi;
+                        pkb.MaLoaiBenh = SelectedLoaiBenh.MaLoaiBenh;
+                        
+                        //Lưu phiếu khám bệnh
+                        DataProvider.Ins.DB.PHIEUKHAMBENHs.Add(pkb);
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        hd.MaPKB = pkb.MaPKB;
+                        hd.MaBN = pkb.MaBN;
+                        //Lưu các chi tiết hóa đơn
+                        if (ListThuocView == null)
+                        {
+                            CT_PKB cT_PKB = new CT_PKB();
+                            cT_PKB.MaPKB = pkb.MaPKB;
+
+                            //Lưu các chi tiết hóa đơn
+                            DataProvider.Ins.DB.CT_PKB.Add(cT_PKB);
+                            DataProvider.Ins.DB.SaveChanges();
+                        }
+                        else
+                        {
+                            foreach (var thuoc in ListThuocView)
+                            {
+                                CT_PKB chitietpkb = new CT_PKB();
+                                chitietpkb.MaPKB = pkb.MaPKB;
+                                chitietpkb.SoLuong = int.Parse(thuoc.SoLuong);
+                                chitietpkb.MaThuoc = int.Parse(thuoc.MaThuoc);
+                                //Lưu các chi tiết hóa đơn
+                                DataProvider.Ins.DB.CT_PKB.Add(chitietpkb);
+                                DataProvider.Ins.DB.SaveChanges();
+                                //Cập nhật số lượng thuốc trong kho
+                                foreach (var thuoctrongkho in listMed)
+                                {
+                                    if (thuoctrongkho.MaThuoc == chitietpkb.MaThuoc)
+                                    {
+                                        thuoctrongkho.SoLuong = thuoctrongkho.SoLuong - chitietpkb.SoLuong;
+                                        //DataProvider.Ins.DB.SaveChanges();
+                                        hd.TienThuoc = hd.TienThuoc + chitietpkb.SoLuong * thuoctrongkho.DonGiaBan;
+                                        DataProvider.Ins.DB.SaveChanges();
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+                       
+                        THAMSO t = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 2);
+                        hd.TienKham = t.GiaTri;
+                        hd.TongTien = hd.TienKham + (hd.TienThuoc ?? 0);
+                        hd.TrangThai = "0";
+                        //cập nhật trạng thái cho bệnh nhân
+                        int MaBenhNhan = int.Parse(p.MaBN.Text);
+                        BENHNHAN bn = DataProvider.Ins.DB.BENHNHANs.SingleOrDefault(h => h.MaBN == MaBenhNhan);
+                        bn.TrangThai = true;
+                        //Lưu hóa đơn
+                        DataProvider.Ins.DB.HOADONs.Add(hd);
+                        DataProvider.Ins.DB.SaveChanges();
+                        MessageBox.Show("Đã khám xong!","Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    
                 }
             }
         }
-        
 
+        private void ThongTinND()
+        {
+            string tendangnhap = Const.TenDangNhap;
+            User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+            string MaBS = User.MaBS.ToString();
+            ObservableCollection<BACSI> DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
+            foreach ( var bacsi  in DSBS )
+            {
+                if (bacsi.MaBS.ToString() == MaBS) 
+                {
+                    Hoten = bacsi.HoTen;
+                    IDBacSi = bacsi.MaBS;
+                    break;
+                }
+            }
+            
+        }
 
     }
 }
