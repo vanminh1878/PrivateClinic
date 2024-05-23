@@ -11,6 +11,8 @@
         WindowStyle="None"
         Background="Transparent"
         x:Name="SuaBenhNhanViewPage"
+        WindowStartupLocation="CenterScreen"
+        Foreground="{DynamicResource MaterialDesignBody}"
         Title="ThemBenhNhanView" Width="835">
 
     <Grid Background="White">
@@ -53,6 +55,7 @@
                             FontFamily="Segoe UI"
                             FontWeight="Bold"
                             FontStyle="Italic"
+                            Text="{Binding HoTen}"
                             />
                     </Grid>
                 </Border>
@@ -78,6 +81,8 @@
                             Background="Transparent"
                             materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
                             BorderThickness="0"
+                            SelectedValue="{Binding GioiTinh}"
+                            SelectedValuePath="Content"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden">
                             <ComboBox.ItemContainerStyle>
                                 <Style TargetType="ComboBoxItem">
@@ -105,6 +110,7 @@
                         <DatePicker Width="170"
                                     VerticalAlignment="Center"
                                     FontSize="14"
+                                    SelectedDate="{Binding NgaySinh, UpdateSourceTrigger=PropertyChanged}"
                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                     FontFamily="Roboto Mono"
                                     x:Name="NgSinh">
@@ -137,6 +143,7 @@
                             FontFamily="Segoe UI"
                             FontWeight="DemiBold"
                             FontStyle="Italic"
+                            Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"
                             />
                     </Grid>
                 </Border>

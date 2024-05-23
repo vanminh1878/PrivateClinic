@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
+using PrivateClinic.View.HoSoBacSi;
 
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
@@ -41,17 +42,13 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
        
         public QuanLiTiepDonViewModel()
         {
-            listBN = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
+            LoadData();
             SearchCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             DeleteCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
             AddCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
             LoadCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadCommand(p));
             LoadSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadSLBNCommand(p));
-            EditBNCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _EditBNCommand(p));
-           
-
-            selectedItemBenhNhan= new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _selectedItemBenhNhan(p));
-
+            EditBN();
             UpdateSTT();
             if (Const.PQ.MaNhom == "NHOM1")
             {
@@ -109,12 +106,15 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         }
 
+        //Load số lượng bệnh nhân khám tối đa
         void _LoadSLBNCommand(QuanLiTiepDonView parameter)
         {
             THAMSO t = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 1);
             parameter.txbMaxBN.Text = t.GiaTri.ToString();
             parameter.txbMaxBN.FontSize = 25;
         }
+
+        //Lưu số lượng bệnh nhân tối đa
         void _SaveSLBNCommand(QuanLiTiepDonView parameter)
         {
    
@@ -138,6 +138,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             }
 
         }
+
+        //Hàm tìm kiếm thông tin bệnh nhân
         void _SearchCommand(QuanLiTiepDonView parameter)
         {
             ObservableCollection<BENHNHAN> temp = new ObservableCollection<BENHNHAN>();
@@ -199,33 +201,23 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             addBNView.ShowDialog();
 
         }
-        void _EditBNCommand(BENHNHAN selectedItem)
+
+        //hàm show màn hình edit
+        void EditBN()
         {
-            if (selectedItem != null)
-            {
-                SuaBenhNhanViewModel.Instance.EditBNView = new SuaBenhNhanView();
-                SuaBenhNhanViewModel.Instance.EditBNView.HoTen.Text = selectedItem.HoTen.ToString();
-                SuaBenhNhanViewModel.Instance.EditBNView.NgSinh.Text = selectedItem.NamSinh.ToString();
-                SuaBenhNhanViewModel.Instance.EditBNView.MaBN.Text = selectedItem.MaBN.ToString();
-                SuaBenhNhanViewModel.Instance.EditBNView.GioiTinh.Text = selectedItem.GioiTinh.ToString();
-                SuaBenhNhanViewModel.Instance.EditBNView.DiaChi.Text = selectedItem.DiaChi.ToString();
-
-                double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
-                SuaBenhNhanViewModel.Instance.EditBNView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                SuaBenhNhanViewModel.Instance.EditBNView.ShowDialog();
-
-
-
-            }
+            EditBNCommand = new ViewModelCommand(ShowWDEditBN);
         }
-        public void SetKhamBNView(BenhNhanDangKhamView view)
+        private void ShowWDEditBN(object obj)
         {
-            KhamBNView = view;
+            SuaBenhNhanView view = new SuaBenhNhanView((BENHNHAN)obj);
+            view.ShowDialog();
+            LoadData();
         }
 
-        void _selectedItemBenhNhan(BENHNHAN bENHNHAN)
+        void LoadData()
         {
-            MessageBox.Show("hihi");
+            listBN = new ObservableCollection<BENHNHAN>(DataProvider.Ins.DB.BENHNHANs);
+
         }
 
     }

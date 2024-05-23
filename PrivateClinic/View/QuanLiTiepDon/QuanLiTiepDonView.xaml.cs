@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using static MaterialDesignThemes.Wpf.Theme;
 using Button = System.Windows.Controls.Button;
 using PrivateClinic.ViewModel.QuanLiTiepDon;
+using PrivateClinic.ViewModel.HoSoBacSiVM;
 
 namespace PrivateClinic.View.QuanLiTiepDon
 {
@@ -47,16 +48,16 @@ namespace PrivateClinic.View.QuanLiTiepDon
             }
         }
 
-        private void EditBNButton_Click(object sender, RoutedEventArgs e)
+        private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             if (DataContext is QuanLiTiepDonViewModel viewModel)
             {
-                var selectedBenhNhan = (sender as Button)?.CommandParameter as BENHNHAN;
+                var selectedBenhNhan= (sender as System.Windows.Controls.Button)?.CommandParameter as BENHNHAN;
 
                 if (selectedBenhNhan != null)
                 {
                     viewModel.EditBNCommand.Execute(selectedBenhNhan);
-                    ListViewBN.Items.Refresh();
+
                 }
             }
         }

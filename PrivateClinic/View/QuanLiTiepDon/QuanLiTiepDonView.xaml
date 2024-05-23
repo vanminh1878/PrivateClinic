@@ -228,10 +228,8 @@
                 <Grid Grid.Row="2">
                     <ListView
                         x:Name="ListViewBN"
-                        SelectedItem="{Binding selectedItemBenhNhan}"
                         ItemsSource="{Binding listBN}"
                         Margin="20 0 0 0"
-                        SelectionMode="Single"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         ScrollViewer.VerticalScrollBarVisibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=4}"  >
 
@@ -278,7 +276,7 @@
                                                         </ControlTemplate>
                                                     </Button.Template>
                                                 </Button>
-                                                <Button ToolTip="Sửa thông tin bệnh nhân " Command="{Binding EditBNCommand}" CommandParameter="{Binding}" Click="EditBNButton_Click" Margin="0 0 15 4" Width="50" Height="50" HorizontalAlignment="Right" >
+                                                <Button ToolTip="Sửa thông tin bệnh nhân " Command="{Binding EditBNCommand}" CommandParameter="{Binding}" Click="EditButton_Click" Margin="0 0 15 4" Width="50" Height="50" HorizontalAlignment="Right" >
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Grid>
