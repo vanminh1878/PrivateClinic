@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
     /// <summary>
-    /// Interaction logic for ThemDonViTinhUS.xaml
+    /// Interaction logic for ThemLoaiThuocUS.xaml
     /// </summary>
-    public partial class ThemDonViTinhUS : UserControl
+    public partial class ThemLoaiThuocUS : UserControl
     {
-        public ThemDonViTinhUS()
+        public ThemLoaiThuocUS()
         {
             InitializeComponent();
-            ThemDonViTinhViewModel viewModel = new ThemDonViTinhViewModel();
+            ThemLoaiThuocViewModel viewModel = new ThemLoaiThuocViewModel();
             this.DataContext = viewModel;
         }
     }

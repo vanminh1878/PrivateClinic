@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
         public XoaDonViTinhUS()
         {
             InitializeComponent();
+            XoaDonViTinhViewModel viewModel = new XoaDonViTinhViewModel();
+            this.DataContext = viewModel;
+            viewModel.LoadCommand.Execute(null);
+            dvtcbx.ItemsSource = viewModel.TenDVTs;
         }
     }
 }

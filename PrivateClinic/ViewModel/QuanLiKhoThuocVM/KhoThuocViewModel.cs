@@ -11,6 +11,7 @@ using PrivateClinic.View.QuanLiKhoThuoc;
 using System.Windows;
 using static System.Net.WebRequestMethods;
 using System.Globalization;
+using PrivateClinic.View.QuanLiTiepDon;
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
@@ -22,6 +23,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             get => _thuoc;
             set { _thuoc = value; OnPropertyChanged(nameof(Thuoc)); }
+
+        }
+        private ObservableCollection<ThuocDTO> _thuoc1;
+
+        public ObservableCollection<ThuocDTO> Thuoc1
+        {
+            get => _thuoc1;
+            set { _thuoc1 = value; OnPropertyChanged(nameof(Thuoc)); }
 
         }
         private ObservableCollection<CT_PNT> _ctphieunhap;
@@ -80,6 +89,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         public ICommand EditMedicineCommand { get; set; }
         public ICommand DeleteMedicineCommand { get; set; }
         public ICommand DetailMedicineCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
         public KhoThuocViewModel()
         {
             LoadData();
@@ -87,6 +97,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             EditMedicineCommand = new RelayCommand<ThuocDTO>((p) => { return p == null ? false : true; }, (p) => _EditMedicineCommand(p));
             DeleteMedicineCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _DeleteMedicineCommand(p));
             DetailMedicineCommand = new RelayCommand<KhoThuocView>((p) => { return p == null ? false : true; }, (p) => _DetailMedicineCommand(p));
+            SearchCommand = new RelayCommand<KhoThuocView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
         }
         void LoadData()
         {
@@ -102,11 +113,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 {
                     if (thuoc.MaDVT == dvt.MaDVT)
                     {
+                        string tenThuocCat = (thuoc.TenThuoc.Length >= 4) ? thuoc.TenThuoc.Substring(0, 4) : thuoc.TenThuoc;
+                        string maThuoc = tenThuocCat + thuoc.MaThuoc.ToString();
+                       
                         ThuocDTO thuocDTO = new ThuocDTO()
                         {
                             STT = stt,
                             DVT = dvt.TenDVT,
-                            MaThuoc = thuoc.MaThuoc,
+                            MaThuoc = maThuoc,
                             TenThuoc = thuoc.TenThuoc,
                             Gia = thuoc.DonGiaNhap,
                             SL = thuoc.SoLuong
@@ -134,8 +148,21 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             SoLuongThuoc = listMed.Count();
         }
 
+        void _SearchCommand(KhoThuocView parameter)
+        {
+            ObservableCollection<ThuocDTO> temp = new ObservableCollection<ThuocDTO>();
+            if (!string.IsNullOrEmpty(parameter.txbSearch.Text))
+            {
+                string searchKeyword = parameter.txbSearch.Text.ToLower();
+                temp = new ObservableCollection<ThuocDTO>(listMed.Where(s => s.TenThuoc.ToLower().Contains(searchKeyword)));
+            }
+            else
+            {
+                temp = new ObservableCollection<ThuocDTO>(listMed);
+            }
+            parameter.MedicineListView.ItemsSource = temp;
+        }
 
-    
         void _EditMedicineCommand(ThuocDTO selectedItem)
         {
             if (selectedItem != null)
@@ -175,10 +202,12 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);
             ThongTinThuocView detail = new ThongTinThuocView();
             ThuocDTO selectedThuocDTO = (ThuocDTO)parameter.MedicineListView.SelectedItem;
-            THUOC temp = Thuoc.FirstOrDefault(t => t.MaThuoc == selectedThuocDTO.MaThuoc);
+            THUOC temp = Thuoc.FirstOrDefault(t => t.TenThuoc == selectedThuocDTO.TenThuoc);
             detail.DonGia.Text = temp.DonGiaNhap.ToString();
             detail.TenThuoc.Text = temp.TenThuoc;
-            detail.MaThuoc.Text = temp.MaThuoc.ToString();
+            string tenThuocCat = (temp.TenThuoc.Length >= 4) ? temp.TenThuoc.Substring(0, 4) : temp.TenThuoc;
+            detail.MaThuoc.Text = tenThuocCat + temp.MaThuoc.ToString();
+
             detail.DVT.Text = temp.DVT.TenDVT.ToString();
             detail.SL.Text = temp.SoLuong.ToString();
             detail.NgNhap.Text = DateTime.Now.ToString("dd/MM/yyyy");

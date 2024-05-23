@@ -20,6 +20,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
             TienKham.Text = string.Join(", ", viewModel.tienkham);
             Dvt.Text = string.Join(", ", viewModel.dvt);
             loaibenh.Text = string.Join(", ", viewModel.loaibenh);
+            loaithuoc.Text = string.Join(", ", viewModel.loaithuoc);
         }
     }
 }

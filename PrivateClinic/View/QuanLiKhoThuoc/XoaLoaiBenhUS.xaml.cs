@@ -17,15 +17,17 @@ using System.Windows.Shapes;
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
     /// <summary>
-    /// Interaction logic for ThemDonViTinhUS.xaml
+    /// Interaction logic for XoaLoaiBenhUS.xaml
     /// </summary>
-    public partial class ThemDonViTinhUS : UserControl
+    public partial class XoaLoaiBenhUS : UserControl
     {
-        public ThemDonViTinhUS()
+        public XoaLoaiBenhUS()
         {
             InitializeComponent();
-            ThemDonViTinhViewModel viewModel = new ThemDonViTinhViewModel();
+            XoaLoaiBenhViewModel viewModel = new XoaLoaiBenhViewModel();
             this.DataContext = viewModel;
+            viewModel.LoadCommand.Execute(null);
+            dvtcbx.ItemsSource = viewModel.TenDVTs;
         }
     }
 }

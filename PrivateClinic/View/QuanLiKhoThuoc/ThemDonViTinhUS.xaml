@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
              mc:Ignorable="d" 
              d:DesignHeight="180"
+             x:Name="ThemDonViTinhViewPage"
+              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignWidth="408">
     <Border
     Padding="10"
@@ -57,7 +59,7 @@
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     BorderBrush="Gray"
-                   
+                    x:Name="dvttbx"
                    
                     />
 
@@ -101,6 +103,11 @@
                             </Grid>
                         </ControlTemplate>
                     </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=ThemDonViTinhViewPage}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </Button>
             </Grid>
 

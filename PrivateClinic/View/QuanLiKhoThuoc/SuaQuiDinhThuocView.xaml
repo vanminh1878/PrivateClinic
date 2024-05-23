@@ -6,8 +6,9 @@
     xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="ThayDoiQuiDinhThuocView"
-    Height="480"
+    Height="540"
     Width="750"
+    BorderBrush="Transparent"
      WindowStyle="None"
     ResizeMode="NoResize"
     Background="Transparent"
@@ -15,20 +16,23 @@
     TextElement.FontSize="22"
     TextElement.FontWeight="Regular"
     x:Name="SuaQuiDinhThuocViewPage"
+    AllowsTransparency="True"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d">
 
     <Border
-        Padding="10"
+    
         Background="White"
         BorderBrush="DarkGray"
+        CornerRadius="10"
         BorderThickness="0.7"
-        CornerRadius="12">
+        >
 
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
+                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
@@ -152,12 +156,12 @@
                     <Border
                         Width="250"
                         Height="35"
-                        Margin="25, 0,0,10"
+                        Margin="22, 0,0,10"
                         HorizontalAlignment="Left"
                         BorderBrush="Black"
                         BorderThickness="0.7"
                         CornerRadius="10">
-                        <TextBox
+                        <TextBox IsEnabled="False"
     Width="250"
     Height="35"
     Padding="20,0,0,0"
@@ -203,13 +207,13 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
  
    Width="250"
    Height="35"
-   Margin="40,0,0,10"
+   Margin="18,0,0,10"
    HorizontalAlignment="Left"
    BorderBrush="Black"
    BorderThickness="0.7"
    CornerRadius="10">
 
-                        <TextBox
+                        <TextBox IsEnabled="False"
        Width="250"
        Height="35"
        Padding="20,0,0,0"
@@ -230,7 +234,7 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                         </Button.Template>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding EditSoCachDungCommand}"
+                                <i:InvokeCommandAction Command="{Binding EditCachDungCommand}"
 CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
@@ -254,13 +258,13 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
       
         Width="250"
         Height="35"
-        Margin="40,0,0,10"
+        Margin="18,0,0,10"
         HorizontalAlignment="Left"
         BorderBrush="Black"
         BorderThickness="0.7"
         CornerRadius="10">
 
-                        <TextBox
+                        <TextBox IsEnabled="False"
             Width="250"
             Height="35"
             Padding="20,0,0,0"
@@ -289,9 +293,59 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                 </WrapPanel>
 
             </Grid>
+            <Grid Grid.Row="6">
+
+                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-15 0 0 0">
+                    <TextBlock
+     
+        Margin="10,0,0,10"
+        HorizontalAlignment="Right"
+        FontSize="20"
+        VerticalAlignment="Center"
+        Text="Số loại thuốc:" />
+
+                    <Border
+      
+        Width="250"
+        Height="35"
+        Margin="18,0,0,10"
+        HorizontalAlignment="Left"
+        BorderBrush="Black"
+        BorderThickness="0.7"
+        CornerRadius="10">
+
+                        <TextBox IsEnabled="False"
+            Width="250"
+            Height="35"
+            Padding="20,0,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+                            FontSize="18"
+            VerticalContentAlignment="Center"
+            x:Name="loaithuoc" />
+
+                    </Border>
+                    <Button ToolTip="Sửa số loại thuốc" Margin="20 0"  Width="40" Height="40" HorizontalAlignment="Right" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="{StaticResource icRepair}" Stretch="UniformToFill"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding EditSLThuocCommand}"
+CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </WrapPanel>
+
+            </Grid>
 
             <!--  Row 6  -->
-            <Grid Grid.Row="6">
+            <Grid Grid.Row="7">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <Button Content="       Hủy (F2)" FontSize="22" FontFamily="Segoe UI" FontWeight="Bold" Margin="5 0 22 0"  Width="170" Height="50" HorizontalAlignment="Right" >
                         <Button.Template>

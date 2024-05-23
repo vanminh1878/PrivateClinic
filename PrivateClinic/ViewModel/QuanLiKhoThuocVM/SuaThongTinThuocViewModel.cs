@@ -107,6 +107,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             {
                 MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else if (!int.TryParse(paramater.SoLuong.Text, out int slValue))
+            {
+                MessageBox.Show("Số lượng phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!double.TryParse(paramater.DonGiaNhap.Text, out double dgValue))
+            {
+                MessageBox.Show("Đơn giá nhập phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             else
             {
                 MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin thuốc?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);

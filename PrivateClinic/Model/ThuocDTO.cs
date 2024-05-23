@@ -5,7 +5,7 @@ namespace PrivateClinic.Model
     public class ThuocDTO
     {
         public int STT { get; set; }
-        public int MaThuoc { get; set; }
+        public string MaThuoc { get; set; }
         public string TenThuoc { get; set; }
         public string DVT { get; set; }
         public int? SL { get; set; }

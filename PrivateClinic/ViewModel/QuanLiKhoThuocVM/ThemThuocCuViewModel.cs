@@ -53,30 +53,38 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin thuốc?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
+                if (!(int.TryParse(paramater.SL.Text, out int soLuong)))
+                    MessageBox.Show("Số lượng không hợp lệ!", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
                 {
-                    THUOC mathuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault(a => a.TenThuoc == paramater.ChonThuoccbx.SelectedItem.ToString());
-                    THUOC thuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault(t => t.MaThuoc == mathuoc.MaThuoc);
 
-                    if (thuoc != null)
+
+
+                    MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin thuốc?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
                     {
-                        
-                        thuoc.SoLuong += int.Parse(paramater.SL.Text);
+                        THUOC mathuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault(a => a.TenThuoc == paramater.ChonThuoccbx.SelectedItem.ToString());
+                        THUOC thuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault(t => t.MaThuoc == mathuoc.MaThuoc);
 
-                        
-                        DataProvider.Ins.DB.SaveChanges();
-                        MessageBox.Show("Cập nhật thông tin thuốc thành công!", "THÔNG BÁO");
+                        if (thuoc != null)
+                        {
 
+                            thuoc.SoLuong += int.Parse(paramater.SL.Text);
 
-                        KhoThuocView quanLiThuocView = new KhoThuocView();
-                        quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
-                        quanLiThuocView.MedicineListView.Items.Refresh();
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không tìm thấy thuốc.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                            DataProvider.Ins.DB.SaveChanges();
+                            MessageBox.Show("Cập nhật thông tin thuốc thành công!", "THÔNG BÁO");
+                            paramater.ChonThuoccbx.SelectedItem = -1;
+                            paramater.SL.Clear();
+
+                            KhoThuocView quanLiThuocView = new KhoThuocView();
+                            quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+                            quanLiThuocView.MedicineListView.Items.Refresh();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không tìm thấy thuốc.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
             }

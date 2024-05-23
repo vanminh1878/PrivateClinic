@@ -118,7 +118,7 @@ CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                     <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
                     <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Thuốc có " Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBlock x:Name="dvt" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock  x:Name="dvt" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="loại đơn vị tính" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
@@ -169,7 +169,27 @@ CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                         <TextBlock Margin="5 0 " Text=" loại bệnh" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
-              
+                <Grid Grid.Column="1">
+                    <Rectangle HorizontalAlignment="Left" Width="50" Height="50">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#C3B59B" Offset="0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.Stroke>
+                            <SolidColorBrush Color="Black" />
+                        </Rectangle.Stroke>
+                    </Rectangle>
+                    <TextBlock Margin="20 0 " Text="6" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" />
+                    <Line X1="50" Y1="88" X2="70" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
+                    <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Margin="20 0 5 0 " Text="Có" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="loaithuoc" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock Margin="5 0 " Text=" loại thuốc" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                    </WrapPanel>
+                </Grid>
+
 
             </Grid>
             

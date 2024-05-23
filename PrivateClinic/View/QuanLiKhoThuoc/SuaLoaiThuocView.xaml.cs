@@ -11,20 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
     /// <summary>
-    /// Interaction logic for ThemDonViTinhUS.xaml
+    /// Interaction logic for SuaLoaiThuocView.xaml
     /// </summary>
-    public partial class ThemDonViTinhUS : UserControl
+    public partial class SuaLoaiThuocView : Window
     {
-        public ThemDonViTinhUS()
+        public SuaLoaiThuocView()
         {
             InitializeComponent();
-            ThemDonViTinhViewModel viewModel = new ThemDonViTinhViewModel();
+            Main.Content = new ThemLoaiThuocUS();
+            ThuocCuRBtn.IsChecked = true;
+            SuaLoaiThuocViewModel viewModel = new SuaLoaiThuocViewModel();
             this.DataContext = viewModel;
         }
     }

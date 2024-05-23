@@ -145,9 +145,17 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         }
         void _SaveCommand(ThemThuocMoiView paramater)
         {
-            if (string.IsNullOrEmpty(paramater.SL.Text) || paramater.TenDVTcbx.SelectedItem == null || paramater.CachDungcbx.SelectedItem == null  || string.IsNullOrEmpty(paramater.TenThuoc.Text) || string.IsNullOrEmpty(paramater.SL.Text) || string.IsNullOrEmpty(paramater.DonGiaNhap.Text)||paramater.CachDungcbx.SelectedItem==null)
+            if (string.IsNullOrEmpty(paramater.SL.Text) || string.IsNullOrEmpty(paramater.DonGiaNhap.Text) || paramater.TenDVTcbx.SelectedItem == null || paramater.CachDungcbx.SelectedItem == null || string.IsNullOrEmpty(paramater.TenThuoc.Text) || paramater.CachDungcbx.SelectedItem == null)
             {
                 MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!int.TryParse(paramater.SL.Text, out int slValue))
+            {
+                MessageBox.Show("Số lượng phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!double.TryParse(paramater.DonGiaNhap.Text, out double dgValue))
+            {
+                MessageBox.Show("Đơn giá nhập phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -161,26 +169,24 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
                     loaithuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
                     thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
-                    
+
                     THUOC newthuoc = new THUOC();
                     {
-                        newthuoc.MaThuoc= int.Parse(paramater.MaThuoc.Text);
+                        newthuoc.MaThuoc = int.Parse(paramater.MaThuoc.Text);
                         newthuoc.TenThuoc = paramater.TenThuoc.Text;
-                        newthuoc.DonGiaNhap = double.Parse(paramater.DonGiaNhap.Text);
-                        newthuoc.SoLuong = int.Parse(paramater.SL.Text);
-                        foreach(var ts in thamso)
+                        newthuoc.DonGiaNhap = dgValue;
+                        newthuoc.SoLuong = slValue;
+                        foreach (var ts in thamso)
                         {
-                            if(ts.MaThamSo==3)
+                            if (ts.MaThamSo == 3)
                             {
                                 newthuoc.DonGiaBan = newthuoc.DonGiaNhap * ts.GiaTri;
-                               
                             }
                         }
 
-
                         foreach (var dvt in donvitinh)
                         {
-                            if(dvt.TenDVT== paramater.TenDVTcbx.SelectedItem.ToString())
+                            if (dvt.TenDVT == paramater.TenDVTcbx.SelectedItem.ToString())
                             {
                                 newthuoc.MaDVT = dvt.MaDVT;
                             }
@@ -194,7 +200,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                         }
                         foreach (var cd in cachdung)
                         {
-                            if (cd.TenCachDung== paramater.CachDungcbx.SelectedItem.ToString())
+                            if (cd.TenCachDung == paramater.CachDungcbx.SelectedItem.ToString())
                             {
                                 newthuoc.MaCachDung = cd.MaCachDung;
                             }
@@ -202,34 +208,15 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                         int nextPN;
                         nextPN = DataProvider.Ins.DB.PHIEUNHAPTHUOCs.Max(t => t.SoPhieuNhap) + 1;
                         PHIEUNHAPTHUOC pnt = new PHIEUNHAPTHUOC();
-                        
+
                         pnt.SoPhieuNhap = nextPN;
                         pnt.NgayNhap = paramater.NgayNhap.SelectedDate;
-                        //pnt.TongTien = paramater.SL.Text * ;
                         DataProvider.Ins.DB.PHIEUNHAPTHUOCs.Add(pnt);
-                        //CT_PNT cT_PNT = new CT_PNT();
-                        //int nextCTPN;
-                        //nextCTPN = DataProvider.Ins.DB.CT_PNT.Max(t => t.SoPhieuNhap) + 1;
-                        //cT_PNT.SoPhieuNhap= nextCTPN;
-                        //if (cT_PNT.SoPhieuNhap== pnt.SoPhieuNhap)
-                        //{
-                        //    cT_PNT.MaThuoc = newthuoc.MaThuoc;
-                        //    DataProvider.Ins.DB.CT_PNT.Add(cT_PNT);
-                        //}
-                                             
-                     };
-                    DataProvider.Ins.DB.THUOCs.Add(newthuoc);
-                    
-                    
-                    DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Thêm thuốc mới thành công!", "THÔNG BÁO");
 
-
-
-
-
-
-
+                        DataProvider.Ins.DB.THUOCs.Add(newthuoc);
+                        DataProvider.Ins.DB.SaveChanges();
+                        MessageBox.Show("Thêm thuốc mới thành công!", "THÔNG BÁO");
+                    };
                 }
             }
 
