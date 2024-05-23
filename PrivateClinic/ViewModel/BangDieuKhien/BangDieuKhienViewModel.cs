@@ -1,14 +1,18 @@
 ﻿using LiveCharts;
+using LiveCharts.Definitions.Series;
 using LiveCharts.Wpf;
+using PrivateClinic.Model;
 using PrivateClinic.ViewModel.OtherViewModels;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace PrivateClinic.ViewModel.BangDieuKhien
 {
     public class BangDieuKhienViewModel : BaseViewModel
     {
-
         #region Properties
         public ObservableCollection<Doctor> listBS { get; set; }
         public ObservableCollection<string> Months { get; set; }
@@ -24,8 +28,33 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
             }
         }
 
-        //Config Chart
+        // Medicine chart
+
+        // Config Chart
         public SeriesCollection RevenueData { get; set; }
+        private string[] _axisXLabels;
+        public string[] AxisXLabels
+        {
+            get { return _axisXLabels; }
+            set
+            {
+                _axisXLabels = value;
+                OnPropertyChanged(nameof(AxisXLabels));
+            }
+        }
+
+        private string[] _axisXLabelsUsage;
+        public string[] AxisXLabelsUsage
+        {
+            get { return _axisXLabelsUsage; }
+            set
+            {
+                _axisXLabelsUsage = value;
+                OnPropertyChanged(nameof(AxisXLabelsUsage));
+            }
+        }
+
+
         public SeriesCollection MedicineData { get; set; }
         public SeriesCollection UsageData { get; set; }
         #endregion
@@ -33,123 +62,178 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
         public BangDieuKhienViewModel()
         {
             listBS = new ObservableCollection<Doctor>()
-        {
-            new Doctor { Name = "Trần Thu Hằng", StatusText = "Nhan vien" },
-            new Doctor { Name = "Nguyễn Văn A", StatusText = "Nhan vien" },
-            new Doctor { Name = "Nguyễn Văn A", StatusText = "Nhan vien" }
-        };
-            Months = new ObservableCollection<string> { "Tháng 3", "Tháng 4", "Tháng 5" };
-            SelectedMonth = Months[0];
+            {
+                new Doctor { Name = "Trần Thu Hằng", StatusText = "Nhan vien" },
+                new Doctor { Name = "Nguyễn Văn A", StatusText = "Nhan vien" },
+                new Doctor { Name = "Nguyễn Văn B", StatusText = "Nhan vien" }
+            };
 
-            InitializeChartData();
-            InitializeMedicineChartData();
-            InitializeUsageChartData();
+            Months = new ObservableCollection<string> {"Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5" , "Tháng 6"};
+            SelectedMonth = Months[0]; // Default selection
         }
-
 
         #region Functions
-        //Config Chart
-        private void InitializeChartData()
+
+        #region Thống kê doanh thu
+        private void UpdatRevenueChartData()
         {
+            var listDoanhThu = new ObservableCollection<BAOCAODOANHTHU>(DataProvider.Ins.DB.BAOCAODOANHTHUs);
+
+            var months = new List<string>();
+            var revenues = new ChartValues<double>();
+
+            foreach (var doanhThu in listDoanhThu)
+            {
+                if (doanhThu.Thang.HasValue && doanhThu.TongDoanhThu.HasValue)
+                {
+                    months.Add($"{doanhThu.Thang}/{doanhThu.Nam}");
+                    revenues.Add(doanhThu.TongDoanhThu.Value);
+                }
+            }
+
             RevenueData = new SeriesCollection
             {
-                new PieSeries
+                new ColumnSeries
                 {
-                    Title = "TIEN THUOC",
-                    Values = new ChartValues<double> { 40 },
-                    DataLabels = true
-                },
-                new PieSeries
-                {
-                    Title = "TIEN KHAM",
-                    Values = new ChartValues<double> { 25 },
-                    DataLabels = true
-                },
-                new PieSeries
-                {
-                    Title = "KHAC",
-                    Values = new ChartValues<double> { 35 },
-                    DataLabels = true
+                    Title = "Doanh Thu",
+                    Values = revenues
                 }
             };
+
+            AxisXLabels = months.ToArray();
+
+            Console.WriteLine($"RevenueData: {RevenueData.Count}");
+        }
+        #endregion
+
+        #region Thống kê Thuốc chart
+        private void UpdateMedicineChartData()
+        {
+            var listThuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+            var listLoaiThuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
+
+            Console.WriteLine($"Total THUOCs: {listThuoc.Count}");
+            Console.WriteLine($"Total LOAITHUOCs: {listLoaiThuoc.Count}");
+            var pieSeriesList = new List<PieSeries>();
+            foreach (var loaiThuoc in listLoaiThuoc)
+            {
+                int totalSoLuong = 0;
+
+                foreach (var thuoc in listThuoc)
+                {
+                    if (thuoc.MaLoaiThuoc == loaiThuoc.MaLoaiThuoc)
+                    {
+                        totalSoLuong += thuoc.SoLuong ?? 0;
+                    }
+                }
+                if (totalSoLuong == 0)
+                {
+                    continue;
+                }
+
+                pieSeriesList.Add(new PieSeries
+                {
+                    Title = loaiThuoc.TenLoaiThuoc,
+                    Values = new ChartValues<int> { totalSoLuong },
+                    DataLabels = true
+                });
+            }
+
+            foreach (var series in pieSeriesList)
+            {
+                Console.WriteLine($"Series Title: {series.Title}, Values: {string.Join(",", series.Values.Cast<int>())}");
+            }
+
+
+            MedicineData = new SeriesCollection();
+            foreach (var pieSeries in pieSeriesList)
+            {
+                MedicineData.Add(pieSeries);
+            }
+            Console.WriteLine($"MedicineData: {MedicineData.Count}, medicineData: {pieSeriesList.Count}");
+        }
+        #endregion
+
+        #region Thống kê sử dụng thuốc
+
+
+        private void UpdateMedicineUsageChartData(int month)
+        {
+            var listBaoCaoSuDungThuoc = new ObservableCollection<BAOCAOSUDUNGTHUOC>(DataProvider.Ins.DB.BAOCAOSUDUNGTHUOCs);
+
+            var filteredData = listBaoCaoSuDungThuoc.Where(x => x.Thang == month).ToList();
+
+            var seriesCollection = new SeriesCollection();
+
+            var uniqueMedicines = filteredData.Select(x => x.MaThuoc).Distinct();
+
+            foreach (var medicine in uniqueMedicines)
+            {
+                var medicineData = filteredData.Where(x => x.MaThuoc == medicine).ToList();
+                var values = new ChartValues<int>();
+
+                foreach (var data in medicineData)
+                {
+                    values.Add(data.SoLanDung ?? 0);
+                }
+
+                seriesCollection.Add(new LineSeries
+                {
+                    Title = $"Thuốc {medicine}",
+                    Values = values,
+                    DataLabels = true,
+                    PointGeometry = DefaultGeometries.Circle,
+                    PointGeometrySize = 15
+                });
+            }
+
+            UsageData = seriesCollection;
+
+            // Cập nhật Labels cho AxisX
+            AxisXLabelsUsage = new[] { $"Tháng {month}" };
+
+            Console.WriteLine($"UsageData: {UsageData.Count}");
         }
 
-        private void InitializeMedicineChartData()
-        {
-            MedicineData = new SeriesCollection
-        {
-            new ColumnSeries
-            {
-                Title = "2022",
-                Values = new ChartValues<double> { 10, 50, 39, 50 }
-            }
-        };
-        }
-
-        private void InitializeUsageChartData()
-        {
-            UsageData = new SeriesCollection
-        {
-            new LineSeries
-            {
-                Title = "Usage",
-                Values = new ChartValues<double> { 20, 36, 18, 40 }
-            }
-        };
-        }
+        #endregion
 
         private void UpdateChartData()
         {
             if (RevenueData == null || RevenueData.Count == 0)
             {
-                InitializeChartData();
+                UpdatRevenueChartData();
             }
 
             if (MedicineData == null || MedicineData.Count == 0)
             {
-                InitializeMedicineChartData();
+                UpdateMedicineChartData();
             }
 
             if (UsageData == null || UsageData.Count == 0)
             {
-                InitializeUsageChartData();
+                UpdateMedicineUsageChartData(1);
             }
 
             switch (SelectedMonth)
             {
                 case "Tháng 3":
-                    RevenueData[0].Values = new ChartValues<double> { 40 };
-                    RevenueData[1].Values = new ChartValues<double> { 25 };
-                    RevenueData[2].Values = new ChartValues<double> { 35 };
 
-                    MedicineData[0].Values = new ChartValues<double> { 10, 50, 39, 50 };
-                    UsageData[0].Values = new ChartValues<double> { 20, 36, 18, 40 };
                     break;
 
                 case "Tháng 4":
-                    RevenueData[0].Values = new ChartValues<double> { 30 };
-                    RevenueData[1].Values = new ChartValues<double> { 20 };
-                    RevenueData[2].Values = new ChartValues<double> { 50 };
 
-                    MedicineData[0].Values = new ChartValues<double> { 15, 60, 29, 60 };
-                    UsageData[0].Values = new ChartValues<double> { 25, 46, 28, 50 };
+
                     break;
 
                 case "Tháng 5":
-                    RevenueData[0].Values = new ChartValues<double> { 50 };
-                    RevenueData[1].Values = new ChartValues<double> { 30 };
-                    RevenueData[2].Values = new ChartValues<double> { 20 };
 
-                    MedicineData[0].Values = new ChartValues<double> { 20, 70, 49, 70 };
-                    UsageData[0].Values = new ChartValues<double> { 30, 56, 38, 60 };
+
                     break;
             }
+            #endregion
         }
 
-        #endregion
-
-
-        //Dummy
+        // Dummy
         public class Doctor
         {
             public string Name { get; set; }
