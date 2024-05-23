@@ -200,8 +200,12 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             {
                 if(obj is BenhNhanDangKhamView p)
                 {
-                    if (p.LoaiBenh.Text == "" && p.TrieuChung.Text == "")
+                    if (p.LoaiBenh.Text == "" || p.TrieuChung.Text == "")
                         MessageBox.Show("Chưa đủ thông tin về chuẩn đoán cho bệnh nhân", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    else if(p.TenBN.Text=="")    
+                    {
+                        MessageBox.Show("Chưa chọn bệnh nhân để khám", "Thông báo",MessageBoxButton.OK);
+                    }
                     else
                     {
                         // tạo hóa đơn
@@ -226,7 +230,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         {
                             CT_PKB cT_PKB = new CT_PKB();
                             cT_PKB.MaPKB = pkb.MaPKB;
-
+                            cT_PKB.MaThuoc = 3;
+                            cT_PKB.SoLuong = 0;
                             //Lưu các chi tiết hóa đơn
                             DataProvider.Ins.DB.CT_PKB.Add(cT_PKB);
                             DataProvider.Ins.DB.SaveChanges();
@@ -270,6 +275,20 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         DataProvider.Ins.DB.HOADONs.Add(hd);
                         DataProvider.Ins.DB.SaveChanges();
                         MessageBox.Show("Đã khám xong!","Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        // Clear the input fields
+                        p.MaBNformat.Text = string.Empty;
+                        p.TrieuChung.Text = string.Empty;
+                        p.TenBN.Text = string.Empty;
+                        p.NgsinhBN.Text = string.Empty;
+                        p.Tuoi.Text = string.Empty;
+                        p.GioiTinh.Text = string.Empty;
+                        p.LoaiBenh.SelectedIndex = -1;
+                        if(ListThuocView != null)
+                        {
+                            ListThuocView.Clear();
+                        }
+                        SoLuongThuocDangChon = 0;
                     }
                     
                 }

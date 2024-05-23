@@ -125,13 +125,14 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         MessageBox.Show("Đã thêm bệnh nhân vào danh sách tiếp đón!", "THÔNG BÁO");
                         DataProvider.Ins.DB.BENHNHANs.Add(a);
                         DataProvider.Ins.DB.SaveChanges();
-                        // Xóa thông tin các TextBox
-                        paramater.HoTen.Text = string.Empty;
-                        paramater.GioiTinh.SelectedIndex = -1;
-                        paramater.DiaChi.Clear();
-                        paramater.NgSinh.SelectedDate = null;
+                        
                     }
                 }
+                // Xóa thông tin các TextBox
+                paramater.HoTen.Text = string.Empty;
+                paramater.GioiTinh.SelectedIndex = -1;
+                paramater.DiaChi.Clear();
+                paramater.NgSinh.SelectedDate = null;
             }
         }
         void _CancelCommand(ThemBenhNhanView paramater)
