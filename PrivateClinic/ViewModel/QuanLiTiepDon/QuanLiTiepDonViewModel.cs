@@ -29,7 +29,6 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }    
-        public ICommand LoadCommand { get; set; }    
         public ICommand LoadSLBNCommand { get; set; }    
         public ICommand EditSLBNCommand { get; set; }    
         public ICommand EditUpSLBNCommand { get; set; }    
@@ -38,15 +37,24 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public ICommand EditBNCommand { get; set; }
 
         public ICommand selectedItemBenhNhan { get; set; }
+        private int soLuongBenhNhanDaTiepDon;
+        public int SoLuongBenhNhanDaTiepDon
+        {
+            get => soLuongBenhNhanDaTiepDon;
+            set
+            {
+                soLuongBenhNhanDaTiepDon = value;
+                OnPropertyChanged();
+            }
+        }
 
-       
+
         public QuanLiTiepDonViewModel()
         {
             LoadData();
             SearchCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
             DeleteCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
             AddCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
-            LoadCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadCommand(p));
             LoadSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadSLBNCommand(p));
             EditBN();
             UpdateSTT();
@@ -67,10 +75,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 //listBN[i].STT = i + 1;
             }
         }
-        void _LoadCommand(QuanLiTiepDonView parameter)
+        void SoLuongBenhNhanTiepDonHomNay()
         {
-            parameter.txbSLBNDK.Text = listBN.Count.ToString();
-            parameter.txbSLBNDK.FontSize = 25;
+            
             
         }
         void _EditSLBNCommand(QuanLiTiepDonView parameter)
@@ -200,6 +207,18 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             var benhnhanList = DataProvider.Ins.DB.BENHNHANs.Where(p => p.TrangThai == false).ToList();
             listBN = new ObservableCollection<BENHNHAN>(benhnhanList);
+            int dem = listBN.Count;
+            int soluong = 0;
+            ObservableCollection<PHIEUKHAMBENH> listpkb = new ObservableCollection<PHIEUKHAMBENH>(DataProvider.Ins.DB.PHIEUKHAMBENHs);
+            foreach (var pkb in listpkb)
+            {
+                if (pkb.NgayKham.Date == DateTime.UtcNow.Date)
+                {
+                    soluong++;
+                }
+            }
+            SoLuongBenhNhanDaTiepDon = dem+soluong;
+            
         }
 
 
