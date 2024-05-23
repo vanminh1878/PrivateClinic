@@ -165,6 +165,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     // Save changes to the database
                     DataProvider.Ins.DB.SaveChanges();
                     LoadData();
+                    MessageBox.Show("Đã xóa ra khỏi danh sách tiếp đón", "Thông báo", MessageBoxButton.OK);
                 }
             }
         }
