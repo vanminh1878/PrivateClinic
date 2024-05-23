@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace PrivateClinic.ViewModel.OtherViewModels
 {
@@ -29,11 +30,18 @@ namespace PrivateClinic.ViewModel.OtherViewModels
         public Button LoginButton { get; set; }
         public ICommand ForgotPasswordCommand { get; set; }
         public ICommand LoginCommand { get; set; }
+        private DispatcherTimer errorMessageTimer;
+
         public LoginViewModel()
         {
             IsLogin = false;
             Password = "";
             Username = "";
+            errorMessageTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(5)
+            };
+            errorMessageTimer.Tick += ErrorMessageTimer_Tick;
             CloseLogin = new RelayCommand<LoginView>((p) => true, (p) => Close());
             MinimizeLogin = new RelayCommand<LoginView>((p) => true, (p) => Minimize(p));
             MoveLogin = new RelayCommand<LoginView>((p) => true, (p) => Move(p));
@@ -65,12 +73,13 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                     }
                     else
                     {
-                        ErrorMessage = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                        ShowErrorMessage("Tên đăng nhập hoặc mật khẩu không đúng!");
+
                     }
                 }
                 catch
                 {
-                    ErrorMessage = "Lỗi kết nối đến cơ sở dữ liệu!";
+                    ShowErrorMessage("Lỗi kết nối đến cơ sở dữ liệu!");
                 }
             });
 
@@ -101,7 +110,17 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             }
         }
 
+        private void ErrorMessageTimer_Tick(object sender, EventArgs e)
+        {
+            ErrorMessage = "";
+            errorMessageTimer.Stop();
+        }
 
+        private void ShowErrorMessage(string message)
+        {
+            ErrorMessage = message;
+            errorMessageTimer.Start();
+        }
         public static string MD5Hash(string value)
         {
             StringBuilder hash = new StringBuilder();
