@@ -3,12 +3,8 @@ using PrivateClinic.View.HoSoBacSi;
 using PrivateClinic.Model;
 using PrivateClinic.View.OtherViews;
 using PrivateClinic.View.QuanLiKhamBenh;
+using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.View.QuanLiTiepDon;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -67,6 +63,10 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             BacSiCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 MainFrame.Content = new HoSoBacSiView();
+            });
+            KhoThuocCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                MainFrame.Content = new QuanLiKhoThuocView();
             });
 
             KhamBenhCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
