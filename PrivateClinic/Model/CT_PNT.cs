@@ -14,6 +14,7 @@ namespace PrivateClinic.Model
     
     public partial class CT_PNT
     {
+        public int CTPNT_ID { get; set; }
         public int SoPhieuNhap { get; set; }
         public Nullable<int> MaThuoc { get; set; }
         public Nullable<int> SoLuongNhap { get; set; }
