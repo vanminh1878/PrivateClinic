@@ -6,15 +6,28 @@ using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Threading;
 
 namespace PrivateClinic.ViewModel.BangDieuKhien
 {
     public class BangDieuKhienViewModel : BaseViewModel
     {
         #region Properties
+        private string _currentTime;
+        public string CurrentTime
+        {
+            get { return _currentTime; }
+            set
+            {
+                _currentTime = value;
+                OnPropertyChanged(nameof(CurrentTime));
+            }
+        }
+
         private ObservableCollection<BACSI> _listBS;
         public ObservableCollection<BACSI> listBS
         {
@@ -84,9 +97,21 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
             listBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             Months = new ObservableCollection<string> {"Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5" , "Tháng 6"};
             SelectedMonth = Months[0]; // Default selection
+            StartClock();
         }
 
         #region Functions
+
+        private void StartClock()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += (s, e) =>
+            {
+                CurrentTime = DateTime.Now.ToString("ddd, MMM d, yyyy hh:mm:ss tt", new CultureInfo("en-US"));
+            };
+            timer.Start();
+        }
 
         #region Thống kê doanh thu
         private void UpdatRevenueChartData()
