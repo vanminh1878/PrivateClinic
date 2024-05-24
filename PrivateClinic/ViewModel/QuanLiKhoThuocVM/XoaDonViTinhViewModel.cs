@@ -32,6 +32,13 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             set { _thamso = value; OnPropertyChanged(nameof(thamso)); }
 
         }
+        private ObservableCollection<THUOC> _thuoc;
+        public ObservableCollection<THUOC> thuoc
+        {
+            get => _thuoc;
+            set { _thuoc = value; OnPropertyChanged(nameof(thuoc)); }
+
+        }
         private List<string> _TenDVTs;
         public List<string> TenDVTs
         {
@@ -62,17 +69,26 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 {
 
                     dvt = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
-                    thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
+                    thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
                     foreach (var dv in dvt)
                     {
                         if (dv.TenDVT == p.dvtcbx.Text)
                         {
-                            DataProvider.Ins.DB.DVTs.Remove(dv);
-                            
+                            // Kiểm tra xem đơn vị tính này đã được sử dụng bởi thuốc chưa
+                            if (thuoc.Any(t => t.MaDVT == dv.MaDVT))
+                            {
+                                MessageBox.Show("Không thể xóa đơn vị tính này vì đã được sử dụng bởi một hoặc nhiều thuốc.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return; // Thoát khỏi hàm nếu không thể xóa
+                            }
+                            else
+                            {
+                                // Xóa đơn vị tính
+                                DataProvider.Ins.DB.DVTs.Remove(dv);
+                                p.dvtcbx.SelectedIndex = -1;
+                                MessageBox.Show("Xóa đơn vị tính thành công!", "THÔNG BÁO");
+                            }
                         }
                     }
-
-                    DataProvider.Ins.DB.SaveChanges();
                     p.dvtcbx.SelectedIndex = -1;
                     MessageBox.Show("Xóa đơn vị tính thành công!", "THÔNG BÁO");
 

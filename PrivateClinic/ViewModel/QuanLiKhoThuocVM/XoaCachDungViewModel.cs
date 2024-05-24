@@ -28,6 +28,13 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             set { _thamso = value; OnPropertyChanged(nameof(thamso)); }
 
         }
+        private ObservableCollection<THUOC> _thuoc;
+        public ObservableCollection<THUOC> thuoc
+        {
+            get => _thuoc;
+            set { _thuoc = value; OnPropertyChanged(nameof(thuoc)); }
+
+        }
         private List<string> _TenDVTs;
         public List<string> TenDVTs
         {
@@ -56,20 +63,30 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn xóa cách dùng này ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (h == MessageBoxResult.Yes)
                 {
+                    thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
 
                     cachdung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
-                   
-                    foreach (var dv in cachdung)
+
+                    foreach (var cd in cachdung)
                     {
-                        if (dv.TenCachDung == p.dvtcbx.Text)
+                        if (cd.TenCachDung == p.dvtcbx.Text)
                         {
-                            DataProvider.Ins.DB.CACHDUNGs.Remove(dv);                           
+                            // Kiểm tra xem cách dùng này đã được sử dụng bởi thuốc chưa
+                            if (thuoc.Any(t => t.MaCachDung == cd.MaCachDung))
+                            {
+                                MessageBox.Show("Không thể xóa cách dùng này vì đã được sử dụng bởi một hoặc nhiều thuốc.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return; // Thoát khỏi hàm nếu không thể xóa
+                            }
+                            else
+                            {
+                                // Xóa cách dùng
+                                DataProvider.Ins.DB.CACHDUNGs.Remove(cd);
+                                p.dvtcbx.SelectedIndex = -1;
+                                MessageBox.Show("Xóa cách dùng thành công!", "THÔNG BÁO");
+                            }
                         }
                     }
-
-                    DataProvider.Ins.DB.SaveChanges();
-                    p.dvtcbx.SelectedIndex = -1;
-                    MessageBox.Show("Xóa cách dùng thành công!", "THÔNG BÁO");
+                    
 
                 }
             }

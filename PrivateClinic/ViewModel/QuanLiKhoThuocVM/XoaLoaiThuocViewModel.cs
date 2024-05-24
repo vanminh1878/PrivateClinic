@@ -25,11 +25,11 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             set { _dvt = value; OnPropertyChanged(nameof(dvt)); }
 
         }
-        private ObservableCollection<THAMSO> _thamso;
-        public ObservableCollection<THAMSO> thamso
+        private ObservableCollection<THUOC> _thuoc;
+        public ObservableCollection<THUOC> thuoc
         {
-            get => _thamso;
-            set { _thamso = value; OnPropertyChanged(nameof(thamso)); }
+            get => _thuoc;
+            set { _thuoc = value; OnPropertyChanged(nameof(thuoc)); }
 
         }
         private List<string> _TenDVTs;
@@ -61,20 +61,27 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 if (h == MessageBoxResult.Yes)
                 {
 
-                    dvt = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
-                    thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
-                    foreach (var dv in dvt)
+                    thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+                    foreach (var lt in dvt)
                     {
-                        if (dv.TenLoaiThuoc == p.dvtcbx.Text)
+                        if (lt.TenLoaiThuoc == p.dvtcbx.Text)
                         {
-                            DataProvider.Ins.DB.LOAITHUOCs.Remove(dv);
-                            
+                            // Kiểm tra xem loại thuốc này đã được sử dụng bởi đơn thuốc chưa
+                            if (thuoc.Any(dt => dt.MaLoaiThuoc == lt.MaLoaiThuoc))
+                            {
+                                MessageBox.Show("Không thể xóa loại thuốc này vì đã được sử dụng bởi một hoặc nhiều đơn thuốc.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return; // Thoát khỏi hàm nếu không thể xóa
+                            }
+                            else
+                            {
+                                // Xóa loại thuốc
+                                DataProvider.Ins.DB.LOAITHUOCs.Remove(lt);
+                                p.dvtcbx.SelectedIndex = -1;
+                                MessageBox.Show("Xóa loại thuốc thành công!", "THÔNG BÁO");
+                            }
+                           
                         }
-                    }
-
-                    DataProvider.Ins.DB.SaveChanges();
-                    p.dvtcbx.SelectedIndex = -1;
-                    MessageBox.Show("Xóa loại thuốc thành công!", "THÔNG BÁO");
+                    }                    
 
                 }
             }

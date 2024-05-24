@@ -18,6 +18,13 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
     public class XoaLoaiBenhViewModel : BaseViewModel
     {
+        private ObservableCollection<PHIEUKHAMBENH> _benhnhan;
+        public ObservableCollection<PHIEUKHAMBENH> benhnhan
+        {
+            get => _benhnhan;
+            set { _benhnhan = value; OnPropertyChanged(nameof(benhnhan)); }
+
+        }
         private ObservableCollection<LOAIBENH> _dvt;
         public ObservableCollection<LOAIBENH> dvt
         {
@@ -60,15 +67,23 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn xóa loại bệnh này ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (h == MessageBoxResult.Yes)
                 {
-
+                    benhnhan = new ObservableCollection<PHIEUKHAMBENH>(DataProvider.Ins.DB.PHIEUKHAMBENHs);
                     dvt = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
-                    thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
-                    foreach (var dv in dvt)
+                    foreach (var lb in dvt)
                     {
-                        if (dv.TenLoaiBenh == p.dvtcbx.Text)
+                        if (lb.TenLoaiBenh == p.dvtcbx.Text)
                         {
-                            DataProvider.Ins.DB.LOAIBENHs.Remove(dv);
-                           
+                            // Kiểm tra xem loại bệnh này đã được sử dụng bởi bệnh nhân chưa
+                            if (benhnhan.Any(bn => bn.MaLoaiBenh == lb.MaLoaiBenh))
+                            {
+                                MessageBox.Show("Không thể xóa loại bệnh này vì đã được sử dụng bởi một hoặc nhiều bệnh nhân.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return; // Thoát khỏi hàm nếu không thể xóa
+                            }
+                            else
+                            {
+                                // Xóa loại bệnh
+                                DataProvider.Ins.DB.LOAIBENHs.Remove(lb);
+                            }
                         }
                     }
 
