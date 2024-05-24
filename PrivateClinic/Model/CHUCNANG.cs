@@ -14,17 +14,8 @@ namespace PrivateClinic.Model
     
     public partial class CHUCNANG
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CHUCNANG()
-        {
-            this.PHANQUYENs = new HashSet<PHANQUYEN>();
-        }
-    
         public string MaChucNang { get; set; }
         public string TenChucNang { get; set; }
         public string TenManHinhDuocLoad { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHANQUYEN> PHANQUYENs { get; set; }
     }
 }

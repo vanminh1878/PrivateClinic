@@ -14,7 +14,6 @@ namespace PrivateClinic.Model
     
     public partial class CT_BCDT
     {
-        public int CTBCDT_ID { get; set; }
         public int MaBCDT { get; set; }
         public int SoHD { get; set; }
         public Nullable<int> SoBenhNhan { get; set; }

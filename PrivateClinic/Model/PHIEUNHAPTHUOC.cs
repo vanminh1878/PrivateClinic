@@ -14,17 +14,10 @@ namespace PrivateClinic.Model
     
     public partial class PHIEUNHAPTHUOC
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PHIEUNHAPTHUOC()
-        {
-            this.CT_PNT = new HashSet<CT_PNT>();
-        }
-    
         public int SoPhieuNhap { get; set; }
-        public Nullable<System.DateTime> NgayNhap { get; set; }
+        public System.DateTime NgayNhap { get; set; }
         public double TongTien { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_PNT> CT_PNT { get; set; }
+        public virtual CT_PNT CT_PNT { get; set; }
     }
 }

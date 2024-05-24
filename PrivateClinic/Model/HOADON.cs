@@ -26,7 +26,6 @@ namespace PrivateClinic.Model
         public double TongTien { get; set; }
         public Nullable<int> MaBN { get; set; }
         public Nullable<int> MaPKB { get; set; }
-        public string TrangThai { get; set; }
     
         public virtual BENHNHAN BENHNHAN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

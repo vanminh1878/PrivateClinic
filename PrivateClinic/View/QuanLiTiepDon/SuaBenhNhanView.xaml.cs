@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using PrivateClinic.Model;
 using PrivateClinic.ViewModel.QuanLiTiepDon;
 
 namespace PrivateClinic.View.QuanLiTiepDon
@@ -21,12 +20,10 @@ namespace PrivateClinic.View.QuanLiTiepDon
     /// </summary>
     public partial class SuaBenhNhanView : Window
     {
-        public SuaBenhNhanView(BENHNHAN benhnhan)
+        public SuaBenhNhanView()
         {
             InitializeComponent();
-            SuaBenhNhanViewModel viewmodel = new SuaBenhNhanViewModel(this); 
-            viewmodel.benhnhan = benhnhan;
-            viewmodel.loadEditCurrent();
+            SuaBenhNhanViewModel viewmodel = new SuaBenhNhanViewModel();
             this.DataContext = viewmodel;
         }
     }

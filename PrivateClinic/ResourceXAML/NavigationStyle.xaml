@@ -68,7 +68,7 @@
                                    HorizontalAlignment="Left"
                                    Margin="5 0 0 0"/>
                                 <TextBlock x:Name="TextBlock"
-                                       Text="Quản lí khám bệnh"
+                                       Text="Quản lí tiếp đón"
                                        Foreground="White"
                                        FontFamily="Segoe UI"
                                        FontWeight="Regular"
@@ -113,7 +113,7 @@
                                    HorizontalAlignment="Left"
                                    Margin="5 0 0 0"/>
                                 <TextBlock x:Name="TextBlock"
-                                       Text="Quản lí bệnh nhân"
+                                       Text="Quản lí khám bệnh"
                                        Foreground="White"
                                        FontFamily="Segoe UI"
                                        FontWeight="Regular"
@@ -292,13 +292,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style
-       TargetType="{x:Type Button}"
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+       TargetType="RadioButton"
        x:Key="LogOut">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate >
+                    <ControlTemplate TargetType="RadioButton">
                         <Border Height="100"
                             x:Name="MainBorder"
                             CornerRadius="10"
@@ -322,7 +322,14 @@
                                        Margin="20 0 0 0"/>
                             </StackPanel>
                         </Border>
-                
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="IconImage" Property="Source" Value="{StaticResource ResourceKey=icLogoutGreen}" />
+                                <Setter TargetName="TextBlock" Property="Foreground" Value="Black" />
+                                <Setter TargetName="TextBlock" Property="FontWeight" Value="Medium" />
+                                <Setter TargetName="MainBorder" Property="Background" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -330,7 +337,7 @@
             <Setter Property="BorderThickness" Value="0" />
         </Style.Setters>
         <Style.Triggers>
-            <Trigger Property="IsPressed" Value="True">
+            <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="White" />
             </Trigger>
         </Style.Triggers>
