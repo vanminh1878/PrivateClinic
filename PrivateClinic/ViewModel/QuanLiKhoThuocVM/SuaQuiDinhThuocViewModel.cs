@@ -51,8 +51,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             set { _Dvt = value; OnPropertyChanged(nameof(Dvt)); }
 
         }
-        private string _CachDung;
-        public string CachDung
+        private float _CachDung;
+        public float CachDung
         {
             get { return _CachDung; }
             set
@@ -61,8 +61,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(CachDung));
             }
         }
-        private List<string> _Tilegia;
-        public List<string> Tilegia
+        private double _Tilegia;
+        public double Tilegia
         {
             get { return _Tilegia; }
             set
@@ -71,8 +71,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(Tilegia));
             }
         }
-        private string _dvt;
-        public string dvt
+        private float _dvt;
+        public float dvt
         {
             get { return _dvt; }
             set
@@ -81,8 +81,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(dvt));
             }
         }
-        private List<string> _tienkham;
-        public List<string> tienkham
+        private double _tienkham;
+        public double tienkham
         {
             get { return _tienkham; }
             set
@@ -91,8 +91,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(tienkham));
             }
         }
-        private string _loaibenh;
-        public string loaibenh
+        private float _loaibenh;
+        public float loaibenh
         {
             get { return _loaibenh; }
             set
@@ -101,8 +101,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(loaibenh));
             }
         }
-        private string _loaithuoc;
-        public string loaithuoc
+        private float _loaithuoc;
+        public float loaithuoc
         {
             get { return _loaithuoc; }
             set
@@ -111,7 +111,6 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(loaithuoc));
             }
         }
-        public ICommand LoadCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand EditDvtCommand { get; set; }    
         public ICommand EditCachDungCommand { get; set; }    
@@ -119,8 +118,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         public ICommand EditSLThuocCommand { get; set; }    
         public SuaQuiDinhThuocViewModel()
         {
+            Loaddata();
             CancelCommand = new RelayCommand<ThayDoiQuiDinhThuocView>((p) => { return p == null ? false : true; }, (p) => _ExitCommand(p));
-            LoadCommand = new RelayCommand<ThayDoiQuiDinhThuocView>((p) => true, (p) => _LoadCommand(p));
             SaveCommand = new RelayCommand<ThayDoiQuiDinhThuocView>((p) => true, (p) => _SaveCommand(p));
             EditDvtCommand = new RelayCommand<ThayDoiQuiDinhThuocView>((p) => true, (p) => _EditDvtCommand(p));
             EditCachDungCommand = new RelayCommand<ThayDoiQuiDinhThuocView>((p) => true, (p) => _EditCachDungCommand(p));
@@ -132,40 +131,52 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             SuaDonViTinhView a =  new SuaDonViTinhView();
             a.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             a.ShowDialog();
+            Loaddata();
         }
         private void _EditCachDungCommand(ThayDoiQuiDinhThuocView p)
         {
             SuaSoCachDungView a = new SuaSoCachDungView();
             a.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             a.ShowDialog();
+            Loaddata();
         }
         private void _EditSLBenhCommand(ThayDoiQuiDinhThuocView p)
         {
             SuaLoaiBenhView a = new SuaLoaiBenhView();
             a.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             a.ShowDialog();
+            Loaddata();
         }
         private void _EditSLThuocCommand(ThayDoiQuiDinhThuocView p)
         {
             SuaLoaiThuocView a = new SuaLoaiThuocView();
             a.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             a.ShowDialog();
+            Loaddata();
         }
-        private void _LoadCommand(ThayDoiQuiDinhThuocView p)
+        void Loaddata()
         {
             thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
+            //Lấy tỉ lệ giá bán
+            THAMSO tlb = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 3);
+            //Lấy tiền khám
+            THAMSO tk = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 2);
+
             cachdung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
             Loaibenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
             Loaithuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
             Dvt = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
-            CachDung = cachdung.Count().ToString();
-            Tilegia = thamso.Where(x => x.MaThamSo == 3).Select(x => x.GiaTri.ToString()).ToList();
-            tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri.ToString()).ToList();
-            loaibenh = Loaibenh.Count().ToString();
-            loaithuoc = Loaithuoc.Count().ToString();
-            dvt = Dvt.Count().ToString();
+            CachDung = cachdung.Count();
+            Tilegia = tlb.GiaTri;
+            tienkham = tk.GiaTri;
+            //tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri.ToString()).ToList();
+            //tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri).ToList();
+            loaibenh = Loaibenh.Count();
+            loaithuoc = Loaithuoc.Count();
+            dvt = Dvt.Count();
 
         }
+
         private void _ExitCommand(ThayDoiQuiDinhThuocView p)
         {
             p.Close();
