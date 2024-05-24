@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using PrivateClinic.Model;
 using PrivateClinic.View.HoSoBacSi;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
@@ -180,7 +181,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 imageData = File.ReadAllBytes(openFileDialog.FileName);
 
                 ImageSource = ImageViewModel.ByteArrayToBitmapImage(imageData);
-                MessageBox.Show("Thay đổi ảnh đại diện thành công", "Thông báo");
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Đổi ảnh đại diện thành công");
+                mb.ShowDialog();
             }
 
         }

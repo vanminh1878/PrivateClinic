@@ -1,5 +1,6 @@
 ﻿using PrivateClinic.Model;
 using PrivateClinic.View.HoSoBacSi;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
@@ -91,13 +92,13 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
 
             parameter.Ngaysinhtxb.IsEnabled = true;
             parameter.NgayVaoLamtxb.IsEnabled = true;
-            parameter.HoTentxb.IsEnabled = true;
-            parameter.GioiTinhtxb.IsEnabled = true;
-            parameter.Emailtxb.IsEnabled = true;
-            parameter.DiaChitxb.IsEnabled = true;
-            parameter.SDTtxb.IsEnabled = true;
-            parameter.Emailtxb.IsEnabled = true;
-            parameter.BangCaptxb.IsEnabled = true;
+            parameter.HoTentxb.IsReadOnly = false;
+            parameter.GioiTinhtxb.IsReadOnly = false;
+            parameter.Emailtxb.IsReadOnly = false;
+            parameter.DiaChitxb.IsReadOnly = false;
+            parameter.SDTtxb.IsReadOnly = false;
+            parameter.Emailtxb.IsReadOnly = false;
+            parameter.BangCaptxb.IsReadOnly = false;
             parameter.btnSave.Visibility = System.Windows.Visibility.Visible;
             parameter.btnSave.IsEnabled = true;
 
@@ -115,23 +116,28 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                        parameter.DiaChitxb.Text == "" || parameter.HoTentxb.Text == "" || parameter.Ngaysinhtxb.SelectedDate == null || parameter.GioiTinhtxb.SelectedValue==null
                        || parameter.NgayVaoLamtxb.SelectedDate == null)
                 {
-                    MessageBox.Show("Nhập thiếu thông tin", "Thông báo", MessageBoxButton.OK);
+                    OkMessageBox mb = new OkMessageBox("Thông báo","Nhập thiếu thông tin!");
+                    mb.ShowDialog();
                 }
                 else if (!parameter.Emailtxb.Text.Contains("@"))
                 {
-                    MessageBox.Show("Email không hợp lệ","Thông báo", MessageBoxButton.OK);
+                    OkMessageBox mb = new OkMessageBox("Thông báo", "Email không hợp lệ!");
+                    mb.ShowDialog();
                 }
                 else if (!parameter.SDTtxb.Text.All(char.IsDigit))
                 {
-                    MessageBox.Show("Số điện thoại chỉ chứa số", "Thông báo", MessageBoxButton.OK);
+                    OkMessageBox mb = new OkMessageBox("Thông báo", "Số điện thoại chỉ chứa số!");
+                    mb.ShowDialog();
                 }
                 else if (parameter.Ngaysinhtxb.SelectedDate.Value > DateTime.UtcNow)
                 {
-                    MessageBox.Show("Ngày sinh không hợp lệ!", "Thông báo", MessageBoxButton.OK);
+                    OkMessageBox mb = new OkMessageBox("Thông báo", "Ngày sinh không hợp lệ!");
+                    mb.ShowDialog();
                 }
                 else if (parameter.NgayVaoLamtxb.SelectedDate.Value <  parameter.Ngaysinhtxb.SelectedDate)
                 {
-                    MessageBox.Show("Ngày vào làm phải lớn hơn ngày sinh!", "Thông báo", MessageBoxButton.OK);
+                    OkMessageBox mb = new OkMessageBox("Thông báo", "Ngày vào làm phải lớn hơn ngày sinh!");
+                    mb.ShowDialog();
                 }
                 else
                 {
@@ -144,8 +150,19 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     t.GioiTinh = parameter.GioiTinhtxb.SelectedValue.ToString();
                     t.DiaChi = parameter.DiaChitxb.Text;
                     DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Đã lưu thông tin bác sĩ thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    OkMessageBox mb = new OkMessageBox("Thông báo", "Lưu thông tin thành công!");
+                    mb.ShowDialog();
+                    //Ẩn các thông tin
                     parameter.btnSave.Visibility = Visibility.Hidden;
+                    parameter.Ngaysinhtxb.IsEnabled = false;
+                    parameter.NgayVaoLamtxb.IsEnabled = false;
+                    parameter.HoTentxb.IsReadOnly = true;
+                    parameter.GioiTinhtxb.IsReadOnly = true;
+                    parameter.Emailtxb.IsReadOnly = true;
+                    parameter.DiaChitxb.IsReadOnly = true;
+                    parameter.SDTtxb.IsReadOnly = true;
+                    parameter.Emailtxb.IsReadOnly = true;
+                    parameter.BangCaptxb.IsReadOnly = true;
                 }
                 
             }
@@ -154,9 +171,10 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         //Xóa thông tin bác sĩ
         void _DeleteCommand(ThongTinChiTietCuaMotBacSIView parameter)
         {
-            BACSI selectedItem = DataProvider.Ins.DB.BACSIs.SingleOrDefault(h => h.MaBS == MaBS);
-            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bác sĩ này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if(r == MessageBoxResult.Yes)
+            BACSI selectedItem = DataProvider.Ins.DB.BACSIs.SingleOrDefault(s => s.MaBS == MaBS);
+            YesNoMessageBox mb = new YesNoMessageBox("Thông báo", "Bạn có muốn xóa bác sĩ này không?");
+            mb.ShowDialog();
+            if (mb.DialogResult == true)
             {
                 if (selectedItem != null && selectedItem.MaBS != 1)
                 {
@@ -175,18 +193,20 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     //Cập nhật listview
 
 
-                    MessageBox.Show("Xóa thành công", "Thông báo");
+                    OkMessageBox mbs = new OkMessageBox("Thông báo", "Xóa thành công");
+                    mbs.ShowDialog(); 
                     parameter.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Không thể xóa Admin", "Báo lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    OkMessageBox mbs = new OkMessageBox("Thông báo", "Không thể xóa chính mình");
+                    mbs.ShowDialog();
                 }
             }
             
             
         }
-
+        
         
 
     }

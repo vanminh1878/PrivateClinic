@@ -9,6 +9,7 @@ using PrivateClinic.ViewModel.OtherViewModels;
 using System.Collections.ObjectModel;
 using PrivateClinic.Model;
 using System.Windows;
+using PrivateClinic.View.MessageBox;
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
     
@@ -189,16 +190,18 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             var thuoc = list.FirstOrDefault(x => x.MaThuoc == SelectedThuoc.MaThuoc);
             if (SelectedThuoc == null || SelectedCachDung == null || string.IsNullOrEmpty(SoLuong)) 
             {
-                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Chưa nhập đủ thông tin");
+                mb.ShowDialog();
             }
             else if (!SoLuong.All(char.IsDigit))
             {
-                MessageBox.Show("Số lượng chỉ chứa số", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Số lượng chỉ chứa số");
+                mb.ShowDialog();
             }
             else if (int.Parse(SoLuong) > SelectedThuoc.SoLuong)
             {
-                MessageBox.Show("Không đủ số lượng","Thông báo",MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Số lượng thuốc không đủ");
+                mb.ShowDialog();
             }
             else
             {
@@ -213,7 +216,6 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 thuocDTO.DVT = DonVi;
                 ListThuocDTO.Add(thuocDTO);
                 SoLuongThuocDaChon = ListThuocDTO.Count();
-                MessageBox.Show("Đã thêm", "Thông báo", MessageBoxButton.OK);
                 SelectedThuoc = null;
                 SoLuong = "";
                 SelectedCachDung = null;
@@ -224,8 +226,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         //Chức năng xóa
         private void DeleteAccept (ThuocDTO selecteditem)
         {
-            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa thuốc này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (r == MessageBoxResult.Yes) 
+            YesNoMessageBox h = new YesNoMessageBox("Thông báo", "Bạn có muốn xóa thuốc này không");
+            h.ShowDialog();
+            if (h.DialogResult == true)
             {
                 if (selecteditem != null)
                 {
@@ -238,7 +241,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             if (ListThuocDTO == null || !ListThuocDTO.Any())
             {
-                MessageBox.Show("Không có thuốc nào để lưu.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mbs = new OkMessageBox("Thông báo", "Không có thuốc nào để lưu");
+                mbs.ShowDialog();
                 return;
             }
             Const.ListThuoc = new ObservableCollection<ThuocDTO>();
@@ -248,7 +252,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 Const.ListThuoc.Add(thuocDTO);
             }
 
-            MessageBox.Show("Đã lưu thuốc thành công.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            OkMessageBox mb = new OkMessageBox("Thông báo", "Đã thêm thuốc cho bệnh nhân");
+            mb.ShowDialog();
             _view.Close();
         }
 

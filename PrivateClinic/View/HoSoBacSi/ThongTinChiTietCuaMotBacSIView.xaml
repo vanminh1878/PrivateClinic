@@ -183,7 +183,7 @@
                              HorizontalAlignment="Left"
                              materialDesign:HintAssist.Hint="Họ và tên"
                              FontWeight="SemiBold"
-                             IsEnabled="False"
+                             IsReadOnly="True"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              x:Name="HoTentxb"
                              Text="{Binding HoTen}" />
@@ -197,7 +197,7 @@
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Số điện thoại"
                         FontWeight="SemiBold"
-                        IsEnabled="False"
+                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         x:Name="SDTtxb"
                         Text="{Binding SDT}"  />
@@ -226,7 +226,7 @@
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Địa chỉ"
                         FontWeight="SemiBold"
-                        IsEnabled="False"
+                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         x:Name="DiaChitxb"
                         Text="{Binding DiaChi}"  />
@@ -248,7 +248,7 @@
                         Height="53"
                         HorizontalAlignment="Left"
                         Margin="20,0,0,0"
-                        IsEnabled="False"
+                        IsReadOnly="True"
                         FontWeight="SemiBold"
                         SelectedValuePath="Content"
                         VerticalContentAlignment="Center"
@@ -269,7 +269,7 @@
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Email"
                         FontWeight="SemiBold"
-                        IsEnabled="False"
+                        IsReadOnly="True"
                         Text="{Binding Email}"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         x:Name="Emailtxb"
@@ -301,7 +301,7 @@
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Bằng cấp"
                         FontWeight="SemiBold"
-                        IsEnabled="False"
+                        IsReadOnly="True"
                         Text="{Binding BangCap}"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         x:Name="BangCaptxb"  />

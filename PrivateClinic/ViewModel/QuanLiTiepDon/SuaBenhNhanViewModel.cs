@@ -9,6 +9,7 @@ using System.Windows.Input;
 using PrivateClinic.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
+using PrivateClinic.View.MessageBox;
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
@@ -85,12 +86,14 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             if (string.IsNullOrEmpty(HoTen) || string.IsNullOrEmpty(GioiTinh) || string.IsNullOrEmpty(NgaySinh.ToString()) || string.IsNullOrEmpty(DiaChi))
             {
-                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Nhập chưa đủ thông tin");
+                mb.ShowDialog();
             }
             else
             {
-                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin bác sĩ ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (h == MessageBoxResult.Yes)
+                YesNoMessageBox mbs = new YesNoMessageBox("Thông báo", "Bạn có muốn cập nhật thông tin bệnh nhân?");
+                mbs.ShowDialog();
+                if (mbs.DialogResult == true )
                 {
                     BENHNHAN a = DataProvider.Ins.DB.BENHNHANs.FirstOrDefault(bn => bn.MaBN == benhnhan.MaBN);
                     a.HoTen = HoTen;
@@ -98,7 +101,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     a.NamSinh = (DateTime)NgaySinh;
                     a.DiaChi = DiaChi;
                     DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Thành công", "Thông báo");
+                    OkMessageBox mb = new OkMessageBox("Thông báo", "Thành công!");
+                    mb.ShowDialog();
                     _view.Close();
                 }
             }

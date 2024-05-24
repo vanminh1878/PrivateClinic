@@ -9,6 +9,7 @@ using System.Windows.Input;
 using PrivateClinic.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
+using PrivateClinic.View.MessageBox;
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
@@ -189,16 +190,19 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         {
             if (SelectedThuoc == null || SelectedCachDung == null || string.IsNullOrEmpty(SoLuong))
             {
-                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox( "Thông Báo", "Bạn chưa nhập đủ thông tin.");
+                mb.ShowDialog();
             }
             else if (!SoLuong.All(char.IsDigit))
             {
-                MessageBox.Show("Số lượng chỉ chứa số", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông Báo", "Số lượng chỉ chứa số");
+                mb.ShowDialog();
             }
             else
             {
-                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin thuốc ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (h == MessageBoxResult.Yes)
+                YesNoMessageBox mb = new YesNoMessageBox("Thông báo", "Bạn muốn lưu thông tin thuốc ?");
+                mb.ShowDialog();
+                if (mb.DialogResult == true)
                 {
                     ThuocDTO thuoc = Const.ListThuocTemp.FirstOrDefault(t => t.MaThuoc == thuocDTO.MaThuoc);
                     thuoc.MaThuoc = MaThuoc;
@@ -206,7 +210,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     thuoc.SL = int.Parse(SoLuong);
                     thuoc.TenThuoc = SelectedThuoc.TenThuoc;
                     thuoc.CachDung = SelectedCachDung.TenCachDung;
-                    MessageBox.Show("Thành công", "Thông báo");
+                    OkMessageBox mbs = new OkMessageBox("Thông Báo", "Cập nhật thành công");
+                    mbs.ShowDialog();
                     _view.Close();
                 }
             }

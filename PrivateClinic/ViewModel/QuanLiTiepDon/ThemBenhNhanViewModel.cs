@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows;
 using PrivateClinic.Model;
 using System.Collections.ObjectModel;
+using PrivateClinic.View.MessageBox;
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
 {
@@ -91,30 +92,39 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             THAMSO t = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 1);
             if (string.IsNullOrEmpty(paramater.HoTen.Text) || string.IsNullOrEmpty(paramater.GioiTinh.SelectedItem.ToString()) || string.IsNullOrEmpty(paramater.NgSinh.Text) || string.IsNullOrEmpty(paramater.DiaChi.Text))
             {
-                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Chưa nhập đủ thông tin");
+                mb.ShowDialog();
             }
             else if (model.SoLuongBenhNhanDaTiepDon == t.GiaTri)
             {
-                MessageBox.Show("Đã đạt giới hạn số lượng bệnh nhân khám trong ngày", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Đã đạt tối đa bệnh nhân tiếp đón trong ngày");
+                mb.ShowDialog();
             }
             else
             {
                 var benhnhan = ListBenhNhan.FirstOrDefault(bn => bn.MaBN == SelectedBenhNhan?.MaBN);
                 if (benhnhan != null)
                 {
-                    MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn thêm bệnh nhân cũ vào danh sách tiếp đón ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (h == MessageBoxResult.Yes)
+                    YesNoMessageBox h = new YesNoMessageBox("Thông báo", "Bạn có muốn thêm bệnh nhân này vào danh sách tiếp đón");
+                    h.ShowDialog();
+                    if (h.DialogResult == true)
                     {
                         benhnhan.TrangThai = false;
+                        benhnhan.DiaChi = paramater.DiaChi.Text;
+                        benhnhan.GioiTinh = paramater.GioiTinh.Text;
+                        benhnhan.NamSinh = (DateTime)paramater.NgSinh.SelectedDate;
+                        benhnhan.HoTen = paramater.HoTen.Text;
                         DataProvider.Ins.DB.SaveChanges();
-                        MessageBox.Show("Đã thêm bệnh nhân vào danh sách tiếp đón!", "THÔNG BÁO");
+                        OkMessageBox mb = new OkMessageBox("Thông báo", "Thành công");
+                        mb.ShowDialog();
                     }
                         
                 }
                 else
                 {
-                    MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn thêm bệnh nhân mới vào danh sách tiếp đón ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (h == MessageBoxResult.Yes)
+                    YesNoMessageBox h = new YesNoMessageBox("Thông báo", "Bạn có muốn thêm bệnh nhân này vào danh sách tiếp đón");
+                    h.ShowDialog();
+                    if (h.DialogResult == true)
                     {
                         BENHNHAN a = new BENHNHAN();
                         a.HoTen = paramater.HoTen.Text;
@@ -122,7 +132,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         a.DiaChi = paramater.DiaChi.Text;
                         a.NamSinh = (DateTime)paramater.NgSinh.SelectedDate;
                         a.TrangThai = false;
-                        MessageBox.Show("Đã thêm bệnh nhân vào danh sách tiếp đón!", "THÔNG BÁO");
+                        OkMessageBox mb = new OkMessageBox("Thông báo", "Thành công");
+                        mb.ShowDialog();
                         DataProvider.Ins.DB.BENHNHANs.Add(a);
                         DataProvider.Ins.DB.SaveChanges();
                         

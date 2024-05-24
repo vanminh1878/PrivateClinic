@@ -220,6 +220,12 @@
     <Compile Include="ViewModel\QuanLiTiepDon\SuaBenhNhanViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\SuaThongTinDonThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\ThemBenhNhanViewModel.cs" />
+    <Compile Include="View\MessageBox\OkMessageBox.xaml.cs">
+      <DependentUpon>OkMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MessageBox\YesNoMessageBox.xaml.cs">
+      <DependentUpon>YesNoMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OtherViews\ForgetPasswordView.xaml.cs">
       <DependentUpon>ForgetPasswordView.xaml</DependentUpon>
     </Compile>
@@ -399,6 +405,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HoSoBacSi\ThongTinChiTietCuaMotBacSIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MessageBox\OkMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MessageBox\YesNoMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

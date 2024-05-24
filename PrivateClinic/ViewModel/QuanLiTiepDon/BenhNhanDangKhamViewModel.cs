@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Resources;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Controls;
+using PrivateClinic.View.MessageBox;
 
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
@@ -224,10 +225,14 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 {
                     if (p.TenBN.Text == "")
                     {
-                        MessageBox.Show("Chưa chọn bệnh nhân để khám", "Thông báo", MessageBoxButton.OK);
+                        OkMessageBox mb = new OkMessageBox("Thông báo", "Chưa chọn bệnh nhân để khám");
+                        mb.ShowDialog();
                     }
                     else if (p.LoaiBenh.Text == "" || p.TrieuChung.Text == "")
-                        MessageBox.Show("Chưa đủ thông tin về chuẩn đoán cho bệnh nhân", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    {
+                        OkMessageBox mb = new OkMessageBox("Chưa đủ thông tin!", "Chưa chọn bệnh nhân để khám");
+                        mb.ShowDialog();
+                    }
                     else
                     {
                         // tạo hóa đơn
@@ -250,13 +255,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         //Lưu các chi tiết hóa đơn
                         if (ListThuocView == null)
                         {
-                            CT_PKB cT_PKB = new CT_PKB();
-                            cT_PKB.MaPKB = pkb.MaPKB;
-                            cT_PKB.MaThuoc = 3;
-                            cT_PKB.SoLuong = 0;
-                            //Lưu các chi tiết hóa đơn
-                            DataProvider.Ins.DB.CT_PKB.Add(cT_PKB);
-                            DataProvider.Ins.DB.SaveChanges();
+                            
                         }
                         else
                         {
@@ -296,53 +295,54 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         //Lưu hóa đơn
                         DataProvider.Ins.DB.HOADONs.Add(hd);
                         DataProvider.Ins.DB.SaveChanges();
-                        MessageBox.Show("Đã khám xong!","Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        MessageBoxResult printResult = System.Windows.MessageBox.Show("Bạn có muốn in phiếu khám bệnh không?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        OkMessageBox mb = new OkMessageBox("Thông báo", "Đã khám xong!");
+                        mb.ShowDialog();
+                        //MessageBoxResult printResult = System.Windows.MessageBox.Show("Bạn có muốn in phiếu khám bệnh không?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                        if (printResult == MessageBoxResult.Yes)
-                        {
-                            BenhNhanDangKhamView pkbtoPrint = new BenhNhanDangKhamView();
-                            pkbtoPrint.GioiTinh.Text = p.GioiTinh.Text;
-                            pkbtoPrint.ListViewMed.ItemsSource = p.ListViewMed.ItemsSource;
-                            pkbtoPrint.LoaiBenh.ItemsSource = p.LoaiBenh.ItemsSource;
-                            pkbtoPrint.LoaiBenh.SelectedItem = p.LoaiBenh.SelectedItem;
-                            pkbtoPrint.LoaiBenh.SelectedIndex = p.LoaiBenh.SelectedIndex;
+                        //if (printResult == MessageBoxResult.Yes)
+                        //{
+                        //    BenhNhanDangKhamView pkbtoPrint = new BenhNhanDangKhamView();
+                        //    pkbtoPrint.GioiTinh.Text = p.GioiTinh.Text;
+                        //    pkbtoPrint.ListViewMed.ItemsSource = p.ListViewMed.ItemsSource;
+                        //    pkbtoPrint.LoaiBenh.ItemsSource = p.LoaiBenh.ItemsSource;
+                        //    pkbtoPrint.LoaiBenh.SelectedItem = p.LoaiBenh.SelectedItem;
+                        //    pkbtoPrint.LoaiBenh.SelectedIndex = p.LoaiBenh.SelectedIndex;
                             
                            
-                            pkbtoPrint.MaBN.Text = p.MaBN.Text;
-                            pkbtoPrint.MaBNformat.Text = p.MaBNformat.Text;
-                            pkbtoPrint.NgKham.Text = p.NgKham.Text;
-                            pkbtoPrint.NgsinhBN.Text = p.NgsinhBN.Text;
-                            pkbtoPrint.TenBN.Text = p.TenBN.Text;
-                            pkbtoPrint.TenBS.Text = p.TenBS.Text;
-                            pkbtoPrint.TrieuChung.Text = p.TrieuChung.Text.ToString();
-                            pkbtoPrint.Tuoi.Text  = p.Tuoi.Text;
-                            pkbtoPrint.TongSoThuoc.Text = p.TongSoThuoc.Text;
-                            pkbtoPrint.saveBtn.Visibility = Visibility.Hidden;
-                            pkbtoPrint.AddBtn.Visibility = Visibility.Hidden;
+                        //    pkbtoPrint.MaBN.Text = p.MaBN.Text;
+                        //    pkbtoPrint.MaBNformat.Text = p.MaBNformat.Text;
+                        //    pkbtoPrint.NgKham.Text = p.NgKham.Text;
+                        //    pkbtoPrint.NgsinhBN.Text = p.NgsinhBN.Text;
+                        //    pkbtoPrint.TenBN.Text = p.TenBN.Text;
+                        //    pkbtoPrint.TenBS.Text = p.TenBS.Text;
+                        //    pkbtoPrint.TrieuChung.Text = p.TrieuChung.Text.ToString();
+                        //    pkbtoPrint.Tuoi.Text  = p.Tuoi.Text;
+                        //    pkbtoPrint.TongSoThuoc.Text = p.TongSoThuoc.Text;
+                        //    pkbtoPrint.saveBtn.Visibility = Visibility.Hidden;
+                        //    pkbtoPrint.AddBtn.Visibility = Visibility.Hidden;
              
                            
 
-                            try
-                            {
-                                pkbtoPrint.IsEnabled = false;
-                                PrintDialog printDialog = new PrintDialog();
-                                if (printDialog.ShowDialog() == true)
-                                {
-                                    pkbtoPrint.LoaiBenh.SelectedItem = p.LoaiBenh.SelectedItem;
-                                    pkbtoPrint.LoaiBenh.SelectedIndex = p.LoaiBenh.SelectedIndex;
-                                    pkbtoPrint.TrieuChung.Text = p.TrieuChung.Text.ToString();
-                                    printDialog.PrintVisual(pkbtoPrint.BenhNhanDangKhamUC, "Phiếu khám bệnh");
-                                }
-                            }
-                            finally
-                            {
-                                pkbtoPrint.IsEnabled = true;
-                            }
+                        //    try
+                        //    {
+                        //        pkbtoPrint.IsEnabled = false;
+                        //        PrintDialog printDialog = new PrintDialog();
+                        //        if (printDialog.ShowDialog() == true)
+                        //        {
+                        //            pkbtoPrint.LoaiBenh.SelectedItem = p.LoaiBenh.SelectedItem;
+                        //            pkbtoPrint.LoaiBenh.SelectedIndex = p.LoaiBenh.SelectedIndex;
+                        //            pkbtoPrint.TrieuChung.Text = p.TrieuChung.Text.ToString();
+                        //            printDialog.PrintVisual(pkbtoPrint.BenhNhanDangKhamUC, "Phiếu khám bệnh");
+                        //        }
+                        //    }
+                        //    finally
+                        //    {
+                        //        pkbtoPrint.IsEnabled = true;
+                        //    }
 
-                            // Gọi hàm in hóa đơn và truyền đối tượng hoadonToPrint
-                            //InHoaDon(pkbtoPrint);
-                        }
+                        //    // Gọi hàm in hóa đơn và truyền đối tượng hoadonToPrint
+                        //    //InHoaDon(pkbtoPrint);
+                        //}
 
                         // Clear the input fields
                         p.MaBNformat.Text = string.Empty;

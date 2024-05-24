@@ -1,5 +1,7 @@
-﻿using PrivateClinic.Model;
+﻿
+using PrivateClinic.Model;
 using PrivateClinic.View.HoSoBacSi;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.View.QuanLiTiepDon;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
@@ -234,8 +236,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
         private void acceptAdd(object obj)
         {
-            MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn thêm bác sĩ mới ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (h == MessageBoxResult.Yes)
+            YesNoMessageBox h = new YesNoMessageBox("Thông báo", "Bạn có muốn thêm bác sĩ mới cho phòng khám?");
+            h.ShowDialog();
+            if (h.DialogResult == true)
             {
                 BACSI bacsi = new BACSI();
                 bacsi.HoTen = HoTen;
@@ -288,7 +291,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     await Task.Delay(2000);
                 }
                 );
-                MessageBox.Show("Thêm bác sĩ mới thành công\n", "Thông báo");
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Đã thêm thành công");
+                mb.ShowDialog();
                 view.Close();
             }
         }
@@ -352,14 +356,19 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 catch 
                 {
                     // Xử lý lỗi khi gửi email
-                    MessageBox.Show("Tên đăng nhập: " + tendangnhap +"\n"
-                                    +"Mật khẩu: " + matkhau);
+                    OkMessageBox ok = new OkMessageBox("Lỗi khi gửi tài khoản qua mail\n"+
+                                                        "Tên đăng nhập: " + tendangnhap + "\n"
+                                                        + "Mật khẩu: " + matkhau, "Thông báo");
+                    ok.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
                 // Xử lý lỗi khi khởi tạo SmtpClient
-                MessageBox.Show("Lỗi khi khởi tạo SmtpClient: " + ex.Message, "Thông báo");
+                OkMessageBox ok = new OkMessageBox("Lỗi khi khởi tạo SmtpClient:\n" +
+                                                       "Tên đăng nhập: " + tendangnhap + "\n"
+                                                       + "Mật khẩu: " + matkhau, "Thông báo");
+                ok.ShowDialog();
             }
         }
         #region Các hàm báo lỗi

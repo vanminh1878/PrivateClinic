@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 using PrivateClinic.View.HoSoBacSi;
+using PrivateClinic.View.MessageBox;
 
 
 namespace PrivateClinic.ViewModel.QuanLiTiepDon
@@ -144,12 +145,16 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             THAMSO t = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 1);
             if (int.TryParse(parameter.txbMaxBN.Text, out int newValue))
             {
-                MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu lại số bệnh nhân khám tối đa trong ngày không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
+                YesNoMessageBox my = new YesNoMessageBox("Thông báo", "Bạn có muốn sửa số lượng bệnh nhân khám tối đa trong ngày?");
+                my.ShowDialog();
+                if (my.DialogResult == false)
+                    return;
+                else
                 {
                     if (newValue < SoLuongBenhNhanDaTiepDon)
                     {
-                        MessageBox.Show("Số lượng bệnh nhân khám tối đa trong ngày không hợp lệ","Thông báo",MessageBoxButton.OK,MessageBoxImage.Error);
+                        OkMessageBox mb = new OkMessageBox("Thông báo", "Giá trị nhập phải lớn hơn bệnh nhân đã khám hôm nay!");
+                        mb.ShowDialog();
                     }
                     else
                     {
@@ -157,16 +162,18 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                         DataProvider.Ins.DB.SaveChanges();
                         parameter.txbMaxBN.IsEnabled = false;
                         parameter.btnSave.IsEnabled = false;
-                        MessageBox.Show("Đã lưu số bệnh nhân khám tối đa trong ngày thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        OkMessageBox mb = new OkMessageBox("Thông báo", "Cập nhật thành công!");
+                        mb.ShowDialog();
                         parameter.btnSave.Visibility = Visibility.Hidden;
 
                     }
-
                 }
+               
             }
             else
             {
-                MessageBox.Show("Giá trị nhập lỗi","Thông báo",MessageBoxButton.OK,MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Giá trị nhập lỗi");
+                mb.ShowDialog();
             }
 
         }
@@ -192,8 +199,11 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         void _DeleteCommand(BENHNHAN selectedItem)
         {
-            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này ra khỏi danh sách tiếp đón không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (r == MessageBoxResult.Yes)
+            YesNoMessageBox mb = new YesNoMessageBox("Thông báo", "Bạn có muốn xóa bệnh nhân này?");
+            mb.ShowDialog();
+            if (mb.DialogResult == false)
+                return;
+            else
             {
                 if (selectedItem != null)
                 {
@@ -201,9 +211,11 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     // Save changes to the database
                     DataProvider.Ins.DB.SaveChanges();
                     LoadData();
-                    MessageBox.Show("Đã xóa ra khỏi danh sách tiếp đón", "Thông báo", MessageBoxButton.OK);
+                    OkMessageBox mbs = new OkMessageBox("Thông báo", "Xóa thành công");
+                    mbs.ShowDialog();
                 }
             }
+           
         }
         public void SetEditBNView(SuaBenhNhanView view)
         {
