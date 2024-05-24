@@ -1,17 +1,10 @@
-﻿using PrivateClinic.View.BangDieuKhien;
+﻿
 using PrivateClinic.View.HoSoBacSi;
 using PrivateClinic.Model;
 using PrivateClinic.View.OtherViews;
 using PrivateClinic.View.QuanLiKhamBenh;
 using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.View.QuanLiTiepDon;
-using PrivateClinic.View.ThanhToan;
-using PrivateClinic.ViewModel.ThanhToan;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,11 +18,11 @@ namespace PrivateClinic.ViewModel.OtherViewModels
         private NGUOIDUNG _NhanVien;
         private NGUOIDUNG _User;
         public static Frame MainFrame { get; set; }
-        //Command ThanhToanCM
+        //Command 
         public ICommand CloseLogin { get; set; }
         public ICommand MinimizeLogin { get; set; }
         public ICommand MoveWindow { get; set; }
-        public ICommand BangDieuKhienCM { get; set; }
+        public ICommand BangdieukhienCM { get; set; }
         public ICommand TiepDonCM { get; set; }
         public ICommand KhamBenhCM { get; set; }
         public ICommand ThanhToanCM { get; set; }
@@ -58,34 +51,19 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             MinimizeLogin = new RelayCommand<MainView>((p) => true, (p) => Minimize(p));
             MoveWindow = new RelayCommand<MainView>((p) => true, (p) => moveWindow(p));
             Loadwd = new RelayCommand<MainView>((p) => true, (p) => _Loadwd(p));
-            
             LoadPageCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 MainFrame = p;
-                p.Content = new BangDieuKhienView();
+                p.Content = new View.QuanLiTiepDon.QuanLiKhamBenhView();
             });
             HomeCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                MainFrame.Content = new BangDieuKhienView();
-            });
-
-            BangDieuKhienCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
-                MainFrame.Content = new BangDieuKhienView();
+                MainFrame.Content = new View.QuanLiTiepDon.QuanLiKhamBenhView();
             });
 
             TiepDonCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 MainFrame.Content = new View.QuanLiTiepDon.QuanLiKhamBenhView();
-            });
-                      
-            ThanhToanCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
-                var view = new ThanhToanView();
-                var viewModel = new ThanhToanViewModel();
-                viewModel.RefreshData();
-                view.DataContext = viewModel;
-                MainFrame.Content = view;
             });
 
             BacSiCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
