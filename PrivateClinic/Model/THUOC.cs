@@ -29,6 +29,7 @@ namespace PrivateClinic.Model
         public int MaCachDung { get; set; }
         public Nullable<double> DonGiaNhap { get; set; }
         public Nullable<double> DonGiaBan { get; set; }
+        public Nullable<int> SoLuong { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BAOCAOSUDUNGTHUOC> BAOCAOSUDUNGTHUOCs { get; set; }

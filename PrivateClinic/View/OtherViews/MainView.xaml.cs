@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PrivateClinic.ViewModel.OtherViewModels;
 
 namespace PrivateClinic.View.OtherViews
 {
@@ -22,6 +23,19 @@ namespace PrivateClinic.View.OtherViews
         public MainView()
         {
             InitializeComponent();
+            MainViewModel viewModel = new MainViewModel();
+            this.DataContext = viewModel;
         }
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            this.blurPanel.Opacity = 0.2;
+            this.blurPanel.Visibility = Visibility.Visible;
+        }
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            this.blurPanel.Visibility = Visibility.Hidden;
+            this.blurPanel.Opacity = 0;
+        }
+
     }
 }

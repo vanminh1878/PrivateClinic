@@ -24,9 +24,9 @@ namespace PrivateClinic.Model
         public int MaPKB { get; set; }
         public System.DateTime NgayKham { get; set; }
         public int MaLoaiBenh { get; set; }
-        public int MaBN { get; set; }
         public Nullable<int> MaBS { get; set; }
         public string TrieuChung { get; set; }
+        public Nullable<int> MaBN { get; set; }
     
         public virtual BACSI BACSI { get; set; }
         public virtual BENHNHAN BENHNHAN { get; set; }
