@@ -4,12 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhamBenh"
+             xmlns:convert="clr-namespace:PrivateClinic.Converters"
              mc:Ignorable="d"
              FontFamily="Sugoe UI"
              FontSize="22"
              FontWeight="Regular"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="550" d:DesignWidth="990">
+    <UserControl.Resources>
+        <convert:IndexConverter x:Key="indexConverter"/>
+    </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -26,7 +30,7 @@
                    Width="35"
                    Height="35"/>
 
-            <TextBlock  Text="Số lượng bệnh nhân đã khám hôm nay:"
+            <TextBlock  Text="Số lượng bệnh nhân đã khám:"
                        Margin="5,10,0,0"
                        VerticalAlignment="Center"
                        FontWeight="Bold"
@@ -108,9 +112,9 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="260"/>
+                    <ColumnDefinition Width="240"/>
                     <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="220"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
@@ -177,19 +181,18 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="260"/>
+                                    <ColumnDefinition Width="240"/>
                                     <ColumnDefinition Width="140"/>
-                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="220"/>
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <!--STT-->
                                 <Grid Grid.Column="0">
-                                    <TextBlock Text="{Binding STT}"
-                                               HorizontalAlignment="Center"
+                                    <TextBlock x:Name="STT" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},
+                                               Converter={StaticResource indexConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                Margin="0,0,10,0"
-                                               VerticalAlignment="Center"
-                                               FontFamily="Segoe UI"
-                                               FontSize="20" />
+                                               />
+
 
                                 </Grid>
 

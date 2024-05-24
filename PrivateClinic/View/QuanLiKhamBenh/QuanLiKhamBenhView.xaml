@@ -33,7 +33,7 @@
             <Grid Grid.Row="0">
                 <DockPanel >
                     <TextBlock VerticalAlignment="Center"
-                               Text="Quản lí khám bệnh"
+                               Text="Quản lí bệnh nhân"
                                FontSize="40"
                                FontFamily="Segoe UI"
                                FontWeight="SemiBold"
