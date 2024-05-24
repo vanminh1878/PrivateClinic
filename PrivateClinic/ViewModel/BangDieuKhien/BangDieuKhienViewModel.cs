@@ -8,13 +8,35 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace PrivateClinic.ViewModel.BangDieuKhien
 {
     public class BangDieuKhienViewModel : BaseViewModel
     {
         #region Properties
-        public ObservableCollection<Doctor> listBS { get; set; }
+        private ObservableCollection<BACSI> _listBS;
+        public ObservableCollection<BACSI> listBS
+        {
+            get => _listBS; set
+            {
+                _listBS = value;
+                OnPropertyChanged();
+                UpdateListDoctorCount();
+            }
+        }
+
+        private int _listDoctorCount;
+        public int ListDoctorCount
+        {
+            get => _listDoctorCount;
+            set
+            {
+                _listDoctorCount = value;
+                OnPropertyChanged(nameof(ListDoctorCount));
+            }
+        }
+
         public ObservableCollection<string> Months { get; set; }
         private string _selectedMonth;
         public string SelectedMonth
@@ -27,8 +49,6 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
                 UpdateChartData();
             }
         }
-
-        // Medicine chart
 
         // Config Chart
         public SeriesCollection RevenueData { get; set; }
@@ -61,13 +81,7 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
 
         public BangDieuKhienViewModel()
         {
-            listBS = new ObservableCollection<Doctor>()
-            {
-                new Doctor { Name = "Trần Thu Hằng", StatusText = "Nhan vien" },
-                new Doctor { Name = "Nguyễn Văn A", StatusText = "Nhan vien" },
-                new Doctor { Name = "Nguyễn Văn B", StatusText = "Nhan vien" }
-            };
-
+            listBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             Months = new ObservableCollection<string> {"Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5" , "Tháng 6"};
             SelectedMonth = Months[0]; // Default selection
         }
@@ -230,14 +244,15 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
 
                     break;
             }
+            listBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             #endregion
         }
 
-        // Dummy
-        public class Doctor
+        private void UpdateListDoctorCount()
         {
-            public string Name { get; set; }
-            public string StatusText { get; set; }
+            var listDoctorToCount = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
+            ListDoctorCount = listDoctorToCount.Count;
+            OnPropertyChanged(nameof(ListDoctorCount));
         }
     }
 }

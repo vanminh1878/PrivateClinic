@@ -111,8 +111,8 @@ namespace PrivateClinic.ViewModel.ThanhToan
             {
                 if (selectedItem != null)
                 {
-                    var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.SoHD == selectedItem.SoHD).ToList();
-                    DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
+                    //var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.SoHD == selectedItem.SoHD).ToList();
+                    //DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
 
                     var relatedCT_PKBs = DataProvider.Ins.DB.CT_PKB.Where(ctpkb => ctpkb.MaPKB == selectedItem.MaPKB).ToList();
                     DataProvider.Ins.DB.CT_PKB.RemoveRange(relatedCT_PKBs);

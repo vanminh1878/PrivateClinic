@@ -167,7 +167,7 @@
                         <StackPanel>
                             <DockPanel Margin="10">
                                 <TextBlock Text="Danh sách bác sĩ" FontWeight="Bold" FontSize="18" DockPanel.Dock="Left"/>
-                                <TextBlock Text="3/10" FontWeight="Bold" FontSize="18" Foreground="#03A66A" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding ListDoctorCount}" FontWeight="Bold" FontSize="18" Foreground="#03A66A" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
                             </DockPanel>
                             
                             <Rectangle Fill="Black" Height="1" Margin="10,0"/>
@@ -208,8 +208,8 @@
                                             </Ellipse>
 
                                             <StackPanel Margin="10,0,0,0" DockPanel.Dock="Left">
-                                                <TextBlock Text="Tran Thu Hang" FontSize="20" FontWeight="Bold"/>
-                                                <TextBlock Text="Bac si" Margin="0,0,0,0" FontSize="18" Foreground="#0010A1"/>
+                                                <TextBlock Text="{Binding HoTen}" FontSize="20" FontWeight="Bold"/>
+                                                <TextBlock Text="{Binding BangCap}" Margin="0,0,0,0" FontSize="18" Foreground="#0010A1"/>
                                             </StackPanel>
 
                                             <Ellipse Width="10" Height="10" Fill="Green" VerticalAlignment="Center" Margin="135,0,0,0" DockPanel.Dock="Right"/>
