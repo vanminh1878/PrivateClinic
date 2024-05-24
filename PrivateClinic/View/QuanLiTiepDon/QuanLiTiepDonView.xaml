@@ -6,11 +6,16 @@
              xmlns:local="clr-namespace:PrivateClinic.View.QuanLiTiepDon"
              xmlns:vm="clr-namespace:PrivateClinic.ViewModel.QuanLiTiepDon"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:convert="clr-namespace:PrivateClinic.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+
              mc:Ignorable="d"
              d:DesignHeight="750" d:DesignWidth="990"
              x:Name="QuanLiTiepDonViewPage"
              >
+    <UserControl.Resources>
+        <convert:IndexConverter x:Key="indexConverter"/>
+    </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Key="F1" Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=QuanLiTiepDonViewPage}"/>
@@ -250,8 +255,10 @@
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
                                         <Grid Grid.Column="0">
-                                            <TextBlock Text="{Binding STT}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
 
+                                            <TextBlock x:Name="STT" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},
+                                                       Converter={StaticResource indexConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                       FontFamily="Segoe UI" FontSize="20" />
                                         </Grid>
                                         <Grid Grid.Column="1">
                                             <TextBlock x:Name="HoTen"  HorizontalAlignment="Center" Text="{Binding HoTen}" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />

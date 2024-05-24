@@ -235,7 +235,9 @@
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
                                         <Grid Grid.Column="0">
-                                            <TextBlock x:Name="STT" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Converter={StaticResource indexConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
+                                            <TextBlock x:Name="STT" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},
+                                                Converter={StaticResource indexConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                       FontFamily="Segoe UI" FontSize="20" />
                                         </Grid>
                                         <Grid Grid.Column="1">
                                             <TextBlock x:Name="TenBN" HorizontalAlignment="Center" Text="{Binding BENHNHAN.HoTen}" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
