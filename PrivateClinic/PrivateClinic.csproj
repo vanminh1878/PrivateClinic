@@ -213,7 +213,6 @@
     <Compile Include="View\HoSoBacSi\ThongTinChiTietCuaMotBacSIView.xaml.cs">
       <DependentUpon>ThongTinChiTietCuaMotBacSIView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\BenhNhanDangKhamViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\QuanLiKhamBenhViewModel.cs" />
     <Compile Include="ViewModel\QuanLiTiepDon\QuanLiTiepDonViewModel.cs" />
@@ -230,7 +229,6 @@
       <DependentUpon>ForgetPasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\QuanLiTiepDon\ThemThuocChoBenhNhanViewModel.cs" />
-    <Compile Include="ViewModel\OtherViewModels\ViewModelCommand.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\KhoThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\QuanLiKhoThuocViewModel.cs" />
     <Compile Include="ViewModel\QuanLiKhoThuocVM\QuyDinhThuocViewModel.cs" />
