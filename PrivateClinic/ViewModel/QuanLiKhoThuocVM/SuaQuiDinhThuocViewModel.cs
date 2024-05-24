@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PrivateClinic.Model;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 
@@ -194,51 +195,32 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin quy định?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                foreach (THAMSO t in thamso)
+                YesNoMessageBox mb = new YesNoMessageBox("Thông báo", "Bạn có muốn cập thông tin các quy định không");
+                mb.ShowDialog();
+                if (mb.DialogResult == true)
                 {
-                    if (t.MaThamSo == 6)
+                    // Tìm phần tử có MaThamSo == 2 và cập nhật tiền khám
+                    var thamSo2 = thamso.FirstOrDefault(t => t.MaThamSo == 2);
+                    if (thamSo2 != null)
                     {
-                        if (double.TryParse(p.cachdung.Text, out double giaTri))
-                        {
-                            t.GiaTri = giaTri;
-                        }
+                        thamSo2.GiaTri = tienkham;
                     }
-                    else if (t.MaThamSo == 3)
+
+                    // Tìm phần tử có MaThamSo == 3 và cập nhật tỉ lệ bán
+                    var thamSo3 = thamso.FirstOrDefault(t => t.MaThamSo == 3);
+                    if (thamSo3 != null)
                     {
-                        if (double.TryParse(p.Tilegia.Text, out double tile1))
-                        {
-                            t.GiaTri = tile1;
-                        }
-                        
+                        thamSo3.GiaTri = Tilegia;
                     }
-                    else if (t.MaThamSo == 2)
-                    {
-                        if (double.TryParse(p.TienKham.Text, out double tienkham1))
-                        {
-                            t.GiaTri = tienkham1;
-                        }
-                      
-                    }
-                    else if (t.MaThamSo == 7)
-                    {
-                        if (double.TryParse(p.loaibenh.Text, out double loaibenh))
-                        {
-                            t.GiaTri = loaibenh;
-                        }
-                    }
-                    else if (t.MaThamSo == 5)
-                    {
-                        if (double.TryParse(p.Dvt.Text, out double dvt))
-                        {
-                            t.GiaTri = dvt;
-                        }
-                    }
+                    DataProvider.Ins.DB.SaveChanges();
+                    OkMessageBox mb2 = new OkMessageBox("Thông báo", "Cập nhật quy định mới thành công!");
+                    mb2.ShowDialog();
+                    p.Close();
                 }
-                DataProvider.Ins.DB.SaveChanges();
-                MessageBox.Show("Cập nhật quy định mới thành công!", "THÔNG BÁO");
-                p.Close();
+
+            }
+                
             }
         }
     }
-}
+
