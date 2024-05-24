@@ -117,6 +117,9 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 case "DoctorList":
                     CurrentView = new DanhSachBacSiView();
                     break;
+                case "PQ":
+                    CurrentView = new PhanQuyenUS();
+                    break;
                 case "Password":
                     CurrentView = new DoiMatKhauView();
                     break;

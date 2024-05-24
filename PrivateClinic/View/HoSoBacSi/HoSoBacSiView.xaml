@@ -147,6 +147,31 @@
                                        FontWeight="Regular"/>
                         </Button.Content>
                     </Button>
+                    <!-- Nút xem danh sách bác sĩ-->
+                    <Button
+                        Width="180"
+                        Height="40"
+                        Padding="0"
+                        Click="Button_Click"
+                        x:Name="btnchucnang"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        FontSize="22"
+                        Visibility="{Binding SetQuanLy}"
+                        Command="{Binding SwitchViewCommand}"
+                        CommandParameter="PQ"
+                        Background="#F5F5F5"
+                        BorderThickness="0"
+                        VerticalAlignment="Bottom">
+                        <Button.Content>
+                            <TextBlock Margin="5,0,0,0"
+                   VerticalAlignment="Center"
+                   Text="Phân quyền"
+                   Foreground="#000000"
+                   FontWeight="Regular"/>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
                 <Border BorderThickness="0 1 0 0"
                         BorderBrush="#808080"
