@@ -121,7 +121,7 @@ namespace PrivateClinic.ViewModel.ThanhToan
             }
             YesNoMessageBox mb = new YesNoMessageBox("Thông báo", "Xác nhận thanh toán hóa đợn này?");
             mb.ShowDialog();
-            if (mb.DialogResult == false)
+            if (mb.DialogResult == true)
             {
                 HOADON invoiceToUpdate = DataProvider.Ins.DB.HOADONs.FirstOrDefault(hd => hd.SoHD == CurrentHoaDon.SoHD);
                 if (invoiceToUpdate != null)
