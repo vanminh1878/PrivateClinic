@@ -32,7 +32,7 @@
                 <TextBlock Text="QUY ĐỊNH " FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" Margin="0 13"/>
             </Grid>
             <Grid Grid.Row="1">
-                <Button Margin="0 0 100 0"  Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                <Button  Margin="0 0 100 0"  Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>

@@ -173,47 +173,61 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         private void _SaveCommand(ThayDoiQuiDinhThuocView p)
         {
             thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
-            foreach(THAMSO t in thamso)
+            if (!double.TryParse(p.Tilegia.Text, out double tile))
             {
-                if(t.MaThamSo == 6)
-                {
-                    if (double.TryParse(p.cachdung.Text, out double giaTri))
-                    {
-                        t.GiaTri = giaTri;
-                    }
-                }
-                else if (t.MaThamSo == 3)
-                {
-                    if (double.TryParse(p.Tilegia.Text, out double tile))
-                    {
-                        t.GiaTri = tile;
-                    }
-                }
-                else if (t.MaThamSo == 2)
-                {
-                    if (double.TryParse(p.TienKham.Text, out double tienkham))
-                    {
-                        t.GiaTri = tienkham;
-                    }
-                }
-                else if (t.MaThamSo == 7)
-                {
-                    if (double.TryParse(p.loaibenh.Text, out double loaibenh))
-                    {
-                        t.GiaTri = loaibenh;
-                    }
-                }
-                else if (t.MaThamSo == 5)
-                {
-                    if (double.TryParse(p.Dvt.Text, out double dvt))
-                    {
-                        t.GiaTri = dvt;
-                    }
-                }
+                MessageBox.Show("Tỉ lệ giá phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            DataProvider.Ins.DB.SaveChanges();
-            MessageBox.Show("Cập nhật quy định mới thành công!", "THÔNG BÁO");
-            p.Close();
+            else if (!double.TryParse(p.TienKham.Text, out double tienkham))
+            {
+                MessageBox.Show("Tiền khám phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin quy định?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                foreach (THAMSO t in thamso)
+                {
+                    if (t.MaThamSo == 6)
+                    {
+                        if (double.TryParse(p.cachdung.Text, out double giaTri))
+                        {
+                            t.GiaTri = giaTri;
+                        }
+                    }
+                    else if (t.MaThamSo == 3)
+                    {
+                        if (double.TryParse(p.Tilegia.Text, out double tile1))
+                        {
+                            t.GiaTri = tile1;
+                        }
+                        
+                    }
+                    else if (t.MaThamSo == 2)
+                    {
+                        if (double.TryParse(p.TienKham.Text, out double tienkham1))
+                        {
+                            t.GiaTri = tienkham1;
+                        }
+                      
+                    }
+                    else if (t.MaThamSo == 7)
+                    {
+                        if (double.TryParse(p.loaibenh.Text, out double loaibenh))
+                        {
+                            t.GiaTri = loaibenh;
+                        }
+                    }
+                    else if (t.MaThamSo == 5)
+                    {
+                        if (double.TryParse(p.Dvt.Text, out double dvt))
+                        {
+                            t.GiaTri = dvt;
+                        }
+                    }
+                }
+                DataProvider.Ins.DB.SaveChanges();
+                MessageBox.Show("Cập nhật quy định mới thành công!", "THÔNG BÁO");
+                p.Close();
+            }
         }
     }
 }

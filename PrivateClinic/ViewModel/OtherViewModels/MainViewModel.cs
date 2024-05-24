@@ -91,7 +91,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                     LoginView w1 = new LoginView();
                     w1.ShowDialog(); // Hiển thị cửa sổ LoginView
                     w.Close();
-
+                    
                 }
             });
         }
@@ -113,18 +113,19 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                 User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == a).FirstOrDefault();             
                 Const.PQ = new PHANQUYEN();
               
-                if (User.MaNhom== "NHOM1     ")
+                if (User.MaNhom== "NHOM1")
                 {
                     Const.PQ.MaNhom = User.MaNhom;
-                    SetQuanLy = Visibility.Collapsed;
-                    SetNhanVien = Visibility.Visible;
                    
+                    SetQuanLy = Visibility.Visible;
+                    SetNhanVien = Visibility.Collapsed;
+
                 }
                 else
                 {
                     Const.PQ.MaNhom = User.MaNhom;
-                    SetQuanLy = Visibility.Visible;
-                    SetNhanVien = Visibility.Collapsed;
+                    SetQuanLy = Visibility.Collapsed;
+                    SetNhanVien = Visibility.Visible;
 
                 }
 

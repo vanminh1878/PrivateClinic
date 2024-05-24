@@ -64,6 +64,24 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public ICommand EditDownSLBNCommand { get; set; }    
         public ICommand SaveSLBNCommand { get; set; }    
         public ICommand EditBNCommand { get; set; }
+        private NGUOIDUNG user;
+        public NGUOIDUNG User
+        {
+            get => user;
+            set
+            {
+                user = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+        private NGUOIDUNG _NhanVien;
+        public NGUOIDUNG NhanVien { get => _NhanVien; set { _NhanVien = value; OnPropertyChanged(); } }
+
+        private Visibility _SetQuanLy;
+        public Visibility SetQuanLy { get => _SetQuanLy; set { _SetQuanLy = value; OnPropertyChanged(); } }
+        private Visibility _SetNhanVien;
+        public Visibility SetNhanVien { get => _SetNhanVien; set { _SetNhanVien = value; OnPropertyChanged(); } }
+        public ICommand LoadCommand { get; set; }
 
         public ICommand selectedItemBenhNhan { get; set; }
         private int soLuongBenhNhanDaTiepDon;
@@ -81,6 +99,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         public QuanLiTiepDonViewModel()
         {
             LoadData();
+
+            LoadCommand = new RelayCommand<QuanLiTiepDonView>((p) => true, (p) => _LoadCommand(p));
             DeleteCommand = new RelayCommand<BENHNHAN>((p) => { return p == null ? false : true; }, (p) => _DeleteCommand(p));
             AddCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
             LoadSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadSLBNCommand(p));
@@ -95,8 +115,23 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             
         }
 
-   
-       
+        private void _LoadCommand(QuanLiTiepDonView p)
+        {
+            if (Const.PQ.MaNhom == "NHOM1")
+            {
+                SetQuanLy = Visibility.Visible;
+                SetNhanVien = Visibility.Collapsed;
+
+            }
+            else
+            {
+                SetQuanLy = Visibility.Collapsed;
+                SetNhanVien = Visibility.Visible;
+
+            }
+        }
+
+
         void _EditSLBNCommand(QuanLiTiepDonView parameter)
         {
           

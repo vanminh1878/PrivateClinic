@@ -57,6 +57,14 @@
           <Property Name="MaCachDung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenCachDung" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="CHUCNANG">
+          <Key>
+            <PropertyRef Name="MaChucNang" />
+          </Key>
+          <Property Name="MaChucNang" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenChucNang" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenManHinhDuocLoad" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CT_BCDT">
           <Key>
             <PropertyRef Name="CTBCDT_ID" />
@@ -87,14 +95,6 @@
           <Property Name="SoLuongNhap" Type="int" />
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="ThanhTien" Type="float" />
-        </EntityType>
-        <EntityType Name="CHUCNANG">
-          <Key>
-            <PropertyRef Name="MaChucNang" />
-          </Key>
-          <Property Name="MaChucNang" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TenChucNang" Type="nvarchar" MaxLength="50" />
-          <Property Name="TenManHinhDuocLoad" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DVT">
           <Key>
@@ -427,10 +427,10 @@
           <EntitySet Name="BAOCAOSUDUNGTHUOC" EntityType="Self.BAOCAOSUDUNGTHUOC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BENHNHAN" EntityType="Self.BENHNHAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CACHDUNG" EntityType="Self.CACHDUNG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUCNANG" EntityType="Self.CHUCNANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_BCDT" EntityType="Self.CT_BCDT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_PKB" EntityType="Self.CT_PKB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_PNT" EntityType="Self.CT_PNT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CHUCNANG" EntityType="Self.CHUCNANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DVT" EntityType="Self.DVT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAIBENH" EntityType="Self.LOAIBENH" Schema="dbo" store:Type="Tables" />
@@ -583,6 +583,15 @@
           <Property Name="TenCachDung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="THUOCs" Relationship="Self.FK_THUOC_MaCachDung" FromRole="CACHDUNG" ToRole="THUOC" />
         </EntityType>
+        <EntityType Name="CHUCNANG">
+          <Key>
+            <PropertyRef Name="MaChucNang" />
+          </Key>
+          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenChucNang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenManHinhDuocLoad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK_PHANQUYEN_CHUCNANG" FromRole="CHUCNANG" ToRole="PHANQUYEN" />
+        </EntityType>
         <EntityType Name="CT_BCDT">
           <Key>
             <PropertyRef Name="CTBCDT_ID" />
@@ -619,15 +628,6 @@
           <Property Name="ThanhTien" Type="Double" />
           <NavigationProperty Name="THUOC" Relationship="Self.FK_CT_PNT_MaThuoc" FromRole="CT_PNT" ToRole="THUOC" />
           <NavigationProperty Name="PHIEUNHAPTHUOC" Relationship="Self.FK_CT_PNT_SoPhieuNhap" FromRole="CT_PNT" ToRole="PHIEUNHAPTHUOC" />
-        </EntityType>
-        <EntityType Name="CHUCNANG">
-          <Key>
-            <PropertyRef Name="MaChucNang" />
-          </Key>
-          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TenChucNang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TenManHinhDuocLoad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK_PHANQUYEN_CHUCNANG" FromRole="CHUCNANG" ToRole="PHANQUYEN" />
         </EntityType>
         <EntityType Name="DVT">
           <Key>
@@ -834,6 +834,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PHANQUYEN_CHUCNANG">
+          <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCNANG">
+              <PropertyRef Name="MaChucNang" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaChucNang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CT_BCDT_SoHD">
           <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
           <End Role="CT_BCDT" Type="Self.CT_BCDT" Multiplicity="*" />
@@ -891,18 +903,6 @@
             </Principal>
             <Dependent Role="CT_PNT">
               <PropertyRef Name="SoPhieuNhap" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PHANQUYEN_CHUCNANG">
-          <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="1" />
-          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CHUCNANG">
-              <PropertyRef Name="MaChucNang" />
-            </Principal>
-            <Dependent Role="PHANQUYEN">
-              <PropertyRef Name="MaChucNang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -984,10 +984,10 @@
           <EntitySet Name="BAOCAOSUDUNGTHUOCs" EntityType="Self.BAOCAOSUDUNGTHUOC" />
           <EntitySet Name="BENHNHANs" EntityType="Self.BENHNHAN" />
           <EntitySet Name="CACHDUNGs" EntityType="Self.CACHDUNG" />
+          <EntitySet Name="CHUCNANGs" EntityType="Self.CHUCNANG" />
           <EntitySet Name="CT_BCDT" EntityType="Self.CT_BCDT" />
           <EntitySet Name="CT_PKB" EntityType="Self.CT_PKB" />
           <EntitySet Name="CT_PNT" EntityType="Self.CT_PNT" />
-          <EntitySet Name="CHUCNANGs" EntityType="Self.CHUCNANG" />
           <EntitySet Name="DVTs" EntityType="Self.DVT" />
           <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
           <EntitySet Name="LOAIBENHs" EntityType="Self.LOAIBENH" />
@@ -1027,6 +1027,10 @@
             <End Role="CACHDUNG" EntitySet="CACHDUNGs" />
             <End Role="THUOC" EntitySet="THUOCs" />
           </AssociationSet>
+          <AssociationSet Name="FK_PHANQUYEN_CHUCNANG" Association="Self.FK_PHANQUYEN_CHUCNANG">
+            <End Role="CHUCNANG" EntitySet="CHUCNANGs" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYENs" />
+          </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_SoHD" Association="Self.FK_CT_BCDT_SoHD">
             <End Role="HOADON" EntitySet="HOADONs" />
             <End Role="CT_BCDT" EntitySet="CT_BCDT" />
@@ -1046,10 +1050,6 @@
           <AssociationSet Name="FK_CT_PNT_SoPhieuNhap" Association="Self.FK_CT_PNT_SoPhieuNhap">
             <End Role="PHIEUNHAPTHUOC" EntitySet="PHIEUNHAPTHUOCs" />
             <End Role="CT_PNT" EntitySet="CT_PNT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PHANQUYEN_CHUCNANG" Association="Self.FK_PHANQUYEN_CHUCNANG">
-            <End Role="CHUCNANG" EntitySet="CHUCNANGs" />
-            <End Role="PHANQUYEN" EntitySet="PHANQUYENs" />
           </AssociationSet>
           <AssociationSet Name="FK_THUOC_MaDVT" Association="Self.FK_THUOC_MaDVT">
             <End Role="DVT" EntitySet="DVTs" />
@@ -1139,6 +1139,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CHUCNANGs">
+            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CHUCNANG">
+              <MappingFragment StoreEntitySet="CHUCNANG">
+                <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
+                <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
+                <ScalarProperty Name="TenManHinhDuocLoad" ColumnName="TenManHinhDuocLoad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CT_BCDT">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CT_BCDT">
               <MappingFragment StoreEntitySet="CT_BCDT">
@@ -1169,15 +1178,6 @@
                 <ScalarProperty Name="SoLuongNhap" ColumnName="SoLuongNhap" />
                 <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CHUCNANGs">
-            <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CHUCNANG">
-              <MappingFragment StoreEntitySet="CHUCNANG">
-                <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
-                <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
-                <ScalarProperty Name="TenManHinhDuocLoad" ColumnName="TenManHinhDuocLoad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

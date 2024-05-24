@@ -93,16 +93,17 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
         private void _LoadCommand(HoSoBacSiView p)
         {
-            if(Const.PQ.MaNhom== "NHOM1     ")
+            if(Const.PQ.MaNhom== "NHOM1")
             {
-                SetQuanLy = Visibility.Collapsed;
-                SetNhanVien = Visibility.Visible;
+                SetQuanLy = Visibility.Visible;
+                SetNhanVien = Visibility.Collapsed;
+                
             }
             else
             {
-                
-                SetQuanLy = Visibility.Visible;
-                SetNhanVien = Visibility.Collapsed;
+                SetQuanLy = Visibility.Collapsed;
+                SetNhanVien = Visibility.Visible;
+
             }
         }
         private void SwitchView(object userControlName)

@@ -128,6 +128,7 @@
 
                     <!--  Nút xem quy định thuốc  -->
                     <Button
+                        Visibility="{Binding SetQuanLy}"
                         x:Name="btnqd"
                         Click="Button_Click"
                         Width="230"

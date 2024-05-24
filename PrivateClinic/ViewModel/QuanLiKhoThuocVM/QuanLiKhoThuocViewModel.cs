@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows.Resources;
 using System;
+using PrivateClinic.View.HoSoBacSi;
 
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
@@ -63,6 +64,16 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(User));
             }
         }
+
+        private NGUOIDUNG _NhanVien;
+        public NGUOIDUNG NhanVien { get => _NhanVien; set { _NhanVien = value; OnPropertyChanged(); } }
+
+        private Visibility _SetQuanLy;
+        public Visibility SetQuanLy { get => _SetQuanLy; set { _SetQuanLy = value; OnPropertyChanged(); } }
+        private Visibility _SetNhanVien;
+        public Visibility SetNhanVien { get => _SetNhanVien; set { _SetNhanVien = value; OnPropertyChanged(); } }
+        public ICommand LoadCommand { get; set; }
+
         private BitmapImage imageSource;
         public BitmapImage ImageSource
         {
@@ -75,10 +86,28 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         }
         public ICommand SwitchViewCommand { get; set; }
         public QuanLiKhoThuocViewModel()
-        { 
+        {
+            LoadCommand = new RelayCommand<QuanLiKhoThuocView>((p) => true, (p) => _LoadCommand(p));
+
             SwitchViewCommand = new ViewModelCommand(SwitchView);
             ThongTinND();
         }
+        private void _LoadCommand(QuanLiKhoThuocView p)
+        {
+            if (Const.PQ.MaNhom == "NHOM1")
+            {
+                SetQuanLy = Visibility.Visible;
+                SetNhanVien = Visibility.Collapsed;
+
+            }
+            else
+            {
+                SetQuanLy = Visibility.Collapsed;
+                SetNhanVien = Visibility.Visible;
+
+            }
+        }
+
         private void SwitchView(object userControlName)
         {
             string userControlNameStr = userControlName as string;

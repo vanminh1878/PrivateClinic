@@ -167,66 +167,81 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin thuốc?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
+                Thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+                bool thuocDaTonTai = false;
+                foreach (var t in Thuoc)
                 {
-                    donvitinh = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
-                    cachdung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
-                    Thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
-                    phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);
-                    ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
-                    loaithuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
-                    thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
-                    
-
-                    THUOC newthuoc = new THUOC();
+                    if (t.TenThuoc.Equals(paramater.TenThuoc.Text, StringComparison.OrdinalIgnoreCase))
                     {
-                        newthuoc.MaThuoc = int.Parse(paramater.MaThuoc.Text.Substring(3));
-                        newthuoc.TenThuoc = paramater.TenThuoc.Text;
-                        newthuoc.DonGiaNhap = dgValue;
-                        newthuoc.SoLuong = slValue;
-                        foreach (var ts in thamso)
-                        {
-                            if (ts.MaThamSo == 3)
-                            {
-                                newthuoc.DonGiaBan = newthuoc.DonGiaNhap * ts.GiaTri;
-                            }
-                        }
-
-                        foreach (var dvt in donvitinh)
-                        {
-                            if (dvt.TenDVT == paramater.TenDVTcbx.SelectedItem.ToString())
-                            {
-                                newthuoc.MaDVT = dvt.MaDVT;
-                            }
-                        }
-                        foreach (var lt in loaithuoc)
-                        {
-                            if (lt.TenLoaiThuoc == paramater.LoaiThuoccbx.SelectedItem.ToString())
-                            {
-                                newthuoc.MaLoaiThuoc = lt.MaLoaiThuoc;
-                            }
-                        }
-                        foreach (var cd in cachdung)
-                        {
-                            if (cd.TenCachDung == paramater.CachDungcbx.SelectedItem.ToString())
-                            {
-                                newthuoc.MaCachDung = cd.MaCachDung;
-                            }
-                        }
-                        int nextPN;
-                        nextPN = DataProvider.Ins.DB.PHIEUNHAPTHUOCs.Max(t => t.SoPhieuNhap) + 1;
-                        PHIEUNHAPTHUOC pnt = new PHIEUNHAPTHUOC();
-
-                        pnt.SoPhieuNhap = nextPN;
-                        pnt.NgayNhap = paramater.NgayNhap.SelectedDate;
-                        DataProvider.Ins.DB.PHIEUNHAPTHUOCs.Add(pnt);
-
-                        DataProvider.Ins.DB.THUOCs.Add(newthuoc);
-                        DataProvider.Ins.DB.SaveChanges();
-                        MessageBox.Show("Thêm thuốc mới thành công!", "THÔNG BÁO");
-                    };
+                        MessageBox.Show("Thuốc này đã có trong kho.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                        thuocDaTonTai = true;
+                        break;
+                    }
                 }
+
+                if (!thuocDaTonTai)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin thuốc?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        donvitinh = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
+                        cachdung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
+                        Thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+                        phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);
+                        ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
+                        loaithuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
+                        thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
+
+                        THUOC newthuoc = new THUOC();
+                        {
+                            newthuoc.MaThuoc = int.Parse(paramater.MaThuoc.Text.Substring(3));
+                            newthuoc.TenThuoc = paramater.TenThuoc.Text;
+                            newthuoc.DonGiaNhap = dgValue;
+                            newthuoc.SoLuong = slValue;
+                            foreach (var ts in thamso)
+                            {
+                                if (ts.MaThamSo == 3)
+                                {
+                                    newthuoc.DonGiaBan = newthuoc.DonGiaNhap * ts.GiaTri;
+                                }
+                            }
+
+                            foreach (var dvt in donvitinh)
+                            {
+                                if (dvt.TenDVT == paramater.TenDVTcbx.SelectedItem.ToString())
+                                {
+                                    newthuoc.MaDVT = dvt.MaDVT;
+                                }
+                            }
+                            foreach (var lt in loaithuoc)
+                            {
+                                if (lt.TenLoaiThuoc == paramater.LoaiThuoccbx.SelectedItem.ToString())
+                                {
+                                    newthuoc.MaLoaiThuoc = lt.MaLoaiThuoc;
+                                }
+                            }
+                            foreach (var cd in cachdung)
+                            {
+                                if (cd.TenCachDung == paramater.CachDungcbx.SelectedItem.ToString())
+                                {
+                                    newthuoc.MaCachDung = cd.MaCachDung;
+                                }
+                            }
+                            int nextPN;
+                            nextPN = DataProvider.Ins.DB.PHIEUNHAPTHUOCs.Max(t => t.SoPhieuNhap) + 1;
+                            PHIEUNHAPTHUOC pnt = new PHIEUNHAPTHUOC();
+
+                            pnt.SoPhieuNhap = nextPN;
+                            pnt.NgayNhap = paramater.NgayNhap.SelectedDate;
+                            DataProvider.Ins.DB.PHIEUNHAPTHUOCs.Add(pnt);
+                            DataProvider.Ins.DB.THUOCs.Add(newthuoc);
+                            DataProvider.Ins.DB.SaveChanges();
+                            MessageBox.Show("Thêm thuốc mới thành công!", "THÔNG BÁO");
+                        }
+                    }
+                }
+
+
             }
 
         }

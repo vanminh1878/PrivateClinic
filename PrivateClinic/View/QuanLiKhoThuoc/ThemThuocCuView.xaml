@@ -72,6 +72,12 @@
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
                         materialDesign:HintAssist.Hint="Chọn thuốc"
+                         IsEditable="True"
+ IsTextSearchEnabled="True"
+                      
+
+
+InputMethod.IsInputMethodEnabled="True"
                          />
 
                 </Border>

@@ -32,10 +32,13 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(TenThuocs));
             }
         }
+
+
         public ICommand LoadCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ThemThuocCuViewModel()
         {
+            thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
             LoadCommand = new RelayCommand<ThemThuocCuView>((p) => true, (p) => _LoadCommand(p));
             SaveCommand = new RelayCommand<ThemThuocCuView>((p) => true, (p) => _SaveCommand(p));
         }

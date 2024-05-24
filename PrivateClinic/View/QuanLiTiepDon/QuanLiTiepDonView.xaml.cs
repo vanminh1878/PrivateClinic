@@ -32,6 +32,7 @@ namespace PrivateClinic.View.QuanLiTiepDon
             InitializeComponent();
             QuanLiTiepDonViewModel viewmodel = new QuanLiTiepDonViewModel();
             this.DataContext = viewmodel;
+            viewmodel.LoadCommand.Execute(null);
 
         }
 

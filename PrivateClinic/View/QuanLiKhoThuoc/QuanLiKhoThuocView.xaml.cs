@@ -17,6 +17,7 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
             Main.Content = new KhoThuocView();
             QuanLiKhoThuocViewModel viewModel = new QuanLiKhoThuocViewModel();
             this.DataContext = viewModel;
+            viewModel.LoadCommand.Execute(null);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
