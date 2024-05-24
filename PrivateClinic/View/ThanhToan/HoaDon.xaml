@@ -73,7 +73,7 @@
 
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <TextBlock Text="Tuổi:"
+                <TextBlock Text="Năm sinh:"
                            Margin="40 0 0 0"
                            Style="{StaticResource ColumnHeaderText1}"/>
                 <TextBlock x:Name="TuoiBN" Text="{Binding CurrentHoaDon.BENHNHAN.NamSinh, StringFormat='yyyy', Mode=TwoWay}"

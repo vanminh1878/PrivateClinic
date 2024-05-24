@@ -90,7 +90,7 @@ namespace PrivateClinic.ViewModel.ThanhToan
             ListThuoc.Clear();
             if (CurrentHoaDon != null && CurrentHoaDon.MaPKB != null)
             {
-                var phieuKhamBenh = DataProvider.Ins.DB.PHIEUKHAMBENHs.FirstOrDefault(pkb => pkb.MaPKB == CurrentHoaDon.MaPKB);
+                PhieuKhamBenh = DataProvider.Ins.DB.PHIEUKHAMBENHs.FirstOrDefault(pkb => pkb.MaPKB == CurrentHoaDon.MaPKB);
 
                 var listCT_PKB = DataProvider.Ins.DB.CT_PKB.Where(ct => ct.MaPKB == CurrentHoaDon.MaPKB).ToList();
 
@@ -187,10 +187,18 @@ namespace PrivateClinic.ViewModel.ThanhToan
             graphics.DrawString("Ngày khám: " + ngayKhamText, headerFont, new SolidBrush(Color.Black), startX, startY + offset);
             offset += headerFont.Height + 5;
 
-            int yearOfBirth;
-            int age = int.TryParse(CurrentHoaDon.BENHNHAN.NamSinh.ToString(), out yearOfBirth) ? DateTime.Now.Year - yearOfBirth : -1;
-            graphics.DrawString("Tuổi: " + (age != -1 ? age.ToString() : "Không xác định"), headerFont, new SolidBrush(Color.Black), startX, startY + offset);
+            string namSinhText;
+            if (CurrentHoaDon.BENHNHAN.NamSinh != null)
+            {
+                namSinhText = CurrentHoaDon.BENHNHAN.NamSinh.ToString("yyyy");
+            }
+            else
+            {
+                namSinhText = "Không xác định";
+            }
+            graphics.DrawString("Năm sinh: " + namSinhText, headerFont, new SolidBrush(Color.Black), startX, startY + offset);
             offset += headerFont.Height + 5;
+
 
             graphics.DrawString("Tổng tiền: " + CurrentHoaDon.TongTien.ToString("#,##0") + " VND", headerFont, new SolidBrush(Color.Black), startX, startY + offset);
             offset += headerFont.Height + 20;

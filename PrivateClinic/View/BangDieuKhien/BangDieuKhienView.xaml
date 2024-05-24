@@ -121,12 +121,15 @@
                             <Grid>
                                 <liveCharts:CartesianChart Series="{Binding UsageData}">
                                     <liveCharts:CartesianChart.AxisX>
-                                        <liveCharts:Axis Title="Tháng" Labels="{Binding AxisXLabelsUsage}"/>
+                                        <liveCharts:Axis Title="Thuốc" Labels="{Binding AxisXLabelsUsage}"/>
                                     </liveCharts:CartesianChart.AxisX>
                                     <liveCharts:CartesianChart.AxisY>
-                                        <liveCharts:Axis Title="Số Lần Dùng"/>
+                                        <liveCharts:Axis Title="Giá trị"/>
                                     </liveCharts:CartesianChart.AxisY>
                                 </liveCharts:CartesianChart>
+
+
+
                                 <TextBlock Text="Thống kê sd thuốc" HorizontalAlignment="Center"
                                            VerticalAlignment="Bottom" Margin="200,10, 0, 0" Grid.Row="1"
                                            Style="{StaticResource ColumnHeaderText1}"
@@ -213,8 +216,6 @@
                                                 <TextBlock Text="{Binding HoTen}" FontSize="20" FontWeight="Bold"/>
                                                 <TextBlock Text="{Binding BangCap}" Margin="0,0,0,0" FontSize="18" Foreground="#0010A1"/>
                                             </StackPanel>
-
-                                            <Ellipse Width="10" Height="10" Fill="Green" VerticalAlignment="Center" Margin="135,0,0,0" DockPanel.Dock="Right"/>
                                         </DockPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
