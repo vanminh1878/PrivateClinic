@@ -185,7 +185,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         //Chức năng thêm
         private void AcceptAdd(object obj)
         {
-            
+            ObservableCollection<THUOC> list = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+            var thuoc = list.FirstOrDefault(x => x.MaThuoc == SelectedThuoc.MaThuoc);
             if (SelectedThuoc == null || SelectedCachDung == null || string.IsNullOrEmpty(SoLuong)) 
             {
                 MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -195,6 +196,10 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 MessageBox.Show("Số lượng chỉ chứa số", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+            else if (int.Parse(SoLuong) > SelectedThuoc.SoLuong)
+            {
+                MessageBox.Show("Không đủ số lượng","Thông báo",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             else
             {
                 ThuocDTO thuocDTO = new ThuocDTO();
@@ -203,6 +208,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 thuocDTO.MaThuoc = MaThuoc;
                 thuocDTO.TenThuoc = selectedThuoc.TenThuoc;
                 thuocDTO.SL = int.Parse(SoLuong);
+                SelectedThuoc.SoLuong = SelectedThuoc.SoLuong - int.Parse(SoLuong);
                 thuocDTO.CachDung = SelectedCachDung.TenCachDung;
                 thuocDTO.DVT = DonVi;
                 ListThuocDTO.Add(thuocDTO);

@@ -222,12 +222,12 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             {
                 if(obj is BenhNhanDangKhamView p)
                 {
-                    if (p.LoaiBenh.Text == "" || p.TrieuChung.Text == "")
-                        MessageBox.Show("Chưa đủ thông tin về chuẩn đoán cho bệnh nhân", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                    else if(p.TenBN.Text=="")    
+                    if (p.TenBN.Text == "")
                     {
-                        MessageBox.Show("Chưa chọn bệnh nhân để khám", "Thông báo",MessageBoxButton.OK);
+                        MessageBox.Show("Chưa chọn bệnh nhân để khám", "Thông báo", MessageBoxButton.OK);
                     }
+                    else if (p.LoaiBenh.Text == "" || p.TrieuChung.Text == "")
+                        MessageBox.Show("Chưa đủ thông tin về chuẩn đoán cho bệnh nhân", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     else
                     {
                         // tạo hóa đơn
