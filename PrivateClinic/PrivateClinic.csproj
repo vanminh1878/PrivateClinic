@@ -319,6 +319,9 @@
     <Compile Include="Model\NHOMNGUOIDUNG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PHANQUYEN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\PHIEUKHAMBENH.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -520,9 +523,9 @@
     <Compile Include="View\ThanhToan\HoaDon.xaml.cs">
       <DependentUpon>HoaDon.xaml</DependentUpon>
     </Compile>
-	  <Compile Include="View\ThanhToan\ThanhToanView.xaml.cs">
-		  <DependentUpon>ThanhToanView.xaml</DependentUpon>
-	  </Compile>
+    <Compile Include="View\ThanhToan\ThanhToanView.xaml.cs">
+      <DependentUpon>ThanhToanView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLiTiepDon\ThemThuocChoBenhNhanView.xaml.cs">
       <DependentUpon>ThemThuocChoBenhNhanView.xaml</DependentUpon>
     </Compile>
@@ -559,9 +562,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BangDieuKhien\BangDieuKhienView.xaml">
-		<SubType>Designer</SubType>
-		<Generator>MSBuild:Compile</Generator>
-	</Page>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\HoSoBacSi\DanhSachBacSiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -743,9 +746,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ThanhToan\ThanhToanView.xaml">
-		<SubType>Designer</SubType>
-		<Generator>MSBuild:Compile</Generator>
-	</Page>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\QuanLiTiepDon\ThemThuocChoBenhNhanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -785,13 +788,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\HoSoBacSi\" />
-    <Folder Include="View\QuanLiKhamBenh\" />
-    <Folder Include="View\QuanLiKhoThuoc\" />
-    <Folder Include="View\BangDieuKhien\" />
-    <Folder Include="View\ThanhToan\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="ResourceXAML\image\ic_add.png" />
     <Resource Include="ResourceXAML\image\ic_arrow_down.png" />
