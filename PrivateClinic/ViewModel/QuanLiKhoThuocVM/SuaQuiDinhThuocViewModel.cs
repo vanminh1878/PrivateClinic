@@ -16,6 +16,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
     public class SuaQuiDinhThuocViewModel: BaseViewModel
     {
+        //Lấy danh sách thuốc để cập nhật giá bán khi thay đổi tỉ lệ bán
+        private ObservableCollection<THUOC> listthuoc;
+        public ObservableCollection<THUOC> Listthuoc
+        {
+            get => listthuoc;
+            set { listthuoc = value; OnPropertyChanged(nameof(Listthuoc)); }
+
+        }
         public ICommand CancelCommand { get; set; }
         private ObservableCollection<THAMSO> _thamso;
         public ObservableCollection<THAMSO> thamso
@@ -185,6 +193,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         private void _SaveCommand(ThayDoiQuiDinhThuocView p)
         {
             thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
+            Listthuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
             if (!double.TryParse(p.Tilegia.Text, out double tile))
             {
                 MessageBox.Show("Tỉ lệ giá phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -211,6 +220,10 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     if (thamSo3 != null)
                     {
                         thamSo3.GiaTri = Tilegia;
+                    }
+                    foreach (var thuoc in Listthuoc)
+                    {
+                        thuoc.DonGiaBan = thuoc.DonGiaNhap * Tilegia;
                     }
                     DataProvider.Ins.DB.SaveChanges();
                     OkMessageBox mb2 = new OkMessageBox("Thông báo", "Cập nhật quy định mới thành công!");
