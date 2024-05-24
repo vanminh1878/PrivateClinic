@@ -145,8 +145,8 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     var relatedHoadons = DataProvider.Ins.DB.HOADONs.Where(h => h.MaBN == selectedItem.MaBN).ToList();
                     DataProvider.Ins.DB.HOADONs.RemoveRange(relatedHoadons);
                     // Remove related CT_BCDT records
-                    var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.HOADON.MaBN == selectedItem.MaBN).ToList();
-                    DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
+                    //var relatedCTBCDTs = DataProvider.Ins.DB.CT_BCDT.Where(ct => ct.HOADON.MaBN == selectedItem.MaBN).ToList();
+                    //DataProvider.Ins.DB.CT_BCDT.RemoveRange(relatedCTBCDTs);
                     // Remove related PHIEUKHAMBENH records
                     var relatedPHIEUKBs = DataProvider.Ins.DB.PHIEUKHAMBENHs.Where(pkb => pkb.MaBN == selectedItem.MaBN).ToList();
                     DataProvider.Ins.DB.PHIEUKHAMBENHs.RemoveRange(relatedPHIEUKBs);
