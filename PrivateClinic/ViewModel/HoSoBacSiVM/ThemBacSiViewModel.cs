@@ -271,6 +271,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 nguoi.MatKhau = TaoMK();
                 DataProvider.Ins.DB.NGUOIDUNGs.Add(nguoi);
                 DataProvider.Ins.DB.SaveChanges();
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Đã thêm thành công");
+                mb.ShowDialog();
                 //Gửi mail tài khoản cho bác sĩ
                 Task.Run(async () =>
                 {
@@ -291,8 +293,6 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     await Task.Delay(2000);
                 }
                 );
-                OkMessageBox mb = new OkMessageBox("Thông báo", "Đã thêm thành công");
-                mb.ShowDialog();
                 view.Close();
             }
         }
@@ -356,19 +356,17 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 catch 
                 {
                     // Xử lý lỗi khi gửi email
-                    OkMessageBox ok = new OkMessageBox("Lỗi khi gửi tài khoản qua mail\n"+
-                                                        "Tên đăng nhập: " + tendangnhap + "\n"
-                                                        + "Mật khẩu: " + matkhau, "Thông báo");
-                    ok.Show();
+                    MessageBox.Show("Lỗi khi gửi tài khoản qua mail\n" +
+                                  "Tên đăng nhập: " + tendangnhap + "\n"
+                                   + "Mật khẩu: " + matkhau, "Thông báo");
                 }
             }
             catch 
             {
                 // Xử lý lỗi khi khởi tạo SmtpClient
-                OkMessageBox ok = new OkMessageBox("Lỗi khi khởi tạo SmtpClient:\n" +
-                                                       "Tên đăng nhập: " + tendangnhap + "\n"
-                                                       + "Mật khẩu: " + matkhau, "Thông báo");
-                ok.Show();
+                MessageBox.Show("Lỗi khi gửi tài khoản qua mail\n" +
+                                  "Tên đăng nhập: " + tendangnhap + "\n"
+                                   + "Mật khẩu: " + matkhau, "Thông báo");
             }
         }
         #region Các hàm báo lỗi
