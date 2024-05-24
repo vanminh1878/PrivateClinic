@@ -15,6 +15,7 @@ namespace PrivateClinic.Model
         public string DVT { get; set; }
         public int? SL { get; set; }
         public double? Gia { get; set; }
+        public double? GiaBan { get; set; }
 
         public DateTime? NgayNhap { get; set; }
     }

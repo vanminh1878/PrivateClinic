@@ -18,39 +18,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
     public class KhoThuocViewModel : BaseViewModel
     {
         private ObservableCollection<THUOC> _thuoc;
-
         public ObservableCollection<THUOC> Thuoc
         {
             get => _thuoc;
             set { _thuoc = value; OnPropertyChanged(nameof(Thuoc)); }
 
         }
-        private ObservableCollection<ThuocDTO> _thuoc1;
 
-        public ObservableCollection<ThuocDTO> Thuoc1
-        {
-            get => _thuoc1;
-            set { _thuoc1 = value; OnPropertyChanged(nameof(Thuoc)); }
-
-        }
-        private ObservableCollection<CT_PNT> _ctphieunhap;
-
-        public ObservableCollection<CT_PNT> ctphieunhap
-        {
-            get => _ctphieunhap;
-            set { _ctphieunhap = value; OnPropertyChanged(nameof(ctphieunhap)); }
-
-        }
-        private ObservableCollection<PHIEUNHAPTHUOC> _phieunhap;
-
-        public ObservableCollection<PHIEUNHAPTHUOC> phieunhap
-        {
-            get => _phieunhap;
-            set { _phieunhap = value; OnPropertyChanged(nameof(phieunhap)); }
-
-        }
         private ObservableCollection<ThuocDTO> _listMed;
-
         public ObservableCollection<ThuocDTO> listMed
         {
             get => _listMed;
@@ -61,8 +36,23 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
         }
 
-        private ObservableCollection<DVT> _donvitinh;
+        private ObservableCollection<CT_PNT> _ctphieunhap;
+        public ObservableCollection<CT_PNT> ctphieunhap
+        {
+            get => _ctphieunhap;
+            set { _ctphieunhap = value; OnPropertyChanged(nameof(ctphieunhap)); }
 
+        }
+
+        private ObservableCollection<PHIEUNHAPTHUOC> _phieunhap;
+        public ObservableCollection<PHIEUNHAPTHUOC> phieunhap
+        {
+            get => _phieunhap;
+            set { _phieunhap = value; OnPropertyChanged(nameof(phieunhap)); }
+
+        }
+
+        private ObservableCollection<DVT> _donvitinh;
         public ObservableCollection<DVT> donvitinh
         {
             get => _donvitinh;
@@ -87,7 +77,6 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
         public ICommand AddMedicineCommand { get; set; }
         public ICommand EditMedicineCommand { get; set; }
-        public ICommand DeleteMedicineCommand { get; set; }
         public ICommand DetailMedicineCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public KhoThuocViewModel()
@@ -95,7 +84,6 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             LoadData();
             AddMedicineCommand = new RelayCommand<KhoThuocView>((p) => { return p == null ? false : true; }, (p) => _AddMedicineCommand(p));
             EditMedicineCommand = new RelayCommand<ThuocDTO>((p) => { return p == null ? false : true; }, (p) => _EditMedicineCommand(p));
-            DeleteMedicineCommand = new RelayCommand<THUOC>((p) => { return p == null ? false : true; }, (p) => _DeleteMedicineCommand(p));
             DetailMedicineCommand = new RelayCommand<KhoThuocView>((p) => { return p == null ? false : true; }, (p) => _DetailMedicineCommand(p));
             SearchCommand = new RelayCommand<KhoThuocView>((p) => { return p == null ? false : true; }, (p) => _SearchCommand(p));
         }
@@ -114,7 +102,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     if (thuoc.MaDVT == dvt.MaDVT)
                     {
                   
-                        string maThuoc = "Med" + thuoc.MaThuoc.ToString();
+                        string maThuoc = "MED" + thuoc.MaThuoc.ToString();
                        
                         ThuocDTO thuocDTO = new ThuocDTO()
                         {
@@ -125,20 +113,22 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                             Gia = thuoc.DonGiaNhap,
                             SL = thuoc.SoLuong
                         };
-
-                    
-                        foreach (var pnt in phieunhap)
+                        foreach (var ct in ctphieunhap)
                         {
-                            foreach (var ct in ctphieunhap)
+                            if (thuoc.MaThuoc == ct.MaThuoc)
                             {
-                                if (ct.SoPhieuNhap == pnt.SoPhieuNhap && ct.MaThuoc == thuoc.MaThuoc)
+                                foreach (var ngaynhap in phieunhap)
                                 {
-                                    thuocDTO.NgayNhap = pnt.NgayNhap;
-                                    break;
+                                    if (ct.SoPhieuNhap == ngaynhap.SoPhieuNhap)
+                                    {
+                                        thuocDTO.NgayNhap = ngaynhap.NgayNhap;
+                                        break;
+                                    }
                                 }
+                                break;
                             }
+                            
                         }
-
                         listMed.Add(thuocDTO);
                         stt++;
                         break;
@@ -175,43 +165,36 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 //SuaThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate = selectedItem.NgayNhap;
                 SuaThongTinThuocViewModel.Instance.EditThuocView.NgayNhap.SelectedDate = DateTime.Now;
                 SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.SelectedItem =
-    SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.Items
-    .Cast<string>()
-    .FirstOrDefault(item => item == selectedItem.DVT.ToString());
-
+                SuaThongTinThuocViewModel.Instance.EditThuocView.TenDVTcbx.Items.Cast<string>().FirstOrDefault(item => item == selectedItem.DVT.ToString());
                 double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
                 SuaThongTinThuocViewModel.Instance.EditThuocView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 SuaThongTinThuocViewModel.Instance.EditThuocView.ShowDialog();
+                LoadData();
             }
         }
 
-        private void _DeleteMedicineCommand(THUOC selectedItem)
-        {
-            
-        }
+       
         public void _AddMedicineCommand(KhoThuocView parameter)
         {
             NhapThuocView addMedicineView = new NhapThuocView();
             double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
             addMedicineView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             addMedicineView.ShowDialog();
-
+            LoadData() ;
         }
         public void _DetailMedicineCommand(KhoThuocView parameter)
         {
-            ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
-            phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);
+            //ctphieunhap = new ObservableCollection<CT_PNT>(DataProvider.Ins.DB.CT_PNT);
+            //phieunhap = new ObservableCollection<PHIEUNHAPTHUOC>(DataProvider.Ins.DB.PHIEUNHAPTHUOCs);
             ThongTinThuocView detail = new ThongTinThuocView();
             ThuocDTO selectedThuocDTO = (ThuocDTO)parameter.MedicineListView.SelectedItem;
             THUOC temp = Thuoc.FirstOrDefault(t => t.TenThuoc == selectedThuocDTO.TenThuoc);
             detail.DonGia.Text = String.Format("{0:0,0}", temp.DonGiaNhap);
             detail.TenThuoc.Text = temp.TenThuoc;
-        
-            detail.MaThuoc.Text = "Med" + temp.MaThuoc.ToString();
-
+            detail.MaThuoc.Text = "MED" + temp.MaThuoc.ToString();
             detail.DVT.Text = temp.DVT.TenDVT.ToString();
             detail.SL.Text = temp.SoLuong.ToString();
-            detail.NgNhap.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            detail.NgNhap.Text = selectedThuocDTO.NgayNhap.Value.ToString("dd/MM/yyyy");
             //if (ctphieunhap != null)
             //{
             //    CT_PNT ct = ctphieunhap.FirstOrDefault(t => t.MaThuoc == temp.MaThuoc);

@@ -183,7 +183,7 @@
                         <Grid Grid.Column="2">
                             <TextBlock
                                 HorizontalAlignment="Left"
-                                Margin="10,0,0,0"
+                                Margin="15,0,0,0"
                                 VerticalAlignment="Center"
                                 FontFamily="Segoe UI"
                                 FontSize="20"
@@ -215,7 +215,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 FontFamily="Segoe UI"
-                                Margin="20,0,0,0"
+                                Margin="30,0,0,0"
                                 FontSize="20"
                                 FontWeight="Bold"
                                 Text="Đơn giá nhập" />
@@ -301,6 +301,7 @@
                                     <Grid Grid.Column="4">
                                         <TextBlock
                                             HorizontalAlignment="Center"
+                                            Margin="0,0,20,0"
                                             VerticalAlignment="Center"
                                             FontFamily="Segoe UI"
                                             Text="{Binding SL}" />
