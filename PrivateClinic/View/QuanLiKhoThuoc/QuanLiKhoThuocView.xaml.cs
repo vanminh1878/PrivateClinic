@@ -2,6 +2,7 @@
 using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace PrivateClinic.View.QuanLiKhoThuoc
 {
@@ -18,9 +19,12 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
             this.DataContext = viewModel;
         }
 
-        
-
-
-       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            btnKhoThuoc.Background = Brushes.WhiteSmoke;
+            btnqd.Background = Brushes.WhiteSmoke;
+            Button button = (Button)sender;
+            button.Background = new SolidColorBrush(Color.FromRgb(128, 128, 128));
+        }
     }
 }

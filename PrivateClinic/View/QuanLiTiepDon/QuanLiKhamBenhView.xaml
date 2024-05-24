@@ -81,6 +81,8 @@
                         Width="240"
                         Height="40"
                         Padding="0"
+                        x:Name="btndsbn"
+                        Click="Button_Click"
                         HorizontalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         FontSize="22"
@@ -100,6 +102,8 @@
 
                     <!-- Nút xem danh sách bệnh nhân đã khám-->
                     <Button
+                        x:Name="btnbnck"
+                        Click="Button_Click"
                         Width="250"
                         Height="40"
                         Padding="0"

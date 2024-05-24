@@ -28,5 +28,13 @@ namespace PrivateClinic.View.QuanLiTiepDon
             QuanLiKhamBenhViewModel viewModel = new QuanLiKhamBenhViewModel();
             this.DataContext = viewModel;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            btnbnck.Background = Brushes.WhiteSmoke;
+            btndsbn.Background = Brushes.WhiteSmoke;
+            Button button = (Button)sender;
+            button.Background = new SolidColorBrush(Color.FromRgb(128, 128, 128));
+        }
     }
 }

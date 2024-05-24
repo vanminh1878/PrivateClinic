@@ -18,6 +18,7 @@ using static MaterialDesignThemes.Wpf.Theme;
 using Button = System.Windows.Controls.Button;
 using PrivateClinic.ViewModel.QuanLiTiepDon;
 using PrivateClinic.ViewModel.HoSoBacSiVM;
+using PrivateClinic.View.QuanLiKhamBenh;
 
 namespace PrivateClinic.View.QuanLiTiepDon
 {
@@ -81,7 +82,9 @@ namespace PrivateClinic.View.QuanLiTiepDon
                 }
 
             }
-    }
+
+            
+        }
 
         private T FindParent<T>(DependencyObject child) where T : DependencyObject
         {

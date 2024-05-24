@@ -269,7 +269,8 @@
                                             <TextBlock x:Name="Diachi" Text="{Binding DiaChi}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="20" />
                                         </Grid>
                                         <Grid Grid.Column="5">
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <StackPanel
+                                                Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                                 <Button ToolTip="Khám bệnh " Command="{Binding KhamBNCommand}" CommandParameter="{Binding}" Click="KhamBNButton_Click" Margin="0 0 15 4" Width="50" Height="50" HorizontalAlignment="Right" >
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">

@@ -70,10 +70,10 @@
                 </Border>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0" Orientation="Horizontal">
                     <Border
-        Width="60"
-        Height="60"
-        Margin="0,0,7,0"
-        CornerRadius="50">
+                        Width="60"
+                        Height="60"
+                        Margin="0,0,7,0"
+                        CornerRadius="50">
                         <Border.Background>
                             <ImageBrush ImageSource="{Binding ImageSource}" />
                         </Border.Background>
@@ -82,13 +82,13 @@
 
                         <!--Tên user-->
                         <TextBlock Text="{Binding TenNV}"
-                   FontSize="22"
-                   FontWeight="SemiBold"
-                   FontFamily="Segoe UI"/>
+                                   FontSize="22"
+                                   FontWeight="SemiBold"
+                                   FontFamily="Segoe UI"/>
                         <TextBlock Text="{Binding ChucVu}"
-                   FontSize="22"
-                   FontWeight="SemiBold"
-                   FontFamily="Segoe UI"/>
+                                   FontSize="22"
+                                   FontWeight="SemiBold"
+                                   FontFamily="Segoe UI"/>
                     </StackPanel>
 
                 </StackPanel>
@@ -103,6 +103,8 @@
 
                     <!--  Nút xem kho thuốc  -->
                     <Button
+                        x:Name="btnKhoThuoc"
+                        Click="Button_Click"
                         Width="230"
                         Height="40"
                         Padding="0"
@@ -112,8 +114,8 @@
                         BorderBrush="Transparent"
                         BorderThickness="2"
                         FontSize="22"
-                         Command="{Binding SwitchViewCommand}"
-                            CommandParameter="KhoThuoc">
+                        Command="{Binding SwitchViewCommand}"
+                        CommandParameter="KhoThuoc">
                         <Button.Content>
                             <TextBlock
                                 Margin="5,0,0,0"
@@ -126,6 +128,8 @@
 
                     <!--  Nút xem quy định thuốc  -->
                     <Button
+                        x:Name="btnqd"
+                        Click="Button_Click"
                         Width="230"
                         Height="40"
                         Margin="25,0,0,0"
@@ -135,8 +139,8 @@
                         Background="#F5F5F5"
                         BorderBrush="Transparent"
                         BorderThickness="2"
-                         Command="{Binding SwitchViewCommand}"
- CommandParameter="Quydinh"
+                        Command="{Binding SwitchViewCommand}"
+                        CommandParameter="Quydinh"
                         FontSize="22">
                         <Button.Content>
                             <TextBlock
