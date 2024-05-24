@@ -127,7 +127,6 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             {
                 SetQuanLy = Visibility.Collapsed;
                 SetNhanVien = Visibility.Visible;
-
             }
         }
 
