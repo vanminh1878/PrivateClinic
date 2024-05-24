@@ -248,7 +248,7 @@
                         Height="53"
                         HorizontalAlignment="Left"
                         Margin="20,0,0,0"
-                        IsReadOnly="True"
+                        IsEnabled="False"
                         FontWeight="SemiBold"
                         SelectedValuePath="Content"
                         VerticalContentAlignment="Center"

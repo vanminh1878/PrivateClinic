@@ -93,7 +93,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
             parameter.Ngaysinhtxb.IsEnabled = true;
             parameter.NgayVaoLamtxb.IsEnabled = true;
             parameter.HoTentxb.IsReadOnly = false;
-            parameter.GioiTinhtxb.IsReadOnly = false;
+            parameter.GioiTinhtxb.IsEnabled = true;
             parameter.Emailtxb.IsReadOnly = false;
             parameter.DiaChitxb.IsReadOnly = false;
             parameter.SDTtxb.IsReadOnly = false;
@@ -157,7 +157,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     parameter.Ngaysinhtxb.IsEnabled = false;
                     parameter.NgayVaoLamtxb.IsEnabled = false;
                     parameter.HoTentxb.IsReadOnly = true;
-                    parameter.GioiTinhtxb.IsReadOnly = true;
+                    parameter.GioiTinhtxb.IsEnabled = false;
                     parameter.Emailtxb.IsReadOnly = true;
                     parameter.DiaChitxb.IsReadOnly = true;
                     parameter.SDTtxb.IsReadOnly = true;
