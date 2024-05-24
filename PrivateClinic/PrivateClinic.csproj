@@ -520,8 +520,9 @@
     <Compile Include="View\ThanhToan\HoaDon.xaml.cs">
       <DependentUpon>HoaDon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ThanhToan\ThanhToanView.xaml.cs">
-      <DependentUpon>ThanhToanView.xaml</DependentUpon>
+	  <Compile Include="View\ThanhToan\ThanhToanView.xaml.cs">
+		  <DependentUpon>ThanhToanView.xaml</DependentUpon>
+	  </Compile>
     <Compile Include="View\QuanLiTiepDon\ThemThuocChoBenhNhanView.xaml.cs">
       <DependentUpon>ThemThuocChoBenhNhanView.xaml</DependentUpon>
     </Compile>
@@ -558,6 +559,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BangDieuKhien\BangDieuKhienView.xaml">
+		<SubType>Designer</SubType>
+		<Generator>MSBuild:Compile</Generator>
+	</Page>
     <Page Include="View\HoSoBacSi\DanhSachBacSiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -739,6 +743,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ThanhToan\ThanhToanView.xaml">
+		<SubType>Designer</SubType>
+		<Generator>MSBuild:Compile</Generator>
+	</Page>
     <Page Include="View\QuanLiTiepDon\ThemThuocChoBenhNhanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -848,8 +855,6 @@
     <Resource Include="ResourceXAML\image\ic_x_payment.png" />
     <Resource Include="ResourceXAML\image\ic_wallet.png" />
     <Resource Include="ResourceXAML\image\ic_khambenh.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="ResourceXAML\image\ic_email.png" />
     <Resource Include="ResourceXAML\image\img_default.png" />
   </ItemGroup>
