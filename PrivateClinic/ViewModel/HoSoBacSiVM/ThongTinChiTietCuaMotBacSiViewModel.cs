@@ -109,8 +109,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         {
             BACSI t = DataProvider.Ins.DB.BACSIs.SingleOrDefault(h => h.MaBS == MaBS);
 
-            MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu lại thông tin bác sĩ không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            YesNoMessageBox result = new YesNoMessageBox("Thông báo", "Bạn có muốn lưu lại thông tin bác sĩ không?");
+            if (result.DialogResult == true)
             {
                 if (parameter.SDTtxb.Text == "" || parameter.Emailtxb.Text == "" || parameter.BangCaptxb.Text == "" ||
                        parameter.DiaChitxb.Text == "" || parameter.HoTentxb.Text == "" || parameter.Ngaysinhtxb.SelectedDate == null || parameter.GioiTinhtxb.SelectedValue==null

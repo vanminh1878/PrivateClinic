@@ -1,5 +1,6 @@
 ﻿using PrivateClinic.Model;
 using PrivateClinic.View.HoSoBacSi;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
@@ -149,8 +150,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         #region Chức năng xóa thông tin 1 bác sĩ
         void DeleteBacSi(BACSI selectedItem)
         {
-            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa bệnh nhân này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (r == MessageBoxResult.Yes) 
+            YesNoMessageBox r = new YesNoMessageBox("Thông báo","Bạn muốn xóa bệnh nhân này không ?");
+            if (r.DialogResult == true)  
             {
                 if (selectedItem != null && selectedItem.MaBS != 1) 
                 {
@@ -170,11 +171,13 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     //Cập nhật listview
                     FilterDSBS.Remove(selectedItem);
                     SoLuong = FilterDSBS.Count;
-                    MessageBox.Show("Xóa thành công", "Thông báo");
+                    OkMessageBox mb = new OkMessageBox("Thông báo", "Xóa thành công");
+                    mb.ShowDialog();
                 }
                 else
                 {
-                    MessageBox.Show("Không thể xóa Admin","Báo lỗi",MessageBoxButton.OK,MessageBoxImage.Error);
+                    OkMessageBox mb = new OkMessageBox("Thông báo", "Không thề xóa admin");
+                    mb.ShowDialog();
                 }
             }
         }

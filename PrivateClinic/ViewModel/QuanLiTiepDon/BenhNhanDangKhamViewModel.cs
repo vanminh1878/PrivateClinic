@@ -182,13 +182,15 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
         #endregion
         void _DeleteCommand(ThuocDTO selectedItem)
         {
-            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa thuốc này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (r == MessageBoxResult.Yes)
+            YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn muốn xóa thuốc này không ?");
+            h.ShowDialog();
+            if (h.DialogResult == true)
             {
                 if (selectedItem != null)
                 {
                     Const.ListThuocTemp.Remove(selectedItem);
-                    MessageBox.Show("Xóa thành công", "Thông báo");
+                    OkMessageBox ok = new OkMessageBox("Thông báo", "Xóa thành công");
+                    ok.ShowDialog();
                     SoLuongThuocDangChon = Const.ListThuocTemp.Count;
                 }
             }

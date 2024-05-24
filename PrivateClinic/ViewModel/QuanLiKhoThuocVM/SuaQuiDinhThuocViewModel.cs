@@ -196,11 +196,13 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             Listthuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
             if (!double.TryParse(p.Tilegia.Text, out double tile))
             {
-                MessageBox.Show("Tỉ lệ giá phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Tỉ lệ giá phải là số!");
+                mb.ShowDialog();
             }
             else if (!double.TryParse(p.TienKham.Text, out double tienkham))
             {
-                MessageBox.Show("Tiền khám phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Tiền khám phải là số!");
+                mb.ShowDialog();
             }
             else
             {

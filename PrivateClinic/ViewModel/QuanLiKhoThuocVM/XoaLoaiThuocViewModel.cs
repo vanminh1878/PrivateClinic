@@ -10,6 +10,7 @@ using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 using System.Windows;
+using PrivateClinic.View.MessageBox;
 
 
 
@@ -53,12 +54,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             if (p.dvtcbx.SelectedItem == null)
             {
-                MessageBox.Show("Bạn chưa chọn loại thuốc cần xóa!.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Bạn chưa chọn loại thuốc để xóa");
+                ok.ShowDialog();
             }
             else
             {
-                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn xóa loại thuốc này ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (h == MessageBoxResult.Yes)
+                YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn muốn xóa loại thuốc này ?");
+                h.ShowDialog();
+                if (h.DialogResult == true)
                 {
 
                     thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
@@ -69,7 +72,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                             // Kiểm tra xem loại thuốc này đã được sử dụng bởi đơn thuốc chưa
                             if (thuoc.Any(dt => dt.MaLoaiThuoc == lt.MaLoaiThuoc))
                             {
-                                MessageBox.Show("Không thể xóa loại thuốc này vì đã được sử dụng bởi một hoặc nhiều đơn thuốc.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                                OkMessageBox ok = new OkMessageBox("Thông báo", "Không thể xóa loại thuốc này vì đã được sử dụng bởi một hoặc nhiều đơn thuốc.");
+                                ok.ShowDialog();
                                 return; // Thoát khỏi hàm nếu không thể xóa
                             }
                             else
@@ -77,7 +81,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                                 // Xóa loại thuốc
                                 DataProvider.Ins.DB.LOAITHUOCs.Remove(lt);
                                 p.dvtcbx.SelectedIndex = -1;
-                                MessageBox.Show("Xóa loại thuốc thành công!", "THÔNG BÁO");
+                                OkMessageBox ok = new OkMessageBox("Thông báo", "Xóa thành công");
+                                ok.ShowDialog();
                             }
                            
                         }

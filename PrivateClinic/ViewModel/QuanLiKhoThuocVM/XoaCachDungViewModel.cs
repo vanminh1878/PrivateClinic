@@ -9,6 +9,7 @@ using PrivateClinic.View.QuanLiKhoThuoc;
 using System.Windows.Input;
 using System.Windows;
 using PrivateClinic.ViewModel.OtherViewModels;
+using PrivateClinic.View.MessageBox;
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
@@ -56,12 +57,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             if (p.dvtcbx.SelectedItem == null)
             {
-                MessageBox.Show("Bạn chưa chọn cách dùng cần xóa!.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Bạn chưa chọn cách dùng để xóa");
+                ok.ShowDialog();
             }
             else
             {
-                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn xóa cách dùng này ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (h == MessageBoxResult.Yes)
+                YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn muốn xóa cách dùng này ?");
+                h.ShowDialog();
+                if (h.DialogResult == true)
                 {
                     thuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
 
@@ -74,7 +77,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                             // Kiểm tra xem cách dùng này đã được sử dụng bởi thuốc chưa
                             if (thuoc.Any(t => t.MaCachDung == cd.MaCachDung))
                             {
-                                MessageBox.Show("Không thể xóa cách dùng này vì đã được sử dụng bởi một hoặc nhiều thuốc.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                                OkMessageBox ok = new OkMessageBox("Thông báo", "Không thể xóa cách dùng này vì đã được sử dụng bởi một hoặc nhiều thuốc.");
+                                ok.ShowDialog();
                                 return; // Thoát khỏi hàm nếu không thể xóa
                             }
                             else
@@ -82,7 +86,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                                 // Xóa cách dùng
                                 DataProvider.Ins.DB.CACHDUNGs.Remove(cd);
                                 p.dvtcbx.SelectedIndex = -1;
-                                MessageBox.Show("Xóa cách dùng thành công!", "THÔNG BÁO");
+                                OkMessageBox ok = new OkMessageBox("Thông báo", "Xóa cách dùng thành công");
+                                ok.ShowDialog();
                             }
                         }
                     }

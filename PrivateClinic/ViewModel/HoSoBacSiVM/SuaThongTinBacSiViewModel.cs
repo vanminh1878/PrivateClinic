@@ -1,5 +1,6 @@
 ﻿using PrivateClinic.Model;
 using PrivateClinic.View.HoSoBacSi;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
 using System.Collections.Generic;
@@ -216,8 +217,8 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         //Hàm sửa thông tin bác sĩ
         private void accept(object obj)
         {
-            MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn lưu thông tin bác sĩ ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (h == MessageBoxResult.Yes)
+            YesNoMessageBox h = new YesNoMessageBox("Thông báo", "Bạn muốn lưu thông tin bác sĩ ?");
+            if (h.DialogResult == true)
             {
                 BACSI a = DataProvider.Ins.DB.BACSIs.FirstOrDefault(bs => bs.MaBS == bacsi.MaBS);
                 a.HoTen = HoTen;

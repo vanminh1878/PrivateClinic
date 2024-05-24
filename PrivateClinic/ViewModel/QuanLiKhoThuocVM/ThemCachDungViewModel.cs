@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows;
 using PrivateClinic.ViewModel.OtherViewModels;
 using PrivateClinic.View.QuanLiTiepDon;
+using PrivateClinic.View.MessageBox;
 
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 {
@@ -33,12 +34,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
             if (string.IsNullOrEmpty(p.dvttbx.Text))
             {
-                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Bạn chưa nhập đủ thông tin");
+                ok.ShowDialog();
             }
             else
             {
-                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn thêm cách dùng mới ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (h == MessageBoxResult.Yes)
+                YesNoMessageBox h =new YesNoMessageBox("THÔNG BÁO", "Bạn muốn thêm cách dùng mới ?");
+                h.ShowDialog();
+                if (h.DialogResult == true)
                 {
 
 
@@ -46,8 +49,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     cd.TenCachDung = p.dvttbx.Text;
                     DataProvider.Ins.DB.CACHDUNGs.Add(cd);      
                     DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Thêm đơn cách dùng mới thành công!", "THÔNG BÁO");
-
+                    OkMessageBox ok = new OkMessageBox("Thông báo", "Thêm thành công!");
+                    ok.ShowDialog();
                 }
             }
             

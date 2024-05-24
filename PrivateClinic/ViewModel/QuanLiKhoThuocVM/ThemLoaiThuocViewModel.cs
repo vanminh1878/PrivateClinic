@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PrivateClinic.Model;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
@@ -30,12 +31,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             if (string.IsNullOrEmpty(p.dvttbx.Text))
             {
-                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Chưa nhập đủ thông tin");
+                ok.ShowDialog();
             }
             else
             {
-                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn loại thuốc mới ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (h == MessageBoxResult.Yes)
+                YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn muốn thêm loại thuốc mới ?");
+                h.ShowDialog();
+                if (h.DialogResult == true)
                 {
 
                     LOAITHUOC dVT = new LOAITHUOC();
@@ -43,7 +46,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     DataProvider.Ins.DB.LOAITHUOCs.Add(dVT);
                     thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
                     DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Thêm loại thuốc mới thành công!", "THÔNG BÁO");
+                    OkMessageBox ok = new OkMessageBox("Thông báo", "Thêm thành công!");
+                    ok.ShowDialog();
 
                 }
             }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PrivateClinic.Model;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 
@@ -155,15 +156,18 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             if (string.IsNullOrEmpty(paramater.SL.Text) || string.IsNullOrEmpty(paramater.DonGiaNhap.Text) || paramater.TenDVTcbx.SelectedItem == null || paramater.CachDungcbx.SelectedItem == null || string.IsNullOrEmpty(paramater.TenThuoc.Text) || paramater.CachDungcbx.SelectedItem == null)
             {
-                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Chưa đủ thông tin");
+                ok.ShowDialog();
             }
             else if (!int.TryParse(paramater.SL.Text, out int slValue))
             {
-                MessageBox.Show("Số lượng phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Số lượng phải là số");
+                ok.ShowDialog();
             }
             else if (!double.TryParse(paramater.DonGiaNhap.Text, out double dgValue))
             {
-                MessageBox.Show("Đơn giá nhập phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Đơn giá nhập phải là số");
+                ok.ShowDialog();
             }
             else
             {
@@ -173,7 +177,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 {
                     if (t.TenThuoc.Equals(paramater.TenThuoc.Text, StringComparison.OrdinalIgnoreCase))
                     {
-                        MessageBox.Show("Thuốc này đã có trong kho.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                        OkMessageBox ok = new OkMessageBox("Thông báo", "Thuốc này đã có tong kho");
+                        ok.ShowDialog(); 
                         thuocDaTonTai = true;
                         break;
                     }
@@ -181,8 +186,9 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
                 if (!thuocDaTonTai)
                 {
-                    MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin thuốc?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (result == MessageBoxResult.Yes)
+                    YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn muốn thêm thuốc mới vào kho ?");
+                    h.ShowDialog();
+                    if (h.DialogResult == true)
                     {
                         donvitinh = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
                         cachdung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
@@ -236,7 +242,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                             DataProvider.Ins.DB.PHIEUNHAPTHUOCs.Add(pnt);
                             DataProvider.Ins.DB.THUOCs.Add(newthuoc);
                             DataProvider.Ins.DB.SaveChanges();
-                            MessageBox.Show("Thêm thuốc mới thành công!", "THÔNG BÁO");
+                            OkMessageBox ok = new OkMessageBox("Thông báo", "Thêm thành công");
+                            ok.ShowDialog();
                         }
                     }
                 }

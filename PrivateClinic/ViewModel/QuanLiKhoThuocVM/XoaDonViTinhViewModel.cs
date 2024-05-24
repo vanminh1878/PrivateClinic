@@ -10,6 +10,7 @@ using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 using System.Windows;
+using PrivateClinic.View.MessageBox;
 
 
 
@@ -60,12 +61,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             if (p.dvtcbx.SelectedItem == null)
             {
-                MessageBox.Show("Bạn chưa chọn đơn vị tính cần xóa!.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Bạn chưa chọn đơn vị tính để xóa");
+                ok.ShowDialog();
             }
             else
             {
-                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn xóa đơn vị tính này ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (h == MessageBoxResult.Yes)
+                YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn muốn xóa đơn vị tính này ?");
+                h.ShowDialog();
+                if (h.DialogResult == true)
                 {
 
                     dvt = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
@@ -77,7 +80,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                             // Kiểm tra xem đơn vị tính này đã được sử dụng bởi thuốc chưa
                             if (thuoc.Any(t => t.MaDVT == dv.MaDVT))
                             {
-                                MessageBox.Show("Không thể xóa đơn vị tính này vì đã được sử dụng bởi một hoặc nhiều thuốc.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                                OkMessageBox ok = new OkMessageBox("Thông báo", "Không thể xóa đơn vị tính này vì đã được sử dụng bởi một hoặc nhiều thuốc.");
+                                ok.ShowDialog();
                                 return; // Thoát khỏi hàm nếu không thể xóa
                             }
                             else
@@ -85,12 +89,12 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                                 // Xóa đơn vị tính
                                 DataProvider.Ins.DB.DVTs.Remove(dv);
                                 p.dvtcbx.SelectedIndex = -1;
-                                MessageBox.Show("Xóa đơn vị tính thành công!", "THÔNG BÁO");
+                                OkMessageBox ok = new OkMessageBox("Thông báo", "Xóa đơn vị tính thành công");
+                                ok.ShowDialog();
                             }
                         }
                     }
-                    p.dvtcbx.SelectedIndex = -1;
-                    MessageBox.Show("Xóa đơn vị tính thành công!", "THÔNG BÁO");
+
 
                 }
             }

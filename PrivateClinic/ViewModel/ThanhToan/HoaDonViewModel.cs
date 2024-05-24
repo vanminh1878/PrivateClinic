@@ -1,4 +1,5 @@
 ﻿using PrivateClinic.Model;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.View.ThanhToan;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
@@ -114,23 +115,27 @@ namespace PrivateClinic.ViewModel.ThanhToan
         {
             if (CurrentHoaDon == null)
             {
-                MessageBox.Show("No invoice selected.", "Error");
+                OkMessageBox mbs = new OkMessageBox("Thông báo", "Hóa đơn không được chọn");
+                mbs.ShowDialog();
                 return;
             }
-            MessageBoxResult confirmation = MessageBox.Show("Xác nhận thanh toán hóa đơn này?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (confirmation == MessageBoxResult.Yes)
+            YesNoMessageBox mb = new YesNoMessageBox("Thông báo", "Xác nhận thanh toán hóa đợn này?");
+            mb.ShowDialog();
+            if (mb.DialogResult == false)
             {
                 HOADON invoiceToUpdate = DataProvider.Ins.DB.HOADONs.FirstOrDefault(hd => hd.SoHD == CurrentHoaDon.SoHD);
                 if (invoiceToUpdate != null)
                 {
                     invoiceToUpdate.TrangThai = ((int)PaymentStatus.Paid).ToString();
                     DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Thanh toán thành công!", "THÔNG BÁO");
+                    OkMessageBox mbs = new OkMessageBox("Thông báo", "Thanh toán thành công");
+                    mbs.ShowDialog();
                     ConfirmPrintInvoice(parameter);
                 }
                 else
                 {
-                    MessageBox.Show("Hóa đơn không tồn tại.", "Error");
+                    OkMessageBox mbs = new OkMessageBox("Thông báo", "Hóa đơn không tồn tại");
+                    mbs.ShowDialog();
                     parameter.DialogResult = true;
                     parameter.Close();
                 }
@@ -146,8 +151,9 @@ namespace PrivateClinic.ViewModel.ThanhToan
 
         private void ConfirmPrintInvoice(HoaDonView parameter)
         {
-            MessageBoxResult printConfirmation = MessageBox.Show("Bạn có muốn in hóa đơn không?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (printConfirmation == MessageBoxResult.Yes)
+            YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn muốn in hóa đơn không ?");
+            h.ShowDialog();
+            if (h.DialogResult == true)
             {
                 PrintInvoice();
             }

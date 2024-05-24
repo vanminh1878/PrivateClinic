@@ -1,4 +1,5 @@
 ﻿using PrivateClinic.Model;
+using PrivateClinic.View.MessageBox;
 using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 using System;
@@ -105,20 +106,23 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
 
             if (string.IsNullOrEmpty(p.TenThuoc.Text) || p.NgayNhap.SelectedDate == null || string.IsNullOrEmpty(p.DonGiaNhap.Text) || string.IsNullOrEmpty(p.TenDVTcbx.SelectedItem.ToString()) || string.IsNullOrEmpty(p.SoLuong.Text))
             {
-                MessageBox.Show("Bạn chưa nhập đủ thông tin.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb =new OkMessageBox("Thông báo", "Bạn chưa nhập đủ thông tin.");
+                mb.ShowDialog();
             }
             else if (!int.TryParse(paramater.SoLuong.Text, out int slValue))
             {
-                MessageBox.Show("Số lượng phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Số lượng phải là số!");
+                mb.ShowDialog();
             }
             else if (!double.TryParse(paramater.DonGiaNhap.Text, out double dgValue))
             {
-                MessageBox.Show("Đơn giá nhập phải là số.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Đơn giá nhập phải là số!");
+                mb.ShowDialog();
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Bạn muốn lưu thông tin thuốc?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
+                YesNoMessageBox result = new YesNoMessageBox("Thông báo", "Bạn muốn lưu thông tin thuốc?");
+                if (result.DialogResult == true)
                 {
                     int maThuoc = int.Parse(p.MaThuoc.Text.Substring(3));
                     THUOC thuoc = DataProvider.Ins.DB.THUOCs.FirstOrDefault(t => t.MaThuoc == maThuoc);
@@ -170,8 +174,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                         //var phieuNhap = DataProvider.Ins.DB.PHIEUNHAPTHUOCs.FirstOrDefault(pn => pn.NgayNhap == ngayNhap);
 
                         DataProvider.Ins.DB.SaveChanges();
-                        MessageBox.Show("Cập nhật thông tin thuốc thành công!", "THÔNG BÁO");
-
+                        OkMessageBox ok = new OkMessageBox("Thông báo", "Cập nhật thông tin thuốc thành công!");
+                        ok.ShowDialog();
 
                         KhoThuocView quanLiThuocView = new KhoThuocView();
                         quanLiThuocView.MedicineListView.ItemsSource = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
@@ -180,7 +184,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                     }
                     else
                     {
-                        MessageBox.Show("Không tìm thấy thuốc.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        OkMessageBox ok = new OkMessageBox("Thông báo", "Không tìm thấy thuốc để cập nhật");
+                        ok.ShowDialog();
                     }
                 }
             }

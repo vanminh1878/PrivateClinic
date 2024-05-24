@@ -10,6 +10,7 @@ using PrivateClinic.View.QuanLiKhoThuoc;
 using PrivateClinic.ViewModel.OtherViewModels;
 using PrivateClinic.ViewModel.QuanLiKhoThuocVM;
 using System.Windows;
+using PrivateClinic.View.MessageBox;
 
 
 
@@ -60,12 +61,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             if (p.dvtcbx.SelectedItem == null)
             {
-                MessageBox.Show("Bạn chưa chọn loại bệnh cần xóa!.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Bạn chưa chọn loại bệnh để xóa");
+                ok.ShowDialog();
             }
             else
             {
-                MessageBoxResult h = System.Windows.MessageBox.Show("Bạn muốn xóa loại bệnh này ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (h == MessageBoxResult.Yes)
+                YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn muốn xóa loại bệnh này ?");
+                h.ShowDialog();
+                if (h.DialogResult == true)
                 {
                     benhnhan = new ObservableCollection<PHIEUKHAMBENH>(DataProvider.Ins.DB.PHIEUKHAMBENHs);
                     dvt = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
@@ -76,21 +79,20 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                             // Kiểm tra xem loại bệnh này đã được sử dụng bởi bệnh nhân chưa
                             if (benhnhan.Any(bn => bn.MaLoaiBenh == lb.MaLoaiBenh))
                             {
-                                MessageBox.Show("Không thể xóa loại bệnh này vì đã được sử dụng bởi một hoặc nhiều bệnh nhân.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                                OkMessageBox ok = new OkMessageBox("Thông báo", "Không thể xóa loại bệnh này vì đã được sử dụng bởi một hoặc nhiều bệnh nhân.");
+                                ok.ShowDialog();
                                 return; // Thoát khỏi hàm nếu không thể xóa
                             }
                             else
                             {
                                 // Xóa loại bệnh
                                 DataProvider.Ins.DB.LOAIBENHs.Remove(lb);
+                                p.dvtcbx.SelectedIndex = -1;
+                                OkMessageBox ok = new OkMessageBox("Thông báo", "Xóa thành công");
+                                ok.ShowDialog();
                             }
                         }
                     }
-
-                    DataProvider.Ins.DB.SaveChanges();
-                    p.dvtcbx.SelectedIndex = -1;
-                    MessageBox.Show("Xóa loại bệnh thành công!", "THÔNG BÁO");
-
                 }
             }
             

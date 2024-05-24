@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows.Resources;
 using System;
+using PrivateClinic.View.MessageBox;
 
 namespace PrivateClinic.ViewModel.ThanhToan
 {
@@ -150,8 +151,9 @@ namespace PrivateClinic.ViewModel.ThanhToan
 
         void _DeleteCommand(HOADON selectedItem)
         {
-            MessageBoxResult r = System.Windows.MessageBox.Show("Bạn muốn xóa hóa đơn này không ?", "THÔNG BÁO", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (r == MessageBoxResult.Yes)
+            YesNoMessageBox h = new YesNoMessageBox("THÔNG BÁO", "Bạn có muốn xóa hóa đơn này ?");
+            h.ShowDialog();
+            if (h.DialogResult == true)
             {
                 if (selectedItem != null)
                 {
