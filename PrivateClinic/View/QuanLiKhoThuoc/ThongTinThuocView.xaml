@@ -10,7 +10,7 @@
     Title="ThongTinThuocView"
     Height="320"
     Width="750"
-     WindowStyle="None"
+    WindowStyle="None"
     ResizeMode="NoResize"
     Background="Transparent"
     AllowsTransparency="True"
@@ -18,7 +18,7 @@
     TextElement.FontSize="19"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d">
 
     <Border
@@ -61,7 +61,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseLeftButtonDown">
                                 <i:InvokeCommandAction Command="{Binding ExitCommand}"
-                 CommandParameter="{Binding ElementName=ThongTinThuocViewPage}"></i:InvokeCommandAction>
+                                                       CommandParameter="{Binding ElementName=ThongTinThuocViewPage}"></i:InvokeCommandAction>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </materialDesign:PackIcon>
@@ -96,7 +96,7 @@
                         IsReadOnly="True"
                         x:Name="MaThuoc"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         />
+                        />
 
                     <!--  Chỗ Ten thuoc  -->
                     <TextBox
@@ -111,7 +111,7 @@
                         IsReadOnly="True"
                         x:Name="TenThuoc"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         />
+                        />
 
                     <!--  Chỗ binding ngày nhập  -->
                     <TextBox
@@ -140,7 +140,7 @@
                         IsReadOnly="True"
                         x:Name="DVT"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         />
+                        />
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -161,27 +161,12 @@
                         Margin="20,0,0,0"
                         Padding="0,0,0,0"
                         HorizontalAlignment="Left"
-                        materialDesign:HintAssist.Hint="Đơn giá"
+                        materialDesign:HintAssist.Hint="Đơn giá nhập"
                         FontWeight="SemiBold"
                         IsReadOnly="True"
                         x:Name="DonGia"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         />
-
-                    <!--  Chỗ binding HSD  -->
-                    <!--
-                    <TextBox
-                        Grid.Row="2"
-                        Width="250"
-                        Height="50"
-                        Margin="20,0,0,0"
-                        Padding="0,0,0,0"
-                        HorizontalAlignment="Left"
-                        materialDesign:HintAssist.Hint="Hạn sử dụng"
-                        FontWeight="SemiBold"
-                        IsReadOnly="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="" />-->
+                        />
 
                     <!--  Chỗ binding Số lượng  -->
                     <TextBox
@@ -196,7 +181,22 @@
                         IsReadOnly="True"
                         x:Name="SL"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         />
+                        />
+
+                    <!--  Chỗ binding Đơn giá  -->
+                    <TextBox
+                        Grid.Row="2"
+                        Width="250"
+                        Height="50"
+                        Margin="20,0,0,0"
+                        Padding="0,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="Đơn giá bán"
+                        FontWeight="SemiBold"
+                        IsReadOnly="True"
+                        x:Name="DonGiaBan"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        />
                 </Grid>
             </Grid>
         </Grid>

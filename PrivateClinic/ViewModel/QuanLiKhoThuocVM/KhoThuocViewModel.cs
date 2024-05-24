@@ -190,6 +190,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             ThuocDTO selectedThuocDTO = (ThuocDTO)parameter.MedicineListView.SelectedItem;
             THUOC temp = Thuoc.FirstOrDefault(t => t.TenThuoc == selectedThuocDTO.TenThuoc);
             detail.DonGia.Text = String.Format("{0:0,0}", temp.DonGiaNhap);
+            detail.DonGiaBan.Text = String.Format("{0:0,0}", temp.DonGiaBan);
             detail.TenThuoc.Text = temp.TenThuoc;
             detail.MaThuoc.Text = "MED" + temp.MaThuoc.ToString();
             detail.DVT.Text = temp.DVT.TenDVT.ToString();
