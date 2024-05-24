@@ -169,6 +169,7 @@
     <Compile Include="Model\PHIEUNHAPTHUOC.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PQDTO.cs" />
     <Compile Include="Model\THAMSO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -178,8 +179,10 @@
     <Compile Include="ViewModel\HoSoBacSiVM\DanhSachBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\DoiMatKhauViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\HoSoBacSiViewModel.cs" />
+    <Compile Include="ViewModel\HoSoBacSiVM\PhanQuyenViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\SuaThongTinBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThemBacSiViewModel.cs" />
+    <Compile Include="ViewModel\HoSoBacSiVM\ThemNhomNguoiDungViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThongTinCaNhanViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThongTinChiTietCuaMotBacSiViewModel.cs" />
     <Compile Include="Model\ThuocDTO.cs" />
@@ -201,11 +204,20 @@
     <Compile Include="View\HoSoBacSi\HoSoBacSiView.xaml.cs">
       <DependentUpon>HoSoBacSiView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HoSoBacSi\PhanQuyenUS.xaml.cs">
+      <DependentUpon>PhanQuyenUS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HoSoBacSi\SuaNhomNguoiDungView.xaml.cs">
+      <DependentUpon>SuaNhomNguoiDungView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HoSoBacSi\SuaThongTinBacSiView.xaml.cs">
       <DependentUpon>SuaThongTinBacSiView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HoSoBacSi\ThemBacSiView.xaml.cs">
       <DependentUpon>ThemBacSiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HoSoBacSi\ThemNhomNguoiDungView.xaml.cs">
+      <DependentUpon>ThemNhomNguoiDungView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HoSoBacSi\ThongTinCaNhanView.xaml.cs">
       <DependentUpon>ThongTinCaNhanView.xaml</DependentUpon>
@@ -390,11 +402,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\HoSoBacSi\PhanQuyenUS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HoSoBacSi\SuaNhomNguoiDungView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\HoSoBacSi\SuaThongTinBacSiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HoSoBacSi\ThemBacSiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HoSoBacSi\ThemNhomNguoiDungView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
