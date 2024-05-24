@@ -27,13 +27,13 @@ namespace PrivateClinic.View.QuanLiKhoThuoc
             InitializeComponent();
             QuyDinhThuocViewModel viewModel = new QuyDinhThuocViewModel();
             this.DataContext = viewModel;
-            viewModel.LoadCommand.Execute(null);
-            cachdung.Text = string.Join(", ", viewModel.CachDung);
-            Tilegia.Text = string.Join(", ", viewModel.Tilegia);          
-            tienkham.Text = string.Join(", ", viewModel.tienkham.Select(x => string.Format("{0:0,0}", x)));
-            dvt.Text = string.Join(", ", viewModel.dvt);
-            loaibenh.Text = string.Join(", ", viewModel.loaibenh);
-            loaithuoc.Text = string.Join(", ", viewModel.loaithuoc);
+            //viewModel.LoadCommand.Execute(null);
+            //cachdung.Text = string.Join(", ", viewModel.CachDung);
+            //Tilegia.Text = string.Join(", ", viewModel.Tilegia);          
+            //tienkham.Text = string.Join(", ", viewModel.tienkham.Select(x => string.Format("{0:0,0}", x)));
+            //dvt.Text = string.Join(", ", viewModel.dvt);
+            //loaibenh.Text = string.Join(", ", viewModel.loaibenh);
+            //loaithuoc.Text = string.Join(", ", viewModel.loaithuoc);
         }
     }
 }

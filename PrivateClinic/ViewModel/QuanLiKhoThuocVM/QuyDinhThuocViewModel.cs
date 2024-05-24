@@ -52,8 +52,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             set { _Dvt = value; OnPropertyChanged(nameof(Dvt)); }
 
         }
-        private string _CachDung;
-        public string CachDung
+        private float _CachDung;
+        public float CachDung
         {
             get { return _CachDung; }
             set
@@ -62,8 +62,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(CachDung));
             }
         }
-        private List<string> _Tilegia;
-        public List<string> Tilegia
+        private double _Tilegia;
+        public double Tilegia
         {
             get { return _Tilegia; }
             set
@@ -72,8 +72,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(Tilegia));
             }
         }
-        private string _dvt;
-        public string dvt
+        private float _dvt;
+        public float dvt
         {
             get { return _dvt; }
             set
@@ -82,8 +82,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(dvt));
             }
         }
-        private List<double> _tienkham;
-        public List<double> tienkham
+        private string _tienkham;
+        public string tienkham
         {
             get { return _tienkham; }
             set
@@ -92,8 +92,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(tienkham));
             }
         }
-        private string _loaibenh;
-        public string loaibenh
+        private float _loaibenh;
+        public float loaibenh
         {
             get { return _loaibenh; }
             set
@@ -102,8 +102,8 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OnPropertyChanged(nameof(loaibenh));
             }
         }
-        private string _loaithuoc;
-        public string loaithuoc
+        private float _loaithuoc;
+        public float loaithuoc
         {
             get { return _loaithuoc; }
             set
@@ -113,35 +113,58 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             }
         }
         public ICommand EditQDCommand { get; set; }
-        public ICommand LoadCommand { get; set; }
+        //public ICommand LoadCommand { get; set; }
         public QuyDinhThuocViewModel() 
         {
             EditQDCommand = new RelayCommand<QuyDinhThuocView>((p) => { return p == null ? false : true; }, (p) => _EditQDCommand(p));
-            LoadCommand = new RelayCommand<QuyDinhThuocView>((p) => true, (p) => _LoadCommand(p));
-
+            //  LoadCommand = new RelayCommand<QuyDinhThuocView>((p) => true, (p) => _LoadCommand(p));
+            Loaddata();
         }
-        private void _LoadCommand(QuyDinhThuocView p)
-        {
-            thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
-            cachdung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
-            Loaibenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
-            Loaithuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
-            Dvt = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
-            CachDung = cachdung.Count().ToString();
-            Tilegia = thamso.Where(x => x.MaThamSo == 3).Select(x => x.GiaTri.ToString()).ToList();
-            //tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri.ToString()).ToList();
-            tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri).ToList();
-            loaibenh = Loaibenh.Count().ToString();
-            loaithuoc = Loaithuoc.Count().ToString();
-            dvt = Dvt.Count().ToString();
+        //private void _LoadCommand(QuyDinhThuocView p)
+        //{
+        //    thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
+        //    cachdung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
+        //    Loaibenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
+        //    Loaithuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
+        //    Dvt = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
+        //    CachDung = cachdung.Count().ToString();
+        //    Tilegia = thamso.Where(x => x.MaThamSo == 3).Select(x => x.GiaTri.ToString()).ToList();
+        //    //tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri.ToString()).ToList();
+        //    tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri).ToList();
+        //    loaibenh = Loaibenh.Count().ToString();
+        //    loaithuoc = Loaithuoc.Count().ToString();
+        //    dvt = Dvt.Count().ToString();
 
-        }
+        //}
         private void _EditQDCommand(QuyDinhThuocView p)
         {
             ThayDoiQuiDinhThuocView a = new ThayDoiQuiDinhThuocView();
             double mainWindowRightEdge = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width;
             a.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             a.ShowDialog();
+            Loaddata();
+        }
+        void Loaddata()
+        {
+            thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
+            //Lấy tỉ lệ giá bán
+            THAMSO tlb = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 3);
+            //Lấy tiền khám
+            THAMSO tk = DataProvider.Ins.DB.THAMSOes.SingleOrDefault(h => h.MaThamSo == 2);
+
+            cachdung = new ObservableCollection<CACHDUNG>(DataProvider.Ins.DB.CACHDUNGs);
+            Loaibenh = new ObservableCollection<LOAIBENH>(DataProvider.Ins.DB.LOAIBENHs);
+            Loaithuoc = new ObservableCollection<LOAITHUOC>(DataProvider.Ins.DB.LOAITHUOCs);
+            Dvt = new ObservableCollection<DVT>(DataProvider.Ins.DB.DVTs);
+            CachDung = cachdung.Count();
+            Tilegia = tlb.GiaTri;
+            tienkham = tk.GiaTri.ToString("N0");
+            //tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri.ToString()).ToList();
+            //tienkham = thamso.Where(x => x.MaThamSo == 2).Select(x => x.GiaTri).ToList();
+            loaibenh = Loaibenh.Count();
+            loaithuoc = Loaithuoc.Count();
+            dvt = Dvt.Count();
+
         }
 
     }

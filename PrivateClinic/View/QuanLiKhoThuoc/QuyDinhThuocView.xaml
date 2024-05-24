@@ -1,24 +1,24 @@
 ﻿<UserControl x:Class="PrivateClinic.View.QuanLiKhoThuoc.QuyDinhThuocView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PrivateClinic.View.QuanLiKhoThuoc"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              x:Name="QuiDinhThuocViewPage"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-   
-    Background="Transparent"
-    FontFamily="Segoe UI"
-    TextElement.FontSize="22"
-    TextElement.FontWeight="Regular"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+
+             Background="Transparent"
+             FontFamily="Segoe UI"
+             TextElement.FontSize="22"
+             TextElement.FontWeight="Regular"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              d:DesignHeight="600" d:DesignWidth="800">
     <Border  Padding="10"
-        Background="White"
-        BorderBrush="DarkGray"
-        BorderThickness="0.7"
-        CornerRadius="12">
+            Background="White"
+            BorderBrush="DarkGray"
+            BorderThickness="0.7"
+            CornerRadius="12">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
@@ -26,7 +26,7 @@
                 <RowDefinition Height="125"/>
                 <RowDefinition Height="125"/>
                 <RowDefinition Height="125"/>
-                
+
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <TextBlock Text="QUY ĐỊNH " FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" Margin="0 13"/>
@@ -43,12 +43,12 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding EditQDCommand}"
-CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
+                                                   CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-               
-               
+
+
             </Grid>
             <Grid Margin="30 0 0 0" Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -71,7 +71,9 @@ CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                     <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
                     <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Có" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBlock x:Name="cachdung" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="cachdung" Margin="0 0 "
+                                   Text="{Binding CachDung}"
+                                   Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="cách dùng thuốc" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
@@ -91,7 +93,9 @@ CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                     <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
                     <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Giá bán = " Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBlock x:Name="Tilegia" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="Tilegia"
+                                   Text="{Binding Tilegia}"
+                                   Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="x Giá nhập" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
@@ -118,7 +122,9 @@ CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                     <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
                     <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Thuốc có " Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBlock  x:Name="dvt" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock  x:Name="dvt" Margin="0 0 "  Foreground="Red"
+                                   Text="{Binding dvt}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text="loại đơn vị tính" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
@@ -138,7 +144,9 @@ CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                     <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
                     <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Tiền khám: " Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBlock x:Name="tienkham" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="tienkham"
+                                   Text="{Binding tienkham}"
+                                   Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text=" VND" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
@@ -165,7 +173,9 @@ CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                     <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
                     <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Có" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBlock x:Name="loaibenh" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="loaibenh"
+                                   Text="{Binding loaibenh}"
+                                   Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text=" loại bệnh" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
@@ -185,16 +195,18 @@ CommandParameter="{Binding ElementName=QuiDinhThuocViewPage}" />
                     <Line X1="70" Y1="35" X2="370" Y2="35" Stroke="Black" StrokeThickness="2" />
                     <WrapPanel Margin="0 0 50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Margin="20 0 5 0 " Text="Có" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
-                        <TextBlock x:Name="loaithuoc" Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                        <TextBlock x:Name="loaithuoc"
+                                   Text="{Binding loaithuoc}"
+                                   Margin="0 0 "  Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                         <TextBlock Margin="5 0 " Text=" loại thuốc" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
                     </WrapPanel>
                 </Grid>
 
 
             </Grid>
-            
+
         </Grid>
-     
+
 
     </Border>
 </UserControl>
