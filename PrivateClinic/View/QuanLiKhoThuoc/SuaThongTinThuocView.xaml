@@ -22,9 +22,9 @@
     mc:Ignorable="d">
     <Window.InputBindings>
         <KeyBinding Key="F2" Command="{Binding CancelCommand}"
-          CommandParameter="{Binding ElementName=ThayDoiThongTinThuocViewPage}"/>
+                    CommandParameter="{Binding ElementName=ThayDoiThongTinThuocViewPage}"/>
         <KeyBinding Key="F3" Command="{Binding SaveCommand}"
-          CommandParameter="{Binding ElementName=ThayDoiThongTinThuocViewPage}"/>
+                    CommandParameter="{Binding ElementName=ThayDoiThongTinThuocViewPage}"/>
     </Window.InputBindings>
     <Border
         Padding="10"
@@ -197,6 +197,7 @@
                                 CornerRadius="10">
 
                                 <TextBox
+                                    IsReadOnly="True"
                                     x:Name="SoLuong"
                                     Width="180"
                                     Height="40"

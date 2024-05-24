@@ -37,6 +37,7 @@ namespace PrivateClinic.View.HoSoBacSi
             btnDoiMK.Background = Brushes.WhiteSmoke;
             btnDSBS.Background = Brushes.WhiteSmoke;
             btnThongTinCN.Background = Brushes.WhiteSmoke;
+            btnchucnang.Background = Brushes.WhiteSmoke;
             Button button = (Button)sender;
             button.Background = new SolidColorBrush(Color.FromRgb(128, 128, 128));
         }

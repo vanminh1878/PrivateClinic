@@ -157,13 +157,13 @@
                             <!-- Avatar -->
                             <Ellipse Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="100">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{StaticResource imgAvatarDefault}"/>
+                                    <ImageBrush ImageSource="{Binding ImageSource}"/>
                                 </Ellipse.Fill>
                             </Ellipse>
 
                             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="Nguyễn Minh Hùng" FontSize="16" FontWeight="Bold" Margin="0,0,0,0"/>
-                                <TextBlock Text="admin" FontSize="14" Margin="0,0,0,10" HorizontalAlignment="Center" Foreground="Red"/>
+                                <TextBlock Text="{Binding TenNV}" FontSize="16" FontWeight="Bold" Margin="0,0,0,0"/>
+                                <TextBlock Text="{Binding ChucVu}" FontSize="14" Margin="0,0,0,10" HorizontalAlignment="Center" Foreground="Red"/>
                             </StackPanel>
                         </Grid>
                     </Border>

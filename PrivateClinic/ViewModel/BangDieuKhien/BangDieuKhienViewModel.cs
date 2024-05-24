@@ -7,9 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows.Resources;
 using System.Windows.Threading;
 
 namespace PrivateClinic.ViewModel.BangDieuKhien
@@ -17,6 +21,46 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
     public class BangDieuKhienViewModel : BaseViewModel
     {
         #region Properties
+        private string chucvu;
+        public string ChucVu
+        {
+            get => chucvu;
+            set
+            {
+                chucvu = value;
+                OnPropertyChanged(nameof(ChucVu));
+            }
+        }
+        private string tenNV;
+        public string TenNV
+        {
+            get => tenNV;
+            set
+            {
+                tenNV = value;
+                OnPropertyChanged(nameof(TenNV));
+            }
+        }
+        private NGUOIDUNG user;
+        public NGUOIDUNG User
+        {
+            get => user;
+            set
+            {
+                user = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+        private BitmapImage imageSource;
+        public BitmapImage ImageSource
+        {
+            get => imageSource;
+            set
+            {
+                imageSource = value;
+                OnPropertyChanged(nameof(ImageSource));
+            }
+        }
         private string _currentTime;
         public string CurrentTime
         {
@@ -94,6 +138,7 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
 
         public BangDieuKhienViewModel()
         {
+            ThongTinND();
             listBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             Months = new ObservableCollection<string> {"Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5" , "Tháng 6"};
             SelectedMonth = Months[0]; // Default selection
@@ -287,6 +332,46 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
             var listDoctorToCount = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             ListDoctorCount = listDoctorToCount.Count;
             OnPropertyChanged(nameof(ListDoctorCount));
+        }
+        //Hàm load thông tin người dùng và ảnh
+        private void ThongTinND()
+        {
+            string tendangnhap = Const.TenDangNhap;
+            User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
+            string MaBS = User.MaBS.ToString();
+            ObservableCollection<BACSI> DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
+            if (Const.PQ.MaNhom == "NHOM1")
+                ChucVu = "Admin";
+            else
+                ChucVu = "Nhân viên";
+            foreach (BACSI bs in DSBS)
+            {
+                if (bs.MaBS.ToString() == MaBS)
+                {
+                    TenNV = bs.HoTen;
+                    if (bs.Image == null)
+                    {
+                        Uri resourceUri = new Uri("pack://application:,,,/ResourceXAML/image/ic_male_user_blue.png", UriKind.Absolute);
+                        StreamResourceInfo streamInfo = System.Windows.Application.GetResourceStream(resourceUri);
+                        byte[] imageBytes;
+                        using (Stream imageStream = streamInfo.Stream)
+                        {
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                imageStream.CopyTo(ms);
+                                imageBytes = ms.ToArray();
+                            }
+                        }
+                        ImageSource = ImageViewModel.ByteArrayToBitmapImage(imageBytes);
+                    }
+                    else
+                    {
+                        BitmapImage image = ImageViewModel.ByteArrayToBitmapImage(bs.Image);
+                        ImageSource = image;
+                    }
+                    break;
+                }
+            }
         }
     }
 }

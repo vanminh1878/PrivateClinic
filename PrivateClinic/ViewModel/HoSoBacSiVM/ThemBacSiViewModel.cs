@@ -359,16 +359,16 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                     OkMessageBox ok = new OkMessageBox("Lỗi khi gửi tài khoản qua mail\n"+
                                                         "Tên đăng nhập: " + tendangnhap + "\n"
                                                         + "Mật khẩu: " + matkhau, "Thông báo");
-                    ok.ShowDialog();
+                    ok.Show();
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 // Xử lý lỗi khi khởi tạo SmtpClient
                 OkMessageBox ok = new OkMessageBox("Lỗi khi khởi tạo SmtpClient:\n" +
                                                        "Tên đăng nhập: " + tendangnhap + "\n"
                                                        + "Mật khẩu: " + matkhau, "Thông báo");
-                ok.ShowDialog();
+                ok.Show();
             }
         }
         #region Các hàm báo lỗi
