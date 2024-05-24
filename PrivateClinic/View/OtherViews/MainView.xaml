@@ -92,13 +92,13 @@
                     <Grid Grid.Row="1" >
                         <StackPanel>
                             <RadioButton
-                                x:Name="BangDieukhien"
-                                Style="{StaticResource BangDieukhien}"
-                                Visibility="{Binding SetQuanLy}"
-                                IsChecked="True"
-                                FontFamily="Segoe UI"
-                                Uid="0"
-                                Command="{Binding BangdieukhienCM}" Width="280" />
+                                 x:Name="BangDieukhien"
+                                 Style="{StaticResource BangDieukhien}"
+                                 IsChecked="True" 
+                                 Visibility="{Binding SetQuanLy}"
+                                 FontFamily="Segoe UI"
+                                 Uid="0"
+                                 Command="{Binding BangDieuKhienCM}" Width="280" />
 
                             <RadioButton
                                 Style="{StaticResource TiepDon}"
