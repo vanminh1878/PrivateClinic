@@ -6,21 +6,23 @@
         xmlns:view="clr-namespace:PrivateClinic.View.OtherViews"
         xmlns:local="clr-namespace:PrivateClinic.ViewModel.OtherViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
-        mc:Ignorable="d"    
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
         Title="MainView" Height="750" Width="1300"
-         WindowStyle="None"
-         ResizeMode="NoResize"
-         Background="Transparent"
-         AllowsTransparency="True"
-         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
         Icon= "{StaticResource icStethoscope}"
-         Name="Mainview"
-       >
+        Name="Mainview"
+        Deactivated="Window_Deactivated"
+        Activated="Window_Activated">
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction  Command="{Binding Loadwd}"
-                                CommandParameter="{Binding ElementName=Mainview}">
+                                   CommandParameter="{Binding ElementName=Mainview}">
 
             </i:InvokeCommandAction>
         </i:EventTrigger>
@@ -30,10 +32,10 @@
             <BeginStoryboard>
                 <Storyboard>
                     <DoubleAnimation Storyboard.TargetName="Mainview"
-                                 Storyboard.TargetProperty="Opacity"
-                                 From="0"
-                                 To="1"
-                                 Duration="0:0:0.1" />
+                                     Storyboard.TargetProperty="Opacity"
+                                     From="0"
+                                     To="1"
+                                     Duration="0:0:0.1" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
@@ -90,46 +92,46 @@
                     <Grid Grid.Row="1" >
                         <StackPanel>
                             <RadioButton
-                                 x:Name="BangDieukhien"
-                                 Style="{StaticResource BangDieukhien}"
+                                x:Name="BangDieukhien"
+                                Style="{StaticResource BangDieukhien}"
                                 Visibility="{Binding SetQuanLy}"
-                                 IsChecked="True" 
-                                 FontFamily="Segoe UI"
-                                 Uid="0"
-                                 Command="{Binding BangdieukhienCM}" Width="280" />
+                                IsChecked="True"
+                                FontFamily="Segoe UI"
+                                Uid="0"
+                                Command="{Binding BangdieukhienCM}" Width="280" />
 
                             <RadioButton
-                                 Style="{StaticResource TiepDon}"
-                                 Uid="1"
-                                 FontFamily="Segoe UI"
-                                 x:Name="TiepDon"
-                                 Command="{Binding TiepDonCM}" Width="280" />
+                                Style="{StaticResource TiepDon}"
+                                Uid="1"
+                                FontFamily="Segoe UI"
+                                x:Name="TiepDon"
+                                Command="{Binding TiepDonCM}" Width="280" />
                             <RadioButton
-                                 Style="{StaticResource KhamBenh}"
-                                 Uid="2"
-                                 FontFamily="Segoe UI"
-                                 x:Name="KhamBenh"
-                                 Command="{Binding KhamBenhCM}" Width="280" />
+                                Style="{StaticResource KhamBenh}"
+                                Uid="2"
+                                FontFamily="Segoe UI"
+                                x:Name="KhamBenh"
+                                Command="{Binding KhamBenhCM}" Width="280" />
                             <RadioButton
-                                   Style="{StaticResource ThanhToan}"
-                                   Uid="3"
-                                   FontFamily="Segoe UI"
-                                   x:Name="ThanhToan"
-                                   Command="{Binding ThanhToanCM}" Width="280" />
+                                Style="{StaticResource ThanhToan}"
+                                Uid="3"
+                                FontFamily="Segoe UI"
+                                x:Name="ThanhToan"
+                                Command="{Binding ThanhToanCM}" Width="280" />
                             <RadioButton
-                                     Style="{StaticResource KhoThuoc}"
-                                     Uid="4"
-                                     FontFamily="Segoe UI"
-                                     x:Name="KhoThuoc"
-                                     Command="{Binding KhoThuocCM}" Width="280" />
+                                Style="{StaticResource KhoThuoc}"
+                                Uid="4"
+                                FontFamily="Segoe UI"
+                                x:Name="KhoThuoc"
+                                Command="{Binding KhoThuocCM}" Width="280" />
                             <RadioButton
-                                     
-                                     Style="{StaticResource BacSi}"
-                                     Uid="5"
-                                     FontFamily="Segoe UI"
-                                     x:Name="BacSi"
-                                     Command="{Binding BacSiCM}" Width="280"/>
-                            
+
+                                Style="{StaticResource BacSi}"
+                                Uid="5"
+                                FontFamily="Segoe UI"
+                                x:Name="BacSi"
+                                Command="{Binding BacSiCM}" Width="280"/>
+
 
                         </StackPanel>
                     </Grid>
@@ -137,20 +139,20 @@
                         <Border BorderThickness="0 1 0 0" BorderBrush="#CCA06E" Margin="20 0 0 0" VerticalAlignment="Bottom" />
                     </Grid>
                     <Grid Grid.Row="3">
-                        
+
                         <Button
-                          Style="{StaticResource LogOut}"
-                          Uid="6"
-                          FontFamily="Segoe UI"
-                          x:Name="LogOut"
+                            Style="{StaticResource LogOut}"
+                            Uid="6"
+                            FontFamily="Segoe UI"
+                            x:Name="LogOut"
                             Command="{Binding LogOutCM}"
-                             CommandParameter="{Binding ElementName=Mainview}"
-                           Width="280"  Margin="0,-10,0,10"/>        
+                            CommandParameter="{Binding ElementName=Mainview}"
+                            Width="280"  Margin="0,-10,0,10"/>
                     </Grid>
                 </Grid>
             </Border>
-            <Border Grid.Column="1" 
-         CornerRadius="0,40,40,0">
+            <Border Grid.Column="1"
+                    CornerRadius="0,40,40,0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
@@ -159,15 +161,15 @@
 
                     <Border Grid.Row="0">
                         <StackPanel
-                     Orientation="Horizontal" 
-                     VerticalAlignment="Top"
-                     HorizontalAlignment="Right"
-                     Margin="10 0 30 0">
+                            Orientation="Horizontal"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Margin="10 0 30 0">
                             <materialDesign:PackIcon Kind="WindowMinimize" Foreground="#7E542E" Height="24" Width="24" Margin="0,0,8,0">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseLeftButtonDown">
                                         <i:InvokeCommandAction Command="{Binding MinimizeLogin}"
-                                            CommandParameter="{Binding ElementName=Mainview}"></i:InvokeCommandAction>
+                                                               CommandParameter="{Binding ElementName=Mainview}"></i:InvokeCommandAction>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </materialDesign:PackIcon>
@@ -175,7 +177,7 @@
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseLeftButtonDown">
                                         <i:InvokeCommandAction Command="{Binding CloseLogin}"
-                                            CommandParameter="{Binding ElementName=Mainview}"></i:InvokeCommandAction>
+                                                               CommandParameter="{Binding ElementName=Mainview}"></i:InvokeCommandAction>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </materialDesign:PackIcon>
@@ -197,6 +199,15 @@
                 </Grid>
 
             </Border>
+            <StackPanel
+                x:Name="blurPanel"
+                Grid.Row="0"
+                Grid.RowSpan="10"
+                Grid.Column="0"
+                Grid.ColumnSpan="10"
+                Background="Black"
+                Opacity="0"
+                Visibility="Hidden" />
         </Grid>
 
 

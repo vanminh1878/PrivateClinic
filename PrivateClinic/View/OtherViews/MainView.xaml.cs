@@ -26,7 +26,16 @@ namespace PrivateClinic.View.OtherViews
             MainViewModel viewModel = new MainViewModel();
             this.DataContext = viewModel;
         }
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            this.blurPanel.Opacity = 0.2;
+            this.blurPanel.Visibility = Visibility.Visible;
+        }
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            this.blurPanel.Visibility = Visibility.Hidden;
+            this.blurPanel.Opacity = 0;
+        }
 
-       
     }
 }
