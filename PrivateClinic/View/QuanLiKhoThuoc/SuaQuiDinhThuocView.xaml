@@ -9,7 +9,7 @@
     Height="540"
     Width="750"
     BorderBrush="Transparent"
-     WindowStyle="None"
+    WindowStyle="None"
     ResizeMode="NoResize"
     Background="Transparent"
     FontFamily="Segoe UI"
@@ -18,17 +18,17 @@
     x:Name="SuaQuiDinhThuocViewPage"
     AllowsTransparency="True"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d">
     <Window.InputBindings>
         <KeyBinding Key="F2" Command="{Binding CancelCommand}"
-             CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}"/>
+                    CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}"/>
         <KeyBinding Key="F3" Command="{Binding SaveCommand}"
-             CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}"/>
+                    CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}"/>
     </Window.InputBindings>
 
     <Border
-    
+
         Background="White"
         BorderBrush="DarkGray"
         CornerRadius="10"
@@ -93,6 +93,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
+                        Text="{Binding tienkham}"
                         FontSize="18"
                         x:Name="TienKham"/>
 
@@ -134,7 +135,8 @@
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
                         FontSize="18"
-                        x:Name="Tilegia" />
+                        x:Name="Tilegia"
+                        Text="{Binding Tilegia}"/>
 
                 </Border>
 
@@ -167,15 +169,16 @@
                         BorderBrush="Black"
                         BorderThickness="0.7"
                         CornerRadius="10">
-                        <TextBox IsEnabled="False"
-    Width="250"
-    Height="35"
-    Padding="20,0,0,0"
-    HorizontalAlignment="Center"
-    VerticalAlignment="Center"
-    VerticalContentAlignment="Center"
-    FontSize="18"
-    x:Name="Dvt" />
+                        <TextBox IsReadOnly="True"
+                                 Width="250"
+                                 Height="35"
+                                 Padding="20,0,0,0"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="18"
+                                 x:Name="Dvt"
+                                 Text="{Binding dvt}"/>
                     </Border>
                     <Button ToolTip="Sửa đơn vị tính" Margin="20 0"  Width="40" Height="40" HorizontalAlignment="Right" >
                         <Button.Template>
@@ -188,7 +191,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding EditDvtCommand}"
-CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                                                       CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -203,31 +206,32 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                 <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-22 0 0 0">
                     <TextBlock
 
-   Margin="10,0,0,10"
-   HorizontalAlignment="Right"
-   FontSize="20"
-   VerticalAlignment="Center"
-   Text="Số cách dùng:" />
+                        Margin="10,0,0,10"
+                        HorizontalAlignment="Right"
+                        FontSize="20"
+                        VerticalAlignment="Center"
+                        Text="Số cách dùng:" />
 
                     <Border
- 
-   Width="250"
-   Height="35"
-   Margin="18,0,0,10"
-   HorizontalAlignment="Left"
-   BorderBrush="Black"
-   BorderThickness="0.7"
-   CornerRadius="10">
 
-                        <TextBox IsEnabled="False"
-       Width="250"
-       Height="35"
-       Padding="20,0,0,0"
-       HorizontalAlignment="Center"
-       VerticalAlignment="Center"
-                       FontSize="18"
-       VerticalContentAlignment="Center"
-       x:Name="cachdung" />
+                        Width="250"
+                        Height="35"
+                        Margin="18,0,0,10"
+                        HorizontalAlignment="Left"
+                        BorderBrush="Black"
+                        BorderThickness="0.7"
+                        CornerRadius="10">
+
+                        <TextBox IsReadOnly="True"
+                                 Width="250"
+                                 Height="35"
+                                 Padding="20,0,0,0"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 FontSize="18"
+                                 VerticalContentAlignment="Center"
+                                 x:Name="cachdung"
+                                 Text="{Binding CachDung}"/>
 
                     </Border>
                     <Button ToolTip="Sửa số cách dùng" Margin="20 0"  Width="40" Height="40" HorizontalAlignment="Right" >
@@ -241,7 +245,7 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding EditCachDungCommand}"
-CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                                                       CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -250,35 +254,36 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
             </Grid>
             <!--  Row 5 -->
             <Grid Grid.Row="5">
-               
+
                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-15 0 0 0">
                     <TextBlock
-     
-        Margin="10,0,0,10"
-        HorizontalAlignment="Right"
-        FontSize="20"
-        VerticalAlignment="Center"
-        Text="Số loại bệnh:" />
+
+                        Margin="10,0,0,10"
+                        HorizontalAlignment="Right"
+                        FontSize="20"
+                        VerticalAlignment="Center"
+                        Text="Số loại bệnh:" />
 
                     <Border
-      
-        Width="250"
-        Height="35"
-        Margin="18,0,0,10"
-        HorizontalAlignment="Left"
-        BorderBrush="Black"
-        BorderThickness="0.7"
-        CornerRadius="10">
 
-                        <TextBox IsEnabled="False"
-            Width="250"
-            Height="35"
-            Padding="20,0,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-                            FontSize="18"
-            VerticalContentAlignment="Center"
-            x:Name="loaibenh" />
+                        Width="250"
+                        Height="35"
+                        Margin="18,0,0,10"
+                        HorizontalAlignment="Left"
+                        BorderBrush="Black"
+                        BorderThickness="0.7"
+                        CornerRadius="10">
+
+                        <TextBox IsReadOnly="True"
+                                 Text="{Binding loaibenh}"
+                                 Width="250"
+                                 Height="35"
+                                 Padding="20,0,0,0"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 FontSize="18"
+                                 VerticalContentAlignment="Center"
+                                 x:Name="loaibenh" />
 
                     </Border>
                     <Button ToolTip="Sửa số loại bệnh" Margin="20 0"  Width="40" Height="40" HorizontalAlignment="Right" >
@@ -292,7 +297,7 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding EditSLBenhCommand}"
-CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                                                       CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -303,32 +308,33 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
 
                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-15 0 0 0">
                     <TextBlock
-     
-        Margin="10,0,0,10"
-        HorizontalAlignment="Right"
-        FontSize="20"
-        VerticalAlignment="Center"
-        Text="Số loại thuốc:" />
+
+                        Margin="10,0,0,10"
+                        HorizontalAlignment="Right"
+                        FontSize="20"
+                        VerticalAlignment="Center"
+                        Text="Số loại thuốc:" />
 
                     <Border
-      
-        Width="250"
-        Height="35"
-        Margin="18,0,0,10"
-        HorizontalAlignment="Left"
-        BorderBrush="Black"
-        BorderThickness="0.7"
-        CornerRadius="10">
 
-                        <TextBox IsEnabled="False"
-            Width="250"
-            Height="35"
-            Padding="20,0,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-                            FontSize="18"
-            VerticalContentAlignment="Center"
-            x:Name="loaithuoc" />
+                        Width="250"
+                        Height="35"
+                        Margin="18,0,0,10"
+                        HorizontalAlignment="Left"
+                        BorderBrush="Black"
+                        BorderThickness="0.7"
+                        CornerRadius="10">
+
+                        <TextBox IsReadOnly="True"
+                                 Text="{Binding loaithuoc}"
+                                 Width="250"
+                                 Height="35"
+                                 Padding="20,0,0,0"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 FontSize="18"
+                                 VerticalContentAlignment="Center"
+                                 x:Name="loaithuoc" />
 
                     </Border>
                     <Button ToolTip="Sửa số loại thuốc" Margin="20 0"  Width="40" Height="40" HorizontalAlignment="Right" >
@@ -342,7 +348,7 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding EditSLThuocCommand}"
-CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                                                       CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -370,32 +376,32 @@ CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding CancelCommand}"
-CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
+                                                       CommandParameter="{Binding ElementName=SuaQuiDinhThuocViewPage}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
                     <Button
-    Width="170"
-    Height="50"
-    Margin="5,0,30,0"
-    HorizontalAlignment="Right"
-    Content="       Lưu (F3)"
-    FontFamily="Segoe UI"
-    FontSize="22"
-    FontWeight="Bold">
+                        Width="170"
+                        Height="50"
+                        Margin="5,0,30,0"
+                        HorizontalAlignment="Right"
+                        Content="       Lưu (F3)"
+                        FontFamily="Segoe UI"
+                        FontSize="22"
+                        FontWeight="Bold">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid>
                                     <Border
-                    Background="#364C9A"
-                    BorderBrush="Transparent"
-                    CornerRadius="10">
+                                        Background="#364C9A"
+                                        BorderBrush="Transparent"
+                                        CornerRadius="10">
                                         <Border.Effect>
                                             <DropShadowEffect
-                            BlurRadius="5"
-                            Opacity="0.5"
-                            ShadowDepth="5"
-                            Color="Black" />
+                                                BlurRadius="5"
+                                                Opacity="0.5"
+                                                ShadowDepth="5"
+                                                Color="Black" />
                                         </Border.Effect>
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     </Border>
