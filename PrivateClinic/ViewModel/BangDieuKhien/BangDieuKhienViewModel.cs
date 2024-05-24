@@ -205,34 +205,47 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
             var seriesCollection = new SeriesCollection();
 
             var uniqueMedicines = filteredData.Select(x => x.MaThuoc).Distinct();
+            var valuesForSoLanDung = new ChartValues<int>();
+            var valuesForTongSoLuongDaDung = new ChartValues<int>();
 
             foreach (var medicine in uniqueMedicines)
             {
                 var medicineData = filteredData.Where(x => x.MaThuoc == medicine).ToList();
-                var values = new ChartValues<int>();
+                int totalSoLanDung = 0;
+                int totalTongSoLuongDaDung = 0;
 
                 foreach (var data in medicineData)
                 {
-                    values.Add(data.SoLanDung ?? 0);
+                    totalSoLanDung += data.SoLanDung ?? 0;
+                    totalTongSoLuongDaDung += data.TongSoLuongDaDung ?? 0;
                 }
 
-                seriesCollection.Add(new LineSeries
-                {
-                    Title = $"Thuốc {medicine}",
-                    Values = values,
-                    DataLabels = true,
-                    PointGeometry = DefaultGeometries.Circle,
-                    PointGeometrySize = 15
-                });
+                valuesForSoLanDung.Add(totalSoLanDung);
+                valuesForTongSoLuongDaDung.Add(totalTongSoLuongDaDung);
             }
+
+            seriesCollection.Add(new ColumnSeries
+            {
+                Title = "Số lần dùng",
+                Values = valuesForSoLanDung,
+                DataLabels = true
+            });
+
+            seriesCollection.Add(new ColumnSeries
+            {
+                Title = "Tổng số lượng đã dùng",
+                Values = valuesForTongSoLuongDaDung,
+                DataLabels = true
+            });
 
             UsageData = seriesCollection;
 
-            // Cập nhật Labels cho AxisX
-            AxisXLabelsUsage = new[] { $"Tháng {month}" };
+            // Cập nhật Labels cho AxisX với các tên thuốc
+            AxisXLabelsUsage = uniqueMedicines.Select(m => $"Thuốc {m}").ToArray();
 
             Console.WriteLine($"UsageData: {UsageData.Count}");
         }
+
 
         #endregion
 
@@ -256,17 +269,13 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
             switch (SelectedMonth)
             {
                 case "Tháng 3":
-
+                    UpdateMedicineUsageChartData(3);
                     break;
-
                 case "Tháng 4":
-
-
+                    UpdateMedicineUsageChartData(4);
                     break;
-
                 case "Tháng 5":
-
-
+                    UpdateMedicineUsageChartData(5);
                     break;
             }
             listBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
