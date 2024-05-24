@@ -14,7 +14,11 @@ namespace PrivateClinic.Model
     
     public partial class PHANQUYEN
     {
+        public int PHANQUYEN_ID { get; set; }
         public string MaNhom { get; set; }
         public string MaChucNang { get; set; }
+    
+        public virtual CHUCNANG CHUCNANG { get; set; }
+        public virtual NHOMNGUOIDUNG NHOMNGUOIDUNG { get; set; }
     }
 }

@@ -12,12 +12,13 @@
           <Property Name="MaBS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NgaySinh" Type="date" />
-          <Property Name="GioiTinh" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="SDT" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="10" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NgayVaoLam" Type="date" Nullable="false" />
           <Property Name="BangCap" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="BAOCAODOANHTHU">
           <Key>
@@ -32,7 +33,7 @@
           <Key>
             <PropertyRef Name="MaBaoCaoSuDungThuoc" />
           </Key>
-          <Property Name="MaBaoCaoSuDungThuoc" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaBaoCaoSuDungThuoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Thang" Type="int" />
           <Property Name="SoLanDung" Type="int" />
           <Property Name="TongSoLuongDaDung" Type="int" />
@@ -47,6 +48,7 @@
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="NamSinh" Type="date" Nullable="false" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrangThai" Type="bit" />
         </EntityType>
         <EntityType Name="CACHDUNG">
           <Key>
@@ -59,15 +61,15 @@
           <Key>
             <PropertyRef Name="MaChucNang" />
           </Key>
-          <Property Name="MaChucNang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaChucNang" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TenChucNang" Type="nvarchar" MaxLength="50" />
           <Property Name="TenManHinhDuocLoad" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CT_BCDT">
           <Key>
-            <PropertyRef Name="MaBCDT" />
-            <PropertyRef Name="SoHD" />
+            <PropertyRef Name="CTBCDT_ID" />
           </Key>
+          <Property Name="CTBCDT_ID" Type="int" Nullable="false" />
           <Property Name="MaBCDT" Type="int" Nullable="false" />
           <Property Name="SoHD" Type="int" Nullable="false" />
           <Property Name="SoBenhNhan" Type="int" />
@@ -85,8 +87,9 @@
         </EntityType>
         <EntityType Name="CT_PNT">
           <Key>
-            <PropertyRef Name="SoPhieuNhap" />
+            <PropertyRef Name="CTPNT_ID" />
           </Key>
+          <Property Name="CTPNT_ID" Type="int" Nullable="false" />
           <Property Name="SoPhieuNhap" Type="int" Nullable="false" />
           <Property Name="MaThuoc" Type="int" />
           <Property Name="SoLuongNhap" Type="int" />
@@ -110,6 +113,7 @@
           <Property Name="TongTien" Type="float" Nullable="false" />
           <Property Name="MaBN" Type="int" />
           <Property Name="MaPKB" Type="int" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LOAIBENH">
           <Key>
@@ -129,24 +133,25 @@
           <Key>
             <PropertyRef Name="TenDangNhap" />
           </Key>
-          <Property Name="TenDangNhap" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="MatKhau" Type="nchar" MaxLength="50" />
-          <Property Name="MaNhom" Type="nchar" MaxLength="10" />
+          <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" />
+          <Property Name="MaBS" Type="int" />
         </EntityType>
         <EntityType Name="NHOMNGUOIDUNG">
           <Key>
             <PropertyRef Name="MaNhom" />
           </Key>
-          <Property Name="MaNhom" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TenNhom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PHANQUYEN">
           <Key>
-            <PropertyRef Name="MaNhom" />
-            <PropertyRef Name="MaChucNang" />
+            <PropertyRef Name="PHANQUYEN_ID" />
           </Key>
-          <Property Name="MaNhom" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="MaChucNang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PHANQUYEN_ID" Type="int" Nullable="false" />
+          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaChucNang" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="PHIEUKHAMBENH">
           <Key>
@@ -155,16 +160,16 @@
           <Property Name="MaPKB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NgayKham" Type="date" Nullable="false" />
           <Property Name="MaLoaiBenh" Type="int" Nullable="false" />
-          <Property Name="MaBN" Type="int" Nullable="false" />
           <Property Name="MaBS" Type="int" />
           <Property Name="TrieuChung" Type="nvarchar" MaxLength="200" />
+          <Property Name="MaBN" Type="int" />
         </EntityType>
         <EntityType Name="PHIEUNHAPTHUOC">
           <Key>
             <PropertyRef Name="SoPhieuNhap" />
           </Key>
           <Property Name="SoPhieuNhap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NgayNhap" Type="date" Nullable="false" />
+          <Property Name="NgayNhap" Type="datetime" />
           <Property Name="TongTien" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="THAMSO">
@@ -186,6 +191,7 @@
           <Property Name="MaCachDung" Type="int" Nullable="false" />
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="DonGiaBan" Type="float" />
+          <Property Name="SoLuong" Type="int" />
         </EntityType>
         <Association Name="FK_BAOCAOSUDUNGTHUOC_THUOC">
           <End Role="THUOC" Type="Self.THUOC" Multiplicity="0..1" />
@@ -261,7 +267,7 @@
         </Association>
         <Association Name="FK_CT_PNT_SoPhieuNhap">
           <End Role="PHIEUNHAPTHUOC" Type="Self.PHIEUNHAPTHUOC" Multiplicity="1" />
-          <End Role="CT_PNT" Type="Self.CT_PNT" Multiplicity="0..1" />
+          <End Role="CT_PNT" Type="Self.CT_PNT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PHIEUNHAPTHUOC">
               <PropertyRef Name="SoPhieuNhap" />
@@ -295,6 +301,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NGUOIDUNG_BACSI">
+          <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
+          <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BACSI">
+              <PropertyRef Name="MaBS" />
+            </Principal>
+            <Dependent Role="NGUOIDUNG">
+              <PropertyRef Name="MaBS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NGUOIDUNG_NHOMNGUOIDUNG">
           <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="0..1" />
           <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="*" />
@@ -307,8 +325,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PHANQUYEN_CHUCNANG">
+          <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCNANG">
+              <PropertyRef Name="MaChucNang" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaChucNang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHANQUYEN_NHOMNGUOIDUNG">
+          <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMNGUOIDUNG">
+              <PropertyRef Name="MaNhom" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaNhom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PHIEUKHAMBENH_MaBN">
-          <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="1" />
+          <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
           <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BENHNHAN">
@@ -436,9 +478,21 @@
             <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENH" />
             <End Role="HOADON" EntitySet="HOADON" />
           </AssociationSet>
+          <AssociationSet Name="FK_NGUOIDUNG_BACSI" Association="Self.FK_NGUOIDUNG_BACSI">
+            <End Role="BACSI" EntitySet="BACSI" />
+            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNG" />
+          </AssociationSet>
           <AssociationSet Name="FK_NGUOIDUNG_NHOMNGUOIDUNG" Association="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG">
             <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNG" />
             <End Role="NGUOIDUNG" EntitySet="NGUOIDUNG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHANQUYEN_CHUCNANG" Association="Self.FK_PHANQUYEN_CHUCNANG">
+            <End Role="CHUCNANG" EntitySet="CHUCNANG" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHANQUYEN_NHOMNGUOIDUNG" Association="Self.FK_PHANQUYEN_NHOMNGUOIDUNG">
+            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNG" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
           </AssociationSet>
           <AssociationSet Name="FK_PHIEUKHAMBENH_MaBN" Association="Self.FK_PHIEUKHAMBENH_MaBN">
             <End Role="BENHNHAN" EntitySet="BENHNHAN" />
@@ -477,12 +531,14 @@
           <Property Name="MaBS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgaySinh" Type="DateTime" Precision="0" />
-          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgayVaoLam" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="BangCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="NGUOIDUNGs" Relationship="Self.FK_NGUOIDUNG_BACSI" FromRole="BACSI" ToRole="NGUOIDUNG" />
           <NavigationProperty Name="PHIEUKHAMBENHs" Relationship="Self.FK_PHIEUKHAMBENH_MaBS" FromRole="BACSI" ToRole="PHIEUKHAMBENH" />
         </EntityType>
         <EntityType Name="BAOCAODOANHTHU">
@@ -499,7 +555,7 @@
           <Key>
             <PropertyRef Name="MaBaoCaoSuDungThuoc" />
           </Key>
-          <Property Name="MaBaoCaoSuDungThuoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaBaoCaoSuDungThuoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Thang" Type="Int32" />
           <Property Name="SoLanDung" Type="Int32" />
           <Property Name="TongSoLuongDaDung" Type="Int32" />
@@ -515,6 +571,7 @@
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NamSinh" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" />
           <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_MaBN" FromRole="BENHNHAN" ToRole="HOADON" />
           <NavigationProperty Name="PHIEUKHAMBENHs" Relationship="Self.FK_PHIEUKHAMBENH_MaBN" FromRole="BENHNHAN" ToRole="PHIEUKHAMBENH" />
         </EntityType>
@@ -530,15 +587,16 @@
           <Key>
             <PropertyRef Name="MaChucNang" />
           </Key>
-          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenChucNang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TenManHinhDuocLoad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK_PHANQUYEN_CHUCNANG" FromRole="CHUCNANG" ToRole="PHANQUYEN" />
         </EntityType>
         <EntityType Name="CT_BCDT">
           <Key>
-            <PropertyRef Name="MaBCDT" />
-            <PropertyRef Name="SoHD" />
+            <PropertyRef Name="CTBCDT_ID" />
           </Key>
+          <Property Name="CTBCDT_ID" Type="Int32" Nullable="false" />
           <Property Name="MaBCDT" Type="Int32" Nullable="false" />
           <Property Name="SoHD" Type="Int32" Nullable="false" />
           <Property Name="SoBenhNhan" Type="Int32" />
@@ -560,8 +618,9 @@
         </EntityType>
         <EntityType Name="CT_PNT">
           <Key>
-            <PropertyRef Name="SoPhieuNhap" />
+            <PropertyRef Name="CTPNT_ID" />
           </Key>
+          <Property Name="CTPNT_ID" Type="Int32" Nullable="false" />
           <Property Name="SoPhieuNhap" Type="Int32" Nullable="false" />
           <Property Name="MaThuoc" Type="Int32" />
           <Property Name="SoLuongNhap" Type="Int32" />
@@ -588,6 +647,7 @@
           <Property Name="TongTien" Type="Double" Nullable="false" />
           <Property Name="MaBN" Type="Int32" />
           <Property Name="MaPKB" Type="Int32" />
+          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BENHNHAN" Relationship="Self.FK_HOADON_MaBN" FromRole="HOADON" ToRole="BENHNHAN" />
           <NavigationProperty Name="CT_BCDT" Relationship="Self.FK_CT_BCDT_SoHD" FromRole="HOADON" ToRole="CT_BCDT" />
           <NavigationProperty Name="PHIEUKHAMBENH" Relationship="Self.FK_HOADON_MaPKB" FromRole="HOADON" ToRole="PHIEUKHAMBENH" />
@@ -612,26 +672,31 @@
           <Key>
             <PropertyRef Name="TenDangNhap" />
           </Key>
-          <Property Name="TenDangNhap" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MaBS" Type="Int32" />
+          <NavigationProperty Name="BACSI" Relationship="Self.FK_NGUOIDUNG_BACSI" FromRole="NGUOIDUNG" ToRole="BACSI" />
           <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NGUOIDUNG" ToRole="NHOMNGUOIDUNG" />
         </EntityType>
         <EntityType Name="NHOMNGUOIDUNG">
           <Key>
             <PropertyRef Name="MaNhom" />
           </Key>
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NGUOIDUNGs" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NHOMNGUOIDUNG" ToRole="NGUOIDUNG" />
+          <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK_PHANQUYEN_NHOMNGUOIDUNG" FromRole="NHOMNGUOIDUNG" ToRole="PHANQUYEN" />
         </EntityType>
         <EntityType Name="PHANQUYEN">
           <Key>
-            <PropertyRef Name="MaNhom" />
-            <PropertyRef Name="MaChucNang" />
+            <PropertyRef Name="PHANQUYEN_ID" />
           </Key>
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PHANQUYEN_ID" Type="Int32" Nullable="false" />
+          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CHUCNANG" Relationship="Self.FK_PHANQUYEN_CHUCNANG" FromRole="PHANQUYEN" ToRole="CHUCNANG" />
+          <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK_PHANQUYEN_NHOMNGUOIDUNG" FromRole="PHANQUYEN" ToRole="NHOMNGUOIDUNG" />
         </EntityType>
         <EntityType Name="PHIEUKHAMBENH">
           <Key>
@@ -640,9 +705,9 @@
           <Property Name="MaPKB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NgayKham" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="MaLoaiBenh" Type="Int32" Nullable="false" />
-          <Property Name="MaBN" Type="Int32" Nullable="false" />
           <Property Name="MaBS" Type="Int32" />
           <Property Name="TrieuChung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MaBN" Type="Int32" />
           <NavigationProperty Name="BACSI" Relationship="Self.FK_PHIEUKHAMBENH_MaBS" FromRole="PHIEUKHAMBENH" ToRole="BACSI" />
           <NavigationProperty Name="BENHNHAN" Relationship="Self.FK_PHIEUKHAMBENH_MaBN" FromRole="PHIEUKHAMBENH" ToRole="BENHNHAN" />
           <NavigationProperty Name="CT_PKB" Relationship="Self.FK_CT_PKB_PHIEUKHAMBENH" FromRole="PHIEUKHAMBENH" ToRole="CT_PKB" />
@@ -654,7 +719,7 @@
             <PropertyRef Name="SoPhieuNhap" />
           </Key>
           <Property Name="SoPhieuNhap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NgayNhap" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NgayNhap" Type="DateTime" Precision="3" />
           <Property Name="TongTien" Type="Double" Nullable="false" />
           <NavigationProperty Name="CT_PNT" Relationship="Self.FK_CT_PNT_SoPhieuNhap" FromRole="PHIEUNHAPTHUOC" ToRole="CT_PNT" />
         </EntityType>
@@ -677,6 +742,7 @@
           <Property Name="MaCachDung" Type="Int32" Nullable="false" />
           <Property Name="DonGiaNhap" Type="Double" />
           <Property Name="DonGiaBan" Type="Double" />
+          <Property Name="SoLuong" Type="Int32" />
           <NavigationProperty Name="BAOCAOSUDUNGTHUOCs" Relationship="Self.FK_BAOCAOSUDUNGTHUOC_THUOC" FromRole="THUOC" ToRole="BAOCAOSUDUNGTHUOC" />
           <NavigationProperty Name="CACHDUNG" Relationship="Self.FK_THUOC_MaCachDung" FromRole="THUOC" ToRole="CACHDUNG" />
           <NavigationProperty Name="CT_PKB" Relationship="Self.FK_CT_PKB_THUOC" FromRole="THUOC" ToRole="CT_PKB" />
@@ -684,6 +750,18 @@
           <NavigationProperty Name="DVT" Relationship="Self.FK_THUOC_MaDVT" FromRole="THUOC" ToRole="DVT" />
           <NavigationProperty Name="LOAITHUOC" Relationship="Self.FK_THUOC_MaLoaiThuoc" FromRole="THUOC" ToRole="LOAITHUOC" />
         </EntityType>
+        <Association Name="FK_NGUOIDUNG_BACSI">
+          <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
+          <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BACSI">
+              <PropertyRef Name="MaBS" />
+            </Principal>
+            <Dependent Role="NGUOIDUNG">
+              <PropertyRef Name="MaBS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PHIEUKHAMBENH_MaBS">
           <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
           <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="*" />
@@ -733,7 +811,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PHIEUKHAMBENH_MaBN">
-          <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="1" />
+          <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
           <End Role="PHIEUKHAMBENH" Type="Self.PHIEUKHAMBENH" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BENHNHAN">
@@ -753,6 +831,18 @@
             </Principal>
             <Dependent Role="THUOC">
               <PropertyRef Name="MaCachDung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHANQUYEN_CHUCNANG">
+          <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCNANG">
+              <PropertyRef Name="MaChucNang" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaChucNang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -806,7 +896,7 @@
         </Association>
         <Association Name="FK_CT_PNT_SoPhieuNhap">
           <End Role="PHIEUNHAPTHUOC" Type="Self.PHIEUNHAPTHUOC" Multiplicity="1" />
-          <End Role="CT_PNT" Type="Self.CT_PNT" Multiplicity="0..1" />
+          <End Role="CT_PNT" Type="Self.CT_PNT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PHIEUNHAPTHUOC">
               <PropertyRef Name="SoPhieuNhap" />
@@ -876,6 +966,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PHANQUYEN_NHOMNGUOIDUNG">
+          <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMNGUOIDUNG">
+              <PropertyRef Name="MaNhom" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaNhom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="QUANLYPHONGMACHTUEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BACSIs" EntityType="Self.BACSI" />
           <EntitySet Name="BAOCAODOANHTHUs" EntityType="Self.BAOCAODOANHTHU" />
@@ -897,6 +999,10 @@
           <EntitySet Name="PHIEUNHAPTHUOCs" EntityType="Self.PHIEUNHAPTHUOC" />
           <EntitySet Name="THAMSOes" EntityType="Self.THAMSO" />
           <EntitySet Name="THUOCs" EntityType="Self.THUOC" />
+          <AssociationSet Name="FK_NGUOIDUNG_BACSI" Association="Self.FK_NGUOIDUNG_BACSI">
+            <End Role="BACSI" EntitySet="BACSIs" />
+            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNGs" />
+          </AssociationSet>
           <AssociationSet Name="FK_PHIEUKHAMBENH_MaBS" Association="Self.FK_PHIEUKHAMBENH_MaBS">
             <End Role="BACSI" EntitySet="BACSIs" />
             <End Role="PHIEUKHAMBENH" EntitySet="PHIEUKHAMBENHs" />
@@ -920,6 +1026,10 @@
           <AssociationSet Name="FK_THUOC_MaCachDung" Association="Self.FK_THUOC_MaCachDung">
             <End Role="CACHDUNG" EntitySet="CACHDUNGs" />
             <End Role="THUOC" EntitySet="THUOCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHANQUYEN_CHUCNANG" Association="Self.FK_PHANQUYEN_CHUCNANG">
+            <End Role="CHUCNANG" EntitySet="CHUCNANGs" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYENs" />
           </AssociationSet>
           <AssociationSet Name="FK_CT_BCDT_SoHD" Association="Self.FK_CT_BCDT_SoHD">
             <End Role="HOADON" EntitySet="HOADONs" />
@@ -961,6 +1071,10 @@
             <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNGs" />
             <End Role="NGUOIDUNG" EntitySet="NGUOIDUNGs" />
           </AssociationSet>
+          <AssociationSet Name="FK_PHANQUYEN_NHOMNGUOIDUNG" Association="Self.FK_PHANQUYEN_NHOMNGUOIDUNG">
+            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNGs" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYENs" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -980,6 +1094,7 @@
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
                 <ScalarProperty Name="NgayVaoLam" ColumnName="NgayVaoLam" />
                 <ScalarProperty Name="BangCap" ColumnName="BangCap" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1012,6 +1127,7 @@
                 <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
                 <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1035,6 +1151,7 @@
           <EntitySetMapping Name="CT_BCDT">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CT_BCDT">
               <MappingFragment StoreEntitySet="CT_BCDT">
+                <ScalarProperty Name="CTBCDT_ID" ColumnName="CTBCDT_ID" />
                 <ScalarProperty Name="MaBCDT" ColumnName="MaBCDT" />
                 <ScalarProperty Name="SoHD" ColumnName="SoHD" />
                 <ScalarProperty Name="SoBenhNhan" ColumnName="SoBenhNhan" />
@@ -1055,6 +1172,7 @@
           <EntitySetMapping Name="CT_PNT">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.CT_PNT">
               <MappingFragment StoreEntitySet="CT_PNT">
+                <ScalarProperty Name="CTPNT_ID" ColumnName="CTPNT_ID" />
                 <ScalarProperty Name="SoPhieuNhap" ColumnName="SoPhieuNhap" />
                 <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
                 <ScalarProperty Name="SoLuongNhap" ColumnName="SoLuongNhap" />
@@ -1080,6 +1198,7 @@
                 <ScalarProperty Name="TongTien" ColumnName="TongTien" />
                 <ScalarProperty Name="MaBN" ColumnName="MaBN" />
                 <ScalarProperty Name="MaPKB" ColumnName="MaPKB" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1105,6 +1224,7 @@
                 <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+                <ScalarProperty Name="MaBS" ColumnName="MaBS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1119,6 +1239,7 @@
           <EntitySetMapping Name="PHANQUYENs">
             <EntityTypeMapping TypeName="QUANLYPHONGMACHTUModel.PHANQUYEN">
               <MappingFragment StoreEntitySet="PHANQUYEN">
+                <ScalarProperty Name="PHANQUYEN_ID" ColumnName="PHANQUYEN_ID" />
                 <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
                 <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
               </MappingFragment>
@@ -1130,9 +1251,9 @@
                 <ScalarProperty Name="MaPKB" ColumnName="MaPKB" />
                 <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
                 <ScalarProperty Name="MaLoaiBenh" ColumnName="MaLoaiBenh" />
-                <ScalarProperty Name="MaBN" ColumnName="MaBN" />
                 <ScalarProperty Name="MaBS" ColumnName="MaBS" />
                 <ScalarProperty Name="TrieuChung" ColumnName="TrieuChung" />
+                <ScalarProperty Name="MaBN" ColumnName="MaBN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1164,6 +1285,7 @@
                 <ScalarProperty Name="MaCachDung" ColumnName="MaCachDung" />
                 <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
                 <ScalarProperty Name="DonGiaBan" ColumnName="DonGiaBan" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

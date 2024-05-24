@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PrivateClinic.Model
+﻿namespace PrivateClinic.Model
 {
     public class DataProvider
     {
@@ -31,4 +25,5 @@ namespace PrivateClinic.Model
             DB = new QUANLYPHONGMACHTUEntities();
         }
     }
+
 }
