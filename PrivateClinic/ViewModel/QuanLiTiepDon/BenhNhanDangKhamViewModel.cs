@@ -232,7 +232,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                     }
                     else if (p.LoaiBenh.Text == "" || p.TrieuChung.Text == "")
                     {
-                        OkMessageBox mb = new OkMessageBox("Chưa đủ thông tin!", "Chưa chọn bệnh nhân để khám");
+                        OkMessageBox mb = new OkMessageBox("Chưa đủ thông tin!", "Chưa đủ thông tin để khám");
                         mb.ShowDialog();
                     }
                     else
