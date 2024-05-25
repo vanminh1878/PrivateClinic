@@ -142,6 +142,7 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
             listBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
             Months = new ObservableCollection<string> {"Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5" , "Tháng 6"};
             SelectedMonth = Months[0]; // Default selection
+
             StartClock();
         }
 
@@ -244,18 +245,24 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
         private void UpdateMedicineUsageChartData(int month)
         {
             var listBaoCaoSuDungThuoc = new ObservableCollection<BAOCAOSUDUNGTHUOC>(DataProvider.Ins.DB.BAOCAOSUDUNGTHUOCs);
+            var listThuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
+
 
             var filteredData = listBaoCaoSuDungThuoc.Where(x => x.Thang == month).ToList();
-
+            Console.WriteLine($"Month selected: {month} filteredData count: {filteredData.Count}");
+            
             var seriesCollection = new SeriesCollection();
 
             var uniqueMedicines = filteredData.Select(x => x.MaThuoc).Distinct();
             var valuesForSoLanDung = new ChartValues<int>();
             var valuesForTongSoLuongDaDung = new ChartValues<int>();
+            var medicineNames = new List<string>();
 
             foreach (var medicine in uniqueMedicines)
             {
                 var medicineData = filteredData.Where(x => x.MaThuoc == medicine).ToList();
+                var medicineInfo = listThuoc.FirstOrDefault(t => t.MaThuoc == medicine);
+
                 int totalSoLanDung = 0;
                 int totalTongSoLuongDaDung = 0;
 
@@ -267,26 +274,37 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
 
                 valuesForSoLanDung.Add(totalSoLanDung);
                 valuesForTongSoLuongDaDung.Add(totalTongSoLuongDaDung);
+                if (medicineInfo != null)
+                {
+                    medicineNames.Add(medicineInfo.TenThuoc);
+                } else
+                {
+                    medicineNames.Add($"Thuốc {medicine}");
+                }
             }
 
-            seriesCollection.Add(new ColumnSeries
+            var newSeriesCollection = new SeriesCollection
             {
-                Title = "Số lần dùng",
-                Values = valuesForSoLanDung,
-                DataLabels = true
-            });
+                    new ColumnSeries
+                {
+                    Title = "Số lần dùng",
+                    Values = valuesForSoLanDung,
+                    DataLabels = true
+                },
+                    new ColumnSeries
+                {
+                    Title = "Tổng số lượng đã dùng",
+                    Values = valuesForTongSoLuongDaDung,
+                    DataLabels = true
+                }
+            };
 
-            seriesCollection.Add(new ColumnSeries
-            {
-                Title = "Tổng số lượng đã dùng",
-                Values = valuesForTongSoLuongDaDung,
-                DataLabels = true
-            });
-
-            UsageData = seriesCollection;
+            UsageData = newSeriesCollection;
 
             // Cập nhật Labels cho AxisX với các tên thuốc
-            AxisXLabelsUsage = uniqueMedicines.Select(m => $"Thuốc {m}").ToArray();
+            AxisXLabelsUsage = medicineNames.ToArray();
+            OnPropertyChanged(nameof(UsageData));
+            OnPropertyChanged(nameof( AxisXLabelsUsage));
 
             Console.WriteLine($"UsageData: {UsageData.Count}");
         }
@@ -313,6 +331,12 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
 
             switch (SelectedMonth)
             {
+                case "Tháng 1":
+                    UpdateMedicineUsageChartData(1);
+                    break;
+                case "Tháng 2":
+                    UpdateMedicineUsageChartData(2);
+                    break;
                 case "Tháng 3":
                     UpdateMedicineUsageChartData(3);
                     break;
@@ -321,6 +345,9 @@ namespace PrivateClinic.ViewModel.BangDieuKhien
                     break;
                 case "Tháng 5":
                     UpdateMedicineUsageChartData(5);
+                    break;  
+                case "Tháng 6":
+                    UpdateMedicineUsageChartData(6);
                     break;
             }
             listBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);

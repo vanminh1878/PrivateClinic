@@ -62,7 +62,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
             LoadPageCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 MainFrame = p;
-                p.Content = new BangDieuKhienView();
+                p.Content = new View.QuanLiTiepDon.QuanLiKhamBenhView();
             });
             HomeCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
