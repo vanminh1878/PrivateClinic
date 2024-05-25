@@ -159,14 +159,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 OkMessageBox ok = new OkMessageBox("Thông báo", "Chưa đủ thông tin");
                 ok.ShowDialog();
             }
-            else if (!int.TryParse(paramater.SL.Text, out int slValue))
+            else if (!int.TryParse(paramater.SL.Text, out int slValue) || slValue <= 0)
             {
-                OkMessageBox ok = new OkMessageBox("Thông báo", "Số lượng phải là số");
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Số lượng không hợp lệ");
                 ok.ShowDialog();
             }
-            else if (!double.TryParse(paramater.DonGiaNhap.Text, out double dgValue))
+            else if (!double.TryParse(paramater.DonGiaNhap.Text, out double dgValue)|| dgValue <0)
             {
-                OkMessageBox ok = new OkMessageBox("Thông báo", "Đơn giá nhập phải là số");
+                OkMessageBox ok = new OkMessageBox("Thông báo", "Đơn giá nhập không hợp lệ");
                 ok.ShowDialog();
             }
             else
@@ -177,7 +177,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
                 {
                     if (t.TenThuoc.Equals(paramater.TenThuoc.Text, StringComparison.OrdinalIgnoreCase))
                     {
-                        OkMessageBox ok = new OkMessageBox("Thông báo", "Thuốc này đã có tong kho");
+                        OkMessageBox ok = new OkMessageBox("Thông báo", "Thuốc này đã có trong kho");
                         ok.ShowDialog(); 
                         thuocDaTonTai = true;
                         break;

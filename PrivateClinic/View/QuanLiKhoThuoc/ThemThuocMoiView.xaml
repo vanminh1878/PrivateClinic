@@ -271,7 +271,7 @@
                         </WrapPanel>
                     </Grid>
                     <Grid Grid.Row="2">
-                        <WrapPanel VerticalAlignment="Center">
+                        <WrapPanel  VerticalAlignment="Center">
                             <TextBlock
                                 Grid.Column="0"
                                 Margin="10,0,50,10"
@@ -290,7 +290,7 @@
                                 CornerRadius="10">
 
                                 <ComboBox
-   
+                        
                                     Width="209"
                                     Height="40"
                                     Padding="15,0,0,0"

@@ -194,14 +194,14 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         {
             thamso = new ObservableCollection<THAMSO>(DataProvider.Ins.DB.THAMSOes);
             Listthuoc = new ObservableCollection<THUOC>(DataProvider.Ins.DB.THUOCs);
-            if (!double.TryParse(p.Tilegia.Text, out double tile))
+            if (!double.TryParse(p.Tilegia.Text, out double tile ) || tile < 0)
             {
-                OkMessageBox mb = new OkMessageBox("Thông báo", "Tỉ lệ giá phải là số!");
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Tỉ lệ giá không hợp lệ!");
                 mb.ShowDialog();
             }
-            else if (!double.TryParse(p.TienKham.Text, out double tienkham))
+            else if (!double.TryParse(p.TienKham.Text, out double tienkham) || tienkham < 0)
             {
-                OkMessageBox mb = new OkMessageBox("Thông báo", "Tiền khám phải là số!");
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Tiền khám không hợp lệ!");
                 mb.ShowDialog();
             }
             else

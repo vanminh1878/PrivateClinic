@@ -193,9 +193,9 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
                 OkMessageBox mb = new OkMessageBox("Thông báo", "Chưa nhập đủ thông tin");
                 mb.ShowDialog();
             }
-            else if (!SoLuong.All(char.IsDigit))
+            else if (!SoLuong.All(char.IsDigit) || int.Parse(SoLuong) <= 0)
             {
-                OkMessageBox mb = new OkMessageBox("Thông báo", "Số lượng chỉ chứa số");
+                OkMessageBox mb = new OkMessageBox("Thông báo", "Số lượng không hợp lệ");
                 mb.ShowDialog();
             }
             else if (int.Parse(SoLuong) > SelectedThuoc.SoLuong)

@@ -58,7 +58,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             }
             else
             {
-                if (!(int.TryParse(paramater.SL.Text, out int soLuong)))
+                if (!(int.TryParse(paramater.SL.Text, out int soLuong)) || soLuong <= 0)
                 {
                     OkMessageBox ok = new OkMessageBox("Thông báo", "Số lượng không hợp lệ");
                     ok.ShowDialog();
