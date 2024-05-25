@@ -94,7 +94,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
         }
         private void _LoadCommand(QuanLiKhoThuocView p)
         {
-            if (Const.PQ.MaNhom == "NHOM1")
+            if (Const.PQ.MaNhom == 1)
             {
                 SetQuanLy = Visibility.Visible;
                 SetNhanVien = Visibility.Collapsed;
@@ -129,7 +129,7 @@ namespace PrivateClinic.ViewModel.QuanLiKhoThuocVM
             User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == tendangnhap).FirstOrDefault();
             string MaBS = User.MaBS.ToString();
             ObservableCollection<BACSI> DSBS = new ObservableCollection<BACSI>(DataProvider.Ins.DB.BACSIs);
-            if (Const.PQ.MaNhom == "NHOM1")
+            if (Const.PQ.MaNhom == 1)
                 ChucVu = "Admin";
             else
                 ChucVu = "Nhân viên";

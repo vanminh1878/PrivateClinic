@@ -21,7 +21,7 @@ namespace PrivateClinic.Model
             this.PHANQUYENs = new HashSet<PHANQUYEN>();
         }
     
-        public string MaNhom { get; set; }
+        public int MaNhom { get; set; }
         public string TenNhom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

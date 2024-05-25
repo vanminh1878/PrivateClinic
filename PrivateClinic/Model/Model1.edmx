@@ -61,7 +61,7 @@
           <Key>
             <PropertyRef Name="CTBCDT_ID" />
           </Key>
-          <Property Name="CTBCDT_ID" Type="int" Nullable="false" />
+          <Property Name="CTBCDT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaBCDT" Type="int" Nullable="false" />
           <Property Name="SoHD" Type="int" Nullable="false" />
           <Property Name="SoBenhNhan" Type="int" />
@@ -93,8 +93,8 @@
             <PropertyRef Name="MaChucNang" />
           </Key>
           <Property Name="MaChucNang" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TenChucNang" Type="nvarchar" MaxLength="50" />
-          <Property Name="TenManHinhDuocLoad" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenChucNang" Type="nvarchar" MaxLength="200" />
+          <Property Name="TenManHinhDuocLoad" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DVT">
           <Key>
@@ -135,14 +135,14 @@
           </Key>
           <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
-          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" />
+          <Property Name="MaNhom" Type="int" />
           <Property Name="MaBS" Type="int" />
         </EntityType>
         <EntityType Name="NHOMNGUOIDUNG">
           <Key>
             <PropertyRef Name="MaNhom" />
           </Key>
-          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaNhom" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenNhom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PHANQUYEN">
@@ -150,7 +150,7 @@
             <PropertyRef Name="PHANQUYEN_ID" />
           </Key>
           <Property Name="PHANQUYEN_ID" Type="int" Nullable="false" />
-          <Property Name="MaNhom" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaNhom" Type="int" Nullable="false" />
           <Property Name="MaChucNang" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="PHIEUKHAMBENH">
@@ -587,7 +587,7 @@
           <Key>
             <PropertyRef Name="CTBCDT_ID" />
           </Key>
-          <Property Name="CTBCDT_ID" Type="Int32" Nullable="false" />
+          <Property Name="CTBCDT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaBCDT" Type="Int32" Nullable="false" />
           <Property Name="SoHD" Type="Int32" Nullable="false" />
           <Property Name="SoBenhNhan" Type="Int32" />
@@ -625,8 +625,8 @@
             <PropertyRef Name="MaChucNang" />
           </Key>
           <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TenChucNang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TenManHinhDuocLoad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenChucNang" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TenManHinhDuocLoad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK_PHANQUYEN_CHUCNANG" FromRole="CHUCNANG" ToRole="PHANQUYEN" />
         </EntityType>
         <EntityType Name="DVT">
@@ -674,7 +674,7 @@
           </Key>
           <Property Name="TenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MaNhom" Type="Int32" />
           <Property Name="MaBS" Type="Int32" />
           <NavigationProperty Name="BACSI" Relationship="Self.FK_NGUOIDUNG_BACSI" FromRole="NGUOIDUNG" ToRole="BACSI" />
           <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NGUOIDUNG" ToRole="NHOMNGUOIDUNG" />
@@ -683,7 +683,7 @@
           <Key>
             <PropertyRef Name="MaNhom" />
           </Key>
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaNhom" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NGUOIDUNGs" Relationship="Self.FK_NGUOIDUNG_NHOMNGUOIDUNG" FromRole="NHOMNGUOIDUNG" ToRole="NGUOIDUNG" />
           <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK_PHANQUYEN_NHOMNGUOIDUNG" FromRole="NHOMNGUOIDUNG" ToRole="PHANQUYEN" />
@@ -693,7 +693,7 @@
             <PropertyRef Name="PHANQUYEN_ID" />
           </Key>
           <Property Name="PHANQUYEN_ID" Type="Int32" Nullable="false" />
-          <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaNhom" Type="Int32" Nullable="false" />
           <Property Name="MaChucNang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CHUCNANG" Relationship="Self.FK_PHANQUYEN_CHUCNANG" FromRole="PHANQUYEN" ToRole="CHUCNANG" />
           <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK_PHANQUYEN_NHOMNGUOIDUNG" FromRole="PHANQUYEN" ToRole="NHOMNGUOIDUNG" />

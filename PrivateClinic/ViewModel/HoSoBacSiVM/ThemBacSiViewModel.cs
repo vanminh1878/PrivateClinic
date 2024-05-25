@@ -266,7 +266,7 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
                 //Thêm tài khoản
                 NGUOIDUNG nguoi = new NGUOIDUNG();
                 nguoi.MaBS = bacsi.MaBS;
-                nguoi.MaNhom = "NHOM2";
+                nguoi.MaNhom = 2;
                 nguoi.TenDangNhap = TaoTenDangNhap(bacsi);
                 nguoi.MatKhau = TaoMK();
                 DataProvider.Ins.DB.NGUOIDUNGs.Add(nguoi);

@@ -33,13 +33,13 @@ namespace PrivateClinic.View.HoSoBacSi
         {
             if (DataContext is PhanQuyenViewModel viewModel)
             {
-                //var selectedBenhNhan = (sender as System.Windows.Controls.Button)?.CommandParameter as PQDTO;
+                var selectedMedicine = (sender as Button)?.CommandParameter as PQDTO;
 
-                //if (selectedBenhNhan != null)
-                //{
-                //    viewModel.EditCommand.Execute(selectedBenhNhan);
-
-                //}
+                if (selectedMedicine != null)
+                {
+                    viewModel.EditCommand.Execute(selectedMedicine);
+                    ListViewPQ.Items.Refresh();
+                }
             }
         }
     }

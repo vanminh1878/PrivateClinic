@@ -135,8 +135,8 @@
                                 <!--STT-->
                                 <Grid Grid.Column="0">
                                     <TextBlock Text="{Binding ChucNang}"
-                                               HorizontalAlignment="Center"
-                                               Margin="0,0,10,0"
+                                               HorizontalAlignment="Left"
+                                               Margin="50,0,10,0"
                                                VerticalAlignment="Center"
                                                FontFamily="Segoe UI"
                                                FontSize="20" />

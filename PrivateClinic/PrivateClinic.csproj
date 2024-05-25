@@ -340,6 +340,7 @@
     <Compile Include="ViewModel\HoSoBacSiVM\DoiMatKhauViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\HoSoBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\PhanQuyenViewModel.cs" />
+    <Compile Include="ViewModel\HoSoBacSiVM\SuaNhomNguoiDungViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\SuaThongTinBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThemBacSiViewModel.cs" />
     <Compile Include="ViewModel\HoSoBacSiVM\ThemNhomNguoiDungViewModel.cs" />
@@ -788,7 +789,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="ResourceXAML\image\ic_add.png" />
     <Resource Include="ResourceXAML\image\ic_arrow_down.png" />
@@ -854,18 +866,6 @@
     <Resource Include="ResourceXAML\image\ic_khambenh.png" />
     <Resource Include="ResourceXAML\image\ic_email.png" />
     <Resource Include="ResourceXAML\image\img_default.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets')" />

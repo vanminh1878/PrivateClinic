@@ -35,15 +35,16 @@ namespace PrivateClinic.ViewModel.HoSoBacSiVM
         }
         private void _saveCommand(ThemNhomNguoiDungView p)
         {
-            //nhomND = new ObservableCollection<NHOMNGUOIDUNG>(DataProvider.Ins.DB.NHOMNGUOIDUNGs);
-            //NHOMNGUOIDUNG nHOMNGUOIDUNG = new NHOMNGUOIDUNG();
-            //{
-            //    nHOMNGUOIDUNG.TenNhom = p.NhomNDmoi.Text;
-            //    //nHOMNGUOIDUNG.MaNhom = 
-            //}
-            //DataProvider.Ins.DB.NHOMNGUOIDUNGs.Add(nHOMNGUOIDUNG);
-            //DataProvider.Ins.DB.SaveChanges();
-            //MessageBox.Show("Thêm nhóm người dùng mới thành công!", "THÔNG BÁO");
+            nhomND = new ObservableCollection<NHOMNGUOIDUNG>(DataProvider.Ins.DB.NHOMNGUOIDUNGs);
+            NHOMNGUOIDUNG nHOMNGUOIDUNG = new NHOMNGUOIDUNG();
+            {
+                nHOMNGUOIDUNG.TenNhom = p.NhomNDmoi.Text;
+            }
+            DataProvider.Ins.DB.NHOMNGUOIDUNGs.Add(nHOMNGUOIDUNG);
+            DataProvider.Ins.DB.SaveChanges();
+            MessageBox.Show("Thêm nhóm người dùng mới thành công!", "THÔNG BÁO");
+            p.Close();
+
         }
     }
 }

@@ -3,14 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-   xmlns:local="clr-namespace:PrivateClinic.View.HoSoBacSi"
+    xmlns:local="clr-namespace:PrivateClinic.View.HoSoBacSi"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="ThongTinThuocViewPage"
+    x:Name="SuaNhomNguoiDungViewPage"
     Title="ThongTinThuocView"
     Height="320"
     Width="750"
-     WindowStyle="None"
+    WindowStyle="None"
     ResizeMode="NoResize"
     Background="Transparent"
     AllowsTransparency="True"
@@ -18,7 +18,7 @@
     TextElement.FontSize="19"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d">
 
     <Border
@@ -61,7 +61,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseLeftButtonDown">
                                 <i:InvokeCommandAction Command="{Binding ExitCommand}"
-                 CommandParameter="{Binding ElementName=ThongTinThuocViewPage}"></i:InvokeCommandAction>
+                                                       CommandParameter="{Binding ElementName=SuaNhomNguoiDungViewPage}"></i:InvokeCommandAction>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </materialDesign:PackIcon>
@@ -86,85 +86,85 @@
                             <ColumnDefinition  />
                             <ColumnDefinition  />
                         </Grid.ColumnDefinitions>
-                  
 
-                    <StackPanel Grid.Column="0">
+
+                        <StackPanel Grid.Column="0">
                             <TextBlock
-Grid.Row="0"
-Width="150"
-Height="50"
-Margin="80,10,0,0"
-Padding="0,10,0,0"
-HorizontalAlignment="Left"
-VerticalAlignment="Bottom"
-materialDesign:HintAssist.Hint="Mã thuốc"
-FontWeight="SemiBold"
-Text="Tên chức năng "
+                                Grid.Row="0"
+                                Width="150"
+                                Height="50"
+                                Margin="80,10,0,0"
+                                Padding="0,10,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                materialDesign:HintAssist.Hint="Mã thuốc"
+                                FontWeight="SemiBold"
+                                Text="Tên chức năng "
 
-       
- />
+
+                                />
 
                             <!--  Chỗ Ten thuoc  -->
                             <TextBlock
-Grid.Row="0"
-Width="264"
-Height="50"
-Margin="80,0,0,70"
-Padding="0,0,0,0"
-HorizontalAlignment="Left"
+                                Grid.Row="0"
+                                Width="264"
+                                Height="50"
+                                Margin="80,0,0,70"
+                                Padding="0,0,0,0"
+                                HorizontalAlignment="Left"
 
-FontWeight="SemiBold"
 
-x:Name="TenThuoc"
 
- />
+                                x:Name="TenChucNang"
+
+                                />
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock
-Grid.Row="0"
-Width="150"
-Height="50"
-Margin="80,10,0,0"
-Padding="0,10,0,0"
-HorizontalAlignment="Left"
-VerticalAlignment="Bottom"
-materialDesign:HintAssist.Hint="Mã thuốc"
-FontWeight="SemiBold"
-Text="Nhóm người dùng "
+                                Grid.Row="0"
+                                Width="200"
+                                Height="50"
+                                Margin="80,10,0,0"
+                                Padding="0,10,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                materialDesign:HintAssist.Hint="Mã thuốc"
+                                FontWeight="SemiBold"
+                                Text="Nhóm người dùng "
 
-       
- />
+
+                                />
 
                             <!--  Chỗ Ten thuoc  -->
                             <ComboBox
-Grid.Row="0"
-Width="255"
-Height="50"
-Margin="80,0,0,70"
-Padding="0,0,0,0"
-HorizontalAlignment="Left"
+                                Grid.Row="0"
+                                Width="255"
+                                Height="50"
+                                Margin="80,0,0,70"
+                                Padding="0,0,0,0"
+                                HorizontalAlignment="Left"
 
-FontWeight="SemiBold"
 
-x:Name="NhomND"
 
- />
+                                x:Name="NhomNDcbx"
+
+                                />
                         </StackPanel>
                     </Grid>
 
-                  
+
 
                     <Grid Grid.Row="1">
                         <Button
-    Content="       Lưu "
-    FontSize="22"
-    FontFamily="Segoe UI"
-    FontWeight="Bold"
-    Margin="5 0 35 0"
-    Width="150"
-    Height="50"
-    x:Name="saveBtn"
-    HorizontalAlignment="Right" >
+                            Content="       Lưu "
+                            FontSize="22"
+                            FontFamily="Segoe UI"
+                            FontWeight="Bold"
+                            Margin="5 0 35 0"
+                            Width="150"
+                            Height="50"
+                            x:Name="saveBtn"
+                            HorizontalAlignment="Right" >
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid>
@@ -181,7 +181,7 @@ x:Name="NhomND"
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <i:InvokeCommandAction Command="{Binding SaveCommand}"
-                                   CommandParameter="{Binding ElementName=BenhNhanDangKhamUC}" />
+                                                           CommandParameter="{Binding ElementName=SuaNhomNguoiDungViewPage}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>

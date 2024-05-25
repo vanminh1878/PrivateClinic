@@ -105,7 +105,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
             AddCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _AddCommand(p));
             LoadSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _LoadSLBNCommand(p));
             EditBN();
-            if (Const.PQ.MaNhom == "NHOM1")
+            if (Const.PQ.MaNhom == 1)
             {
                 EditSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditSLBNCommand(p));
                 EditUpSLBNCommand = new RelayCommand<QuanLiTiepDonView>((p) => { return p == null ? false : true; }, (p) => _EditUpSLBNCommand(p));
@@ -117,7 +117,7 @@ namespace PrivateClinic.ViewModel.QuanLiTiepDon
 
         private void _LoadCommand(QuanLiTiepDonView p)
         {
-            if (Const.PQ.MaNhom == "NHOM1")
+            if (Const.PQ.MaNhom == 1)
             {
                 SetQuanLy = Visibility.Visible;
                 SetNhanVien = Visibility.Collapsed;

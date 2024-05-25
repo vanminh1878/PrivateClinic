@@ -16,7 +16,7 @@ namespace PrivateClinic.Model
     {
         public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
-        public string MaNhom { get; set; }
+        public Nullable<int> MaNhom { get; set; }
         public Nullable<int> MaBS { get; set; }
     
         public virtual BACSI BACSI { get; set; }

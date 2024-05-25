@@ -135,9 +135,9 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                 User = DataProvider.Ins.DB.NGUOIDUNGs.Where(x => x.TenDangNhap == a).FirstOrDefault();             
                 Const.PQ = new PHANQUYEN();
               
-                if (User.MaNhom== "NHOM1")
+                if (User.MaNhom== 1)
                 {
-                    Const.PQ.MaNhom = User.MaNhom;
+                    Const.PQ.MaNhom = 1;
                    
                     SetQuanLy = Visibility.Visible;
                     SetNhanVien = Visibility.Collapsed;
@@ -145,7 +145,7 @@ namespace PrivateClinic.ViewModel.OtherViewModels
                 }
                 else
                 {
-                    Const.PQ.MaNhom = User.MaNhom;
+                    Const.PQ.MaNhom = 2;
                     SetQuanLy = Visibility.Collapsed;
                     SetNhanVien = Visibility.Visible;
 

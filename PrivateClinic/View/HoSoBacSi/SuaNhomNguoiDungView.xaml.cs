@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PrivateClinic.ViewModel.HoSoBacSiVM;
 
 namespace PrivateClinic.View.HoSoBacSi
 {
@@ -21,7 +22,10 @@ namespace PrivateClinic.View.HoSoBacSi
     {
         public SuaNhomNguoiDungView()
         {
+         
             InitializeComponent();
+            SuaNhomNguoiDungViewModel viewModel = new SuaNhomNguoiDungViewModel();
+            this.DataContext = viewModel;
         }
     }
 }
