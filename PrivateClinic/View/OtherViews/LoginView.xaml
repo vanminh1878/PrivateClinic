@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PrivateClinic.View.OtherViews"
         mc:Ignorable="d"
-        Title="LoginView" Height="750" Width="1300"
+        Title="LoginView" Height="750" Width="1400"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
